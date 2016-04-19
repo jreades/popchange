@@ -85,7 +85,7 @@
     } else { #we have a problem
       #print error
       cat("GeographyCode field not found in OA_attributes. Trying alternative versions.")
-      if (colnames(OA_attributes)[1] == "Zone.ID") { #if zone.id, then use that
+      if ((colnames(OA_attributes)[1] == "Zone.ID") || ((colnames(OA_attributes)[1] == "Zone.Code"))) { #if zone.id, then use that
         #rename column
         colnames(OA_attributes)[1] <- "GeographyCode"
       } else {
