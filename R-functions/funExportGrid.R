@@ -1,6 +1,7 @@
 #function to export data as ASCII grid
 ExportGrid <- function(grid_m_smooth_pop, filename_prefix, grid_r_ID, columnName){
-  
+  #replace NA with -1 (NA value for ascii grid)
+  grid_m_smooth_pop[which(is.na(grid_m_ID))] <- "-1"
 #export as ascii grid
 filename <- paste0("output/5a_ascii_grid",filename_prefix,"_",columnName,".asc")
 #filename <- "20151006-test-b.asc"
