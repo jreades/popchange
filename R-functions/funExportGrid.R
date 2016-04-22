@@ -22,6 +22,24 @@ for (i in 1:ncol(grid_m_smooth_pop)) {
   i <- i + 1
 }
 
+#export lookup table as CSV
+  #extract which grid cells
+    grid_ID <- grid_m_ID[which(!is.na(grid_m_ID))]
+  #extract grid values
+    grid_IDs_matrix <- which(!is.na(grid_m_ID), arr.ind = TRUE)
+    grid_values <- grid_m_smooth_pop[grid_IDs_matrix]
+  #combine together
+    tmp <- cbind(grid_ID,grid_values)
+  #setup filename
+    filename <- paste0("output/lookup_",filename_prefix,"_",columnName,".csv")
+  #write CSV file
+    write.csv(tmp, filename, row.names = FALSE)
+  #setup CSVT file
+    #setup filename
+      filename <- paste0("output/lookup_",filename_prefix,"_",columnName,".csvt")
+    #print info & write file
+      cat(paste0("String,Real"), file = filename, sep = "\n")
+      
 #return data
 #return(status)
 }
