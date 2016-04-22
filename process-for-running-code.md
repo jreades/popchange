@@ -21,7 +21,7 @@ Work out field names (max 8 characters)
 Update lines 56-62 to update year and grids. 
 I usually run line 56 (read in attributes) to check field names are all correct. 
 
-Run code
+Run code (analysis-no-overlay.R)
 
 Check output
 - include output file names in data summary
