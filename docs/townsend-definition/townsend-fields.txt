@@ -1,0 +1,41 @@
+“The Townsend score comprises:
+
+•             Unemployed persons (% of employed and unemployed)
+
+•             Non owner occupied households (% total households)
+
+•             Households without access to a car or van (% total households)
+
+•             Households with more than one person per room (% total households)
+
+ 
+
+The four percentages were used in construction of the deprivation score (Townsend et al. 1987, and see Senior 2002). The percentages of unemployed persons and households with more than one person per room (overcrowding) were logged (after addition of 1; this allows for the tendency for skewed distributions of these percentages). After this, the four variables (two percentages and two logged percentages) were converted to z scores ((percentage-mean) / standard deviation) and these were summed to derive deprivation scores. Positive values of the index indicate areas with higher levels of deprivation while negative values indicate lower levels of deprivation.”
+
+Unemployment
+
+For unemployment, the most useful definition is unemployed/(employed + unemployed)*100, but unemployed/all economically active*100 is ok. The main thing is that the same definition (or as close as possible) is used for all censuses. Either solution is likely affected by presence/absence of students within the economic activity categories and it would be better to be consistent with this, but it may not be possible. As an example, the best table for 1991 is SAS08 (see screendump below) – here employees full time and part time and self-employed with and without employed = allemployed (there are additional employed categories which would need to be included for later censuses). This would give unemployed% = unemployed/allemployed*100 (obviously, for males and females).
+
+Currently excluding students
+
+1971 table 05
+working (260) = allemployed
+unemployed% = seeking work (261) / allemployed*100
+(Repeat for Male and Female, field numbers here are for male)
+
+1981 SAS81 09
+employees full time (789) and self-employed (705) = allemployed 
+unemployed% = not in employment (859)/allemployed*100
+
+1991 SAS08
+employees full time (23) and part time (34) and self-employed with (45) and without (58) employees = allemployed 
+unemployed% = unemployed (78)/allemployed*100
+(Repeat for Male and Female, field numbers here are for male)
+
+2001 KS009a
+employees part-time (2) and full-time (3) and self-employed (4) = allemployed
+unemployed% = unemployed (5)/allemployed*100
+
+2011 KS601EW
+employee full-time (3) and part-time (2) and self-employed (4) = allemployed
+unemployed% = unemployed (5)/allemployed*100
