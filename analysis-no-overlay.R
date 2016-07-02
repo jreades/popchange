@@ -61,8 +61,8 @@
     filename_prefix <- "1981_Age_test_20160702"
   #set iterative smoothing
     iterative_smoothing <- FALSE #set to TRUE if you want iterative smoothing
-  #set denominator column in input file (usually 1)
-    denominator_col <- 1
+  #set denominator column in input file for calculation of percentages (usually 1) (0 means do not calculate percentages)
+    denom_col <- 1
     
   #NO NEED TO EDIT
   #read in grid template (the raster version of the grid) 
@@ -262,10 +262,9 @@
           sectionTime[sectionNumber] <- sum(sectionTime[8:(sectionNumber-1)], na.rm = TRUE)
 
 #Section (5+1). 
-  #calculating rates
-
-          CalcRate(grid_r_ID, columnNames, denominator_col, filename_prefix)
-
+  #calculate rates
+      CalcRate(grid_r_ID, columnNames, denom_col, filename_prefix)
+          
 #Section 6. Data Summary
   #Stop the clock
     proc.time() - ptm  
