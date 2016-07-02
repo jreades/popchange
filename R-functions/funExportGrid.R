@@ -1,7 +1,8 @@
 #function to export data as ASCII grid, with option to calc percentages
   #code to run to setup variable as they are called by analysis-no-overlay.R
-    columnName <- columnNames[i] 
-
+    #columnName <- columnNames[i]
+    
+ExportGrid <- function(grid_m_smooth_pop, filename_prefix, grid_r_ID, columnName){
   #replace NA with -1 (NA value for ascii grid)
     grid_m_smooth_pop[which(is.na(grid_m_ID))] <- "-1"
   #export as ascii grid
