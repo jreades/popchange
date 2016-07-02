@@ -46,24 +46,27 @@
   source("R-functions/funGridSmoothing.R")              #4
   source("R-functions/funGridSmoothingIterative.R")     #5
   source("R-functions/funExportGrid.R")                 #5
+  source("R-functions/funCalcRate.R")                 #5
   #source("R-functions/funDataSummary.R")                #10  
   source("R-functions/funDataSummaryNoOverlay.R")       #10  
 
 #1c. Load Data (swap out from data.R file)
   #read in OA attributes (the Census variables we are allocating to grid), strip.white = TRUE removes training spaces found in 1981 Census download
-    OA_attributes <- read.csv("data/1971/attributes/1971-OA-attributes-sas08.csv", strip.white = TRUE)  
+    OA_attributes <- read.csv("input/1981/attributes/1981-OA-attributes-sas02.csv", strip.white = TRUE)  
   #read in grid proportion (proportion of each OA in each grid)
-    OA_grid <- read.csv("data/1971/1971-OA-grid-proportion.csv")
+    OA_grid <- read.csv("input/1981/1981-OA-grid-proportion.csv")
   #set year
-    year <- 1971
+    year <- 1981
   #Setup file names to save
-    filename_prefix <- "1971_country_birth"
+    filename_prefix <- "1981_Age_test_20160702"
   #set iterative smoothing
     iterative_smoothing <- FALSE #set to TRUE if you want iterative smoothing
+  #set denominator column in input file (usually 1)
+    denominator_col <- 1
     
   #NO NEED TO EDIT
   #read in grid template (the raster version of the grid) 
-    filename_grid <- paste0("data/grid.tif")
+    filename_grid <- paste0("input/grid.tif")
   #save time for section 1
     sectionTime[1] <- (proc.time() - ptm)[3]
   #ensure all columns within OA_attributes are numeric
@@ -174,7 +177,7 @@
     if (!exists("grid_m_regions")) { #if grid_m_regions does not exists
       #if it does, load the file
       #get file name
-        filename <- paste0("data/",year,"/",year,"-contiguous-regions.RData")
+        filename <- paste0("input/",year,"/",year,"-contiguous-regions.RData")
       #check if file exists
       if (file.exists(paste0(filename))) {
         #then load
@@ -257,6 +260,11 @@
         #total time for section 8 (Grid Smooth (by region) and Rescale) & 9 (Iterative Grid Smoothing)
           sectionName[sectionNumber] <- paste0("Total: Grid Smooth (by region) and Iterative Grid Smoothing")
           sectionTime[sectionNumber] <- sum(sectionTime[8:(sectionNumber-1)], na.rm = TRUE)
+
+#Section (5+1). 
+  #calculating rates
+
+          CalcRate(grid_r_ID, columnNames, denominator_col, filename_prefix)
 
 #Section 6. Data Summary
   #Stop the clock
