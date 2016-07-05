@@ -67,6 +67,9 @@
   #NO NEED TO EDIT
   #read in grid template (the raster version of the grid) 
     filename_grid <- paste0("input/grid.tif")
+  #test to check filename grid read in
+    grid_r_ID <- readGDAL(filename_grid)
+    
   #save time for section 1
     sectionTime[1] <- (proc.time() - ptm)[3]
   #ensure all columns within OA_attributes are numeric
