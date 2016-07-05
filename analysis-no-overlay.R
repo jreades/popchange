@@ -69,6 +69,7 @@
     filename_grid <- paste0("input/grid.tif")
   #test to check filename grid read in
     grid_r_ID <- readGDAL(filename_grid)
+  #test for presence of tmp/ folder  
     
   #save time for section 1
     sectionTime[1] <- (proc.time() - ptm)[3]
