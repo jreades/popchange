@@ -14,31 +14,33 @@
 #Read in source Townsend data (update this section for different years)
   #unemployment
     #count unemployed        
-      filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_TAiUnemp.asc")
+      filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_EAUnem.asc")
       unemployed_persons <- as.matrix(readGDAL(filename))
     #total economically active
-      filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_TAlEcAc.asc")
-      all_economically_active_persons <- as.matrix(readGDAL(filename))
+        #comprised of all employed + unemployed
+          filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_EAAllEm.asc")
+          all_employed <- as.matrix(readGDAL(filename))
+          all_economically_active_persons <- all_employed + unemployed_persons
   #no car or van
     #count households with no car or van
-      filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_THNoCar.asc")
+      filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_NoCar.asc")
       no_car_van_households <- as.matrix(readGDAL(filename))
     #total households (car)
-      filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_THouseHld.asc")
+      filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_NoCarTotal.asc")
       all_households_car <- as.matrix(readGDAL(filename))
   #non owner occupied households
     #count non owner occupied households
-      filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_TNOwnOcc.asc")
+      filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TenNOCC.asc")
       non_owner_occupied_households <- as.matrix(readGDAL(filename))
     #total households tenure
-      filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_THouseAll.asc")
+      filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TenAll.asc")
       total_households_tenure <- as.matrix(readGDAL(filename))
   #overcrowding
     #count households Overcrowding
-      filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_TPPR_.1m.asc")
+      filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_OverCrw.asc")
       overcrowded_households <- as.matrix(readGDAL(filename))
     #total households (overcrowding)
-      filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_TPPRTotal.asc")
+      filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_OcTotal.asc")
       total_households_overcrowding <- as.matrix(readGDAL(filename))
       
 #Calculations of percentage
@@ -72,7 +74,7 @@
   #replace NA with -1 (NA value for ascii grid)
     townsend_2011_z_score[which(is.na(grid_m_ID))] <- "-1"
   #export as ascii grid
-    filename <- paste0("output/2011_townsend_z_scores.asc")
+    filename <- paste0("output/2001_townsend_z_scores.asc")
   #rows and cols are inversed for asc grid - see help (?as.raster) and http://stackoverflow.com/questions/14513480/convert-matrix-to-raster-in-r
     cat(paste0("ncols        ",nrow(grid_m_ID)), file = filename, sep = "\n")
     cat(paste0("nrows        ",ncol(grid_m_ID)), file = filename, sep = "\n", append = TRUE)
