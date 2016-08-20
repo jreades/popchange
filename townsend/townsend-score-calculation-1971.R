@@ -106,21 +106,8 @@
     non_own_occ_z <- (non_own_occ_pc - mean(non_own_occ_pc, na.rm = TRUE)) / sd(non_own_occ_pc, na.rm = TRUE)
     
 #Sum z scores
-    #townsend_z_score <- unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z
- #   townsend_z_score <- format(unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z, scientific = FALSE)
-   
- #   townsend_z_score <- sum(unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z, na.rm = FALSE)
-    
- #    townsend_z_score <- as.double(unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z, scientific = FALSE)
-    
      townsend_z_score <- unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z
      
-    #http://stackoverflow.com/questions/5352099/how-to-disable-scientific-notation-in-r
-     #http://stackoverflow.com/questions/9397664/force-r-not-to-use-exponential-notation-e-g-e10
-    
-    #townsend_z_score <- non_owner_occupied_households
-    #townsend_z_score <- unemployed_z
-
 #export to ASC grid
   #replace NA with -1 (NA value for ascii grid)
     townsend_z_score[which(is.na(grid_m_ID))] <- "-1"
@@ -148,4 +135,24 @@
       #print i (for testing speed)
       #print(i)
     }
+    
+  #export as CSV & CSVT
+    #export lookup table as CSV
+      #extract which grid cells
+        grid_ID <- grid_m_ID[which(!is.na(grid_m_ID))]
+      #extract grid values
+        grid_IDs_matrix <- which(!is.na(grid_m_ID), arr.ind = TRUE)
+        grid_values <- townsend_z_score[grid_IDs_matrix]
+      #combine together
+        tmp <- cbind(grid_ID,grid_values)
+      #setup filename
+        filename <- paste0("output/townsend/1971_townsend_z_scores.csv")
+      #write CSV file
+        write.csv(tmp, filename, row.names = FALSE)
+    #setup CSVT file
+      #setup filename
+        filename <- paste0("output/townsend/1971_townsend_z_scores.csvt")
+      #print info & write file
+        cat(paste0("String,Real"), file = filename, sep = "\n")
+    
     

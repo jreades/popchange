@@ -121,3 +121,25 @@
       #print(i)
     }
     
+  #export as CSV & CSVT
+    #export lookup table as CSV
+      #extract which grid cells
+        grid_ID <- grid_m_ID[which(!is.na(grid_m_ID))]
+      #extract grid values
+        grid_IDs_matrix <- which(!is.na(grid_m_ID), arr.ind = TRUE)
+        grid_values <- townsend_z_score[grid_IDs_matrix]
+      #combine together
+        tmp <- cbind(grid_ID,grid_values)
+      #setup filename
+        filename <- paste0("output/townsend/1981_townsend_z_scores.csv")
+    #write CSV file
+      write.csv(tmp, filename, row.names = FALSE)
+    #setup CSVT file
+      #setup filename
+        filename <- paste0("output/townsend/1981_townsend_z_scores.csvt")
+      #print info & write file
+        cat(paste0("String,Real"), file = filename, sep = "\n")
+    
+    
+    
+    
