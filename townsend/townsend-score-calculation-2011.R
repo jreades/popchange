@@ -97,29 +97,27 @@
     non_own_occ_z <- (non_own_occ_pc - mean(non_own_occ_pc, na.rm = TRUE)) / sd(non_own_occ_pc, na.rm = TRUE)
     
 #Sum z scores
-    #townsend_z_score <- unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z
- #   townsend_z_score <- format(unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z, scientific = FALSE)
-   
- #   townsend_z_score <- sum(unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z, na.rm = FALSE)
-    
- #    townsend_z_score <- as.double(unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z, scientific = FALSE)
-    
      townsend_z_score <- unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z
      
-    #http://stackoverflow.com/questions/5352099/how-to-disable-scientific-notation-in-r
-     #http://stackoverflow.com/questions/9397664/force-r-not-to-use-exponential-notation-e-g-e10
-    
-    #townsend_z_score <- non_owner_occupied_households
-    #townsend_z_score <- unemployed_z
-
+#Option to export Townsend domain percentages     
+     #townsend_z_score <- unemployed_pc
+     #townsend_z_score <- overcrowded_pc
+     #townsend_z_score <- no_car_van_pc
+     #townsend_z_score <- non_own_occ_pc
+     
+ #set file export name
+     filename_part <- "2011_townsend_z_scores"
+     #filename_part <- "2011_townsend_unemployed_pc"
+     #filename_part <- "2011_townsend_overcrowded_pc"
+     #filename_part <- "2011_townsend_no_car_van_pc"
+     #filename_part <- "2011_townsend_non_own_occ_pc"        
+     
 #export to ASC grid
   #replace NA with -1 (NA value for ascii grid)
     townsend_z_score[which(is.na(grid_m_ID))] <- "-1"
     
-    #townsend_z_score <- format(townsend_z_score, scientific=FALSE)
-    
   #export as ascii grid
-    filename <- paste0("output/townsend/2011_townsend_z_scores.asc")
+    filename <- paste0("output/townsend/",filename_part,".asc")
   #rows and cols are inversed for asc grid - see help (?as.raster) and http://stackoverflow.com/questions/14513480/convert-matrix-to-raster-in-r
     cat(paste0("ncols        ",nrow(grid_m_ID)), file = filename, sep = "\n")
     cat(paste0("nrows        ",ncol(grid_m_ID)), file = filename, sep = "\n", append = TRUE)
@@ -150,11 +148,11 @@
       #combine together
         tmp <- cbind(grid_ID,grid_values)
       #setup filename
-        filename <- paste0("output/townsend/2011_townsend_z_scores.csv")
+        filename <- paste0("output/townsend/",filename_part,".csv")
       #write CSV file
         write.csv(tmp, filename, row.names = FALSE)
     #setup CSVT file
       #setup filename
-        filename <- paste0("output/townsend/2011_townsend_z_scores.csvt")
+        filename <- paste0("output/townsend/",filename_part,".csvt")
       #print info & write file
         cat(paste0("String,Real"), file = filename, sep = "\n")

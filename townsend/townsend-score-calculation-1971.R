@@ -108,6 +108,19 @@
 #Sum z scores
      townsend_z_score <- unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z
      
+#Option to export Townsend domain percentages     
+     #townsend_z_score <- unemployed_pc
+     #townsend_z_score <- overcrowded_pc
+     #townsend_z_score <- no_car_van_pc
+     #townsend_z_score <- non_own_occ_pc
+     
+#set file export name
+     filename_part <- "1971_townsend_z_scores"
+     #filename_part <- "1971_townsend_unemployed_pc"
+     #filename_part <- "1971_townsend_overcrowded_pc"
+     #filename_part <- "1971_townsend_no_car_van_pc"
+     #filename_part <- "1971_townsend_non_own_occ_pc"
+     
 #export to ASC grid
   #replace NA with -1 (NA value for ascii grid)
     townsend_z_score[which(is.na(grid_m_ID))] <- "-1"
@@ -115,7 +128,7 @@
     #townsend_z_score <- format(townsend_z_score, scientific=FALSE)
     
   #export as ascii grid
-    filename <- paste0("output/townsend/1971_townsend_z_scores.asc")
+    filename <- paste0("output/townsend/",filename_part,".asc")
   #rows and cols are inversed for asc grid - see help (?as.raster) and http://stackoverflow.com/questions/14513480/convert-matrix-to-raster-in-r
     cat(paste0("ncols        ",nrow(grid_m_ID)), file = filename, sep = "\n")
     cat(paste0("nrows        ",ncol(grid_m_ID)), file = filename, sep = "\n", append = TRUE)
@@ -146,12 +159,12 @@
       #combine together
         tmp <- cbind(grid_ID,grid_values)
       #setup filename
-        filename <- paste0("output/townsend/1971_townsend_z_scores.csv")
+        filename <- paste0("output/townsend/",filename_part,".csv")
       #write CSV file
         write.csv(tmp, filename, row.names = FALSE)
     #setup CSVT file
       #setup filename
-        filename <- paste0("output/townsend/1971_townsend_z_scores.csvt")
+        filename <- paste0("output/townsend/",filename_part,".csvt")
       #print info & write file
         cat(paste0("String,Real"), file = filename, sep = "\n")
     

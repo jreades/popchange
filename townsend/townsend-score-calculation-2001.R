@@ -84,13 +84,26 @@
     non_own_occ_z <- (non_own_occ_pc - mean(non_own_occ_pc, na.rm = TRUE)) / sd(non_own_occ_pc, na.rm = TRUE)
     
 #Sum z scores
-    townsend_2011_z_score <- unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z
+    townsend_z_score <- unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z
+    
+#Option to export Townsend domain percentages     
+    #townsend_z_score <- unemployed_pc
+    #townsend_z_score <- overcrowded_pc
+    #townsend_z_score <- no_car_van_pc
+    #townsend_z_score <- non_own_occ_pc
+    
+  #set file export name
+    filename_part <- "2001_townsend_z_scores"
+    #filename_part <- "2001_townsend_unemployed_pc"
+    #filename_part <- "2001_townsend_overcrowded_pc"
+    #filename_part <- "2001_townsend_no_car_van_pc"
+    #filename_part <- "2001_townsend_non_own_occ_pc"        
     
 #export to ASC grid
   #replace NA with -1 (NA value for ascii grid)
-    townsend_2011_z_score[which(is.na(grid_m_ID))] <- "-1"
+    townsend_z_score[which(is.na(grid_m_ID))] <- "-1"
   #export as ascii grid
-    filename <- paste0("output/townsend/2001_townsend_z_scores.asc")
+    filename <- paste0("output/townsend/",filename_part,".asc")
   #rows and cols are inversed for asc grid - see help (?as.raster) and http://stackoverflow.com/questions/14513480/convert-matrix-to-raster-in-r
     cat(paste0("ncols        ",nrow(grid_m_ID)), file = filename, sep = "\n")
     cat(paste0("nrows        ",ncol(grid_m_ID)), file = filename, sep = "\n", append = TRUE)
@@ -102,7 +115,7 @@
     cat(paste0("NODATA_value -1"), file = filename, sep = "\n", append = TRUE) 
   #output data
     #for each row (col in R)
-    for (i in 1:ncol(townsend_2011_z_score)) {
+    for (i in 1:ncol(townsend_z_score)) {
       #notes #this section is very slow on a windows machine, but very fast on OSX. 
         cat(townsend_2011_z_score[,i], "\n", file = filename, append = TRUE)
       #next i
@@ -121,11 +134,11 @@
       #combine together
         tmp <- cbind(grid_ID,grid_values)
       #setup filename
-        filename <- paste0("output/townsend/2001_townsend_z_scores.csv")
+        filename <- paste0("output/townsend/",filename_part,".csv")
       #write CSV file
         write.csv(tmp, filename, row.names = FALSE)
     #setup CSVT file
       #setup filename
-        filename <- paste0("output/townsend/2001_townsend_z_scores.csvt")
+        filename <- paste0("output/townsend/",filename_part,".csvt")
       #print info & write file
         cat(paste0("String,Real"), file = filename, sep = "\n")
