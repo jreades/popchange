@@ -1,8 +1,8 @@
-#Read in 1971 
-OA_attributes <- read.csv("data/1971/attributes/sas08-country-of-birth/1971_sas08_unmerged.csv")  
+#Read in 1971
+OA_attributes <- read.csv("input/1971/attributes/townsend/1971_townsend_unmerged.csv")  
 
 #Read in lookup file
-OA_attributes_lookup <- read.csv("data/1971/attributes/ED71_ED81lookupF.csv")  
+OA_attributes_lookup <- read.csv("input/1971/attributes/ED71_ED81lookupF.csv")  
 
 #merge data
 OA_attributes_merged <- merge(OA_attributes,OA_attributes_lookup,by.x="GeographyCode",by.y="ED71code") 
@@ -22,4 +22,4 @@ OA_attributes_merged$ED81mergeLINK <- NULL
 head(OA_attributes_merged)
 
 #save csv
-write.csv(OA_attributes_merged, file= "data/1971/attributes/1971-OA-attributes-sas08.csv", row.names = FALSE)  
+write.csv(OA_attributes_merged, file= "input/1971/attributes/1971_townsend.csv", row.names = FALSE)  
