@@ -25,12 +25,12 @@
       townsend_z_1981 <- read.csv(filename)
     #drop ID column
       townsend_z_1981$grid_ID <- NULL
-  #2001
+  #1991
     #filename & read in
-      filename <- paste0("output/townsend/2001_townsend_z_scores.csv")
-      townsend_z_2001 <- read.csv(filename)
+      filename <- paste0("output/townsend/1991_townsend_z_scores.csv")
+      townsend_z_1991 <- read.csv(filename)
     #drop ID column
-      townsend_z_2001$grid_ID <- NULL
+      townsend_z_1991$grid_ID <- NULL
   #2001
     #filename & read in
       filename <- paste0("output/townsend/2001_townsend_z_scores.csv")
@@ -204,8 +204,8 @@
       total_population_2011$grid_ID <- NULL  
 
 #CBind together
-  z_scores <- cbind(townsend_z_1971,townsend_z_2001,townsend_z_2001,townsend_z_2001,townsend_z_2011)
-    colnames(z_scores) <- c("townsend_z_1971", "townsend_z_2001", "townsend_z_2001", "townsend_z_2001","townsend_z_2011")
+  z_scores <- cbind(townsend_z_1971,townsend_z_1981,townsend_z_1991,townsend_z_2001,townsend_z_2011)
+    colnames(z_scores) <- c("townsend_z_1971", "townsend_z_1981", "townsend_z_1991", "townsend_z_2001","townsend_z_2011")
   y1971 <- cbind(no_car_van_pc_1971, non_own_occ_pc_1971, overcrowded_pc_1971, unemployed_pc_1971)
     colnames(y1971) <- c("no_car_van_pc_1971", "non_own_occ_pc_1971", "overcrowded_pc_1971", "unemployed_pc_1971")
   y1981 <- cbind(no_car_van_pc_1981, non_own_occ_pc_1981, overcrowded_pc_1981, unemployed_pc_1981)
