@@ -66,15 +66,15 @@
       
 #Calculations of percentage
   #Unemployed
-    unemployed_pc <- unemployed_persons / all_economically_active_persons
+    unemployed_pc <- (unemployed_persons / all_economically_active_persons) * 100
   #Non owner occupied
-    non_own_occ_pc <- non_owner_occupied_households / total_households_tenure
+    non_own_occ_pc <- (non_owner_occupied_households / total_households_tenure) * 100
   #Non access to car or van
-    no_car_van_pc <- no_car_van_households / all_households_car
+    no_car_van_pc <- (no_car_van_households / all_households_car) * 100
       #replace instances of all_households_car = 0 with a value of 0 instead of NaN
         no_car_van_pc[which(all_households_car == 0)] <- 0
   #Overcrowded
-    overcrowded_pc <- overcrowded_households / total_households_overcrowding
+    overcrowded_pc <- (overcrowded_households / total_households_overcrowding) * 100
 
 #Calculations of logging for unemployed persons and overcrowding
     unemployed_pc_log <- log(unemployed_pc + 1)

@@ -65,19 +65,19 @@
       
 #Calculations of percentage
   #Unemployed
-    unemployed_pc <- unemployed_persons / all_economically_active_persons
+    unemployed_pc <- (unemployed_persons / all_economically_active_persons) * 100
       #replace instances of all_economically_active_persons = 0 with a value of 0 instead of NaN
         unemployed_pc[which(all_economically_active_persons == 0)] <- 0
   #Non owner occupied
-    non_own_occ_pc <- non_owner_occupied_households / total_households_tenure
+    non_own_occ_pc <- (non_owner_occupied_households / total_households_tenure) * 100
       #replace instances of total_households_tenure = 0 with a value of 0 instead of NaN
         non_own_occ_pc[which(total_households_tenure == 0)] <- 0
   #Non access to car or van
-    no_car_van_pc <- no_car_van_households / all_households_car
+    no_car_van_pc <- (no_car_van_households / all_households_car) * 100
       #replace instances of all_households_car = 0 with a value of 0 instead of NaN
         no_car_van_pc[which(all_households_car == 0)] <- 0
   #Overcrowded
-    overcrowded_pc <- overcrowded_households / total_households_overcrowding
+    overcrowded_pc <- (overcrowded_households / total_households_overcrowding) * 100
       #replace instances of total_households_overcrowding = 0 with a value of 0 instead of NaN
         overcrowded_pc[which(total_households_overcrowding == 0)] <- 0
 
@@ -125,7 +125,7 @@
     #for each row (col in R)
     for (i in 1:ncol(townsend_z_score)) {
       #notes #this section is very slow on a windows machine, but very fast on OSX. 
-        cat(townsend_2011_z_score[,i], "\n", file = filename, append = TRUE)
+        cat(townsend_z_score[,i], "\n", file = filename, append = TRUE)
       #next i
         i <- i + 1
       #print i (for testing speed)

@@ -51,19 +51,21 @@
       
 #Calculations of percentage
   #Unemployed
-    unemployed_pc <- unemployed_persons / all_economically_active_persons
+    unemployed_pc <- (unemployed_persons / all_economically_active_persons) * 100
       #replace instances of all_economically_active_persons = 0 with a value of 0 instead of NaN
         unemployed_pc[which(all_economically_active_persons == 0)] <- 0
   #Non owner occupied
-    non_own_occ_pc <- non_owner_occupied_households / total_households_tenure
+    #replace all negative values of non_owner_occupied_households with 0
+        non_owner_occupied_households[which(non_owner_occupied_households < 0)] <- 0
+    non_own_occ_pc <- (non_owner_occupied_households / total_households_tenure) * 100
       #replace instances of total_households_tenure = 0 with a value of 0 instead of NaN
         non_own_occ_pc[which(total_households_tenure == 0)] <- 0
   #Non access to car or van
-    no_car_van_pc <- no_car_van_households / all_households_car
+    no_car_van_pc <- (no_car_van_households / all_households_car) * 100
       #replace instances of all_households_car = 0 with a value of 0 instead of NaN
         no_car_van_pc[which(all_households_car == 0)] <- 0
   #Overcrowded
-    overcrowded_pc <- overcrowded_households / total_households_overcrowding
+    overcrowded_pc <- (overcrowded_households / total_households_overcrowding) * 100
       #replace instances of total_households_overcrowding = 0 with a value of 0 instead of NaN
         overcrowded_pc[which(total_households_overcrowding == 0)] <- 0
 
