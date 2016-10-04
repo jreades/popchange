@@ -37,6 +37,8 @@
     #total households (car)
       filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_CarTotalHs.asc")
       all_households_car <- as.matrix(readGDAL(filename))
+    #update total with count of households when count > total
+      all_households_car[which(no_car_van_households > all_households_car)] <- no_car_van_households[which(no_car_van_households > all_households_car)]
   #non owner occupied households
     #count non owner occupied households
       #tenure rent LA
@@ -57,9 +59,18 @@
       #sum non owner occupied
           non_owner_occupied_households <- tenure_rent_LA + tenure_rent_free + tenure_rent_Pr + tenure_rent_Ot + tenure_social_rent_other
     #total households
+      #read in other tenure
+        #tenure_own_mort
+          filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_TnOwnMt.asc")
+          tenure_own_mort <- as.matrix(readGDAL(filename))
+        #tenure_own_outright
+          filename <- paste0("output/townsend/2011/5a_ascii_grid2011_townsend_TnOwnOR.asc")
+          tenure_own_outright <- as.matrix(readGDAL(filename))     
+        #tenure_own_shd
+          filename <- paste0("output/townsend/2011/5a_ascii_grid2011_townsend_TnOwnSH.asc")
+          tenure_own_shd <- as.matrix(readGDAL(filename)) 
       #tenure total
-        filename <- paste0("output/townsend/2011/5a_ascii_grid2011_townsend_TnAll.asc")
-        total_households_tenure <- as.matrix(readGDAL(filename)) 
+          total_households_tenure <- non_owner_occupied_households + tenure_own_mort + tenure_own_outright + tenure_own_shd
   #overcrowding
     #count households Overcrowding
       filename <- paste0("output/townsend/2011/5a_ascii_grid2011_townsend_OcOcc1.asc")
@@ -67,6 +78,8 @@
     #total households (overcrowding)
       filename <- paste0("output/townsend/2011/5a_ascii_grid2011_townsend_OcTotal.asc")
       total_households_overcrowding <- as.matrix(readGDAL(filename))
+    #update total with count of households when count > total
+      total_households_overcrowding[which(overcrowded_households > total_households_overcrowding)] <- overcrowded_households[which(overcrowded_households > total_households_overcrowding)]
       
 #Calculations of percentage
   #Unemployed
@@ -76,7 +89,7 @@
   #Non owner occupied
     non_own_occ_pc <- (non_owner_occupied_households / total_households_tenure) * 100
       #replace instances of total_households_tenure = 0 with a value of 0 instead of NaN
-        non_own_occ_pc[which(total_households_tenure == 0)] <- 0
+        non_own_occ_pc[which(total_households_tenure == 0)] <- 0 #excluding very small values
   #Non access to car or van
     no_car_van_pc <- (no_car_van_households / all_households_car) * 100
       #replace instances of all_households_car = 0 with a value of 0 instead of NaN
