@@ -28,6 +28,9 @@
     #total households (car)
       filename <- paste0("output/townsend/1981/5a_ascii_grid1981_Townsend_Total.asc")
       all_households_car <- as.matrix(readGDAL(filename))
+      #update total with count of households when count > total
+      all_households_car[which(no_car_van_households > all_households_car)] <- no_car_van_households[which(no_car_van_households > all_households_car)]
+      
   #non owner occupied households
     #count non owner occupied households
       #tenure_owner_occipied (only variable avaliable)

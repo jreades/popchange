@@ -9,6 +9,7 @@
     filename_grid <- paste0("input/grid.tif")
   #test to check filename grid read in and to convert to necessary format
     grid_r_ID <- readGDAL(filename_grid)
+    grid_m_ID <- as.matrix(readGDAL(filename_grid))
 
 #Read in source Townsend data
   #unemployment
@@ -16,10 +17,19 @@
       filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_EAUnem.asc")
       unemployed_persons <- as.matrix(readGDAL(filename))
     #total economically active
-        #comprised of all employed + unemployed
-          filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_EAAllEm.asc")
-          all_employed <- as.matrix(readGDAL(filename))
-          all_economically_active_persons <- all_employed + unemployed_persons
+      #comprised of all employed (full + part + self) + unemployed
+        #full time
+          filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_EAFull.asc")
+          full_time_employed <- as.matrix(readGDAL(filename))
+        #part time
+          filename <- paste0("output/townsend/2001/5a_ascii_grid2001_Townsend_EAPart.asc")
+          part_time_employed <- as.matrix(readGDAL(filename))
+        #self employed
+          filename <- paste0("output/townsend/2001/5a_ascii_grid2001_Townsend_EASelf.asc")
+          self_employed <- as.matrix(readGDAL(filename))
+      #totals
+        all_employed <- full_time_employed + part_time_employed + self_employed
+        all_economically_active_persons <- all_employed + unemployed_persons
   #no car or van
     #count households with no car or van
       filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_NoCar.asc")

@@ -28,6 +28,9 @@
     #total households (car)
       filename <- paste0("output/townsend/1991/5a_ascii_grid1991_Townsend_TnAll.asc")
       all_households_car <- as.matrix(readGDAL(filename))
+      #update total with count of households when count > total
+      all_households_car[which(no_car_van_households > all_households_car)] <- no_car_van_households[which(no_car_van_households > all_households_car)]
+      
   #non owner occupied households
     #count non owner occupied households
       #tenure rent LA
@@ -65,16 +68,22 @@
       total_households_overcrowding <- as.matrix(readGDAL(filename))
       
 #Calculations of percentage
-  #Unemployed
-    unemployed_pc <- (unemployed_persons / all_economically_active_persons) * 100
-  #Non owner occupied
-    non_own_occ_pc <- (non_owner_occupied_households / total_households_tenure) * 100
-  #Non access to car or van
-    no_car_van_pc <- (no_car_van_households / all_households_car) * 100
-      #replace instances of all_households_car = 0 with a value of 0 instead of NaN
-        no_car_van_pc[which(all_households_car == 0)] <- 0
-  #Overcrowded
-    overcrowded_pc <- (overcrowded_households / total_households_overcrowding) * 100
+    #Unemployed
+      unemployed_pc <- (unemployed_persons / all_economically_active_persons) * 100
+        #replace instances of all_economically_active_persons = 0 with a value of 0 instead of NaN
+          unemployed_pc[which(all_economically_active_persons == 0)] <- 0
+    #Non owner occupied
+      non_own_occ_pc <- (non_owner_occupied_households / total_households_tenure) * 100
+        #replace instances of total_households_tenure = 0 with a value of 0 instead of NaN
+        non_own_occ_pc[which(total_households_tenure == 0)] <- 0 #excluding very small values
+    #Non access to car or van
+      no_car_van_pc <- (no_car_van_households / all_households_car) * 100
+        #replace instances of all_households_car = 0 with a value of 0 instead of NaN
+          no_car_van_pc[which(all_households_car == 0)] <- 0
+    #Overcrowded
+      overcrowded_pc <- (overcrowded_households / total_households_overcrowding) * 100
+        #replace instances of total_households_overcrowding = 0 with a value of 0 instead of NaN
+          overcrowded_pc[which(total_households_overcrowding == 0)] <- 0    
 
 #Calculations of logging for unemployed persons and overcrowding
     unemployed_pc_log <- log(unemployed_pc + 1)

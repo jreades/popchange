@@ -76,6 +76,9 @@
       #no total available. Use Tenure total instead
       #non owner occupied households
       all_households_car <- total_households_tenure
+      #update total with count of households when count > total
+        all_households_car[which(no_car_van_households > all_households_car)] <- no_car_van_households[which(no_car_van_households > all_households_car)]
+      
         
 #Calculations of percentage
   #Unemployed
