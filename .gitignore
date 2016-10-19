@@ -5,3 +5,5 @@ data
 output
 .Rapp.history
 shared
+input/
+merge
