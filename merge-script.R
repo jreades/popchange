@@ -9,6 +9,8 @@
   filenames <- list.files(path = ".") 
 #Merge files
   tmp <- do.call("cbind", lapply(filenames, read.csv, header = TRUE)) 
+#Rename first col to grid_ID_keep
+  colnames(tmp)[1] <- "grid_ID_keep"
 #remove gird_ID cols
   tmp2 <- subset(tmp, select=-c(grid_ID))
   tmp2 <- tmp[ , -which(names(tmp) %in% c("grid_ID"))]
