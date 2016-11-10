@@ -48,18 +48,18 @@ Uploaded,Percentage,Complete,Category,Name,Year,Table Number,Column Number,Denom
 ,20161017,x,Health,General Health: Good,2001,KS008,ks0080004,,,HGood4,6,Is 0005 in Scotland,5a_ascii_grid2001_Health_HGood4.asc
 ,20161017,x,Health,General Health: Fairly good,2001,KS008,ks0080005,,,HFGood5,7,Is 0006 in Scotland,5a_ascii_grid2001_Health_HFGood5.asc
 ,20161017,x,Health,General Health: Not good,2001,KS008,ks0080006,,,HNotGd6,7,Is 0007 in Scotland,5a_ascii_grid2001_Health_HNotGd6.asc
-,20161017,x,Health,All categories: Long-term health problem or disability,2011,KS301EW,0001,,2011-OA-attributes-ks301,HAllPPpl1,9,,5a_ascii_grid2011_Health_HAllPPpl1.asc
-,20161017,x,Health,Day-to-day activities limited a lot,2011,KS301EW,0002,,2011-OA-attributes-ks301,HLtdLot2,8,,5a_ascii_grid2011_Health_HLtdLot2.asc
-,20161017,x,Health,Day-to-day activities limited a little,2011,KS301EW,0003,,2011-OA-attributes-ks301,HLtdLtl3,8,,5a_ascii_grid2011_Health_HLtdLtl3.asc
-,20161017,x,Health,Day-to-day activities not limited,2011,KS301EW,0004,,2011-OA-attributes-ks301,HLetNot4,8,,5a_ascii_grid2011_Health_HLetNot4.asc
-,20161017,x,Health,Day-to-day activities limited a lot: Age 16 to 64,2011,KS301EW,0005,,2011-OA-attributes-ks301,HLtLotW5,8,,5a_ascii_grid2011_Health_HLtLotW5.asc
-,20161017,x,Health,Day-to-day activities limited a little: Age 16 to 64,2011,KS301EW,0006,,2011-OA-attributes-ks301,HLtLtlW6,8,,5a_ascii_grid2011_Health_HLtLtlW6.asc
-,20161017,x,Health,Day-to-day activities not limited: Age 16 to 64,2011,KS301EW,0007,,2011-OA-attributes-ks301,HLtNotW7,8,,5a_ascii_grid2011_Health_HLtNotW7.asc
-,20161017,x,Health,Very good health,2011,KS301EW,0008,,2011-OA-attributes-ks301,HVGood8,7,,5a_ascii_grid2011_Health_HVGood8.asc
-,20161017,x,Health,Good health,2011,KS301EW,0009,,2011-OA-attributes-ks301,HGood9,6,,5a_ascii_grid2011_Health_HGood9.asc
-,20161017,x,Health,Fair health,2011,KS301EW,0010,,2011-OA-attributes-ks301,HFair10,7,,5a_ascii_grid2011_Health_HFair10.asc
-,20161017,x,Health,Bad health,2011,KS301EW,0011,,2011-OA-attributes-ks301,HBad11,6,,5a_ascii_grid2011_Health_HBad11.asc
-,20161017,x,Health,Very bad health,2011,KS301EW,0012,,2011-OA-attributes-ks301,HVBad12,7,,5a_ascii_grid2011_Health_HVBad12.asc
+,20161017,x,Health,All categories: Long-term health problem or disability,2011,KS301EW,1,,2011-OA-attributes-ks301,HAllPPpl1,9,,5a_ascii_grid2011_Health_HAllPPpl1.asc
+,20161017,x,Health,Day-to-day activities limited a lot,2011,KS301EW,2,,2011-OA-attributes-ks301,HLtdLot2,8,,5a_ascii_grid2011_Health_HLtdLot2.asc
+,20161017,x,Health,Day-to-day activities limited a little,2011,KS301EW,3,,2011-OA-attributes-ks301,HLtdLtl3,8,,5a_ascii_grid2011_Health_HLtdLtl3.asc
+,20161017,x,Health,Day-to-day activities not limited,2011,KS301EW,4,,2011-OA-attributes-ks301,HLetNot4,8,,5a_ascii_grid2011_Health_HLetNot4.asc
+,20161017,x,Health,Day-to-day activities limited a lot: Age 16 to 64,2011,KS301EW,5,,2011-OA-attributes-ks301,HLtLotW5,8,,5a_ascii_grid2011_Health_HLtLotW5.asc
+,20161017,x,Health,Day-to-day activities limited a little: Age 16 to 64,2011,KS301EW,6,,2011-OA-attributes-ks301,HLtLtlW6,8,,5a_ascii_grid2011_Health_HLtLtlW6.asc
+,20161017,x,Health,Day-to-day activities not limited: Age 16 to 64,2011,KS301EW,7,,2011-OA-attributes-ks301,HLtNotW7,8,,5a_ascii_grid2011_Health_HLtNotW7.asc
+,20161017,x,Health,Very good health,2011,KS301EW,8,,2011-OA-attributes-ks301,HVGood8,7,,5a_ascii_grid2011_Health_HVGood8.asc
+,20161017,x,Health,Good health,2011,KS301EW,9,,2011-OA-attributes-ks301,HGood9,6,,5a_ascii_grid2011_Health_HGood9.asc
+,20161017,x,Health,Fair health,2011,KS301EW,10,,2011-OA-attributes-ks301,HFair10,7,,5a_ascii_grid2011_Health_HFair10.asc
+,20161017,x,Health,Bad health,2011,KS301EW,11,,2011-OA-attributes-ks301,HBad11,6,,5a_ascii_grid2011_Health_HBad11.asc
+,20161017,x,Health,Very bad health,2011,KS301EW,12,,2011-OA-attributes-ks301,HVBad12,7,,5a_ascii_grid2011_Health_HVBad12.asc
 ,,x,Health,Limiting Long Term Illness,1981,,,,,,0,"Not Avaliable (introduced in 1991, https://discover.ukdataservice.ac.uk/catalogue/?sn=22001)",
 ,,x,Health,Limiting Long Term Illness,1971,,,,,,0,"Not Avaliable (introduced in 1991, https://discover.ukdataservice.ac.uk/catalogue/?sn=22001)",
 ,,x,Health,General Health,1981,,,,,,0,Not Available,
@@ -602,23 +602,29 @@ x,x,x,Ethnicity,DATA NOT AVAILABLE,1981,-,-,,-,-,-,-,DATA NOT AVALIABLE
 ,20161017,x,Country of Birth,Other Europe: Females,1971,SAS08,c71s08_466,,1971-OA-attributes-sas08,1s08_466,8,,(see folder)
 ,20161017,x,Country of Birth,"Other Foreign, At Sea or Not Stated: Males",1971,SAS08,c71s08_467,,1971-OA-attributes-sas08,1s08_467,8,,(see folder)
 ,20161017,x,Country of Birth,"Other Foreign, At Sea or Not Stated: Females",1971,SAS08,c71s08_468,,1971-OA-attributes-sas08,1s08_468,8,,(see folder)
-,NA (see folder),20160816,Townsend,Economically active: Employee: Part-time,2011,KS601EW/SC,0002,#N/A,2011-townsend.csv,EAPart,,,
-,NA (see folder),20160816,Townsend,Economically active: Employee: Full-time,2011,KS601EW/SC,0003,#N/A,2011-townsend.csv,EAFull,,,
-,NA (see folder),20160816,Townsend,Economically active: Self-employed,2011,KS601EW/SC,0004,#N/A,2011-townsend.csv,EASelf,,,
-,NA (see folder),20160816,Townsend,Economically active: Unemployed,2011,KS601EW/SC,0005,#N/A,2011-townsend.csv,EAUnem,,,
-,NA (see folder),20160816,Townsend,Total Households (Cars),2011,QS416EW/404S,0001,#N/A,2011-townsend.csv,CarTotalHs,,,
-,NA (see folder),20160816,Townsend,Households with No Cars or Vans,2011,QS416EW/404S,0002,#N/A,2011-townsend.csv,CarNoCar,,,
-,NA (see folder),20160816,Townsend,All categories: Tenure,2011,KS402EW/402S,0001,#N/A,2011-townsend.csv,TnAll,,,
-,NA (see folder),20160816,Townsend,Owned: Owned outright,2011,KS402EW/402S,0002,#N/A,2011-townsend.csv,TnOwnOR,,,
-,NA (see folder),20160816,Townsend,Owned: Owned with a mortgage or loan,2011,KS402EW/402S,0003,#N/A,2011-townsend.csv,TnOwnMt,,,
-,NA (see folder),20160816,Townsend,Shared ownership (part owned and part rented),2011,KS402EW/402S,0004,#N/A,2011-townsend.csv,TnOwnSH,,,
-,NA (see folder),20160816,Townsend,Social rented: Rented from council (Local Authority),2011,KS402EW/402S,0005,#N/A,2011-townsend.csv,TnRentLA,,,
-,NA (see folder),20160816,Townsend,Social rented: Other,2011,KS402EW/402S,0006,#N/A,2011-townsend.csv,TnRentSo,,,
-,NA (see folder),20160816,Townsend,Private rented: Private landlord or letting agency,2011,KS402EW/402S,0007,#N/A,2011-townsend.csv,TnRentPr,,,
-,NA (see folder),20160816,Townsend,Private rented: Other,2011,KS402EW/402S,0008,#N/A,2011-townsend.csv,TnRentOt,,,
-,NA (see folder),20160816,Townsend,Living rent free,2011,KS402EW/402S,0009,#N/A,2011-townsend.csv,TnRentFr,,,
-,NA (see folder),20160816,Townsend,Total Households (Persons Per Room),2011,KS403EW/QS408,0001,#N/A,2011-townsend.csv,OcTotal,,,
-,NA (see folder),20160816,Townsend,"Total Households (Overcrowded, score of -1)",2011,KS403EW/QS408,0004,#N/A,2011-townsend.csv,OcOcc1,,,
+,NA (see folder),20160816,Townsend,Economically active: Employee: Part-time,2011,KS601EW/SC,2,#N/A,2011-townsend.csv,EAPart,,,
+,NA (see folder),20160816,Townsend,Economically active: Employee: Full-time,2011,KS601EW/SC,3,#N/A,2011-townsend.csv,EAFull,,,
+,NA (see folder),20160816,Townsend,Economically active: Self-employed,2011,KS601EW/SC,4,#N/A,2011-townsend.csv,EASelf,,,
+,NA (see folder),20160816,Townsend,Economically active: Unemployed,2011,KS601EW/SC,5,#N/A,2011-townsend.csv,EAUnem,,,
+,NA (see folder),20160816,Townsend,Total Households (Cars),2011,QS416EW/404S,1,#N/A,2011-townsend.csv,CarTotalHs,,,
+,NA (see folder),20160816,Townsend,Households with No Cars or Vans,2011,QS416EW/404S,2,#N/A,2011-townsend.csv,CarNoCar,,,
+,NA (see folder),20160816,Townsend,All categories: Tenure,2011,KS402EW/402S,1,#N/A,2011-townsend.csv,TnAll,,,
+,NA (see folder),20160816,Townsend,Owned: Owned outright,2011,KS402EW/402S,2,#N/A,2011-townsend.csv,TnOwnOR,,,
+,NA (see folder),20160816,Townsend,Owned: Owned with a mortgage or loan,2011,KS402EW/402S,3,#N/A,2011-townsend.csv,TnOwnMt,,,
+,NA (see folder),20160816,Townsend,Shared ownership (part owned and part rented),2011,KS402EW/402S,4,#N/A,2011-townsend.csv,TnOwnSH,,,
+,NA (see folder),20160816,Townsend,Social rented: Rented from council (Local Authority),2011,KS402EW/402S,5,#N/A,2011-townsend.csv,TnRentLA,,,
+,NA (see folder),20160816,Townsend,Social rented: Other,2011,KS402EW/402S,6,#N/A,2011-townsend.csv,TnRentSo,,,
+,NA (see folder),20160816,Townsend,Private rented: Private landlord or letting agency,2011,KS402EW/402S,7,#N/A,2011-townsend.csv,TnRentPr,,,
+,NA (see folder),20160816,Townsend,Private rented: Other,2011,KS402EW/402S,8,#N/A,2011-townsend.csv,TnRentOt,,,
+,NA (see folder),20160816,Townsend,Living rent free,2011,KS402EW/402S,9,#N/A,2011-townsend.csv,TnRentFr,,,
+,,20161110,Townsend,Overcrowding: Total Households,2011,QS409EW,1,#N/A,2011-townsend.csv,TnOcTot,,,
+,,20161110,Townsend,Overcrowding: Up to 0.5 persons per room,2011,QS409EW,2,#N/A,2011-townsend.csv,TnOc05,,,
+,,20161110,Townsend,Overcrowding: Over 0.5 and up to 1.0 persons per room,2011,QS409EW,3,#N/A,2011-townsend.csv,TnOc05_1,,,
+,,20161110,Townsend,Overcrowding: Over 1 and up to 1.5 persons per room,2011,QS409EW,4,#N/A,2011-townsend.csv,TnOc1_15,,,
+,,20161110,Townsend,Overcrowding: Over 1.5 persons per room,2011,QS409EW,5,#N/A,2011-townsend.csv,TnOc15p,,,
+,,20161110,Townsend,Overcrowding: Over 1 persons per room,2011,,,,2011-townsend.csv,TnOc1p,,,
+,NA (see folder),20160816,Townsend,Total Households (Persons Per Room),2011,KS403EW/QS408,1,#N/A,2011-townsend.csv,OcTotal,,,
+,NA (see folder),20160816,Townsend,"Total Households (Overcrowded, score of -1)",2011,KS403EW/QS408,4,#N/A,2011-townsend.csv,OcOcc1,,,
 ,NA (see folder),20160803,Townsend,Economic Activity: Total People,2001,KS009a,ks09a0001,#N/A,2001_townsend_inputs.csv,TotPel,,Townsend unemployment defined in text file,
 ,NA (see folder),20160803,Townsend,Economic Activity: Employees: Part-time,2001,KS009a,ks09a0002,#N/A,2001_townsend_inputs.csv,EAPart,,,
 ,NA (see folder),20160803,Townsend,Economic Activity: Employees: Full-time,2001,KS009a,ks09a0003,#N/A,2001_townsend_inputs.csv,EAFull,,,
@@ -635,7 +641,10 @@ x,x,x,Ethnicity,DATA NOT AVAILABLE,1981,-,-,,-,-,-,-,DATA NOT AVALIABLE
 ,NA (see folder),20160803,Townsend,Tenure: Rented from: Housing Association / Registered Social Landlord,2001,KS018,ks0180006,ks0180001,2001_townsend.csv,TnRentHA,,,
 ,NA (see folder),20160803,Townsend,Tenure: Rented from: Private landlord or letting agency,2001,KS018,ks0180007,ks0180001,2001_townsend.csv,TnRentPr,,Scotland splits furnished (7) and unfurnished (8). Combined for this,
 ,NA (see folder),20160803,Townsend,Tenure: Rented from: Other,2001,KS018,ks0180008,ks0180001,2001_townsend.csv,TnRentOt,,,
-,NA (see folder),20160803,Townsend,Overcrowding (Households with occupancy rating -1 or less),2001,KS019,ks0190004,ks0190001,2001_townsend_inputs.csv,OcOcc1,,,
+,NA (see folder),20161110,Townsend,Overcrowding: Total Households,2001,CS052,cs0520001,#N/A,2001_townsend_inputs.csv,TnOcTot,,,
+,NA,20161110,Townsend,Overcrowding: Over 1 and up to 1.5 persons per room,2001,CS052,cs0520013,#N/A,2001_townsend_inputs.csv,TnOc1_15,,,
+,NA,20161110,Townsend,Overcrowding: Over 1.5 persons per room,2001,CS052,cs0520017,#N/A,2001_townsend_inputs.csv,TnOc15p,,,
+,NA,20161110,Townsend,Overcrowding: More than 1 person per room,2001,CS052,#N/A,#N/A,2001_townsend_inputs.csv,TnOc1p,,,
 ,NA (see folder),20160803,Townsend,All households,2001,KS019,ks0190001,#N/A,2001_townsend_inputs.csv,OcTotal,,,
 ,NA (see folder),20160807,Townsend,Car Availability: Total Households,1991,SAS21,s210003,#N/A,1991_townsend.csv,CrTotHs,,,
 ,NA (see folder),20160807,Townsend,Car Availability: Households with No car,1991,SAS21,s210004,s210003,1991_townsend.csv,CrNoCar,,,
