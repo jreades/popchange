@@ -1,0 +1,703 @@
+Uploaded,Percentage,Complete,Category,Name,Year,Table Number,Column Number,Denominator,Input File Name,Column Code,ColumnCode Length,Notes,Output Filename
+,20161017,x,Tenure,All permanent,1991,SAS 20,s200001,,1991-OA-attributes-sas20.csv,TPerm1,6,,5a_ascii_grid1991_Tenure_TPerm1
+,20161017,x,Tenure,Owner occupied – owned outright,1991,SAS 20,s200002,,1991-OA-attributes-sas20.csv,TOwnOc2,7,,5a_ascii_grid1991_Tenure_TOwnOc2
+,20161017,x,Tenure,Owner occupied – buying,1991,SAS 20,s200003,,1991-OA-attributes-sas20.csv,TOwnOc3,7,,5a_ascii_grid1991_Tenure_TOwnOc3
+,20161017,x,Tenure,Rented privately – furnished,1991,SAS 20,s200004,,1991-OA-attributes-sas20.csv,TRentFu4,8,,5a_ascii_grid1991_Tenure_TRentFu4
+,20161017,x,Tenure,Rented privately – unfurnished,1991,SAS 20,s200005,,1991-OA-attributes-sas20.csv,TRentUF5,8,,5a_ascii_grid1991_Tenure_TRentUF5
+,20161017,x,Tenure,Rented with a job or business,1991,SAS 20,s200006,,1991-OA-attributes-sas20.csv,TRentJb6,8,,5a_ascii_grid1991_Tenure_TRentJb6
+,20161017,x,Tenure,Rented from housing association,1991,SAS 20,s200007,,1991-OA-attributes-sas20.csv,TRentHA7,8,,5a_ascii_grid1991_Tenure_TRentHA7
+,20161017,x,Tenure,Rented from Local Authority,1991,SAS 20,s200008,,1991-OA-attributes-sas20.csv,TRentLA8,8,Scotland combines 8 & 9,5a_ascii_grid1991_Tenure_TRentLA8
+,20161017,x,Tenure,Non-permanent accommodation,1991,SAS 20,s200009,,1991-OA-attributes-sas20.csv,TNPerm9,7,Is 10 in Scotland,5a_ascii_grid1991_Tenure_TNPerm9
+,20161017,x,Tenure,No car,1991,SAS 20,s200010,,1991-OA-attributes-sas20.csv,TNoCar10,8,Is 11 in Scotland,5a_ascii_grid1991_Tenure_TNoCar10
+,20161017,x,Tenure,Total Households with residents,1981,SAS81 10,[81sas100929],,1981-OA-attributes-sas10,TAllHs29,8,,5a_ascii_grid1981_Tenure_TAllHs29.asc
+,20161017,x,Tenure,Total Permanent Households,1981,SAS81 10,[81sas100951],,1981-OA-attributes-sas10,TPerm51,7,,5a_ascii_grid1981_Tenure_TPerm51.asc
+,20161017,x,Tenure,Owner occupied – buying,1981,SAS81 10,[81sas100967],,1981-OA-attributes-sas10,TOwnOc67,8,,5a_ascii_grid1981_Tenure_TOwnOc67.asc
+,20161017,x,Tenure,"Council Housing etc.,",1981,SAS81 10,[81sas100983],,1981-OA-attributes-sas10,TCoun83,7,,5a_ascii_grid1981_Tenure_TCoun83.asc
+,20161017,x,Tenure,Housing Association,1981,SAS81 10,[81sas100999],,1981-OA-attributes-sas10,THouAs99,8,,5a_ascii_grid1981_Tenure_THouAs99.asc
+,20161017,x,Tenure,Household with Business,1981,SAS81 10,[81sas101015],,1981-OA-attributes-sas10,THouBs15,8,,5a_ascii_grid1981_Tenure_THouBs15.asc
+,20161017,x,Tenure,By Virtue of Employment,1981,SAS81 10,[81sas101031],,1981-OA-attributes-sas10,T031,4,,5a_ascii_grid1981_Tenure_T031.asc
+,20161017,x,Tenure,Other Rented: Unfurnished,1981,SAS81 10,[81sas101047],,1981-OA-attributes-sas10,TrentFu7,8,,5a_ascii_grid1981_Tenure_TrentFu7.asc
+,20161017,x,Tenure,Other Rented: Furnished,1981,SAS81 10,[81sas101063],,1981-OA-attributes-sas10,TRentUf3,8,,5a_ascii_grid1981_Tenure_TRentUf3.asc
+,20161017,x,Tenure,Non-permanent,1981,SAS81 10,[81sas101127],,1981-OA-attributes-sas10,TNPerm7,7,,5a_ascii_grid1981_Tenure_TNPerm7.asc
+,20161017,x,Tenure,All Households,2001,KS018,ks0180001,,2001-OA-attributes_ks018.csv,TAllHs1,7,,5a_ascii_grid2001_Tenure_TAllHs1.asc
+,20161017,x,Tenure,Owner occupied – owned outright,2001,KS018,ks0180002,,2001-OA-attributes_ks018.csv,TOnOwn2,7,,5a_ascii_grid2001_Tenure_TOnOwn2.asc
+,20161017,x,Tenure,Owner occupied – owns with a mortgage or loan,2001,KS018,ks0180003,,2001-OA-attributes_ks018.csv,TOnMot3,7,,5a_ascii_grid2001_Tenure_TOnMot3.asc
+,20161017,x,Tenure,Owner occupied – shared ownership,2001,KS018,ks0180004,,2001-OA-attributes_ks018.csv,TOnShd4,7,,5a_ascii_grid2001_Tenure_TOnShd4.asc
+,20161017,x,Tenure,Rented from Council / Local Authority,2001,KS018,ks0180005,,2001-OA-attributes_ks018.csv,TRentLA5,8,,5a_ascii_grid2001_Tenure_TRentLA5.asc
+,20161017,x,Tenure,Rented from housing association,2001,KS018,ks0180006,,2001-OA-attributes_ks018.csv,TRentHA6,8,,5a_ascii_grid2001_Tenure_TRentHA6.asc
+,20161017,x,Tenure,Rented from Private,2001,KS018,ks0180007,,2001-OA-attributes_ks018.csv,TRentPr7,8,"Scotland splits furnished and unfurnished (7&8), they are combined here (into 7)",5a_ascii_grid2001_Tenure_TRentPr7.asc
+,20161017,x,Tenure,Other Rented,2001,KS018,ks0180008,,2001-OA-attributes_ks018.csv,TRentOt8,8,Scotland renumbered from 9 to 8,5a_ascii_grid2001_Tenure_TRentOt8.asc
+,20161017,x,Tenure,All Households,2011,KS402,KS402EW0001,,2011-OA-attributes-ks402.CSV,TAllHs1,7,,5a_ascii_grid2011_Tenure_TAllHs1.asc
+,20161017,x,Tenure,Owner occupied – owned outright,2011,KS402,KS402EW0002,,2011-OA-attributes-ks402.CSV,TOnOwn2,7,,5a_ascii_grid2011_Tenure_TOnOwn2.asc
+,20161017,x,Tenure,Owner occupied – owns with a mortgage or loan,2011,KS402,KS402EW0003,,2011-OA-attributes-ks402.CSV,TOnMot3,7,,5a_ascii_grid2011_Tenure_TOnMot3.asc
+,20161017,x,Tenure,Owner occupied – shared ownership,2011,KS402,KS402EW0004,,2011-OA-attributes-ks402.CSV,TOnShd4,7,,5a_ascii_grid2011_Tenure_TOnShd4.asc
+,20161017,x,Tenure,Rented from Council / Local Authority,2011,KS402,KS402EW0005,,2011-OA-attributes-ks402.CSV,TRentLA5,8,,5a_ascii_grid2011_Tenure_TRentLA5.asc
+,20161017,x,Tenure,Social rented: Other,2011,KS402,KS402EW0006,,2011-OA-attributes-ks402.CSV,TRentOt6,8,,5a_ascii_grid2011_Tenure_TRentHA6.asc
+,20161017,x,Tenure,Private Rented: landlord or letting agency,2011,KS402,KS402EW0007,,2011-OA-attributes-ks402.CSV,TRentPr7,8,,5a_ascii_grid2011_Tenure_TRentOt6.asc
+,20161017,x,Tenure,Private Rented: other,2011,KS402,KS402EW0008,,2011-OA-attributes-ks402.CSV,TRentOt8,8,,5a_ascii_grid2011_Tenure_TRentPr7.asc
+,20161017,x,Tenure,Living rent free,2011,KS402,KS402EW0009,,2011-OA-attributes-ks402.CSV,TRentFr9,8,,5a_ascii_grid2011_Tenure_TRentOt8.asc
+,NA,x,Tenure,Owner occupied,1971,SAS18,c71s18_053,,,TOwnOc3,7,Households per 1000 households,5a_ascii_grid1971_Tenure_TOwnOc3
+,NA,x,Tenure,Rented from Council,1971,SAS18,c71s18_054,,,TRentCn4,8,Households per 1000 households,5a_ascii_grid1971_Tenure_TRentCn4
+,NA,x,Tenure,Rented unfurnished,1971,SAS18,c71s18_055,,,TRentUf5,8,Households per 1000 households,5a_ascii_grid1971_Tenure_TRentUf5
+,NA,x,Tenure,Rented furnished,1971,SAS18,c71s18_056,,,TRentFr6,8,Households per 1000 households,5a_ascii_grid1971_Tenure_TRentFr6
+,NA,x,Tenure,Not stated,1971,SAS18,c71s18_057,,,TRentOt7,8,Households per 1000 households,5a_ascii_grid1971_Tenure_TRentOt7
+,20161017,x,Health,Long term illness in households,1991,SAS12,s120001,,,LLTI1,5,Count of residents,5a_ascii_grid1991_LLTI_LLTI1
+,20161017,x,Health,All people,2001,KS008,ks0080001,,,HAllPpl1,8,'-,5a_ascii_grid2001_Health_HAllPpl1.asc
+,20161017,x,Health,People with limiting long-term illness,2001,KS008,ks0080002,,,HPLLTI2,7,Is 0003 in Scotland,5a_ascii_grid2001_Health_HPLLTI2.asc
+,20161017,x,Health,People of working age with limiting long term illness,2001,KS008,ks0080003,,,HPWLLTI3,8,Is 0004 in Scotland,5a_ascii_grid2001_Health_HPWLLTI3.asc
+,20161017,x,Health,General Health: Good,2001,KS008,ks0080004,,,HGood4,6,Is 0005 in Scotland,5a_ascii_grid2001_Health_HGood4.asc
+,20161017,x,Health,General Health: Fairly good,2001,KS008,ks0080005,,,HFGood5,7,Is 0006 in Scotland,5a_ascii_grid2001_Health_HFGood5.asc
+,20161017,x,Health,General Health: Not good,2001,KS008,ks0080006,,,HNotGd6,7,Is 0007 in Scotland,5a_ascii_grid2001_Health_HNotGd6.asc
+,20161017,x,Health,All categories: Long-term health problem or disability,2011,KS301EW,0001,,2011-OA-attributes-ks301,HAllPPpl1,9,,5a_ascii_grid2011_Health_HAllPPpl1.asc
+,20161017,x,Health,Day-to-day activities limited a lot,2011,KS301EW,0002,,2011-OA-attributes-ks301,HLtdLot2,8,,5a_ascii_grid2011_Health_HLtdLot2.asc
+,20161017,x,Health,Day-to-day activities limited a little,2011,KS301EW,0003,,2011-OA-attributes-ks301,HLtdLtl3,8,,5a_ascii_grid2011_Health_HLtdLtl3.asc
+,20161017,x,Health,Day-to-day activities not limited,2011,KS301EW,0004,,2011-OA-attributes-ks301,HLetNot4,8,,5a_ascii_grid2011_Health_HLetNot4.asc
+,20161017,x,Health,Day-to-day activities limited a lot: Age 16 to 64,2011,KS301EW,0005,,2011-OA-attributes-ks301,HLtLotW5,8,,5a_ascii_grid2011_Health_HLtLotW5.asc
+,20161017,x,Health,Day-to-day activities limited a little: Age 16 to 64,2011,KS301EW,0006,,2011-OA-attributes-ks301,HLtLtlW6,8,,5a_ascii_grid2011_Health_HLtLtlW6.asc
+,20161017,x,Health,Day-to-day activities not limited: Age 16 to 64,2011,KS301EW,0007,,2011-OA-attributes-ks301,HLtNotW7,8,,5a_ascii_grid2011_Health_HLtNotW7.asc
+,20161017,x,Health,Very good health,2011,KS301EW,0008,,2011-OA-attributes-ks301,HVGood8,7,,5a_ascii_grid2011_Health_HVGood8.asc
+,20161017,x,Health,Good health,2011,KS301EW,0009,,2011-OA-attributes-ks301,HGood9,6,,5a_ascii_grid2011_Health_HGood9.asc
+,20161017,x,Health,Fair health,2011,KS301EW,0010,,2011-OA-attributes-ks301,HFair10,7,,5a_ascii_grid2011_Health_HFair10.asc
+,20161017,x,Health,Bad health,2011,KS301EW,0011,,2011-OA-attributes-ks301,HBad11,6,,5a_ascii_grid2011_Health_HBad11.asc
+,20161017,x,Health,Very bad health,2011,KS301EW,0012,,2011-OA-attributes-ks301,HVBad12,7,,5a_ascii_grid2011_Health_HVBad12.asc
+,,x,Health,Limiting Long Term Illness,1981,,,,,,0,"Not Avaliable (introduced in 1991, https://discover.ukdataservice.ac.uk/catalogue/?sn=22001)",
+,,x,Health,Limiting Long Term Illness,1971,,,,,,0,"Not Avaliable (introduced in 1991, https://discover.ukdataservice.ac.uk/catalogue/?sn=22001)",
+,,x,Health,General Health,1981,,,,,,0,Not Available,
+,,x,Health,General Health,1971,,,,,,0,Not Available,
+,,x,Health,General Health,1991,,,,,,0,Not Available,
+,NA,x,Age,Age All Catagories,2001,KS002,ks0020001,,2001-OA-attributes_ks002,AgeAll,6,,5a_ascii_grid2001_Age_AgeAll.asc
+,done,x,Age,Age 0 to 4,2001,KS002,ks0020002,,2001-OA-attributes_ks002,Age0-4,6,,5a_ascii_grid2001_Age_Age0.4.asc
+,done,x,Age,Age 5 to 7,2001,KS002,ks0020003,,2001-OA-attributes_ks002,Age5-7,6,,5a_ascii_grid2001_Age_Age10.14.asc
+,done,x,Age,Age 8 to 9,2001,KS002,ks0020004,,2001-OA-attributes_ks002,Age8-9,8,,5a_ascii_grid2001_Age_Age15.asc
+,done,x,Age,Age 10 to 14,2001,KS002,ks0020005,,2001-OA-attributes_ks002,Age10-14,5,,5a_ascii_grid2001_Age_Age16.17.asc
+,done,x,Age,Age 15,2001,KS002,ks0020006,,2001-OA-attributes_ks002,Age15,8,,5a_ascii_grid2001_Age_Age18.19.asc
+,done,x,Age,Age 16 to 17,2001,KS002,ks0020007,,2001-OA-attributes_ks002,Age16-17,8,,5a_ascii_grid2001_Age_Age20.24.asc
+,done,x,Age,Age 18 to 19,2001,KS002,ks0020008,,2001-OA-attributes_ks002,Age18-19,8,,5a_ascii_grid2001_Age_Age25.29.asc
+,done,x,Age,Age 20 to 24,2001,KS002,ks0020009,,2001-OA-attributes_ks002,Age20-24,8,,5a_ascii_grid2001_Age_Age30.44.asc
+,done,x,Age,Age 25 to 29,2001,KS002,ks0020010,,2001-OA-attributes_ks002,Age25-29,8,,5a_ascii_grid2001_Age_Age45.59.asc
+,done,x,Age,Age 30 to 44,2001,KS002,ks0020011,,2001-OA-attributes_ks002,Age30-44,8,,5a_ascii_grid2001_Age_Age5.7.asc
+,done,x,Age,Age 45 to 59,2001,KS002,ks0020012,,2001-OA-attributes_ks002,Age45-59,8,,5a_ascii_grid2001_Age_Age60.64.asc
+,done,x,Age,Age 60 to 64,2001,KS002,ks0020013,,2001-OA-attributes_ks002,Age60-64,8,,5a_ascii_grid2001_Age_Age65.69.asc
+,done,x,Age,Age 65 to 69,2001,KS002,ks0020014,,2001-OA-attributes_ks002,Age65-69,8,,5a_ascii_grid2001_Age_Age70.84.asc
+,done,x,Age,Age 70 to 84,2001,KS002,ks0020015,,2001-OA-attributes_ks002,Age70-84,8,,5a_ascii_grid2001_Age_Age8.9.asc
+,done,x,Age,Age 85 to 89,2001,KS002,ks0020016,,2001-OA-attributes_ks002,Age85-89,8,,5a_ascii_grid2001_Age_Age85.89.asc
+,done,x,Age,Age 90 plus,2001,KS002,ks0020017,,2001-OA-attributes_ks002,Age90plu,8,,5a_ascii_grid2001_Age_Age90plu.asc
+,done,x,Age,All categories: Age,2011,KS102,KS102EW0001,,2011-OA-attributes-ks102,Column Code,11,,5a_ascii_grid2011_Age_AgeAll.asc
+,done,x,Age,Age 0 to 4,2011,KS102,KS102EW0002,,2011-OA-attributes-ks102,Age0-4,6,,5a_ascii_grid2011_Age_Age0.4.asc
+,done,x,Age,Age 5 to 7,2011,KS102,KS102EW0003,,2011-OA-attributes-ks102,Age5-7,6,,5a_ascii_grid2011_Age_Age5.7.asc
+,done,x,Age,Age 8 to 9,2011,KS102,KS102EW0004,,2011-OA-attributes-ks102,Age8-9,6,,5a_ascii_grid2011_Age_Age8.9.asc
+,done,x,Age,Age 10 to 14,2011,KS102,KS102EW0005,,2011-OA-attributes-ks102,Age10-14,8,,5a_ascii_grid2011_Age_Age10.14.asc
+,done,x,Age,Age 15,2011,KS102,KS102EW0006,,2011-OA-attributes-ks102,Age15,5,,5a_ascii_grid2011_Age_Age15.asc
+,done,x,Age,Age 16 to 17,2011,KS102,KS102EW0007,,2011-OA-attributes-ks102,Age16-17,8,,5a_ascii_grid2011_Age_Age16.17.asc
+,done,x,Age,Age 18 to 19,2011,KS102,KS102EW0008,,2011-OA-attributes-ks102,Age18-19,8,,5a_ascii_grid2011_Age_Age18.19.asc
+,done,x,Age,Age 20 to 24,2011,KS102,KS102EW0009,,2011-OA-attributes-ks102,Age20-24,8,,5a_ascii_grid2011_Age_Age20.24.asc
+,done,x,Age,Age 25 to 29,2011,KS102,KS102EW0010,,2011-OA-attributes-ks102,Age25-29,8,,5a_ascii_grid2011_Age_Age25.29.asc
+,done,x,Age,Age 30 to 44,2011,KS102,KS102EW0011,,2011-OA-attributes-ks102,Age30-44,8,,5a_ascii_grid2011_Age_Age30.44.asc
+,done,x,Age,Age 45 to 59,2011,KS102,KS102EW0012,,2011-OA-attributes-ks102,Age45-59,8,,5a_ascii_grid2011_Age_Age45.59.asc
+,done,x,Age,Age 60 to 64,2011,KS102,KS102EW0013,,2011-OA-attributes-ks102,Age60-64,8,,5a_ascii_grid2011_Age_Age60.64.asc
+,done,x,Age,Age 65 to 74,2011,KS102,KS102EW0014,,2011-OA-attributes-ks102,Age65-69,8,,5a_ascii_grid2011_Age_Age65.69.asc
+,done,x,Age,Age 75 to 84,2011,KS102,KS102EW0015,,2011-OA-attributes-ks102,Age70-84,8,,5a_ascii_grid2011_Age_Age70.84.asc
+,done,x,Age,Age 85 to 89,2011,KS102,KS102EW0016,,2011-OA-attributes-ks102,Age85-89,8,,5a_ascii_grid2011_Age_Age85.89.asc
+,done,x,Age,Age 90 and over,2011,KS102,KS102EW0017,,2011-OA-attributes-ks102,Age90plu,8,,5a_ascii_grid2011_Age_Age90plu.asc
+,done,x,Age,Mean age,2011,KS102,KS102EW0018,,2011-OA-attributes-ks102,AgeMean,7,,5a_ascii_grid2011_Age_AgeMean.asc
+,done,x,Age,Median age,2011,KS102,KS102EW0019,,2011-OA-attributes-ks102,AgeMedin,8,,5a_ascii_grid2011_Age_AgeMedin.asc
+,done,x,Age,Age 0 to 14 Males Single/Widowed/Divorced,1971,SAS07,c71s07_269,,1971_sas07_present_persons,A0-14MSi,8,,5a_ascii_grid1971_Age_A0.14MSi.asc
+,done,x,Age,Age 0 to 14 Females Single/Widowed/Divorced,1971,SAS07,c71s07_297,,1971_sas07_present_persons,A0-14FSi,8,,5a_ascii_grid1971_Age_A0.14FSi.asc
+,done,x,Age,Age 15 to 19 Males Single/Widowed/Divorced,1971,SAS07,c71s07_270,,1971_sas07_present_persons,A15-19MS,8,,5a_ascii_grid1971_Age_A15.19MS.asc
+,done,x,Age,Age 15 to 19 Males Married,1971,SAS07,c71s07_284,,1971_sas07_present_persons,A15-19MM,8,,5a_ascii_grid1971_Age_A15.19MM.asc
+,done,x,Age,Age 15 to 19 Females Single/Widowed/Divorced,1971,SAS07,c71s07_298,,1971_sas07_present_persons,A15-19FS,8,,5a_ascii_grid1971_Age_A15.19FS.asc
+,done,x,Age,Age 15 to 19 Females Married ,1971,SAS07,c71s07_312,,1971_sas07_present_persons,A15-19FM,8,,5a_ascii_grid1971_Age_A15.19FM.asc
+,done,x,Age,Age 20 to 24 Males Single/Widowed/Divorced,1971,SAS07,c71s07_271,,1971_sas07_present_persons,A20-24MS,8,,5a_ascii_grid1971_Age_A20.24MS.asc
+,done,x,Age,Age 20 to 24 Males Married,1971,SAS07,c71s07_285,,1971_sas07_present_persons,A20-24MM,8,,5a_ascii_grid1971_Age_A20.24MM.asc
+,done,x,Age,Age 20 to 24 Females Single/Widowed/Divorced,1971,SAS07,c71s07_299,,1971_sas07_present_persons,A20-24FS,8,,5a_ascii_grid1971_Age_A20.24FS.asc
+,done,x,Age,Age 20 to 24 Females Married ,1971,SAS07,c71s07_313,,1971_sas07_present_persons,A20-24FM,8,,5a_ascii_grid1971_Age_A20.24FM.asc
+,done,x,Age,Age 25 to 29 Males Single/Widowed/Divorced,1971,SAS07,c71s07_272,,1971_sas07_present_persons,A25-29MS,8,,5a_ascii_grid1971_Age_A25.29MS.asc
+,done,x,Age,Age 25 to 29 Males Married,1971,SAS07,c71s07_286,,1971_sas07_present_persons,A25-29MM,8,,5a_ascii_grid1971_Age_A25.29MM.asc
+,done,x,Age,Age 25 to 29 Females Single/Widowed/Divorced,1971,SAS07,c71s07_300,,1971_sas07_present_persons,A25-29FS,8,,5a_ascii_grid1971_Age_A25.29FS.asc
+,done,x,Age,Age 25 to 29 Females Married ,1971,SAS07,c71s07_314,,1971_sas07_present_persons,A25-29FM,8,,5a_ascii_grid1971_Age_A25.29FM.asc
+,done,x,Age,Age 30 to 34 Males Single/Widowed/Divorced,1971,SAS07,c71s07_273,,1971_sas07_present_persons,A30-34MS,8,,5a_ascii_grid1971_Age_A30.34MS.asc
+,done,x,Age,Age 30 to 34 Males Married,1971,SAS07,c71s07_287,,1971_sas07_present_persons,A30-34MM,8,,5a_ascii_grid1971_Age_A30.34MM.asc
+,done,x,Age,Age 30 to 34 Females Single/Widowed/Divorced,1971,SAS07,c71s07_301,,1971_sas07_present_persons,A30-34FS,8,,5a_ascii_grid1971_Age_A30.34FS.asc
+,done,x,Age,Age 30 to 34 Females Married ,1971,SAS07,c71s07_315,,1971_sas07_present_persons,A30-34FM,8,,5a_ascii_grid1971_Age_A30.34FM.asc
+,done,x,Age,Age 35 to 39 Males Single/Widowed/Divorced,1971,SAS07,c71s07_274,,1971_sas07_present_persons,A35-39MS,8,,5a_ascii_grid1971_Age_A35.39MS.asc
+,done,x,Age,Age 35 to 39 Males Married,1971,SAS07,c71s07_288,,1971_sas07_present_persons,A35-39MM,8,,5a_ascii_grid1971_Age_A35.39MM.asc
+,done,x,Age,Age 35 to 39 Females Single/Widowed/Divorced,1971,SAS07,c71s07_302,,1971_sas07_present_persons,A35-39FS,8,,5a_ascii_grid1971_Age_A35.39FS.asc
+,done,x,Age,Age 35 to 39 Females Married ,1971,SAS07,c71s07_316,,1971_sas07_present_persons,A35-39FM,8,,5a_ascii_grid1971_Age_A35.39FM.asc
+,done,x,Age,Age 40 to 44 Males Single/Widowed/Divorced,1971,SAS07,c71s07_275,,1971_sas07_present_persons,A40-44MS,8,,5a_ascii_grid1971_Age_A40.44MS.asc
+,done,x,Age,Age 40 to 44 Males Married,1971,SAS07,c71s07_289,,1971_sas07_present_persons,A40-44MM,8,,5a_ascii_grid1971_Age_A40.44MM.asc
+,done,x,Age,Age 40 to 44 Females Single/Widowed/Divorced,1971,SAS07,c71s07_303,,1971_sas07_present_persons,A40-44FS,8,,5a_ascii_grid1971_Age_A40.44FS.asc
+,done,x,Age,Age 40 to 44 Females Married ,1971,SAS07,c71s07_317,,1971_sas07_present_persons,A40-44FM,8,,5a_ascii_grid1971_Age_A40.44FM.asc
+,done,x,Age,Age 45 to 49 Males Single/Widowed/Divorced,1971,SAS07,c71s07_276,,1971_sas07_present_persons,A45-49MS,8,,5a_ascii_grid1971_Age_A45.49MS.asc
+,done,x,Age,Age 45 to 49 Males Married,1971,SAS07,c71s07_290,,1971_sas07_present_persons,A45-49MM,8,,5a_ascii_grid1971_Age_A45.49MM.asc
+,done,x,Age,Age 45 to 49 Females Single/Widowed/Divorced,1971,SAS07,c71s07_304,,1971_sas07_present_persons,A45-49FS,8,,5a_ascii_grid1971_Age_A45.49FS.asc
+,done,x,Age,Age 45 to 49 Females Married ,1971,SAS07,c71s07_318,,1971_sas07_present_persons,A45-49FM,8,,5a_ascii_grid1971_Age_A45.49FM.asc
+,done,x,Age,Age 50 to 54 Males Single/Widowed/Divorced,1971,SAS07,c71s07_277,,1971_sas07_present_persons,A50-54MS,8,,5a_ascii_grid1971_Age_A50.54MS.asc
+,done,x,Age,Age 50 to 54 Males Married,1971,SAS07,c71s07_291,,1971_sas07_present_persons,A50-54MM,8,,5a_ascii_grid1971_Age_A50.54MM.asc
+,done,x,Age,Age 50 to 54 Females Single/Widowed/Divorced,1971,SAS07,c71s07_305,,1971_sas07_present_persons,A50-54FS,8,,5a_ascii_grid1971_Age_A50.54FS.asc
+,done,x,Age,Age 50 to 54 Females Married ,1971,SAS07,c71s07_319,,1971_sas07_present_persons,A50-54FM,8,,5a_ascii_grid1971_Age_A50.54FM.asc
+,done,x,Age,Age 55 to 59 Males Single/Widowed/Divorced,1971,SAS07,c71s07_278,,1971_sas07_present_persons,A55-59MS,8,,5a_ascii_grid1971_Age_A55.59MS.asc
+,done,x,Age,Age 55 to 59 Males Married,1971,SAS07,c71s07_292,,1971_sas07_present_persons,A55-59MM,8,,5a_ascii_grid1971_Age_A55.59MM.asc
+,done,x,Age,Age 55 to 59 Females Single/Widowed/Divorced,1971,SAS07,c71s07_306,,1971_sas07_present_persons,A55-59FS,8,,5a_ascii_grid1971_Age_A55.59FS.asc
+,done,x,Age,Age 55 to 59 Females Married ,1971,SAS07,c71s07_320,,1971_sas07_present_persons,A55-59FM,8,,5a_ascii_grid1971_Age_A55.59FM.asc
+,done,x,Age,Age 60 to 64 Males Single/Widowed/Divorced,1971,SAS07,c71s07_279,,1971_sas07_present_persons,A60-64MS,8,,5a_ascii_grid1971_Age_A60.64MS.asc
+,done,x,Age,Age 60 to 64 Males Married,1971,SAS07,c71s07_293,,1971_sas07_present_persons,A60-64MM,8,,5a_ascii_grid1971_Age_A60.64MM.asc
+,done,x,Age,Age 60 to 64 Females Single/Widowed/Divorced,1971,SAS07,c71s07_307,,1971_sas07_present_persons,A60-64FS,8,,5a_ascii_grid1971_Age_A60.64FS.asc
+,done,x,Age,Age 60 to 64 Females Married ,1971,SAS07,c71s07_321,,1971_sas07_present_persons,A60-64FM,8,,5a_ascii_grid1971_Age_A60.64FM.asc
+,done,x,Age,Age 65 to 69 Males Single/Widowed/Divorced,1971,SAS07,c71s07_280,,1971_sas07_present_persons,A65-69MS,8,,5a_ascii_grid1971_Age_A65.69MS.asc
+,done,x,Age,Age 65 to 69 Males Married,1971,SAS07,c71s07_294,,1971_sas07_present_persons,A65-69MM,8,,5a_ascii_grid1971_Age_A65.69MM.asc
+,done,x,Age,Age 65 to 69 Females Single/Widowed/Divorced,1971,SAS07,c71s07_308,,1971_sas07_present_persons,A65-69FS,8,,5a_ascii_grid1971_Age_A65.69FS.asc
+,done,x,Age,Age 65 to 69 Females Married ,1971,SAS07,c71s07_322,,1971_sas07_present_persons,A65-69FM,8,,5a_ascii_grid1971_Age_A65.69FM.asc
+,done,x,Age,Age 70 to 74 Males Single/Widowed/Divorced,1971,SAS07,c71s07_281,,1971_sas07_present_persons,A70-75MS,8,,5a_ascii_grid1971_Age_A70.75MS.asc
+,done,x,Age,Age 70 to 74 Males Married,1971,SAS07,c71s07_295,,1971_sas07_present_persons,A70-75MM,8,,5a_ascii_grid1971_Age_A70.75MM.asc
+,done,x,Age,Age 70 to 74 Females Single/Widowed/Divorced,1971,SAS07,c71s07_309,,1971_sas07_present_persons,A70-75FS,8,,5a_ascii_grid1971_Age_A70.75FS.asc
+,done,x,Age,Age 70 to 74 Females Married ,1971,SAS07,c71s07_323,,1971_sas07_present_persons,A70-75FM,8,,5a_ascii_grid1971_Age_A70.75FM.asc
+,done,x,Age,Age 75+ Males Single/Widowed/Divorced,1971,SAS07,c71s07_282,,1971_sas07_present_persons,A75pMS,6,,5a_ascii_grid1971_Age_A75pMS.asc
+,done,x,Age,Age 75+ Males Married,1971,SAS07,c71s07_296,,1971_sas07_present_persons,A75pMM,6,,5a_ascii_grid1971_Age_A75pMM.asc
+,done,x,Age,Age 75+ Females Single/Widowed/Divorced,1971,SAS07,c71s07_310,,1971_sas07_present_persons,A75pFS,6,,5a_ascii_grid1971_Age_A75pFS.asc
+,done,x,Age,Age 75+ Females Married ,1971,SAS07,c71s07_324,,1971_sas07_present_persons,A75pFM,6,,5a_ascii_grid1971_Age_A75pFM.asc
+,done,x,Age,Total Males Single/Widowed/Divorced,1971,SAS07,c71s07_325,,1971_sas07_present_persons,ATotMS,6,,5a_ascii_grid1971_Age_ATotMS.asc
+,done,x,Age,Total Males Married,1971,SAS07,c71s07_326,,1971_sas07_present_persons,ATotMM,6,,5a_ascii_grid1971_Age_ATotMM.asc
+,done,x,Age,Total Females Single/Widowed/Divorced,1971,SAS07,c71s07_327,,1971_sas07_present_persons,ATotFS,6,,5a_ascii_grid1971_Age_ATotFS.asc
+,done,x,Age,Total Females Married ,1971,SAS07,c71s07_328,,1971_sas07_present_persons,ATotFM,6,,5a_ascii_grid1971_Age_ATotFM.asc
+,done,x,Age,All Age,1981,SAS02,[81sas020050],,"1981-OA-attributes-sas02,csv",AgeAll,6,,5a_ascii_grid20160310d_GB_1981_AgeAll.asc
+,done,x,Age,Age 0 to 4,1981,SAS02,[81sas020057],,"1981-OA-attributes-sas02,csv",Age0_4,6,,5a_ascii_grid20160310d_GB_1981_Age0_4.asc
+,done,x,Age,Age 5 to 9,1981,SAS02,[81sas020064],,"1981-OA-attributes-sas02,csv",Age5_9,6,,5a_ascii_grid20160310d_GB_1981_Age5_9.asc
+,done,x,Age,Age 10 to 14,1981,SAS02,[81sas020071],,"1981-OA-attributes-sas02,csv",Age10_14,8,,5a_ascii_grid20160310d_GB_1981_Age10_14.asc
+,done,x,Age,Age 15,1981,SAS02,[81sas020078],,"1981-OA-attributes-sas02,csv",Age15,5,,5a_ascii_grid20160310d_GB_1981_Age15.asc
+,done,x,Age,Age 16 to 19,1981,SAS02,[81sas020085],,"1981-OA-attributes-sas02,csv",Age16_19,8,,5a_ascii_grid20160310d_GB_1981_Age16_19.asc
+,done,x,Age,Age 20 to 24,1981,SAS02,[81sas020092],,"1981-OA-attributes-sas02,csv",Age20_24,8,,5a_ascii_grid20160310d_GB_1981_Age20_24.asc
+,done,x,Age,Age 25 to 29,1981,SAS02,[81sas020099],,"1981-OA-attributes-sas02,csv",Age25_29,8,,5a_ascii_grid20160310d_GB_1981_Age25_29.asc
+,done,x,Age,Age 30 to 34,1981,SAS02,[81sas020106],,"1981-OA-attributes-sas02,csv",Age30_34,8,,5a_ascii_grid20160310d_GB_1981_Age30_34.asc
+,done,x,Age,Age 35 to 39,1981,SAS02,[81sas020113],,"1981-OA-attributes-sas02,csv",Age35_39,8,,5a_ascii_grid20160310d_GB_1981_Age35_39.asc
+,done,x,Age,Age 40 to 44,1981,SAS02,[81sas020120],,"1981-OA-attributes-sas02,csv",Age40_44,8,,5a_ascii_grid20160310d_GB_1981_Age40_44.asc
+,done,x,Age,Age 45 to 49,1981,SAS02,[81sas020127],,"1981-OA-attributes-sas02,csv",Age45_49,8,,5a_ascii_grid20160310d_GB_1981_Age45_49.asc
+,done,x,Age,Age 50 to 54,1981,SAS02,[81sas020134],,"1981-OA-attributes-sas02,csv",Age50_54,8,,5a_ascii_grid20160310d_GB_1981_Age50_54.asc
+,done,x,Age,Age 55 to 59,1981,SAS02,[81sas020141],,"1981-OA-attributes-sas02,csv",Age55_59,8,,5a_ascii_grid20160310d_GB_1981_Age55_59.asc
+,done,x,Age,Age 60 to 64,1981,SAS02,[81sas020148],,"1981-OA-attributes-sas02,csv",Age60_64,8,,5a_ascii_grid20160310d_GB_1981_Age60_64.asc
+,done,x,Age,Age 65 to 69,1981,SAS02,[81sas020155],,"1981-OA-attributes-sas02,csv",Age65_69,8,,5a_ascii_grid20160310d_GB_1981_Age65_69.asc
+,done,x,Age,Age 70 to 74,1981,SAS02,[81sas020162],,"1981-OA-attributes-sas02,csv",Age70_74,8,,5a_ascii_grid20160310d_GB_1981_Age70_74.asc
+,done,x,Age,Age 75 to 79,1981,SAS02,[81sas020169],,"1981-OA-attributes-sas02,csv",Age75_79,8,,5a_ascii_grid20160310d_GB_1981_Age75_79.asc
+,done,x,Age,Age 80 to 84,1981,SAS02,[81sas020176],,"1981-OA-attributes-sas02,csv",Age80_84,8,,5a_ascii_grid20160310d_GB_1981_Age80_84.asc
+,done,x,Age,Age 85 plus,1981,SAS02,[81sas020183],,"1981-OA-attributes-sas02,csv",Age85plus,9,,5a_ascii_grid20160310d_GB_1981_Age85plus.asc
+,done,x,Age,Age All Catagories,1991,SAS02,s020001,,1991-OA-attributes-sas02,AgeAll,6,,5a_ascii_grid1991_Age_AgeAll.asc
+,done,x,Age,Age 0 to 4,1991,SAS02,s020008,,1991-OA-attributes-sas02,Age0_4,6,,5a_ascii_grid1991_Age_Age0_4.asc
+,done,x,Age,Age 5 to 9,1991,SAS02,s020015,,1991-OA-attributes-sas02,Age5_9,6,,5a_ascii_grid1991_Age_Age10_14.asc
+,done,x,Age,Age 10 to 14,1991,SAS02,s020022,,1991-OA-attributes-sas02,Age10_14,8,,5a_ascii_grid1991_Age_Age15.asc
+,done,x,Age,Age 15,1991,SAS02,s020029,,1991-OA-attributes-sas02,Age15,5,,5a_ascii_grid1991_Age_Age16_17.asc
+,done,x,Age,Age 16 to 17,1991,SAS02,s020036,,1991-OA-attributes-sas02,Age16_17,8,,5a_ascii_grid1991_Age_Age18_19.asc
+,done,x,Age,Age 18 to 19,1991,SAS02,s020043,,1991-OA-attributes-sas02,Age18_19,8,,5a_ascii_grid1991_Age_Age20_24.asc
+,done,x,Age,Age 20 to 24,1991,SAS02,s020050,,1991-OA-attributes-sas02,Age20_24,8,,5a_ascii_grid1991_Age_Age25_29.asc
+,done,x,Age,Age 25 to 29,1991,SAS02,s020057,,1991-OA-attributes-sas02,Age25_29,8,,5a_ascii_grid1991_Age_Age30_34.asc
+,done,x,Age,Age 30 to 34,1991,SAS02,s020064,,1991-OA-attributes-sas02,Age30_34,8,,5a_ascii_grid1991_Age_Age35_39.asc
+,done,x,Age,Age 35 to 39,1991,SAS02,s020071,,1991-OA-attributes-sas02,Age35_39,8,,5a_ascii_grid1991_Age_Age40_44.asc
+,done,x,Age,Age 40 to 44,1991,SAS02,s020078,,1991-OA-attributes-sas02,Age40_44,8,,5a_ascii_grid1991_Age_Age45_49.asc
+,done,x,Age,Age 45 to 49,1991,SAS02,s020085,,1991-OA-attributes-sas02,Age45_49,8,,5a_ascii_grid1991_Age_Age50_54.asc
+,done,x,Age,Age 50 to 54,1991,SAS02,s020092,,1991-OA-attributes-sas02,Age50_54,8,,5a_ascii_grid1991_Age_Age55_59.asc
+,done,x,Age,Age 55 to 59,1991,SAS02,s020099,,1991-OA-attributes-sas02,Age55_59,8,,5a_ascii_grid1991_Age_Age5_9.asc
+,done,x,Age,Age 60 to 64,1991,SAS02,s020106,,1991-OA-attributes-sas02,Age60_64,8,,5a_ascii_grid1991_Age_Age60_64.asc
+,done,x,Age,Age 65 to 69,1991,SAS02,s020113,,1991-OA-attributes-sas02,Age65_69,8,,5a_ascii_grid1991_Age_Age65_69.asc
+,done,x,Age,Age 70 to 74,1991,SAS02,s020120,,1991-OA-attributes-sas02,Age70_74,8,,5a_ascii_grid1991_Age_Age70_74.asc
+,done,x,Age,Age 75 to 79,1991,SAS02,s020127,,1991-OA-attributes-sas02,Age75_79,8,,5a_ascii_grid1991_Age_Age75_79.asc
+,done,x,Age,Age 80 to 84,1991,SAS02,s020134,,1991-OA-attributes-sas02,Age80_84,8,,5a_ascii_grid1991_Age_Age80_84.asc
+,done,x,Age,Age 85 to 98,1991,SAS02,s020141,,1991-OA-attributes-sas02,Age85_89,8,,5a_ascii_grid1991_Age_Age85_89.asc
+,done,x,Age,Age 90 plus,1991,SAS02,s020148,,1991-OA-attributes-sas02,Age90plus,9,,5a_ascii_grid1991_Age_Age90plus.asc
+,#N/A,20160822,Total Population,Usual Resident Population: All people,2001,KS001,ks0010001,,2001-OA-attributes_ks001.csv,UsRsPopA,8,,5a_ascii_grid2001_Total_Population_UsRsPopA
+,#N/A,20160822,Total Population,Usual Resident Population: Males,2001,KS001,ks0010002,,2001-OA-attributes_ks001.csv,UsRsPopM,8,,5a_ascii_grid2001_Total_Population_UsRsPopM
+,#N/A,20160822,Total Population,Usual Resident Population: Females,2001,KS001,ks0010003,,2001-OA-attributes_ks001.csv,UsRsPopF,8,,5a_ascii_grid2001_Total_Population_UsRsPopF
+,#N/A,20160822,Total Population,Usual Resident Population: People in Households,2001,KS001,ks0010004,,2001-OA-attributes_ks001.csv,UsRsPopH,8,,5a_ascii_grid2001_Total_Population_UsRsPopH
+,#N/A,20160822,Total Population,Usual Resident Population: People living in communal establishments,2001,KS001,ks0010005,,2001-OA-attributes_ks001.csv,UsRsPopC,8,,5a_ascii_grid2001_Total_Population_UsRsPopC
+,#N/A,20160822,Total Population,Usual Resident Population: Students away from home,2001,KS001,ks0010006,,2001-OA-attributes_ks001.csv,UsRsPopS,8,,5a_ascii_grid2001_Total_Population_UsRsPopS
+,#N/A,20160822,Total Population,Usual Resident Population: All people,2011,KS101,KS101EW0001,,2011-OA-attributes-ks101,URPopAll,8,,5a_ascii_grid2011_Total_Population_URPopAll
+,#N/A,20160822,Total Population,Usual Resident Population: Males,2011,KS101,KS101EW0002,,2011-OA-attributes-ks101,URPopM,6,,5a_ascii_grid2011_Total_Population_URPopM
+,#N/A,20160822,Total Population,Usual Resident Population: Females,2011,KS101,KS101EW0003,,2011-OA-attributes-ks101,URPopF,6,,5a_ascii_grid2011_Total_Population_URPopF
+,#N/A,20160822,Total Population,Usual Resident Population: Lives in a household,2011,KS101,KS101EW0004,,2011-OA-attributes-ks101,URPopH,6,,5a_ascii_grid2011_Total_Population_URPopH
+,#N/A,20160822,Total Population,Usual Resident Population: Lives in a communal establishment,2011,KS101,KS101EW0005,,2011-OA-attributes-ks101,URPopC,6,,5a_ascii_grid2011_Total_Population_URPopC
+,#N/A,20160822,Total Population,Usual Resident Population: Schoolchild of full-time student ages over 4 at their non term-time address,2011,KS101,KS101EW0006,,2011-OA-attributes-ks101,URPopS,6,,5a_ascii_grid2011_Total_Population_URPopS
+,#N/A,20160822,Total Population,Present residents,1991,SAS01,s010001,,1991-OA-attributes-sas01,TPPres,6,,5a_ascii_grid1991_Total_Population_TPPres.asc
+,#N/A,20160822,Total Population,Absent Residents (part of household present),1991,SAS01,s010008,,1991-OA-attributes-sas01,TPPtAb,6,,5a_ascii_grid1991_Total_Population_TPPtAb.asc
+,#N/A,20160822,Total Population,Absent residents (wholly absent household – enumerated),1991,SAS01,s010015,,1991-OA-attributes-sas01,TPAbEn,6,,5a_ascii_grid1991_Total_Population_TPAbEn.asc
+,#N/A,20160822,Total Population,Absent residents (wholly absent household – imputed),1991,SAS01,s010022,,1991-OA-attributes-sas01,TPAbIm,6,,5a_ascii_grid1991_Total_Population_TPAbIm.asc
+,#N/A,20160822,Total Population,Visitors,1991,SAS01,s010029,,1991-OA-attributes-sas01,TPVis,5,,5a_ascii_grid1991_Total_Population_TPVis.asc
+,#N/A,20160822,Total Population,Visitors – Resident in UK,1991,SAS01,s010036,,1991-OA-attributes-sas01,TPVisRUK,8,,5a_ascii_grid1991_Total_Population_TPVisRUK.asc
+,#N/A,20160822,Total Population,Visitors – Resident outside UK,1991,SAS01,s010043,,1991-OA-attributes-sas01,TPVisNR,7,,5a_ascii_grid1991_Total_Population_TPVisNR.asc
+,#N/A,20160822,Total Population,Persons Present 1991: 1971 Base,1991,SAS01,s010050,,1991-OA-attributes-sas01,TP71Bs,6,,5a_ascii_grid1991_Total_Population_TP71Bs.asc
+,#N/A,20160822,Total Population,Persons Present 1991: 1981 Base,1991,SAS01,s010057,,1991-OA-attributes-sas01,TP81Bs,6,,5a_ascii_grid1991_Total_Population_TP81Bs.asc
+,#N/A,20160822,Total Population,Persons Present 1991: 1991 Base,1991,SAS01,s010064,,1991-OA-attributes-sas01,TP91Bs,6,,5a_ascii_grid1991_Total_Population_TP91Bs.asc
+,#N/A,20160822,Total Population,All present residents,1981,SAS01,[81sas010001],,1981-OA-attributes-sas01,PBPres,6,,5a_ascii_grid1981_Total_Population_PBPres
+,#N/A,20160822,Total Population,All Absent Residents (part of household present),1981,SAS01,[81sas010008],,1981-OA-attributes-sas01,PBPtAb,6,,5a_ascii_grid1981_Total_Population_PBPtAb
+,#N/A,20160822,Total Population,All Visitors,1981,SAS01,[81sas010015],,1981-OA-attributes-sas01,PBVis,5,,5a_ascii_grid1981_Total_Population_PBVis
+,#N/A,20160822,Total Population,All Visitors – Resident in UK,1981,SAS01,[81sas010022],,1981-OA-attributes-sas01,PBVisRUK ,9,,5a_ascii_grid1981_Total_Population_PBVisRUK
+,#N/A,20160822,Total Population,All Visitors – Resident outside UK,1981,SAS01,[81sas010029],,1981-OA-attributes-sas01,PBVisNR,7,,5a_ascii_grid1981_Total_Population_PBVisNR
+,#N/A,20160822,Total Population,Persons Present 1981: 1971 Base,1981,SAS01,[81sas010036],,1981-OA-attributes-sas01,PB71Bs,6,,5a_ascii_grid1981_Total_Population_PB71Bs
+,#N/A,20160822,Total Population,Persons Present 1981: 1981 Base,1981,SAS01,[81sas010043],,1981-OA-attributes-sas01,TP81Bs,6,,5a_ascii_grid1981_Total_Population_TP81Bs
+,#N/A,20160822,Total Population,Population present,1971,SAS01,c71s01_032,,1971-OA-attributes-sas01,PBPres,6,,5a_ascii_grid1971_Total_Population_PBPres.asc
+,#N/A,20160822,Total Population,Visitors resident in LA,1971,SAS01,c71s01_033,,1971-OA-attributes-sas01,PBVisRLA,8,,5a_ascii_grid1971_Total_Population_PBVisRLA.asc
+,#N/A,20160822,Total Population,Visitors to LA: resident in GB,1971,SAS01,c71s01_034,,1971-OA-attributes-sas01,PBVisRGB,8,,5a_ascii_grid1971_Total_Population_PBVisRGB.asc
+,#N/A,20160822,Total Population,Visitors to GB,1971,SAS01,c71s01_035,,1971-OA-attributes-sas01,PBVisGB,7,,5a_ascii_grid1971_Total_Population_PBVisGB.asc
+,#N/A,20160822,Total Population,Population in private households,1971,SAS01,c71s01_036,,1971-OA-attributes-sas01,PBPHs,5,,5a_ascii_grid1971_Total_Population_PBPHs.asc
+,#N/A,20160822,Total Population,Population in private households: residents at address of enum.,1971,SAS01,c71s01_037,,1971-OA-attributes-sas01,PBPHsR,6,,5a_ascii_grid1971_Total_Population_PBPHsR.asc
+,#N/A,20160822,Total Population,Population not in private households,1971,SAS01,c71s01_038,,1971-OA-attributes-sas01,PBNPHo,6,,5a_ascii_grid1971_Total_Population_PBNPHo.asc
+,#N/A,20160822,Total Population,Population not in private households: residents at address of enum.,1971,SAS01,c71s01_039,,1971-OA-attributes-sas01,PBNPHoR,7,,5a_ascii_grid1971_Total_Population_PBNPHoR.asc
+x,x,x,Ethnicity,DATA NOT AVAILABLE,1971,-,-,,-,-,-,-,DATA NOT AVALIABLE
+x,x,x,Ethnicity,DATA NOT AVAILABLE,1981,-,-,,-,-,-,-,DATA NOT AVALIABLE
+,20161017,x,Ethnicity,Total,1991,SAS06,s060001,,1991-OA-attributes-sas06,ETotal1,7,,5a_ascii_grid1991_Ethnicity_ETotal1.asc
+,20161017,x,Ethnicity,White,1991,SAS06,s060002,,1991-OA-attributes-sas06,EWhite2,7,,5a_ascii_grid1991_Ethnicity_EWhite2.asc
+,20161017,x,Ethnicity,Black Caribbean,1991,SAS06,s060003,,1991-OA-attributes-sas06,EBlkCab3,8,,5a_ascii_grid1991_Ethnicity_EBlkCab3.asc
+,20161017,x,Ethnicity,Black Africa,1991,SAS06,s060004,,1991-OA-attributes-sas06,EBlkAfr4,8,,5a_ascii_grid1991_Ethnicity_EBlkAfr4.asc
+,20161017,x,Ethnicity,Black other,1991,SAS06,s060005,,1991-OA-attributes-sas06,EBlkOth5,8,,5a_ascii_grid1991_Ethnicity_EBlkOth5.asc
+,20161017,x,Ethnicity,Indian,1991,SAS06,s060006,,1991-OA-attributes-sas06,EIndian6,8,,5a_ascii_grid1991_Ethnicity_EIndian6.asc
+,20161017,x,Ethnicity,Pakistani,1991,SAS06,s060007,,1991-OA-attributes-sas06,EPakist7,8,,5a_ascii_grid1991_Ethnicity_EPakist7.asc
+,20161017,x,Ethnicity,Bangladeshi,1991,SAS06,s060008,,1991-OA-attributes-sas06,EBangla8,8,,5a_ascii_grid1991_Ethnicity_EBangla8.asc
+,20161017,x,Ethnicity,Chinese,1991,SAS06,s060009,,1991-OA-attributes-sas06,EChines9,8,,5a_ascii_grid1991_Ethnicity_EChines9.asc
+,20161017,x,Ethnicity,Other: Asian,1991,SAS06,s060010,,1991-OA-attributes-sas06,EOtAsn10,8,,5a_ascii_grid1991_Ethnicity_EOtAsn10.asc
+,20161017,x,Ethnicity,Other: Other,1991,SAS06,s060011,,1991-OA-attributes-sas06,EOther11,8,,5a_ascii_grid1991_Ethnicity_EOther11.asc
+,20161017,x,Ethnicity,Persons born in Ireland,1991,SAS06,s060012,,1991-OA-attributes-sas06,EBIrel12,8,,5a_ascii_grid1991_Ethnicity_EBIrel12.asc
+,20161017,x,Ethnicity,All People,2001,KS006,ks06a0001,,2001-OA-attributes_ks006,ETotal1,7,,5a_ascii_grid2001_Ethnicity_ETotal1.asc
+,20161017,x,Ethnicity,White: White British,2001,KS006,ks06a0002,,2001-OA-attributes_ks006,EWhtBrt2,8,,5a_ascii_grid2001_Ethnicity_EWhtBrt2.asc
+,20161017,x,Ethnicity,White: White Irish,2001,KS006,ks06a0003,,2001-OA-attributes_ks006,EWhtIrs3,8,,5a_ascii_grid2001_Ethnicity_EWhtIrs3.asc
+,20161017,x,Ethnicity,White: Other White,2001,KS006,ks06a0004,,2001-OA-attributes_ks006,EWhtOth4,8,,5a_ascii_grid2001_Ethnicity_EWhtOth4.asc
+,20161017,x,Ethnicity,Mixed: White and Black Caribbean,2001,KS006,ks06a0005,,2001-OA-attributes_ks006,EWhBlCb5,8,,5a_ascii_grid2001_Ethnicity_EWhBlCb5.asc
+,20161017,x,Ethnicity,Mixed: White and Black African,2001,KS006,ks06a0006,,2001-OA-attributes_ks006,EWhBlAf6,8,,5a_ascii_grid2001_Ethnicity_EWhBlAf6.asc
+,20161017,x,Ethnicity,Mixed: White and Asian,2001,KS006,ks06a0007,,2001-OA-attributes_ks006,EWhAsin7,8,,5a_ascii_grid2001_Ethnicity_EWhAsin7.asc
+,20161017,x,Ethnicity,Mixed: Other Mixed,2001,KS006,ks06a0008,,2001-OA-attributes_ks006,MixOthr8,8,,5a_ascii_grid2001_Ethnicity_MixOthr8.asc
+,20161017,x,Ethnicity,Asian or Asian British: Indian,2001,KS006,ks06a0009,,2001-OA-attributes_ks006,EAsIndn9,8,,5a_ascii_grid2001_Ethnicity_EAsIndn9.asc
+,20161017,x,Ethnicity,Asian or Asian British: Pakistani,2001,KS006,ks06a0010,,2001-OA-attributes_ks006,EAsPak10,8,,5a_ascii_grid2001_Ethnicity_EAsPak10.asc
+,20161017,x,Ethnicity,Asian or Asian British: Bangladeshi,2001,KS006,ks06a0011,,2001-OA-attributes_ks006,EAsBan11,8,,5a_ascii_grid2001_Ethnicity_EAsBan11.asc
+,20161017,x,Ethnicity,Asian or Asian British: Other Asian,2001,KS006,ks06a0012,,2001-OA-attributes_ks006,EAsOth12,8,,5a_ascii_grid2001_Ethnicity_EAsOth12.asc
+,20161017,x,Ethnicity,Black or Black British: Caribbean,2001,KS006,ks06a0013,,2001-OA-attributes_ks006,EBkCab13,8,,5a_ascii_grid2001_Ethnicity_EBkCab13.asc
+,20161017,x,Ethnicity,Black or Black British: African,2001,KS006,ks06a0014,,2001-OA-attributes_ks006,EBkAfr14,8,,5a_ascii_grid2001_Ethnicity_EBkAfr14.asc
+,20161017,x,Ethnicity,Black or Black British: Other Black,2001,KS006,ks06a0015,,2001-OA-attributes_ks006,EBlOth15,8,,5a_ascii_grid2001_Ethnicity_EBlOth15.asc
+,20161017,x,Ethnicity,Chinese or other ethnic group: Chinese,2001,KS006,ks06a0016,,2001-OA-attributes_ks006,EChine16,8,,5a_ascii_grid2001_Ethnicity_EChine16.asc
+,20161017,x,Ethnicity,Chinese or other ethnic group: Other ethnic group,2001,KS006,ks06a0017,,2001-OA-attributes_ks006,EOther17,8,,5a_ascii_grid2001_Ethnicity_EOther17.asc
+,20161017,x,Ethnicity,All People,2011,KS201,KS201EW0001,,2011-OA-attributes-ks201.csv,ETotal1,7,,5a_ascii_grid2011_Ethnicity_ETotal1.asc
+,20161017,x,Ethnicity,White: English/Welsh/Scottish/Northern Irish/British,2011,KS201,KS201EW0002,,2011-OA-attributes-ks201.csv,EWhite2,7,,5a_ascii_grid2011_Ethnicity_EWhite2.asc
+,20161017,x,Ethnicity,White: Irish,2011,KS201,KS201EW0003,,2011-OA-attributes-ks201.csv,EWhtIrs3,8,,5a_ascii_grid2011_Ethnicity_EWhtIrs3.asc
+,20161017,x,Ethnicity,White: Gypsy or Irish Traveller,2011,KS201,KS201EW0004,,2011-OA-attributes-ks201.csv,EWhTrav4,8,Not available for Scotland,5a_ascii_grid2011_Ethnicity_EWhTrav4.asc
+,20161017,x,Ethnicity,White: Other White,2011,KS201,KS201EW0005,,2011-OA-attributes-ks201.csv,EWhtOth5,8,,5a_ascii_grid2011_Ethnicity_EWhtOth5.asc
+,20161017,x,Ethnicity,Mixed/multiple ethnic groups: White and Black Caribbean,2011,KS201,KS201EW0006,,2011-OA-attributes-ks201.csv,EWhBlCb6,8,Not available for Scotland,5a_ascii_grid2011_Ethnicity_EWhBlCb6.asc
+,20161017,x,Ethnicity,Mixed/multiple ethnic groups: White and Black African,2011,KS201,KS201EW0007,,2011-OA-attributes-ks201.csv,EWhBlAf7,8,Not available for Scotland,5a_ascii_grid2011_Ethnicity_EWhBlAf7.asc
+,20161017,x,Ethnicity,Mixed/multiple ethnic groups: White and Asian,2011,KS201,KS201EW0008,,2011-OA-attributes-ks201.csv,EWhAsin8,8,,5a_ascii_grid2011_Ethnicity_EWhAsin8.asc
+,20161017,x,Ethnicity,Mixed/multiple ethnic groups: Other Mixed,2011,KS201,KS201EW0009,,2011-OA-attributes-ks201.csv,MixOthr9,8,,5a_ascii_grid2011_Ethnicity_MixOthr9.asc
+,20161017,x,Ethnicity,Asian/Asian British: Indian,2011,KS201,KS201EW0010,,2011-OA-attributes-ks201.csv,EAsInd10,8,,5a_ascii_grid2011_Ethnicity_EAsInd10.asc
+,20161017,x,Ethnicity,Asian/Asian British: Pakistani,2011,KS201,KS201EW0011,,2011-OA-attributes-ks201.csv,EAsPak11,8,,5a_ascii_grid2011_Ethnicity_EAsPak11.asc
+,20161017,x,Ethnicity,Asian/Asian British: Bangladeshi,2011,KS201,KS201EW0012,,2011-OA-attributes-ks201.csv,EAsBan12,8,,5a_ascii_grid2011_Ethnicity_EAsBan12.asc
+,20161017,x,Ethnicity,Asian/Asian British: Chinese,2011,KS201,KS201EW0013,,2011-OA-attributes-ks201.csv,EAsChn13,8,,5a_ascii_grid2011_Ethnicity_EAsChn13.asc
+,20161017,x,Ethnicity,Asian/Asian British: Other Asian,2011,KS201,KS201EW0014,,2011-OA-attributes-ks201.csv,EAsOth14,8,Not available for Scotland,5a_ascii_grid2011_Ethnicity_EAsOth14.asc
+,20161017,x,Ethnicity,Black/African/Caribbean/Black British: African,2011,KS201,KS201EW0015,,2011-OA-attributes-ks201.csv,EBkAfr15,8,,5a_ascii_grid2011_Ethnicity_EBkAfr15.asc
+,20161017,x,Ethnicity,Black/African/Caribbean/Black British: Caribbean,2011,KS201,KS201EW0016,,2011-OA-attributes-ks201.csv,EBkCab16,8,,5a_ascii_grid2011_Ethnicity_EBkCab16.asc
+,20161017,x,Ethnicity,Black/African/Caribbean/Black British: Other Black,2011,KS201,KS201EW0017,,2011-OA-attributes-ks201.csv,EBkOth17,8,Not available for Scotland,5a_ascii_grid2011_Ethnicity_EBkOth17.asc
+,20161017,x,Ethnicity,Other ethnic group: Arab,2011,KS201,KS201EW0018,,2011-OA-attributes-ks201.csv,EOtArb18,8,Not available for Scotland,5a_ascii_grid2011_Ethnicity_EOtArb18.asc
+,20161017,x,Ethnicity,Other ethnic group: Any other ethnic group,2011,KS201,KS201EW0019,,2011-OA-attributes-ks201.csv,EOther19,8,,5a_ascii_grid2011_Ethnicity_EOther19.asc
+,20161014,x,Country of Birth,All categories: Country of birth - Unit : Persons,2011,QS203,QS203EW0001,,2011-OA-attributes-qs203.csv,All,3,,5a_ascii_grid2011_Country_of_Birth_All.asc
+,20161014,x,Country of Birth,Europe - Unit : Persons,2011,QS203,QS203EW0002,,2011-OA-attributes-qs203.csv,Europe,6,,5a_ascii_grid2011_Country_of_Birth_Europe.asc
+,20161014,x,Country of Birth,Europe\ United Kingdom - Unit : Persons,2011,QS203,QS203EW0003,,2011-OA-attributes-qs203.csv,UK,2,,5a_ascii_grid2011_Country_of_Birth_Ukoth.asc
+,20161014,x,Country of Birth,Europe\ United Kingdom\ England - Unit : Persons,2011,QS203,QS203EW0004,,2011-OA-attributes-qs203.csv,UKEng,5,,5a_ascii_grid2011_Country_of_Birth_UKEng.asc
+,20161014,x,Country of Birth,Europe\ United Kingdom\ Northern Ireland - Unit : Persons,2011,QS203,QS203EW0005,,2011-OA-attributes-qs203.csv,NorthIre,8,,5a_ascii_grid2011_Country_of_Birth_NorthIre.asc
+,20161014,x,Country of Birth,Europe\ United Kingdom\ Scotland - Unit : Persons,2011,QS203,QS203EW0006,,2011-OA-attributes-qs203.csv,Scotland,8,,5a_ascii_grid2011_Country_of_Birth_Scotland.asc
+,20161014,x,Country of Birth,Europe\ United Kingdom\ Wales - Unit : Persons,2011,QS203,QS203EW0007,,2011-OA-attributes-qs203.csv,Wales,5,,5a_ascii_grid2011_Country_of_Birth_Wales.asc
+,20161014,x,Country of Birth,Europe\ Great Britain not otherwise specified - Unit : Persons,2011,QS203,QS203EW0008,,2011-OA-attributes-qs203.csv,GB,2,Not available for Scotland,5a_ascii_grid2011_Country_of_Birth_GB.asc
+,20161014,x,Country of Birth,Europe\ United Kingdom not otherwise specified - Unit : Persons,2011,QS203,QS203EW0009,,2011-OA-attributes-qs203.csv,Ukoth,5,,5a_ascii_grid2011_Country_of_Birth_UK.1.asc
+,20161014,x,Country of Birth,Europe\ Guernsey - Unit : Persons,2011,QS203,QS203EW0010,,2011-OA-attributes-qs203.csv,Guernsey,8,Not available for Scotland,5a_ascii_grid2011_Country_of_Birth_Guernsey.asc
+,20161014,x,Country of Birth,Europe\ Jersey - Unit : Persons,2011,QS203,QS203EW0011,,2011-OA-attributes-qs203.csv,Jersey,6,Not available for Scotland,5a_ascii_grid2011_Country_of_Birth_Jersey.asc
+,20161014,x,Country of Birth,Europe\ Channel Islands not otherwise specified - Unit : Persons,2011,QS203,QS203EW0012,,2011-OA-attributes-qs203.csv,Channel,7,,5a_ascii_grid2011_Country_of_Birth_Channel.asc
+,20161014,x,Country of Birth,Europe\ Isle of Man - Unit : Persons,2011,QS203,QS203EW0013,,2011-OA-attributes-qs203.csv,IsleMan,7,,5a_ascii_grid2011_Country_of_Birth_IsleMan.asc
+,20161014,x,Country of Birth,Europe\ Ireland - Unit : Persons,2011,QS203,QS203EW0014,,2011-OA-attributes-qs203.csv,Ireland,7,,5a_ascii_grid2011_Country_of_Birth_Ireland.asc
+,20161014,x,Country of Birth,Europe\ Other Europe - Unit : Persons,2011,QS203,QS203EW0015,,2011-OA-attributes-qs203.csv,OthEurop,8,,5a_ascii_grid2011_Country_of_Birth_OthEurop.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU Countries - Unit : Persons,2011,QS203,QS203EW0016,,2011-OA-attributes-qs203.csv,OthEU,5,,5a_ascii_grid2011_Country_of_Birth_OthEU.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU countries\ Member countries in March 2001 - Unit : Persons,2011,QS203,QS203EW0017,,2011-OA-attributes-qs203.csv,EU01,6,,5a_ascii_grid2011_Country_of_Birth_EU01.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU countries\ Member countries in March 2001\ France - Unit : Persons,2011,QS203,QS203EW0018,,2011-OA-attributes-qs203.csv,France,7,,5a_ascii_grid2011_Country_of_Birth_France.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU countries\ Member countries in March 2001\ Germany - Unit : Persons,2011,QS203,QS203EW0019,,2011-OA-attributes-qs203.csv,Germany,5,,5a_ascii_grid2011_Country_of_Birth_Germany.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU countries\ Member countries in March 2001\ Italy - Unit : Persons,2011,QS203,QS203EW0020,,2011-OA-attributes-qs203.csv,Italy,8,,5a_ascii_grid2011_Country_of_Birth_Italy.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU countries\ Member countries in March 2001\ Portugal - Unit : Persons,2011,QS203,QS203EW0021,,2011-OA-attributes-qs203.csv,Portugal,5,Not available for Scotland,5a_ascii_grid2011_Country_of_Birth_Portugal.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU countries\ Member countries in March 2001\ Spain (including Canary Islands) - Unit : Persons,2011,QS203,QS203EW0022,,2011-OA-attributes-qs203.csv,Spain,7,,5a_ascii_grid2011_Country_of_Birth_Spain.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU countries\ Member countries in March 2001\ Other member countries in March 2001 - Unit : Persons,2011,QS203,QS203EW0023,,2011-OA-attributes-qs203.csv,OthEU01,7,,5a_ascii_grid2011_Country_of_Birth_OthEU01.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU countries\ Accession countries April 2001 to March 2011 - Unit : Persons,2011,QS203,QS203EW0024,,2011-OA-attributes-qs203.csv,EU11,4,,5a_ascii_grid2011_Country_of_Birth_EU11.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU countries\ Accession countries April 2001 to March 2011\ Lithuania - Unit : Persons,2011,QS203,QS203EW0025,,2011-OA-attributes-qs203.csv,Lithuan,7,,5a_ascii_grid2011_Country_of_Birth_Lithuan.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU countries\ Accession countries April 2001 to March 2011\ Poland - Unit : Persons,2011,QS203,QS203EW0026,,2011-OA-attributes-qs203.csv,Poland,6,,5a_ascii_grid2011_Country_of_Birth_Poland.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU countries\ Accession countries April 2001 to March 2011\ Romania - Unit : Persons,2011,QS203,QS203EW0027,,2011-OA-attributes-qs203.csv,Romania,7,,5a_ascii_grid2011_Country_of_Birth_Romania.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ EU countries\ Accession countries April 2001 to March 2011\ Other EU accession countries - Unit : Persons,2011,QS203,QS203EW0028,,2011-OA-attributes-qs203.csv,OthEU11,7,,5a_ascii_grid2011_Country_of_Birth_OthEU11.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ Rest of Europe - Unit : Persons,2011,QS203,QS203EW0029,,2011-OA-attributes-qs203.csv,RestEuro,8,,5a_ascii_grid2011_Country_of_Birth_RestEuro.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ Rest of Europe\ Turkey - Unit : Persons,2011,QS203,QS203EW0030,,2011-OA-attributes-qs203.csv,Turkey,6,,5a_ascii_grid2011_Country_of_Birth_Turkey.asc
+,20161014,x,Country of Birth,Europe\ Other Europe\ Rest of Europe\ Other Europe - Unit : Persons,2011,QS203,QS203EW0031,,2011-OA-attributes-qs203.csv,RestEurO,8,,Missing
+,20161014,x,Country of Birth,Africa - Unit : Persons,2011,QS203,QS203EW0032,,2011-OA-attributes-qs203.csv,Africa,6,,5a_ascii_grid2011_Country_of_Birth_Africa.asc
+,20161014,x,Country of Birth,Africa\ North Africa - Unit : Persons,2011,QS203,QS203EW0033,,2011-OA-attributes-qs203.csv,NtAfrica,8,,5a_ascii_grid2011_Country_of_Birth_NtAfrica.asc
+,20161014,x,Country of Birth,Africa\ Central and Western Africa - Unit : Persons,2011,QS203,QS203EW0034,,2011-OA-attributes-qs203.csv,CWAfrica,8,,5a_ascii_grid2011_Country_of_Birth_CWAfrica.asc
+,20161014,x,Country of Birth,Africa\ Central and Western Africa\ Ghana - Unit : Persons,2011,QS203,QS203EW0035,,2011-OA-attributes-qs203.csv,Ghana,5,Not available for Scotland,5a_ascii_grid2011_Country_of_Birth_Ghana.asc
+,20161014,x,Country of Birth,Africa\ Central and Western Africa\ Nigeria - Unit : Persons,2011,QS203,QS203EW0036,,2011-OA-attributes-qs203.csv,Nigeria,7,,5a_ascii_grid2011_Country_of_Birth_Nigeria.asc
+,20161014,x,Country of Birth,Africa\ Central and Western Africa\ Other Central and Western Africa - Unit : Persons,2011,QS203,QS203EW0037,,2011-OA-attributes-qs203.csv,OtCWAfr,7,,5a_ascii_grid2011_Country_of_Birth_OtCWAfr.asc
+,20161014,x,Country of Birth,Africa\ South and Eastern Africa - Unit : Persons,2011,QS203,QS203EW0038,,2011-OA-attributes-qs203.csv,SEAfrica,8,,5a_ascii_grid2011_Country_of_Birth_SEAfrica.asc
+,20161014,x,Country of Birth,Africa\ South and Eastern Africa\ Kenya - Unit : Persons,2011,QS203,QS203EW0039,,2011-OA-attributes-qs203.csv,Kenya,5,,5a_ascii_grid2011_Country_of_Birth_Kenya.asc
+,20161014,x,Country of Birth,Africa\ South and Eastern Africa\ Somalia - Unit : Persons,2011,QS203,QS203EW0040,,2011-OA-attributes-qs203.csv,Somalia,7,Not available for Scotland,5a_ascii_grid2011_Country_of_Birth_Somalia.asc
+,20161014,x,Country of Birth,Africa\ South and Eastern Africa\ South Africa - Unit : Persons,2011,QS203,QS203EW0041,,2011-OA-attributes-qs203.csv,SouthAfr,8,,5a_ascii_grid2011_Country_of_Birth_SouthAfr.asc
+,20161014,x,Country of Birth,Africa\ South and Eastern Africa\ Zimbabwe - Unit : Persons,2011,QS203,QS203EW0042,,2011-OA-attributes-qs203.csv,Zimbab,6,,5a_ascii_grid2011_Country_of_Birth_Zimbab.asc
+,20161014,x,Country of Birth,Africa\ South and Eastern Africa\ Other South and Eastern Africa - Unit : Persons,2011,QS203,QS203EW0043,,2011-OA-attributes-qs203.csv,OtSEAfra,8,,5a_ascii_grid2011_Country_of_Birth_OtSEAfra.asc
+,20161014,x,Country of Birth,Africa\ Africa not otherwise specified - Unit : Persons,2011,QS203,QS203EW0044,,2011-OA-attributes-qs203.csv,AfricaOt,8,Not available for Scotland,5a_ascii_grid2011_Country_of_Birth_AfricaOt.asc
+,20161014,x,Country of Birth,Middle East and Asia - Unit : Persons,2011,QS203,QS203EW0045,,2011-OA-attributes-qs203.csv,MidEsAs,7,,5a_ascii_grid2011_Country_of_Birth_MidEsAs.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Middle East - Unit : Persons,2011,QS203,QS203EW0046,,2011-OA-attributes-qs203.csv,MidEast,4,,5a_ascii_grid2011_Country_of_Birth_MidEast.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Middle East\ Iran - Unit : Persons,2011,QS203,QS203EW0047,,2011-OA-attributes-qs203.csv,Iran,8,,5a_ascii_grid2011_Country_of_Birth_Iran.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Middle East\ Other Middle East - Unit : Persons,2011,QS203,QS203EW0048,,2011-OA-attributes-qs203.csv,OtMidEst,8,,5a_ascii_grid2011_Country_of_Birth_OtMidEst.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Eastern Asia - Unit : Persons,2011,QS203,QS203EW0049,,2011-OA-attributes-qs203.csv,China,8,,5a_ascii_grid2011_Country_of_Birth_China.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Eastern Asia\ China - Unit : Persons,2011,QS203,QS203EW0050,,2011-OA-attributes-qs203.csv,EastAsia,8,,5a_ascii_grid2011_Country_of_Birth_EastAsia.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Eastern Asia\ Hong Kong (Special Administrative Region of China) - Unit : Persons,2011,QS203,QS203EW0051,,2011-OA-attributes-qs203.csv,HongKong,8,,5a_ascii_grid2011_Country_of_Birth_HongKong.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Eastern Asia\ Other Eastern Asia - Unit : Persons,2011,QS203,QS203EW0052,,2011-OA-attributes-qs203.csv,OtEastAs,8,,5a_ascii_grid2011_Country_of_Birth_OtEastAs.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Southern Asia - Unit : Persons,2011,QS203,QS203EW0053,,2011-OA-attributes-qs203.csv,SthAsia,7,,5a_ascii_grid2011_Country_of_Birth_SthAsia.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Southern Asia\ Bangladesh - Unit : Persons,2011,QS203,QS203EW0054,,2011-OA-attributes-qs203.csv,Banglads,8,,5a_ascii_grid2011_Country_of_Birth_Banglads.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Southern Asia\ India - Unit : Persons,2011,QS203,QS203EW0055,,2011-OA-attributes-qs203.csv,India,5,,5a_ascii_grid2011_Country_of_Birth_India.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Southern Asia\ Pakistan - Unit : Persons,2011,QS203,QS203EW0056,,2011-OA-attributes-qs203.csv,Pakistan,8,,5a_ascii_grid2011_Country_of_Birth_Pakistan.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Southern Asia\ Sri Lanka - Unit : Persons,2011,QS203,QS203EW0057,,2011-OA-attributes-qs203.csv,SriLanka,8,,5a_ascii_grid2011_Country_of_Birth_SriLanka.asc
+,20161014,x,Country of Birth,Middle East and Asia\ Southern Asia\ Other Southern Asia - Unit : Persons,2011,QS203,QS203EW0058,,2011-OA-attributes-qs203.csv,OtSthAs,7,Not available for Scotland,5a_ascii_grid2011_Country_of_Birth_OtSthAs
+,20161014,x,Country of Birth,Middle East and Asia\ South-East Asia - Unit : Persons,2011,QS203,QS203EW0059,,2011-OA-attributes-qs203.csv,SEAsia,6,,5a_ascii_grid2011_Country_of_Birth_SEAsia
+,20161014,x,Country of Birth,Middle East and Asia\ South-East Asia\ Philippines - Unit : Persons,2011,QS203,QS203EW0060,,2011-OA-attributes-qs203.csv,Phillipp,8,,5a_ascii_grid2011_Country_of_Birth_Phillipp
+,20161014,x,Country of Birth,Middle East and Asia\ South-East Asia\ Other South-East Asia - Unit : Persons,2011,QS203,QS203EW0061,,2011-OA-attributes-qs203.csv,OtSEAsia,8,,5a_ascii_grid2011_Country_of_Birth_OtSEAsia
+,20161014,x,Country of Birth,Middle East and Asia\ Central Asia - Unit : Persons,2011,QS203,QS203EW0062,,2011-OA-attributes-qs203.csv,Casia,5,,5a_ascii_grid2011_Country_of_Birth_Casia
+,20161014,x,Country of Birth,The Americas and the Caribbean - Unit : Persons,2011,QS203,QS203EW0063,,2011-OA-attributes-qs203.csv,AmerCab,7,,5a_ascii_grid2011_Country_of_Birth_AmerCab
+,20161014,x,Country of Birth,The Americas and the Caribbean\ North America - Unit : Persons,2011,QS203,QS203EW0064,,2011-OA-attributes-qs203.csv,NthAmer,7,,5a_ascii_grid2011_Country_of_Birth_NthAmer
+,20161014,x,Country of Birth,The Americas and the Caribbean\ North America\ United States - Unit : Persons,2011,QS203,QS203EW0065,,2011-OA-attributes-qs203.csv,US,2,,5a_ascii_grid2011_Country_of_Birth_US
+,20161014,x,Country of Birth,The Americas and the Caribbean\ North America\ Other North America - Unit : Persons,2011,QS203,QS203EW0066,,2011-OA-attributes-qs203.csv,OthNthAm,8,,5a_ascii_grid2011_Country_of_Birth_OthNthAm
+,20161014,x,Country of Birth,The Americas and the Caribbean\ Central America - Unit : Persons,2011,QS203,QS203EW0067,,2011-OA-attributes-qs203.csv,CentAmer,8,,5a_ascii_grid2001_Country_of_Birth_All
+,20161014,x,Country of Birth,The Americas and the Caribbean\ South America - Unit : Persons,2011,QS203,QS203EW0068,,2011-OA-attributes-qs203.csv,SouthAm,7,,5a_ascii_grid2011_Country_of_Birth_SouthAm
+,20161014,x,Country of Birth,The Americas and the Caribbean\ The Caribbean - Unit : Persons,2011,QS203,QS203EW0069,,2011-OA-attributes-qs203.csv,Caribbea,8,,5a_ascii_grid2011_Country_of_Birth_Caribbea
+,20161014,x,Country of Birth,The Americas and the Caribbean\ The Caribbean\ Jamaica - Unit : Persons,2011,QS203,QS203EW0070,,2011-OA-attributes-qs203.csv,Jamaica,7,Not available for Scotland,5a_ascii_grid2011_Country_of_Birth_Jamaica
+,20161014,x,Country of Birth,The Americas and the Caribbean\ The Caribbean\ Other Caribbean - Unit : Persons,2011,QS203,QS203EW0071,,2011-OA-attributes-qs203.csv,OthCarib,8,Not available for Scotland,5a_ascii_grid2011_Country_of_Birth_OthCarib
+,20161014,x,Country of Birth,Antarctica and Oceania - Unit : Persons,2011,QS203,QS203EW0072,,2011-OA-attributes-qs203.csv,AntOcean,8,,5a_ascii_grid2011_Country_of_Birth_AntOcean
+,20161014,x,Country of Birth,Antarctica and Oceania\ Antarctica - Unit : Persons,2011,QS203,QS203EW0073,,2011-OA-attributes-qs203.csv,Antarct,7,,5a_ascii_grid2011_Country_of_Birth_Antarct
+,20161014,x,Country of Birth,Antarctica and Oceania\ Australasia - Unit : Persons,2011,QS203,QS203EW0074,,2011-OA-attributes-qs203.csv,Australs,8,,5a_ascii_grid2011_Country_of_Birth_Australs
+,20161014,x,Country of Birth,Antarctica and Oceania\ Other Oceania - Unit : Persons,2011,QS203,QS203EW0077,,2011-OA-attributes-qs203.csv,OthOcea,7,,5a_ascii_grid2011_Country_of_Birth_OthOcea
+,20161014,x,Country of Birth,Other - Unit : Persons,2011,QS203,QS203EW0078,,2011-OA-attributes-qs203.csv,Other,5,,5a_ascii_grid2011_Country_of_Birth_Other
+,20161014,x,Country of Birth,All people - Unit : People,2001,UV008,F15589,,2001-OA-attributes_uv008,All,3,,5a_ascii_grid2001_Country_of_Birth_All
+,20161014,x,Country of Birth,Europe \ United Kingdom  \ England  - Unit : People,2001,UV008,F15590,,2001-OA-attributes_uv008,England,7,,5a_ascii_grid2001_Country_of_Birth_England.asc
+,20161014,x,Country of Birth,Europe \ United Kingdom  \ Scotland - Unit : People,2001,UV008,F15591,,2001-OA-attributes_uv008,Scotland,8,,5a_ascii_grid2001_Country_of_Birth_Scotland.asc
+,20161014,x,Country of Birth,Europe \ United Kingdom  \ Wales - Unit : People,2001,UV008,F15592,,2001-OA-attributes_uv008,Wales,5,,5a_ascii_grid2001_Country_of_Birth_Wales.asc
+,20161014,x,Country of Birth,Europe \ United Kingdom  \ Northern Ireland - Unit : People,2001,UV008,F15593,,2001-OA-attributes_uv008,NorthIre,8,,5a_ascii_grid2001_Country_of_Birth_NorthIre.asc
+,20161014,x,Country of Birth,Europe \ Republic of Ireland - Unit : People,2001,UV008,F15594,,2001-OA-attributes_uv008,RoI,3,,5a_ascii_grid2001_Country_of_Birth_RoI.asc
+,20161014,x,Country of Birth,Europe \ Other Western Europe \ EU countries  \ Other EU - Unit : People,2001,UV008,F15595,,2001-OA-attributes_uv008,OtherEU,7,Not available for Scotland,5a_ascii_grid2001_Country_of_Birth_OtherEU.asc
+,20161014,x,Country of Birth,Other - Unit : People,2001,UV008,F15596,,2001-OA-attributes_uv008,Other,5,Not available for Scotland,5a_ascii_grid2001_Country_of_Birth_Other.asc
+,20161014,x,Country of Birth,Europe - Unit : People,2001,UV008,F96139,,2001-OA-attributes_uv008,Europe,6,Not available for Scotland,5a_ascii_grid2001_Country_of_Birth_Europe.asc
+,20161014,x,Country of Birth,Europe \ United Kingdom  - Unit : People,2001,UV008,F96140,,2001-OA-attributes_uv008,UK,2,Not available for Scotland,5a_ascii_grid2001_Country_of_Birth_UK.asc
+,20161014,x,Country of Birth,Europe \ United Kingdom  \ UK part not specified - Unit : People,2001,UV008,F96145,,2001-OA-attributes_uv008,UKOther,7,,5a_ascii_grid2001_Country_of_Birth_UKOther.asc
+,20161014,x,Country of Birth,Europe \ Channel Islands and Isle of Man - Unit : People,2001,UV008,F96147,,2001-OA-attributes_uv008,CI_IOM,6,,5a_ascii_grid2001_Country_of_Birth_CI_IOM.asc
+,20161014,x,Country of Birth,Europe \ Other Western Europe - Unit : People,2001,UV008,F96148,,2001-OA-attributes_uv008,OthWestE,8,,5a_ascii_grid2001_Country_of_Birth_OthWestE.asc
+,20161014,x,Country of Birth,Europe \ Other Western Europe \ EU countries  - Unit : People,2001,UV008,F96149,,2001-OA-attributes_uv008,EU,2,,5a_ascii_grid2001_Country_of_Birth_EU.asc
+,20161014,x,Country of Birth,Austria - Unit : People,2001,UV008,F96150,,2001-OA-attributes_uv008,Austria,7,,5a_ascii_grid2001_Country_of_Birth_Austria.asc
+,20161014,x,Country of Birth,Belgium - Unit : People,2001,UV008,F96151,,2001-OA-attributes_uv008,Belgium,7,,5a_ascii_grid2001_Country_of_Birth_Belgium.asc
+,20161014,x,Country of Birth,Denmark - Unit : People,2001,UV008,F96152,,2001-OA-attributes_uv008,Denmark,7,,5a_ascii_grid2001_Country_of_Birth_Denmark.asc
+,20161014,x,Country of Birth,Finland - Unit : People,2001,UV008,F96153,,2001-OA-attributes_uv008,Finland,7,,5a_ascii_grid2001_Country_of_Birth_Finland.asc
+,20161014,x,Country of Birth,Europe \ Other Western Europe \ EU countries  \ France  - Unit : People,2001,UV008,F96154,,2001-OA-attributes_uv008,France,6,,5a_ascii_grid2001_Country_of_Birth_France.asc
+,20161014,x,Country of Birth,Europe \ Other Western Europe \ EU countries  \ Germany - Unit : People,2001,UV008,F96155,,2001-OA-attributes_uv008,Germany,7,,5a_ascii_grid2001_Country_of_Birth_Germany.asc
+,20161014,x,Country of Birth,Greece - Unit : People,2001,UV008,F96156,,2001-OA-attributes_uv008,Greece,6,,5a_ascii_grid2001_Country_of_Birth_Greece.asc
+,20161014,x,Country of Birth,Europe \ Other Western Europe \ EU countries  \ Italy  - Unit : People,2001,UV008,F96157,,2001-OA-attributes_uv008,Italy,5,,5a_ascii_grid2001_Country_of_Birth_Italy.asc
+,20161014,x,Country of Birth,Luxembourg - Unit : People,2001,UV008,F96158,,2001-OA-attributes_uv008,Luxembou,8,,5a_ascii_grid2001_Country_of_Birth_Luxembou.asc
+,20161014,x,Country of Birth,Europe \ Other Western Europe \ EU countries  \ Netherlands  - Unit : People,2001,UV008,F96159,,2001-OA-attributes_uv008,Netherla,8,,5a_ascii_grid2001_Country_of_Birth_Netherla.asc
+,20161014,x,Country of Birth,Portugal - Unit : People,2001,UV008,F96160,,2001-OA-attributes_uv008,Portugal,8,,5a_ascii_grid2001_Country_of_Birth_Portugal.asc
+,20161014,x,Country of Birth,Europe \ Other Western Europe \ EU countries  \ Spain - Unit : People,2001,UV008,F96161,,2001-OA-attributes_uv008,Spain,5,,5a_ascii_grid2001_Country_of_Birth_Spain.asc
+,20161014,x,Country of Birth,Sweden - Unit : People,2001,UV008,F96162,,2001-OA-attributes_uv008,Sweeden,7,,5a_ascii_grid2001_Country_of_Birth_Sweeden.asc
+,20161014,x,Country of Birth,Europe \ Other Western Europe \ Non EU countries in Western Europe - Unit : People,2001,UV008,F96163,,2001-OA-attributes_uv008,NonEUWEu,8,,5a_ascii_grid2001_Country_of_Birth_NonEUWEu.asc
+,20161014,x,Country of Birth,Europe \ Eastern Europe - Unit : People,2001,UV008,F96164,,2001-OA-attributes_uv008,EastEuro,8,,5a_ascii_grid2001_Country_of_Birth_EastEuro.asc
+,20161014,x,Country of Birth,Albania - Unit : People,2001,UV008,F96165,,2001-OA-attributes_uv008,Albania,7,,5a_ascii_grid2001_Country_of_Birth_Albania.asc
+,20161014,x,Country of Birth,Czech Republic - Unit : People,2001,UV008,F96166,,2001-OA-attributes_uv008,CzechRep,8,,5a_ascii_grid2001_Country_of_Birth_CzechRep.asc
+,20161014,x,Country of Birth,Romania - Unit : People,2001,UV008,F96167,,2001-OA-attributes_uv008,Romania,7,,5a_ascii_grid2001_Country_of_Birth_Romania.asc
+,20161014,x,Country of Birth,Europe \ Eastern Europe \ Poland - Unit : People,2001,UV008,F96168,,2001-OA-attributes_uv008,Poland,6,,5a_ascii_grid2001_Country_of_Birth_Poland.asc
+,20161014,x,Country of Birth,Turkey - Unit : People,2001,UV008,F96169,,2001-OA-attributes_uv008,Turkey,6,,5a_ascii_grid2001_Country_of_Birth_Turkey.asc
+,20161014,x,Country of Birth,Former Yugoslavia - Unit : People,2001,UV008,F96170,,2001-OA-attributes_uv008,FmrYoug,7,,5a_ascii_grid2001_Country_of_Birth_FmrYoug.asc
+,20161014,x,Country of Birth,Baltic States - Unit : People,2001,UV008,F96171,,2001-OA-attributes_uv008,Baltic,6,,5a_ascii_grid2001_Country_of_Birth_Baltic.asc
+,20161014,x,Country of Birth,Other European countries in former USSR - Unit : People,2001,UV008,F96172,,2001-OA-attributes_uv008,EurUSSR,7,,5a_ascii_grid2001_Country_of_Birth_EurUSSR.asc
+,20161014,x,Country of Birth,Europe \ Eastern Europe \ Other Eastern Europe - Unit : People,2001,UV008,F96173,,2001-OA-attributes_uv008,OthEstEu,8,,5a_ascii_grid2001_Country_of_Birth_OthEstEu.asc
+,20161014,x,Country of Birth,Africa - Unit : People,2001,UV008,F96174,,2001-OA-attributes_uv008,Africa,6,,5a_ascii_grid2001_Country_of_Birth_Africa.asc
+,20161014,x,Country of Birth,Africa \ North Africa - Unit : People,2001,UV008,F96175,,2001-OA-attributes_uv008,NtAfrica,8,,5a_ascii_grid2001_Country_of_Birth_NtAfrica.asc
+,20161014,x,Country of Birth,Africa \ Central and Western Africa - Unit : People,2001,UV008,F96176,,2001-OA-attributes_uv008,CWAfrica,8,,5a_ascii_grid2001_Country_of_Birth_CWAfrica.asc
+,20161014,x,Country of Birth,Democratic Republic of Congo - Unit : People,2001,UV008,F96177,,2001-OA-attributes_uv008,Congo,5,,5a_ascii_grid2001_Country_of_Birth_Congo.asc
+,20161014,x,Country of Birth,Africa \ Central and Western Africa \ Nigeria - Unit : People,2001,UV008,F96178,,2001-OA-attributes_uv008,Nigeria,7,,5a_ascii_grid2001_Country_of_Birth_Nigeria.asc
+,20161014,x,Country of Birth,Sierra Leone - Unit : People,2001,UV008,F96179,,2001-OA-attributes_uv008,SierLeo,7,,5a_ascii_grid2001_Country_of_Birth_SierLeo.asc
+,20161014,x,Country of Birth,Africa \ Central and Western Africa \ Other Central and Western Africa - Unit : People,2001,UV008,F96180,,2001-OA-attributes_uv008,OtSWAfr,7,,5a_ascii_grid2001_Country_of_Birth_OtSWAfr.asc
+,20161014,x,Country of Birth,Africa \ South and Eastern Africa - Unit : People,2001,UV008,F96181,,2001-OA-attributes_uv008,SEAfric,7,,5a_ascii_grid2001_Country_of_Birth_SEAfric.asc
+,20161014,x,Country of Birth,Africa \ South and Eastern Africa \ Kenya - Unit : People,2001,UV008,F96182,,2001-OA-attributes_uv008,Kenya,5,,5a_ascii_grid2001_Country_of_Birth_Kenya.asc
+,20161014,x,Country of Birth,Somalia - Unit : People,2001,UV008,F96183,,2001-OA-attributes_uv008,Somalia,7,,5a_ascii_grid2001_Country_of_Birth_Somalia.asc
+,20161014,x,Country of Birth,Africa \ South and Eastern Africa \ South Africa - Unit : People,2001,UV008,F96184,,2001-OA-attributes_uv008,SouthAfr,8,,5a_ascii_grid2001_Country_of_Birth_SouthAfr.asc
+,20161014,x,Country of Birth,Africa \ South and Eastern Africa \ Zimbabwe - Unit : People,2001,UV008,F96185,,2001-OA-attributes_uv008,Zimbab,6,,5a_ascii_grid2001_Country_of_Birth_Zimbab.asc
+,20161014,x,Country of Birth,Africa \ South and Eastern Africa \ Other South and Eastern Africa - Unit : People,2001,UV008,F96186,,2001-OA-attributes_uv008,OtSEAfra,8,,5a_ascii_grid2001_Country_of_Birth_OtSEAfra.asc
+,20161014,x,Country of Birth,Asia - Unit : People,2001,UV008,F96187,,2001-OA-attributes_uv008,Asia,4,,5a_ascii_grid2001_Country_of_Birth_Asia.asc
+,20161014,x,Country of Birth,Asia \ Middle East  - Unit : People,2001,UV008,F96188,,2001-OA-attributes_uv008,MidEast,7,,5a_ascii_grid2001_Country_of_Birth_MidEast.asc
+,20161014,x,Country of Birth,Asia \ Middle East  \ Cyprus  - Unit : People,2001,UV008,F96189,,2001-OA-attributes_uv008,Cyprus,6,,5a_ascii_grid2001_Country_of_Birth_Cyprus.asc
+,20161014,x,Country of Birth,Asia \ Middle East  \ Iran - Unit : People,2001,UV008,F96190,,2001-OA-attributes_uv008,Iran,4,,5a_ascii_grid2001_Country_of_Birth_Iran.asc
+,20161014,x,Country of Birth,Iraq - Unit : People,2001,UV008,F96191,,2001-OA-attributes_uv008,Iraq,4,,5a_ascii_grid2001_Country_of_Birth_Iraq.asc
+,20161014,x,Country of Birth,Asia \ Middle East  \ Other Middle East - Unit : People,2001,UV008,F96192,,2001-OA-attributes_uv008,OtMidEst,8,,5a_ascii_grid2001_Country_of_Birth_OtMidEst.asc
+,20161014,x,Country of Birth,Asia \ Far East - Unit : People,2001,UV008,F96193,,2001-OA-attributes_uv008,FarEast,7,,5a_ascii_grid2001_Country_of_Birth_FarEast.asc
+,20161014,x,Country of Birth,Asia \ Far East \ China - Unit : People,2001,UV008,F96194,,2001-OA-attributes_uv008,China,5,,5a_ascii_grid2001_Country_of_Birth_China.asc
+,20161014,x,Country of Birth,Asia \ Far East \ Hong Kong  - Unit : People,2001,UV008,F96195,,2001-OA-attributes_uv008,HongKong,8,,5a_ascii_grid2001_Country_of_Birth_HongKong.asc
+,20161014,x,Country of Birth,Asia \ Far East \ Japan  - Unit : People,2001,UV008,F96196,,2001-OA-attributes_uv008,Japan,5,,5a_ascii_grid2001_Country_of_Birth_Japan.asc
+,20161014,x,Country of Birth,Asia \ Far East \ Malaysia  - Unit : People,2001,UV008,F96197,,2001-OA-attributes_uv008,Malaysia,8,,5a_ascii_grid2001_Country_of_Birth_Malaysia.asc
+,20161014,x,Country of Birth,Asia \ Far East \ Singapore - Unit : People,2001,UV008,F96198,,2001-OA-attributes_uv008,Singapor,8,,5a_ascii_grid2001_Country_of_Birth_Singapor.asc
+,20161014,x,Country of Birth,Asia \ Far East \ Other Far East - Unit : People,2001,UV008,F96199,,2001-OA-attributes_uv008,OtFarEas,8,,5a_ascii_grid2001_Country_of_Birth_OtFarEas.asc
+,20161014,x,Country of Birth,Asian countries in former USSR - Unit : People,2001,UV008,F96200,,2001-OA-attributes_uv008,AsUSSR,6,,5a_ascii_grid2001_Country_of_Birth_AsUSSR.asc
+,20161014,x,Country of Birth,Asia \ South Asia  - Unit : People,2001,UV008,F96201,,2001-OA-attributes_uv008,SthAsia,7,,5a_ascii_grid2001_Country_of_Birth_SthAsia.asc
+,20161014,x,Country of Birth,Afghanistan - Unit : People,2001,UV008,F96202,,2001-OA-attributes_uv008,Afganist,8,,5a_ascii_grid2001_Country_of_Birth_Afganist.asc
+,20161014,x,Country of Birth,Asia \ South Asia  \ Bangladesh  - Unit : People,2001,UV008,F96203,,2001-OA-attributes_uv008,Banglads,8,,5a_ascii_grid2001_Country_of_Birth_Banglads.asc
+,20161014,x,Country of Birth,Asia \ South Asia  \ India  - Unit : People,2001,UV008,F96204,,2001-OA-attributes_uv008,India,5,,5a_ascii_grid2001_Country_of_Birth_India.asc
+,20161014,x,Country of Birth,Asia \ South Asia  \ Pakistan - Unit : People,2001,UV008,F96205,,2001-OA-attributes_uv008,Pakistan,8,,5a_ascii_grid2001_Country_of_Birth_Pakistan.asc
+,20161014,x,Country of Birth,Sri Lanka - Unit : People,2001,UV008,F96206,,2001-OA-attributes_uv008,SriLanka,8,,5a_ascii_grid2001_Country_of_Birth_SriLanka.asc
+,20161014,x,Country of Birth,Asia \ South Asia  \ Other South Asia - Unit : People,2001,UV008,F96207,,2001-OA-attributes_uv008,OtSthAs,7,,5a_ascii_grid2001_Country_of_Birth_OtSthAs.asc
+,20161014,x,Country of Birth,North America - Unit : People,2001,UV008,F96208,,2001-OA-attributes_uv008,NthAmer,7,,5a_ascii_grid2001_Country_of_Birth_NthAmer.asc
+,20161014,x,Country of Birth,North America \ Canada - Unit : People,2001,UV008,F96209,,2001-OA-attributes_uv008,Canada,6,,5a_ascii_grid2001_Country_of_Birth_Canada.asc
+,20161014,x,Country of Birth,North America \ USA - Unit : People,2001,UV008,F96210,,2001-OA-attributes_uv008,USA,3,,5a_ascii_grid2001_Country_of_Birth_USA.asc
+,20161014,x,Country of Birth,North America \ Caribbean & West Indies \ Jamaica - Unit : People,2001,UV008,F96211,,2001-OA-attributes_uv008,Jamaica,7,,5a_ascii_grid2001_Country_of_Birth_Jamaica.asc
+,20161014,x,Country of Birth,North America \ Caribbean & West Indies \ Other Caribbean & West Indies - Unit : People,2001,UV008,F96212,,2001-OA-attributes_uv008,OthCarib,8,,5a_ascii_grid2001_Country_of_Birth_OthCarib.asc
+,20161014,x,Country of Birth,North America \ Other North America - Unit : People,2001,UV008,F96213,,2001-OA-attributes_uv008,OthNthAm,8,,5a_ascii_grid2001_Country_of_Birth_OthNthAm.asc
+,20161014,x,Country of Birth,South America - Unit : People,2001,UV008,F96214,,2001-OA-attributes_uv008,SthAmer,7,,5a_ascii_grid2001_Country_of_Birth_SthAmer.asc
+,20161014,x,Country of Birth,Oceania - Unit : People,2001,UV008,F96215,,2001-OA-attributes_uv008,Oceania,7,,5a_ascii_grid2001_Country_of_Birth_Oceania.asc
+,20161014,x,Country of Birth,Oceania \ Australia - Unit : People,2001,UV008,F96216,,2001-OA-attributes_uv008,Australi,8,,5a_ascii_grid2001_Country_of_Birth_Australi.asc
+,20161014,x,Country of Birth,Oceania \ New Zealand - Unit : People,2001,UV008,F96217,,2001-OA-attributes_uv008,NewZeald,8,,5a_ascii_grid2001_Country_of_Birth_NewZeald.asc
+,20161014,x,Country of Birth,Oceania \ Other Oceania - Unit : People,2001,UV008,F96218,,2001-OA-attributes_uv008,OthOcena,8,,5a_ascii_grid2001_Country_of_Birth_OthOcena.asc
+,done,x,Country of Birth,All countries of birth: Males,1991,SAS07,s070001,,1991-OA-attributes-sas07,BAllM01,7,,(see folder)
+,done,x,Country of Birth,All countries of birth: Females,1991,SAS07,s070002,,1991-OA-attributes-sas07,BAllF02,7,,(see folder)
+,done,x,Country of Birth,All countries of birth: Males and Females,1991,SAS07,,,1991-OA-attributes-sas07,BAll,4,,(see folder)
+,done,x,Country of Birth,UK: Males,1991,SAS07,s070003,,1991-OA-attributes-sas07,BUKM03,6,,(see folder)
+,done,x,Country of Birth,UK Females,1991,SAS07,s070004,,1991-OA-attributes-sas07,BUKF04,6,,(see folder)
+,done,x,Country of Birth,UK : Males and Females,1991,SAS07,,,1991-OA-attributes-sas07,BUK,3,,(see folder)
+,done,x,Country of Birth,UK: England: Males,1991,SAS07,s070005,,1991-OA-attributes-sas07,BUKEM05,7,,(see folder)
+,done,x,Country of Birth,UK: England: Females,1991,SAS07,s070006,,1991-OA-attributes-sas07,BUKEF06,7,,(see folder)
+,done,x,Country of Birth,UK: England: Males and Females,1991,SAS07,,,1991-OA-attributes-sas07,BUKE,4,,(see folder)
+,done,x,Country of Birth,UK: Scotland: Males,1991,SAS07,s070007,,1991-OA-attributes-sas07,BUKSM07,7,,(see folder)
+,done,x,Country of Birth,UK: Scotland: Females,1991,SAS07,s070008,,1991-OA-attributes-sas07,BUKSF08,7,,(see folder)
+,done,x,Country of Birth,UK: Scotland: Males and Females,1991,SAS07,,,1991-OA-attributes-sas07,BUKS,4,,(see folder)
+,done,x,Country of Birth,UK: Wales: Males,1991,SAS07,s070009,,1991-OA-attributes-sas07,BUKWM09,7,,(see folder)
+,done,x,Country of Birth,UK: Wales: Females,1991,SAS07,s070010,,1991-OA-attributes-sas07,BUKWF10,7,,(see folder)
+,done,x,Country of Birth,UK: Wales: Males and Females,1991,SAS07,,,1991-OA-attributes-sas07,BUKW,4,,(see folder)
+,done,x,Country of Birth,UK: Northern Ireland: Males,1991,SAS07,s070011,,1991-OA-attributes-sas07,BUKNM11,7,,(see folder)
+,done,x,Country of Birth,UK: Northern Ireland: Females,1991,SAS07,s070012,,1991-OA-attributes-sas07,BUKNF12,7,,(see folder)
+,done,x,Country of Birth,UK: Northern Ireland: Males and Females,1991,SAS07,,,1991-OA-attributes-sas07,BUKNI,5,,(see folder)
+,done,x,Country of Birth,Irish Republic: Males,1991,SAS07,s070013,,1991-OA-attributes-sas07,BIRM13,6,,(see folder)
+,done,x,Country of Birth,Irish Republic: Females,1991,SAS07,s070014,,1991-OA-attributes-sas07,BIRF14,6,,(see folder)
+,done,x,Country of Birth,Irish Republic: Males and Females,1991,SAS07,,,1991-OA-attributes-sas07,BIR,3,,(see folder)
+,done,x,Country of Birth,Old Commonwealth: Males,1991,SAS07,s070015,,1991-OA-attributes-sas07,BCM15,5,,(see folder)
+,done,x,Country of Birth,Old Commonwealth: Females,1991,SAS07,s070016,,1991-OA-attributes-sas07,BCF16,5,,(see folder)
+,done,x,Country of Birth,Old Commonwealth: Males and Females,1991,SAS07,,,1991-OA-attributes-sas07,BC,2,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Males,1991,SAS07,s070017,,1991-OA-attributes-sas07,BNCM17,6,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Females,1991,SAS07,s070018,,1991-OA-attributes-sas07,BNCF18,6,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Males and Females,1991,SAS07,,,1991-OA-attributes-sas07,BNCM,4,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Eastern Africa: Males,1991,SAS07,s070019,,1991-OA-attributes-sas07,s070019,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Eastern Africa: Females,1991,SAS07,s070020,,1991-OA-attributes-sas07,s070020,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Other Africa: Males,1991,SAS07,s070021,,1991-OA-attributes-sas07,s070021,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Other Africa: Females,1991,SAS07,s070022,,1991-OA-attributes-sas07,s070022,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Caribbean: Males,1991,SAS07,s070023,,1991-OA-attributes-sas07,s070023,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Caribbean: Females,1991,SAS07,s070024,,1991-OA-attributes-sas07,s070024,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Bangladesh: Males,1991,SAS07,s070025,,1991-OA-attributes-sas07,s070025,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Bangladesh: Females,1991,SAS07,s070026,,1991-OA-attributes-sas07,s070026,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: India: Males,1991,SAS07,s070027,,1991-OA-attributes-sas07,s070027,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: India: Females,1991,SAS07,s070028,,1991-OA-attributes-sas07,s070028,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Pakistan: Males,1991,SAS07,s070029,,1991-OA-attributes-sas07,s070029,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Pakistan: Females,1991,SAS07,s070030,,1991-OA-attributes-sas07,s070030,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: South East Asia: Males,1991,SAS07,s070031,,1991-OA-attributes-sas07,s070031,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: South East Asia: Females,1991,SAS07,s070032,,1991-OA-attributes-sas07,s070032,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Cyprus: Males,1991,SAS07,s070033,,1991-OA-attributes-sas07,s070033,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Cyprus: Females,1991,SAS07,s070034,,1991-OA-attributes-sas07,s070034,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Other: Males,1991,SAS07,s070035,,1991-OA-attributes-sas07,s070035,7,,(see folder)
+,done,x,Country of Birth,New Commonwealth: Other: Females,1991,SAS07,s070036,,1991-OA-attributes-sas07,s070036,7,,(see folder)
+,done,x,Country of Birth,Other European Community: Males,1991,SAS07,s070037,,1991-OA-attributes-sas07,s070037,7,,(see folder)
+,done,x,Country of Birth,Other European Community: Females,1991,SAS07,s070038,,1991-OA-attributes-sas07,s070038,7,,(see folder)
+,done,x,Country of Birth,Other Europe: Males,1991,SAS07,s070039,,1991-OA-attributes-sas07,s070039,7,,(see folder)
+,done,x,Country of Birth,Other Europe: Females,1991,SAS07,s070040,,1991-OA-attributes-sas07,s070040,7,,(see folder)
+,done,x,Country of Birth,China: Males,1991,SAS07,s070041,,1991-OA-attributes-sas07,s070041,7,,(see folder)
+,done,x,Country of Birth,China: Females,1991,SAS07,s070042,,1991-OA-attributes-sas07,s070042,7,,(see folder)
+,done,x,Country of Birth,Rest of the World: Males,1991,SAS07,s070043,,1991-OA-attributes-sas07,s070043,7,,(see folder)
+,done,x,Country of Birth,Rest of the World: Females,1991,SAS07,s070044,,1991-OA-attributes-sas07,s070044,7,,(see folder)
+,20161017,x,Country of Birth,Total,1981,SAS04,[81sas040320],,1981-OA-attributes-sas04,BTT20,5,,(see folder)
+,20161017,x,Country of Birth,Total: Males,1981,SAS04,[81sas040321],,1981-OA-attributes-sas04,BTM21,5,,(see folder)
+,20161017,x,Country of Birth,Total: Females,1981,SAS04,[81sas040322],,1981-OA-attributes-sas04,BTF22,5,,(see folder)
+,20161017,x,Country of Birth,England: Total,1981,SAS04,[81sas040323],,1981-OA-attributes-sas04,BEngT23,7,,(see folder)
+,20161017,x,Country of Birth,England: Males,1981,SAS04,[81sas040324],,1981-OA-attributes-sas04,BEngM24,7,,(see folder)
+,20161017,x,Country of Birth,England: Females,1981,SAS04,[81sas040325],,1981-OA-attributes-sas04,BEngF25,7,,(see folder)
+,20161017,x,Country of Birth,Scotland: Total,1981,SAS04,[81sas040326],,1981-OA-attributes-sas04,BSctT26,7,,(see folder)
+,20161017,x,Country of Birth,Scotland: Males,1981,SAS04,[81sas040327],,1981-OA-attributes-sas04,BSctM27,7,,(see folder)
+,20161017,x,Country of Birth,Scotland: Females,1981,SAS04,[81sas040328],,1981-OA-attributes-sas04,BSctF28,7,,(see folder)
+,20161017,x,Country of Birth,Wales: Total,1981,SAS04,[81sas040329],,1981-OA-attributes-sas04,BWalT29,7,,(see folder)
+,20161017,x,Country of Birth,Wales: Males,1981,SAS04,[81sas040330],,1981-OA-attributes-sas04,BWalM30,7,,(see folder)
+,20161017,x,Country of Birth,Wales: Females,1981,SAS04,[81sas040331],,1981-OA-attributes-sas04,BWalF31,7,,(see folder)
+,20161017,x,Country of Birth,Rest of UK: Total,1981,SAS04,[81sas040332],,1981-OA-attributes-sas04,BRestT32,8,,(see folder)
+,20161017,x,Country of Birth,Rest of UK: Males,1981,SAS04,[81sas040333],,1981-OA-attributes-sas04,BRestM33,8,,(see folder)
+,20161017,x,Country of Birth,Rest of UK: Females,1981,SAS04,[81sas040334],,1981-OA-attributes-sas04,BRestF34,8,,(see folder)
+,20161017,x,Country of Birth,Irish Republic: Total,1981,SAS04,[81sas040335],,1981-OA-attributes-sas04,BIRT35,6,,(see folder)
+,20161017,x,Country of Birth,Irish Republic: Males,1981,SAS04,[81sas040336],,1981-OA-attributes-sas04,BIRM36,6,,(see folder)
+,20161017,x,Country of Birth,Irish Republic: Females,1981,SAS04,[81sas040337],,1981-OA-attributes-sas04,BIRF37,6,,(see folder)
+,20161017,x,Country of Birth,Old Commonwealth: Total,1981,SAS04,[81sas040338],,1981-OA-attributes-sas04,BOCT38,6,,(see folder)
+,20161017,x,Country of Birth,Old Commonwealth: Males,1981,SAS04,[81sas040339],,1981-OA-attributes-sas04,BOCM39,6,,(see folder)
+,20161017,x,Country of Birth,Old Commonwealth: Females,1981,SAS04,[81sas040340],,1981-OA-attributes-sas04,BOCMF40,7,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Total,1981,SAS04,[81sas040341],,1981-OA-attributes-sas04,as040341,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Males,1981,SAS04,[81sas040342],,1981-OA-attributes-sas04,as040342,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Females,1981,SAS04,[81sas040343],,1981-OA-attributes-sas04,as040343,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Eastern Africa: Total,1981,SAS04,[81sas040344],,1981-OA-attributes-sas04,as040344,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Eastern Africa: Males,1981,SAS04,[81sas040345],,1981-OA-attributes-sas04,as040345,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Eastern Africa: Females,1981,SAS04,[81sas040346],,1981-OA-attributes-sas04,as040346,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Other Africa: Total,1981,SAS04,[81sas040347],,1981-OA-attributes-sas04,as040347,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Other Africa: Males,1981,SAS04,[81sas040348],,1981-OA-attributes-sas04,as040348,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Other Africa: Females,1981,SAS04,[81sas040349],,1981-OA-attributes-sas04,as040349,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Caribbean: Total,1981,SAS04,[81sas040350],,1981-OA-attributes-sas04,as040350,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Caribbean: Males,1981,SAS04,[81sas040351],,1981-OA-attributes-sas04,as040351,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Caribbean: Females,1981,SAS04,[81sas040352],,1981-OA-attributes-sas04,as040352,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: India: Total,1981,SAS04,[81sas040353],,1981-OA-attributes-sas04,as040353,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: India: Males,1981,SAS04,[81sas040354],,1981-OA-attributes-sas04,as040354,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: India: Females,1981,SAS04,[81sas040355],,1981-OA-attributes-sas04,as040355,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Bangladesh: Total,1981,SAS04,[81sas040356],,1981-OA-attributes-sas04,as040356,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Bangladesh: Males,1981,SAS04,[81sas040357],,1981-OA-attributes-sas04,as040357,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Bangladesh: Females,1981,SAS04,[81sas040358],,1981-OA-attributes-sas04,as040358,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Far East: Total,1981,SAS04,[81sas040359],,1981-OA-attributes-sas04,as040359,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Far East: Males,1981,SAS04,[81sas040360],,1981-OA-attributes-sas04,as040360,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Far East: Females,1981,SAS04,[81sas040361],,1981-OA-attributes-sas04,as040361,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Mediterranean: Total,1981,SAS04,[81sas040362],,1981-OA-attributes-sas04,as040362,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Mediterranean: Males,1981,SAS04,[81sas040363],,1981-OA-attributes-sas04,as040363,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Mediterranean: Females,1981,SAS04,[81sas040364],,1981-OA-attributes-sas04,as040364,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Remainder: Total,1981,SAS04,[81sas040365],,1981-OA-attributes-sas04,as040365,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Remainder: Males,1981,SAS04,[81sas040366],,1981-OA-attributes-sas04,as040366,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Remainder: Females,1981,SAS04,[81sas040367],,1981-OA-attributes-sas04,as040367,8,,(see folder)
+,20161017,x,Country of Birth,Pakistan: Total,1981,SAS04,[81sas040368],,1981-OA-attributes-sas04,as040368,8,,(see folder)
+,20161017,x,Country of Birth,Pakistan: Males,1981,SAS04,[81sas040369],,1981-OA-attributes-sas04,as040369,8,,(see folder)
+,20161017,x,Country of Birth,Pakistan: Females,1981,SAS04,[81sas040370],,1981-OA-attributes-sas04,as040370,8,,(see folder)
+,20161017,x,Country of Birth,Other European Community: Total,1981,SAS04,[81sas040371],,1981-OA-attributes-sas04,as040371,8,,(see folder)
+,20161017,x,Country of Birth,Other European Community: Males,1981,SAS04,[81sas040372],,1981-OA-attributes-sas04,as040372,8,,(see folder)
+,20161017,x,Country of Birth,Other European Community: Females,1981,SAS04,[81sas040373],,1981-OA-attributes-sas04,as040373,8,,(see folder)
+,20161017,x,Country of Birth,Other Europe: Total,1981,SAS04,[81sas040374],,1981-OA-attributes-sas04,as040374,8,,(see folder)
+,20161017,x,Country of Birth,Other Europe: Males,1981,SAS04,[81sas040375],,1981-OA-attributes-sas04,as040375,8,,(see folder)
+,20161017,x,Country of Birth,Other Europe: Females,1981,SAS04,[81sas040376],,1981-OA-attributes-sas04,as040376,8,,(see folder)
+,20161017,x,Country of Birth,Rest of the World: Total,1981,SAS04,[81sas040377],,1981-OA-attributes-sas04,as040377,8,,(see folder)
+,20161017,x,Country of Birth,Rest of the World: Males,1981,SAS04,[81sas040378],,1981-OA-attributes-sas04,as040378,8,,(see folder)
+,20161017,x,Country of Birth,Rest of the World: Females,1981,SAS04,[81sas040379],,1981-OA-attributes-sas04,as040379,8,,(see folder)
+,20161017,x,Country of Birth,All: Males,1971,SAS08,,,1971-OA-attributes-sas08,BAllM01,7,,(see folder)
+,20161017,x,Country of Birth,All: Females,1971,SAS08,,,1971-OA-attributes-sas08,BAllF02,7,,(see folder)
+,20161017,x,Country of Birth,All: Total,1971,SAS08,,,1971-OA-attributes-sas08,BAll,4,,(see folder)
+,20161017,x,Country of Birth,England: Males,1971,SAS08,c71s08_439,,1971-OA-attributes-sas08,BEngM39,7,,(see folder)
+,20161017,x,Country of Birth,England: Females,1971,SAS08,c71s08_440,,1971-OA-attributes-sas08,BEngF40,7,,(see folder)
+,20161017,x,Country of Birth,England: Total,1971,SAS08,,,1971-OA-attributes-sas08,BEngB,5,,(see folder)
+,20161017,x,Country of Birth,Scotland: Males,1971,SAS08,c71s08_441,,1971-OA-attributes-sas08,BSctM41,7,,(see folder)
+,20161017,x,Country of Birth,Scotland: Females,1971,SAS08,c71s08_442,,1971-OA-attributes-sas08,BSctF42,7,,(see folder)
+,20161017,x,Country of Birth,Scotland: Total,1971,SAS08,,,1971-OA-attributes-sas08,BScotB,6,,(see folder)
+,20161017,x,Country of Birth,Wales: Males,1971,SAS08,c71s08_443,,1971-OA-attributes-sas08,BWalM43,7,,(see folder)
+,20161017,x,Country of Birth,Wales: Females,1971,SAS08,c71s08_444,,1971-OA-attributes-sas08,BWalF44,7,,(see folder)
+,20161017,x,Country of Birth,Wales: Total,1971,SAS08,,,1971-OA-attributes-sas08,BWalB,5,,(see folder)
+,20161017,x,Country of Birth,Northern Ireland: Males,1971,SAS08,c71s08_445,,1971-OA-attributes-sas08,BNIM45,6,,(see folder)
+,20161017,x,Country of Birth,Northern Ireland: Females,1971,SAS08,c71s08_446,,1971-OA-attributes-sas08,BNIF46,6,,(see folder)
+,20161017,x,Country of Birth,Northern Ireland: Total,1971,SAS08,,,1971-OA-attributes-sas08,BNIB,4,,(see folder)
+,20161017,x,Country of Birth,Irish Republic: Males,1971,SAS08,c71s08_447,,1971-OA-attributes-sas08,BIRM47,6,,(see folder)
+,20161017,x,Country of Birth,Irish Republic: Females,1971,SAS08,c71s08_448,,1971-OA-attributes-sas08,BIRF48,6,,(see folder)
+,20161017,x,Country of Birth,Irish Republic: Total,1971,SAS08,,,1971-OA-attributes-sas08,BIRB,4,,(see folder)
+,20161017,x,Country of Birth,Old Commonwealth: Males,1971,SAS08,c71s08_449,,1971-OA-attributes-sas08,BOCM49,6,,(see folder)
+,20161017,x,Country of Birth,Old Commonwealth: Females,1971,SAS08,c71s08_450,,1971-OA-attributes-sas08,BOCF50,6,,(see folder)
+,20161017,x,Country of Birth,Old Commonwealth: Total,1971,SAS08,,,1971-OA-attributes-sas08,BOCB,4,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Males,1971,SAS08,c71s08_469,,1971-OA-attributes-sas08,BNCM69,6,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Females,1971,SAS08,c71s08_470,,1971-OA-attributes-sas08,BNCF69,6,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Total,1971,SAS08,,,1971-OA-attributes-sas08,BNCB,4,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Africa: Males,1971,SAS08,c71s08_451,,1971-OA-attributes-sas08,1s08_451,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Africa: Females,1971,SAS08,c71s08_452,,1971-OA-attributes-sas08,1s08_452,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: America: Males,1971,SAS08,c71s08_453,,1971-OA-attributes-sas08,1s08_453,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: America: Females,1971,SAS08,c71s08_454,,1971-OA-attributes-sas08,1s08_454,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Ceylon: Males,1971,SAS08,c71s08_455,,1971-OA-attributes-sas08,1s08_455,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Ceylon: Females,1971,SAS08,c71s08_456,,1971-OA-attributes-sas08,1s08_456,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: India: Males,1971,SAS08,c71s08_457,,1971-OA-attributes-sas08,1s08_457,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: India: Females,1971,SAS08,c71s08_458,,1971-OA-attributes-sas08,1s08_458,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Pakistan: Males,1971,SAS08,c71s08_459,,1971-OA-attributes-sas08,1s08_459,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Pakistan: Females,1971,SAS08,c71s08_460,,1971-OA-attributes-sas08,1s08_460,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Far East: Males,1971,SAS08,c71s08_461,,1971-OA-attributes-sas08,1s08_461,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Far East: Females,1971,SAS08,c71s08_462,,1971-OA-attributes-sas08,1s08_462,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Other: Males,1971,SAS08,c71s08_463,,1971-OA-attributes-sas08,1s08_463,8,,(see folder)
+,20161017,x,Country of Birth,New Commonwealth: Other: Females,1971,SAS08,c71s08_464,,1971-OA-attributes-sas08,1s08_464,8,,(see folder)
+,20161017,x,Country of Birth,Other Europe: Males,1971,SAS08,c71s08_465,,1971-OA-attributes-sas08,1s08_465,8,,(see folder)
+,20161017,x,Country of Birth,Other Europe: Females,1971,SAS08,c71s08_466,,1971-OA-attributes-sas08,1s08_466,8,,(see folder)
+,20161017,x,Country of Birth,"Other Foreign, At Sea or Not Stated: Males",1971,SAS08,c71s08_467,,1971-OA-attributes-sas08,1s08_467,8,,(see folder)
+,20161017,x,Country of Birth,"Other Foreign, At Sea or Not Stated: Females",1971,SAS08,c71s08_468,,1971-OA-attributes-sas08,1s08_468,8,,(see folder)
+,NA (see folder),20160816,Townsend,Economically active: Employee: Part-time,2011,KS601EW/SC,0002,#N/A,2011-townsend.csv,EAPart,,,
+,NA (see folder),20160816,Townsend,Economically active: Employee: Full-time,2011,KS601EW/SC,0003,#N/A,2011-townsend.csv,EAFull,,,
+,NA (see folder),20160816,Townsend,Economically active: Self-employed,2011,KS601EW/SC,0004,#N/A,2011-townsend.csv,EASelf,,,
+,NA (see folder),20160816,Townsend,Economically active: Unemployed,2011,KS601EW/SC,0005,#N/A,2011-townsend.csv,EAUnem,,,
+,NA (see folder),20160816,Townsend,Total Households (Cars),2011,QS416EW/404S,0001,#N/A,2011-townsend.csv,CarTotalHs,,,
+,NA (see folder),20160816,Townsend,Households with No Cars or Vans,2011,QS416EW/404S,0002,#N/A,2011-townsend.csv,CarNoCar,,,
+,NA (see folder),20160816,Townsend,All categories: Tenure,2011,KS402EW/402S,0001,#N/A,2011-townsend.csv,TnAll,,,
+,NA (see folder),20160816,Townsend,Owned: Owned outright,2011,KS402EW/402S,0002,#N/A,2011-townsend.csv,TnOwnOR,,,
+,NA (see folder),20160816,Townsend,Owned: Owned with a mortgage or loan,2011,KS402EW/402S,0003,#N/A,2011-townsend.csv,TnOwnMt,,,
+,NA (see folder),20160816,Townsend,Shared ownership (part owned and part rented),2011,KS402EW/402S,0004,#N/A,2011-townsend.csv,TnOwnSH,,,
+,NA (see folder),20160816,Townsend,Social rented: Rented from council (Local Authority),2011,KS402EW/402S,0005,#N/A,2011-townsend.csv,TnRentLA,,,
+,NA (see folder),20160816,Townsend,Social rented: Other,2011,KS402EW/402S,0006,#N/A,2011-townsend.csv,TnRentSo,,,
+,NA (see folder),20160816,Townsend,Private rented: Private landlord or letting agency,2011,KS402EW/402S,0007,#N/A,2011-townsend.csv,TnRentPr,,,
+,NA (see folder),20160816,Townsend,Private rented: Other,2011,KS402EW/402S,0008,#N/A,2011-townsend.csv,TnRentOt,,,
+,NA (see folder),20160816,Townsend,Living rent free,2011,KS402EW/402S,0009,#N/A,2011-townsend.csv,TnRentFr,,,
+,NA (see folder),20160816,Townsend,Total Households (Persons Per Room),2011,KS403EW/QS408,0001,#N/A,2011-townsend.csv,OcTotal,,,
+,NA (see folder),20160816,Townsend,"Total Households (Overcrowded, score of -1)",2011,KS403EW/QS408,0004,#N/A,2011-townsend.csv,OcOcc1,,,
+,NA (see folder),20160803,Townsend,Economic Activity: Total People,2001,KS009a,ks09a0001,#N/A,2001_townsend_inputs.csv,TotPel,,Townsend unemployment defined in text file,
+,NA (see folder),20160803,Townsend,Economic Activity: Employees: Part-time,2001,KS009a,ks09a0002,#N/A,2001_townsend_inputs.csv,EAPart,,,
+,NA (see folder),20160803,Townsend,Economic Activity: Employees: Full-time,2001,KS009a,ks09a0003,#N/A,2001_townsend_inputs.csv,EAFull,,,
+,NA (see folder),20160803,Townsend,Economic Activity: Self-employed,2001,KS009a,ks09a0004,#N/A,2001_townsend_inputs.csv,EASelf,,,
+,NA (see folder),20160803,Townsend,Economic Activity: All Employed,2001,KS009a,#N/A,#N/A,2001_townsend_inputs.csv,EAAllEm,,Derived (cols 2+3+4),
+,NA (see folder),20160803,Townsend,Economic Activity: Unemployed,2001,KS009a,ks09a0005,#N/A,2001_townsend_inputs.csv,EAUnem,,,
+,NA (see folder),20160803,Townsend,Households with No Cars or Vans,2001,KS017,ks0170002,ks0170001,2001_townsend_inputs.csv,NoCar,,,
+,NA (see folder),20160803,Townsend,Households: All Households,2001,KS017,ks0170001,#N/A,2001_townsend_inputs.csv,CarTotalHs,,,
+,NA (see folder),20160803,Townsend,Tenure: All Households,2001,KS018,ks0180001,#N/A,2001_townsend.csv,TnAll,,,
+,NA (see folder),20160803,Townsend,Tenure: Owner Occupied: Owns Outright,2001,KS018,ks0180002,ks0180001,2001_townsend.csv,TnOwnOR,,,
+,NA (see folder),20160803,Townsend,Tenure: Owner Occupied: Owns with a Mortgage,2001,KS018,ks0180003,ks0180001,2001_townsend.csv,TnOwnMt,,,
+,NA (see folder),20160803,Townsend,Tenure: Owner Occupied: Shared Ownership,2001,KS018,ks0180004,ks0180001,2001_townsend.csv,TnOwnSH,,,
+,NA (see folder),20160803,Townsend,Tenure: Rented from: Council (Local Authority),2001,KS018,ks0180005,ks0180001,2001_townsend.csv,TnRentLA,,,
+,NA (see folder),20160803,Townsend,Tenure: Rented from: Housing Association / Registered Social Landlord,2001,KS018,ks0180006,ks0180001,2001_townsend.csv,TnRentHA,,,
+,NA (see folder),20160803,Townsend,Tenure: Rented from: Private landlord or letting agency,2001,KS018,ks0180007,ks0180001,2001_townsend.csv,TnRentPr,,Scotland splits furnished (7) and unfurnished (8). Combined for this,
+,NA (see folder),20160803,Townsend,Tenure: Rented from: Other,2001,KS018,ks0180008,ks0180001,2001_townsend.csv,TnRentOt,,,
+,NA (see folder),20160803,Townsend,Overcrowding (Households with occupancy rating -1 or less),2001,KS019,ks0190004,ks0190001,2001_townsend_inputs.csv,OcOcc1,,,
+,NA (see folder),20160803,Townsend,All households,2001,KS019,ks0190001,#N/A,2001_townsend_inputs.csv,OcTotal,,,
+,NA (see folder),20160807,Townsend,Car Availability: Total Households,1991,SAS21,s210003,#N/A,1991_townsend.csv,CrTotHs,,,
+,NA (see folder),20160807,Townsend,Car Availability: Households with No car,1991,SAS21,s210004,s210003,1991_townsend.csv,CrNoCar,,,
+,NA (see folder),20160807,Townsend,Car Availability: Households with 1 car,1991,SAS21,s210004,s210003,1991_townsend.csv,Cr1Car,,,
+,NA (see folder),20160807,Townsend,Car Availability: Households with 2 car,1991,SAS21,s210005,s210003,1991_townsend.csv,Cr2Cars,,,
+,NA (see folder),20160807,Townsend,Car Availability: Households with 3 or more cars,1991,SAS21,s210006,s210003,1991_townsend.csv,Cr3pCars,,,
+,NA (see folder),20160807,Townsend,Economic Position: Males: Economically Active: All,1991,SAS08,s080012,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Males: Economically Active: Employees – full time,1991,SAS08,s080023,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Males: Economically Active: Employees – part time,1991,SAS08,s080034,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Males: Economically Active: Self employed – with employees,1991,SAS08,s080045,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Males: Economically Active: Self employed – without employees,1991,SAS08,s080056,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Males: Economically Active: On a Government scheme,1991,SAS08,s080067,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Males: Economically Active: Unemployed,1991,SAS08,s080078,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Males: Economically Active: All employed,1991,SAS08,,#N/A,#N/A,#N/A,,"Derived from cols 23,34,45,56,67 above",
+,NA (see folder),20160807,Townsend,Economic Position: Females: Economically Active: All,1991,SAS08,s080166,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Females: Economically Active: Employees – full time,1991,SAS08,s080177,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Females: Economically Active: Employees – part time,1991,SAS08,s080188,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Females: Economically Active: Self employed – with employees,1991,SAS08,s080199,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Females: Economically Active: Self employed – without employees,1991,SAS08,s080210,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Females: Economically Active: On a Government scheme,1991,SAS08,s080221,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Females: Economically Active: Unemployed,1991,SAS08,s080232,#N/A,#N/A,#N/A,,,
+,NA (see folder),20160807,Townsend,Economic Position: Females: Economically Active: All employed,1991,SAS08,,#N/A,#N/A,#N/A,,"Derived from cols 177,188,199,210,221 above",
+,NA (see folder),20160807,Townsend,Economic Position: Economically Active: All employed,1991,SAS08,,#N/A,1991_townsend.csv,Employed,,Derived from Male + Female figures above,
+,NA (see folder),20160807,Townsend,Economic Position: Economically Active: Unemployed,1991,SAS08,,#N/A,1991_townsend.csv,Unemploy,,Derived from Male + Female figures above,
+,NA (see folder),20160807,Townsend,Tenure: All Households,1991,SAS20,s200001,#N/A,1991_townsend.csv,TnAll,,,
+,NA (see folder),20160807,Townsend,Tenure: Owner Occupied: Owns Outright,1991,SAS20,s200002,s200001,1991_townsend.csv,TnOwnOR,,,
+,NA (see folder),20160807,Townsend,Tenure: Owner Occupied: Buying,1991,SAS20,s200003,s200001,1991_townsend.csv,TnOwnBy,,,
+,NA (see folder),20160807,Townsend,Tenure: Rent Privately: Furnished,1991,SAS20,s200004,s200001,1991_townsend.csv,TnRntFur,,,
+,NA (see folder),20160807,Townsend,Tenure: Rent Privately: Unfurnished,1991,SAS20,s200005,s200001,1991_townsend.csv,TnRntUFr,,,
+,NA (see folder),20160807,Townsend,Tenure: Rented with a job or business,1991,SAS20,s200006,s200001,1991_townsend.csv,TnRntJob,,,
+,NA (see folder),20160807,Townsend,Tenure: Rented from a Housing Association,1991,SAS20,s200007,s200001,1991_townsend.csv,TnRentHA,,,
+,NA (see folder),20160807,Townsend,Tenure: Rented from a Local Authority or new town,1991,SAS20,s200008,s200001,1991_townsend.csv,TnRentLA,,"In Scotland, there is a new category (rented from Scottish homes) which is combined with this one",
+,NA (see folder),20160807,Townsend,Tenure: Non-permanent accommodation,1991,SAS20,s200009,s200001,1991_townsend.csv,TnNonPm,,"In Scotland this is 10, renumbered to 9",
+,NA (see folder),20160807,Townsend,Amenities: No car,1991,SAS20,s200010,s200001,1991_townsend.csv,TnNoCar,,"In Scotland this is 11, renumbered to 10",
+,NA (see folder),20160807,Townsend,Overcrowding: Total Households,1991,SAS23,s230001,#N/A,1991_townsend.csv,OcTotal,,,
+,NA (see folder),20160807,Townsend,Overcrowding: Up to 0.5 persons per room,1991,SAS23,s230002,s230001,1991_townsend.csv,Oc05,,,
+,NA (see folder),20160807,Townsend,Overcrowding: Over 1 and up to 1.5 persons per room,1991,SAS23,s230003,s230001,1991_townsend.csv,Oc1_15,,,
+,NA (see folder),20160807,Townsend,Overcrowding: Over 1.5 persons per room,1991,SAS23,s230004,s230001,1991_townsend.csv,Oc15_p,,,
+,NA (see folder),20160807,Townsend,Overcrowding: More than 1 person per room,1991,SAS23,,,1991_townsend.csv,Oc1p,,Derived from cols 3 + 4,
+,NA (see folder),20160816,Townsend,Economically Active: In employment full time: Total Persons,1981,SAS81 09,[81sas090789],#N/A,1981_townsend.csv,Employed,,,
+,NA (see folder),20160816,Townsend,Economically Active: Not in employment: Total Persons,1981,SAS81 09,[81sas090859],#N/A,1981_townsend.csv,Unemploy,,,
+,NA (see folder),20160816,Townsend,Economically Active: Self-employed,1981,SAS81 09,[81sas090705],#N/A,1981_townsend.csv,SelfEmpl,,,
+,NA (see folder),20160816,Townsend,Tenure & Amenities: Total Households with Residents,1981,SAS81 10,[81sas100929],#N/A,1981_townsend.csv,Total,,,
+,NA (see folder),20160816,Townsend,Tenure & Amenities: Persons per room >1 up 1.5 ppr,1981,SAS81 10,[81sas100946],#N/A,1981_townsend.csv,Oc1_15,,,
+,NA (see folder),20160816,Townsend,Tenure & Amenities: No car,1981,SAS81 10,[81sas100949],#N/A,1981_townsend.csv,NoCar,,,
+,NA (see folder),20160816,Townsend,Tenure & Amenities: Owner Occupied,1981,SAS81 10,[81sas100967],#N/A,1981_townsend.csv,TNOwnOcc,,,
+,NA (see folder),20160820,Townsend,Employment: Working: Males,1971,SAS71 05,c71s05_260,#N/A,1971_townsend.csv,WorkMale,,,
+,NA (see folder),20160820,Townsend,Employment: Working: Females: Single/Widowed/Divorced,1971,SAS71 05,c71s05_263,#N/A,1971_townsend.csv,WFemSWD,,,
+,NA (see folder),20160820,Townsend,Employment: Working: Females: Married,1971,SAS71 05,c71s05_266,#N/A,1971_townsend.csv,WFemMar,,,
+,NA (see folder),20160820,Townsend,Employment: Seeking Work: Males,1971,SAS71 05,c71s05_261,#N/A,1971_townsend.csv,SkWkMale,,,
+,NA (see folder),20160820,Townsend,Employment: Seeking Work: Females: Single/Widowed/Divorced,1971,SAS71 05,c71s05_264,#N/A,1971_townsend.csv,SkWkFmSW,,,
+,NA (see folder),20160820,Townsend,Employment: Seeking Work: Females: Married,1971,SAS71 05,c71s05_267,#N/A,1971_townsend.csv,SkWkFmMd,,,
+,NA (see folder),20160820,Townsend,Employment: Working,1971,SAS71 05,#N/A,#N/A,1971_townsend.csv,Working,,"Derived (cols 260, 263, 266)",
+,NA (see folder),20160820,Townsend,Employment: Seeking Work,1971,SAS71 05,#N/A,#N/A,1971_townsend.csv,SeekWork,,"Derived (cols 261, 264, 267)",
+,NA (see folder),20160820,Townsend,Tenure: Owner Occupied,1971,SAS71 05,c71s18_053,#N/A,1971_townsend.csv,TNOwnOcc,,,
+,NA (see folder),20160820,Townsend,Tenure: Rented from Council,1971,SAS71 05,c71s18_054,#N/A,1971_townsend.csv,TnRentLA,,,
+,NA (see folder),20160820,Townsend,Tenure: Rented unfurnished,1971,SAS71 05,c71s18_055,#N/A,1971_townsend.csv,TnRentUn,,,
+,NA (see folder),20160820,Townsend,Tenure: Rented furnished,1971,SAS71 05,c71s18_056,#N/A,1971_townsend.csv,TnRentFr,,,
+,NA (see folder),20160820,Townsend,Tenure: Not stated,1971,SAS71 05,c71s18_057,#N/A,1971_townsend.csv,TnOther,,,
+,NA (see folder),20160820,Townsend,Persons per room: Greater than 1.5,1971,SAS71 05,c71s18_065,#N/A,1971_townsend.csv,Oc15,,,
+,NA (see folder),20160820,Townsend,Persons per room: Between 1 and 1.5,1971,SAS71 05,c71s18_066,#N/A,1971_townsend.csv,Oc1_15,,,
+,NA (see folder),20160820,Townsend,Persons per room: Between 0.75 and 1,1971,SAS71 05,c71s18_067,#N/A,1971_townsend.csv,Oc075_1,,,
+,NA (see folder),20160820,Townsend,Persons per room: Between 0.5 and 0.75,1971,SAS71 05,c71s18_068,#N/A,1971_townsend.csv,Oc05_075,,,
+,NA (see folder),20160820,Townsend,Persons per room: Less than 0.5,1971,SAS71 05,c71s18_069,#N/A,1971_townsend.csv,Oc05,,,
+,NA (see folder),20160820,Townsend,No car,1971,SAS71 05,c71s18_077,#N/A,1971_townsend.csv,NoCar,,,
