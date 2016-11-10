@@ -56,21 +56,21 @@
   #Unemployed
     unemployed_pc <- (unemployed_persons / all_economically_active_persons) * 100
       #replace instances of all_economically_active_persons = 0 with a value of 0 instead of NaN
-        unemployed_pc[which(all_economically_active_persons == 0)] <- 0
+        unemployed_pc[which(all_economically_active_persons == 0)] <- NA
   #Non owner occupied
     #replace all negative values of non_owner_occupied_households with 0
         non_owner_occupied_households[which(non_owner_occupied_households < 0)] <- 0
     non_own_occ_pc <- (non_owner_occupied_households / total_households_tenure) * 100
       #replace instances of total_households_tenure = 0 with a value of 0 instead of NaN
-        non_own_occ_pc[which(total_households_tenure == 0)] <- 0
+        non_own_occ_pc[which(total_households_tenure == 0)] <- NA
   #Non access to car or van
     no_car_van_pc <- (no_car_van_households / all_households_car) * 100
       #replace instances of all_households_car = 0 with a value of 0 instead of NaN
-        no_car_van_pc[which(all_households_car == 0)] <- 0
+        no_car_van_pc[which(all_households_car == 0)] <- NA
   #Overcrowded
     overcrowded_pc <- (overcrowded_households / total_households_overcrowding) * 100
       #replace instances of total_households_overcrowding = 0 with a value of 0 instead of NaN
-        overcrowded_pc[which(total_households_overcrowding == 0)] <- 0
+        overcrowded_pc[which(total_households_overcrowding == 0)] <- NA
 
 #Calculations of logging for unemployed persons and overcrowding
     unemployed_pc_log <- log(unemployed_pc + 1)
@@ -81,7 +81,13 @@
     overcrowded_z <- (overcrowded_log - mean(overcrowded_log, na.rm = TRUE)) / sd(overcrowded_log, na.rm = TRUE)
     no_car_van_z <- (no_car_van_pc - mean(no_car_van_pc, na.rm = TRUE)) / sd(no_car_van_pc, na.rm = TRUE)
     non_own_occ_z <- (non_own_occ_pc - mean(non_own_occ_pc, na.rm = TRUE)) / sd(non_own_occ_pc, na.rm = TRUE)
-    
+
+#Reset totals with 0 to NA
+    unemployed_pc_log[which(total_households_tenure == 0)] <- NA
+    overcrowded_log[which(total_households_tenure == 0)] <- NA
+    no_car_van_pc[which(total_households_tenure == 0)] <- NA
+    non_own_occ_pc[which(total_households_tenure == 0)] <- NA
+  
 #Sum z scores
      townsend_z_score <- unemployed_z + overcrowded_z + no_car_van_z + non_own_occ_z
      
@@ -89,19 +95,21 @@
    #townsend_z_score <- unemployed_pc
    #townsend_z_score <- overcrowded_pc
    #townsend_z_score <- no_car_van_pc
-   #townsend_z_score <- non_own_occ_pc
+   townsend_z_score <- non_own_occ_pc
      
   #set file export name
-     filename_part <- "1981_townsend_z_scores"
+     #filename_part <- "1981_townsend_z_scores"
      #filename_part <- "1981_townsend_unemployed_pc"
      #filename_part <- "1981_townsend_overcrowded_pc"
      #filename_part <- "1981_townsend_no_car_van_pc"
-     #filename_part <- "1981_townsend_non_own_occ_pc"
+     filename_part <- "1981_townsend_non_own_occ_pc"
 
 #export to ASC grid
+  
   #replace NA with -1 (NA value for ascii grid)
-    townsend_z_score[which(is.na(grid_m_ID))] <- "-1"
-    
+    townsend_z_score[which(is.na(grid_m_ID))] <- "-9999"
+    townsend_z_score[which(total_households_tenure == 0)] <- "-9999"
+  
     #townsend_z_score <- format(townsend_z_score, scientific=FALSE)
     
   #export as ascii grid
@@ -114,7 +122,7 @@
     cat(paste0("yllcorner    ",grid_r_ID@bbox[2,1]), file = filename, sep = "\n", append = TRUE) 
     cat(paste0("cellsize     ",grid_r_ID@grid@cellsize[1]),  file = filename, sep = "\n", append = TRUE) 
   #ignore NODATA value
-    cat(paste0("NODATA_value -1"), file = filename, sep = "\n", append = TRUE) 
+    cat(paste0("NODATA_value -9999"), file = filename, sep = "\n", append = TRUE) 
   #output data
     #for each row (col in R)
     for (i in 1:ncol(townsend_z_score)) {
@@ -130,6 +138,9 @@
     #export lookup table as CSV
       #extract which grid cells
         grid_ID <- grid_m_ID[which(!is.na(grid_m_ID))]
+      #update to na for csv
+        townsend_z_score[which(is.na(grid_m_ID))] <- NA
+        townsend_z_score[which(total_households_tenure == 0)] <- NA
       #extract grid values
         grid_IDs_matrix <- which(!is.na(grid_m_ID), arr.ind = TRUE)
         grid_values <- townsend_z_score[grid_IDs_matrix]
