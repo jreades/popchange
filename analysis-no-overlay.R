@@ -52,17 +52,17 @@
 
 #1c. Load Data (swap out from data.R file)
   #read in OA attributes (the Census variables we are allocating to grid), strip.white = TRUE removes training spaces found in 1981 Census download
-    OA_attributes <- read.csv("input/1981/attributes/1981-OA-attributes-sas02.csv", strip.white = TRUE)  
+    OA_attributes <- read.csv("input/1991/attributes/1991_townsend.csv", strip.white = TRUE)  
   #read in grid proportion (proportion of each OA in each grid)
-    OA_grid <- read.csv("input/1981/1981-OA-grid-proportion.csv")
+    OA_grid <- read.csv("input/1991/1991-OA-grid-proportion.csv")
   #set year
-    year <- 1981
+    year <- 1991
   #Setup file names to save
-    filename_prefix <- "1981_Age_test_20160702"
+    filename_prefix <- "1991_Townsend"
   #set iterative smoothing
     iterative_smoothing <- FALSE #set to TRUE if you want iterative smoothing
   #set denominator column in input file for calculation of percentages (usually 1) (0 means do not calculate percentages)
-    denom_col <- 1
+    denom_col <- 0
     
   #NO NEED TO EDIT
   #read in grid template (the raster version of the grid) 
@@ -258,7 +258,7 @@
           #stop time 
             sectionTime[sectionNumber] <- (proc.time() - ptm)[3] - sum(sectionTime[1:(sectionNumber-1)], na.rm = TRUE)
         } #end for loop (each attribute column)
-      #note down total time for Sections 8 & 9
+      #note down total time for Sections 8 & 9 
         #advance section number
           sectionNumber <- sectionNumber + 1
         #total time for section 8 (Grid Smooth (by region) and Rescale) & 9 (Iterative Grid Smoothing)
