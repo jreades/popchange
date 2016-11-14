@@ -1,4 +1,4 @@
-Uploaded to Postgres DB,Uploaded to popchange-data.liverpool.ac.uk,Percentage,Complete,Category,Name,Year,Table Number,Column Number,Denominator,Input File Name,Column Code,ColumnCode Length,Notes,Output Filename
+Entered and uploaded to Postgres DB,Uploaded to popchange-data.liverpool.ac.uk,Percentage,Complete,Category,Name,Year,Table Number,Column Number,Denominator,Input File Name,Column Code,ColumnCode Length,Notes,Output Filename
 ,,20161017,x,Tenure,All permanent,1991,SAS 20,s200001,,1991-OA-attributes-sas20.csv,TPerm1,6,,5a_ascii_grid1991_Tenure_TPerm1
 ,,20161017,x,Tenure,Owner occupied â€“ owned outright,1991,SAS 20,s200002,,1991-OA-attributes-sas20.csv,TOwnOc2,7,,5a_ascii_grid1991_Tenure_TOwnOc2
 ,,20161017,x,Tenure,Owner occupied â€“ buying,1991,SAS 20,s200003,,1991-OA-attributes-sas20.csv,TOwnOc3,7,,5a_ascii_grid1991_Tenure_TOwnOc3
@@ -82,33 +82,33 @@ Uploaded to Postgres DB,Uploaded to popchange-data.liverpool.ac.uk,Percentage,Co
 ,,done,x,Age,Age 70 to 84,2001,KS002,ks0020015,,2001-OA-attributes_ks002,Age70-84,8,,5a_ascii_grid2001_Age_Age8.9.asc
 ,,done,x,Age,Age 85 to 89,2001,KS002,ks0020016,,2001-OA-attributes_ks002,Age85-89,8,,5a_ascii_grid2001_Age_Age85.89.asc
 ,,done,x,Age,Age 90 plus,2001,KS002,ks0020017,,2001-OA-attributes_ks002,Age90plu,8,,5a_ascii_grid2001_Age_Age90plu.asc
-,20160823,20160823,x,Age,Age 0 – 14,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age0_14.asc
-,20160823,20160823,x,Age,Age 15 – 19,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age15_19.asc
-,20160823,20160823,x,Age,Age 20 – 24,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age20_24.asc
-,20160823,20160823,x,Age,Age 25 – 29,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age25_29.asc
-,20160823,20160823,x,Age,Age 30 – 44,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age30_44.asc
-,20160823,20160823,x,Age,Age 45 – 59,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age45_59.asc
-,20160823,20160823,x,Age,Age 60 – 64,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age60_64.asc
-,20160823,20160823,x,Age,Age 65 plus,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age65p.asc
-,,done,x,Age,All categories: Age,2011,KS102,KS102EW0001,,2011-OA-attributes-ks102,Column Code,11,,5a_ascii_grid2011_Age_AgeAll.asc
-,,done,x,Age,Age 0 to 4,2011,KS102,KS102EW0002,,2011-OA-attributes-ks102,Age0-4,6,,5a_ascii_grid2011_Age_Age0.4.asc
-,,done,x,Age,Age 5 to 7,2011,KS102,KS102EW0003,,2011-OA-attributes-ks102,Age5-7,6,,5a_ascii_grid2011_Age_Age5.7.asc
-,,done,x,Age,Age 8 to 9,2011,KS102,KS102EW0004,,2011-OA-attributes-ks102,Age8-9,6,,5a_ascii_grid2011_Age_Age8.9.asc
-,,done,x,Age,Age 10 to 14,2011,KS102,KS102EW0005,,2011-OA-attributes-ks102,Age10-14,8,,5a_ascii_grid2011_Age_Age10.14.asc
-,,done,x,Age,Age 15,2011,KS102,KS102EW0006,,2011-OA-attributes-ks102,Age15,5,,5a_ascii_grid2011_Age_Age15.asc
-,,done,x,Age,Age 16 to 17,2011,KS102,KS102EW0007,,2011-OA-attributes-ks102,Age16-17,8,,5a_ascii_grid2011_Age_Age16.17.asc
-,,done,x,Age,Age 18 to 19,2011,KS102,KS102EW0008,,2011-OA-attributes-ks102,Age18-19,8,,5a_ascii_grid2011_Age_Age18.19.asc
-,,done,x,Age,Age 20 to 24,2011,KS102,KS102EW0009,,2011-OA-attributes-ks102,Age20-24,8,,5a_ascii_grid2011_Age_Age20.24.asc
-,,done,x,Age,Age 25 to 29,2011,KS102,KS102EW0010,,2011-OA-attributes-ks102,Age25-29,8,,5a_ascii_grid2011_Age_Age25.29.asc
-,,done,x,Age,Age 30 to 44,2011,KS102,KS102EW0011,,2011-OA-attributes-ks102,Age30-44,8,,5a_ascii_grid2011_Age_Age30.44.asc
-,,done,x,Age,Age 45 to 59,2011,KS102,KS102EW0012,,2011-OA-attributes-ks102,Age45-59,8,,5a_ascii_grid2011_Age_Age45.59.asc
-,,done,x,Age,Age 60 to 64,2011,KS102,KS102EW0013,,2011-OA-attributes-ks102,Age60-64,8,,5a_ascii_grid2011_Age_Age60.64.asc
-,,done,x,Age,Age 65 to 74,2011,KS102,KS102EW0014,,2011-OA-attributes-ks102,Age65-69,8,,5a_ascii_grid2011_Age_Age65.69.asc
-,,done,x,Age,Age 75 to 84,2011,KS102,KS102EW0015,,2011-OA-attributes-ks102,Age70-84,8,,5a_ascii_grid2011_Age_Age70.84.asc
-,,done,x,Age,Age 85 to 89,2011,KS102,KS102EW0016,,2011-OA-attributes-ks102,Age85-89,8,,5a_ascii_grid2011_Age_Age85.89.asc
-,,done,x,Age,Age 90 and over,2011,KS102,KS102EW0017,,2011-OA-attributes-ks102,Age90plu,8,,5a_ascii_grid2011_Age_Age90plu.asc
-,,done,x,Age,Mean age,2011,KS102,KS102EW0018,,2011-OA-attributes-ks102,AgeMean,7,,5a_ascii_grid2011_Age_AgeMean.asc
-,,done,x,Age,Median age,2011,KS102,KS102EW0019,,2011-OA-attributes-ks102,AgeMedin,8,,5a_ascii_grid2011_Age_AgeMedin.asc
+20161114,20160823,20160823,x,Age,Age 0 – 14,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age0_14.asc
+20161114,20160823,20160823,x,Age,Age 15 – 19,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age15_19.asc
+20161114,20160823,20160823,x,Age,Age 20 – 24,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age20_24.asc
+20161114,20160823,20160823,x,Age,Age 25 – 29,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age25_29.asc
+20161144,20160823,20160823,x,Age,Age 30 – 44,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age30_44.asc
+20161144,20160823,20160823,x,Age,Age 45 – 59,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age45_59.asc
+20161144,20160823,20160823,x,Age,Age 60 – 64,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age60_64.asc
+20161144,20160823,20160823,x,Age,Age 65 plus,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,(derived),,,5a_ascii_grid2011_Age_Age65p.asc
+#N/A,20160823,done,x,Age,All categories: Age,2011,KS102,KS102EW0001,,2011-OA-attributes-ks102,Column Code,11,,5a_ascii_grid2011_Age_AgeAll.asc
+#N/A,20160823,done,x,Age,Age 0 to 4,2011,KS102,KS102EW0002,,2011-OA-attributes-ks102,Age0-4,6,,5a_ascii_grid2011_Age_Age0.4.asc
+#N/A,20160823,done,x,Age,Age 5 to 7,2011,KS102,KS102EW0003,,2011-OA-attributes-ks102,Age5-7,6,,5a_ascii_grid2011_Age_Age5.7.asc
+#N/A,20160823,done,x,Age,Age 8 to 9,2011,KS102,KS102EW0004,,2011-OA-attributes-ks102,Age8-9,6,,5a_ascii_grid2011_Age_Age8.9.asc
+#N/A,20160823,done,x,Age,Age 10 to 14,2011,KS102,KS102EW0005,,2011-OA-attributes-ks102,Age10-14,8,,5a_ascii_grid2011_Age_Age10.14.asc
+#N/A,20160823,done,x,Age,Age 15,2011,KS102,KS102EW0006,,2011-OA-attributes-ks102,Age15,5,,5a_ascii_grid2011_Age_Age15.asc
+#N/A,20160823,done,x,Age,Age 16 to 17,2011,KS102,KS102EW0007,,2011-OA-attributes-ks102,Age16-17,8,,5a_ascii_grid2011_Age_Age16.17.asc
+#N/A,20160823,done,x,Age,Age 18 to 19,2011,KS102,KS102EW0008,,2011-OA-attributes-ks102,Age18-19,8,,5a_ascii_grid2011_Age_Age18.19.asc
+#N/A,20160823,done,x,Age,Age 20 to 24,2011,KS102,KS102EW0009,,2011-OA-attributes-ks102,Age20-24,8,,5a_ascii_grid2011_Age_Age20.24.asc
+#N/A,20160823,done,x,Age,Age 25 to 29,2011,KS102,KS102EW0010,,2011-OA-attributes-ks102,Age25-29,8,,5a_ascii_grid2011_Age_Age25.29.asc
+#N/A,20160823,done,x,Age,Age 30 to 44,2011,KS102,KS102EW0011,,2011-OA-attributes-ks102,Age30-44,8,,5a_ascii_grid2011_Age_Age30.44.asc
+#N/A,20160823,done,x,Age,Age 45 to 59,2011,KS102,KS102EW0012,,2011-OA-attributes-ks102,Age45-59,8,,5a_ascii_grid2011_Age_Age45.59.asc
+#N/A,20160823,done,x,Age,Age 60 to 64,2011,KS102,KS102EW0013,,2011-OA-attributes-ks102,Age60-64,8,,5a_ascii_grid2011_Age_Age60.64.asc
+#N/A,20160823,done,x,Age,Age 65 to 74,2011,KS102,KS102EW0014,,2011-OA-attributes-ks102,Age65-69,8,,5a_ascii_grid2011_Age_Age65.69.asc
+#N/A,20160823,done,x,Age,Age 75 to 84,2011,KS102,KS102EW0015,,2011-OA-attributes-ks102,Age70-84,8,,5a_ascii_grid2011_Age_Age70.84.asc
+#N/A,20160823,done,x,Age,Age 85 to 89,2011,KS102,KS102EW0016,,2011-OA-attributes-ks102,Age85-89,8,,5a_ascii_grid2011_Age_Age85.89.asc
+#N/A,20160823,done,x,Age,Age 90 and over,2011,KS102,KS102EW0017,,2011-OA-attributes-ks102,Age90plu,8,,5a_ascii_grid2011_Age_Age90plu.asc
+#N/A,20160823,done,x,Age,Mean age,2011,KS102,KS102EW0018,,2011-OA-attributes-ks102,AgeMean,7,,5a_ascii_grid2011_Age_AgeMean.asc
+#N/A,20160823,done,x,Age,Median age,2011,KS102,KS102EW0019,,2011-OA-attributes-ks102,AgeMedin,8,,5a_ascii_grid2011_Age_AgeMedin.asc
 ,,done,x,Age,Age 0 to 14 Males Single/Widowed/Divorced,1971,SAS07,c71s07_269,,1971_sas07_present_persons,A0-14MSi,8,,5a_ascii_grid1971_Age_A0.14MSi.asc
 ,,done,x,Age,Age 0 to 14 Females Single/Widowed/Divorced,1971,SAS07,c71s07_297,,1971_sas07_present_persons,A0-14FSi,8,,5a_ascii_grid1971_Age_A0.14FSi.asc
 ,,done,x,Age,Age 15 to 19 Males Single/Widowed/Divorced,1971,SAS07,c71s07_270,,1971_sas07_present_persons,A15-19MS,8,,5a_ascii_grid1971_Age_A15.19MS.asc
