@@ -122,14 +122,14 @@
      #townsend_z_score <- unemployed_pc
      #townsend_z_score <- overcrowded_pc
      #townsend_z_score <- no_car_van_pc
-     townsend_z_score <- non_own_occ_pc
+     #townsend_z_score <- non_own_occ_pc
      
  #set file export name
-     #filename_part <- "2011_townsend_z_scores"
+     filename_part <- "2011_townsend_z_scores"
      #filename_part <- "2011_townsend_unemployed_pc"
      #filename_part <- "2011_townsend_overcrowded_pc"
      #filename_part <- "2011_townsend_no_car_van_pc"
-     filename_part <- "2011_townsend_non_own_occ_pc"        
+     #filename_part <- "2011_townsend_non_own_occ_pc"        
      
 #export to ASC grid
   #replace NA with -1 (NA value for ascii grid)

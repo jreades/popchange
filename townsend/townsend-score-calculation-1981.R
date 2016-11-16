@@ -48,9 +48,11 @@
     #count households Overcrowding
       filename <- paste0("output/townsend/1981/5a_ascii_grid1981_townsend_Oc1_15.asc")
       overcrowded_households <- as.matrix(readGDAL(filename))
+    #count households not overcrowded
+      filename <- paste0("output/townsend/1981/5a_ascii_grid1981_townsend_NonOc.asc")
+      households_not_overcrowded <- as.matrix(readGDAL(filename))
     #total households (overcrowding)
-      filename <- paste0("output/townsend/1981/5a_ascii_grid1981_townsend_Total.asc")
-      total_households_overcrowding <- as.matrix(readGDAL(filename))
+      total_households_overcrowding <- overcrowded_households + households_not_overcrowded
       
 #Calculations of percentage
   #Unemployed
@@ -98,11 +100,11 @@
    #townsend_z_score <- non_own_occ_pc
      
   #set file export name
-     filename_part <- "1981_townsend_z_scores"
-     #filename_part <- "1981_townsend_unemployed_pc"
-     #filename_part <- "1981_townsend_overcrowded_pc"
-     #filename_part <- "1981_townsend_no_car_van_pc"
-     #filename_part <- "1981_townsend_non_own_occ_pc"
+   filename_part <- "1981_townsend_z_scores"
+   #filename_part <- "1981_townsend_unemployed_pc"
+   #filename_part <- "1981_townsend_overcrowded_pc"
+   #filename_part <- "1981_townsend_no_car_van_pc"
+   #filename_part <- "1981_townsend_non_own_occ_pc"
 
 #export to ASC grid
   

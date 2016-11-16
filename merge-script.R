@@ -16,6 +16,7 @@
   tmp2 <- tmp[ , -which(names(tmp) %in% c("grid_ID"))]
 #apply names based on filenames
   colnames(tmp2) <- filenames
+  #need to add grid_id to output.csv manually
 #export
   #setup filename
     filename <- paste0("output.csv")
