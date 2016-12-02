@@ -16,62 +16,42 @@
     #count unemployed        
       filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_EAUnem.asc")
       unemployed_persons <- as.matrix(readGDAL(filename))
+    #total employed
+      #comprised of all employed (full + part + self)
+      filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_EAAllEm.asc")
+      all_employed <- as.matrix(readGDAL(filename))
     #total economically active
       #comprised of all employed (full + part + self) + unemployed
-        #full time
-          filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_EAFull.asc")
-          full_time_employed <- as.matrix(readGDAL(filename))
-        #part time
-          filename <- paste0("output/townsend/2001/5a_ascii_grid2001_Townsend_EAPart.asc")
-          part_time_employed <- as.matrix(readGDAL(filename))
-        #self employed
-          filename <- paste0("output/townsend/2001/5a_ascii_grid2001_Townsend_EASelf.asc")
-          self_employed <- as.matrix(readGDAL(filename))
-      #totals
-        all_employed <- full_time_employed + part_time_employed + self_employed
-        all_economically_active_persons <- all_employed + unemployed_persons
+      all_economically_active_persons <- all_employed + unemployed_persons
   #no car or van
     #count households with no car or van
       filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_NoCar.asc")
       no_car_van_households <- as.matrix(readGDAL(filename))
-    #total households (car)
-      filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_CarTotalHs.asc")
-      all_households_car <- as.matrix(readGDAL(filename))
+    #count households with no car or van
+      filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_Car.asc")
+      car_van_households <- as.matrix(readGDAL(filename))
+      #total households (car)
+      all_households_car <- no_car_van_households + car_van_households
   #non owner occupied households
     #count non owner occupied households
-      #tenure rent LA
-        filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TnRentLA.asc")
-        tenure_rent_LA <- as.matrix(readGDAL(filename))
-      #tenure_rent_HA
-        filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TnRentHA.asc")
-        tenure_rent_HA <- as.matrix(readGDAL(filename))     
-      #tenure_rent_Pr
-        filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TnRentPr.asc")
-        tenure_rent_Pr <- as.matrix(readGDAL(filename)) 
-      #tenure_rent_Ot
-        filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TnRentOt.asc")
-        tenure_rent_Ot <- as.matrix(readGDAL(filename)) 
-      #sum non owner occupied
-        non_owner_occupied_households <- tenure_rent_LA + tenure_rent_HA + tenure_rent_Pr + tenure_rent_Ot
-      #total households
+      #tenure rent 
+        filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TnRent.asc")
+        non_owner_occupied_households <- as.matrix(readGDAL(filename))
+      #total owner occupied
         #tenure own outright  
-          filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TnOwnOR.asc")
-          tenure_own_outright <- as.matrix(readGDAL(filename)) 
-        #tenure own mortgage
-          filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TnOwnMt.asc")
-          tenure_owm_mortgage <- as.matrix(readGDAL(filename)) 
-        #tenure own shared   
-          filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TnOwnSH.asc")
-          tenure_owned_shared <- as.matrix(readGDAL(filename)) 
-      #sum total
-          total_households_tenure <- non_owner_occupied_households + tenure_own_outright + tenure_owm_mortgage + tenure_owned_shared
+          filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TnOwn.asc")
+          tenure_own_occ <- as.matrix(readGDAL(filename)) 
+     #sum total
+          total_households_tenure <- non_owner_occupied_households + tenure_own_occ
   #overcrowding
     #count households Overcrowding
       filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TnOc1p.asc")
       overcrowded_households <- as.matrix(readGDAL(filename))
     #total households (overcrowding)
-      filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TnOcTot.asc")
-      total_households_overcrowding <- as.matrix(readGDAL(filename))
+      filename <- paste0("output/townsend/2001/5a_ascii_grid2001_townsend_TnOcNot.asc")
+      not_overcrowded_households <- as.matrix(readGDAL(filename))
+  #total households (overcrowding)
+      total_households_overcrowding <- overcrowded_households + not_overcrowded_households
   
 #Calculations of percentage
   #Unemployed

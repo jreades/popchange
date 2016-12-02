@@ -23,49 +23,35 @@
           all_economically_active_persons <- all_employed + unemployed_persons
   #no car or van
     #count households with no car or van
-      filename <- paste0("output/townsend/1991/5a_ascii_grid1991_Townsend_TnNoCar.asc")
+      filename <- paste0("output/townsend/1991/5a_ascii_grid1991_Townsend_CrNoCar.asc")
       no_car_van_households <- as.matrix(readGDAL(filename))
+    #count households with no car or van
+      filename <- paste0("output/townsend/1991/5a_ascii_grid1991_Townsend_Car.asc")
+      car_van_households <- as.matrix(readGDAL(filename))
+  
     #total households (car)
-      filename <- paste0("output/townsend/1991/5a_ascii_grid1991_Townsend_TnAll.asc")
-      all_households_car <- as.matrix(readGDAL(filename))
-      #update total with count of households when count > total
-      all_households_car[which(no_car_van_households > all_households_car)] <- no_car_van_households[which(no_car_van_households > all_households_car)]
+      all_households_car <- no_car_van_households + car_van_households
       
   #non owner occupied households
-    #count non owner occupied households
-      #tenure rent LA
-        filename <- paste0("output/townsend/1991/5a_ascii_grid1991_townsend_TnRentLA.asc")
-        tenure_rent_LA <- as.matrix(readGDAL(filename))
-      #tenure_rent_HA
-        filename <- paste0("output/townsend/1991/5a_ascii_grid1991_townsend_TnRentHA.asc")
-        tenure_rent_HA <- as.matrix(readGDAL(filename))     
-      #tenure_rent_furnished
-        filename <- paste0("output/townsend/1991/5a_ascii_grid1991_townsend_TnRntFur.asc")
-        tenure_rent_furnished <- as.matrix(readGDAL(filename)) 
-      #tenure_rent_unfurnished
-        filename <- paste0("output/townsend/1991/5a_ascii_grid1991_townsend_TnRntUFr.asc")
-        tenure_rent_unfurnished <- as.matrix(readGDAL(filename)) 
-      #tenure_rent_job
-        filename <- paste0("output/townsend/1991/5a_ascii_grid1991_townsend_TnRntJob.asc")
-        tenure_rent_job <- as.matrix(readGDAL(filename)) 
-      #sum non owner occupied
-        non_owner_occupied_households <- tenure_rent_LA + tenure_rent_HA + tenure_rent_furnished + tenure_rent_unfurnished + tenure_rent_job
+    #non owner occupied households
+      #tenure_rent
+        filename <- paste0("output/townsend/1991/5a_ascii_grid1991_townsend_TnRent.asc")
+        non_owner_occupied_households <- as.matrix(readGDAL(filename)) 
       #total households
         #tenure own outright  
-          filename <- paste0("output/townsend/1991/5a_ascii_grid1991_townsend_TnOwnOR.asc")
-          tenure_own_outright <- as.matrix(readGDAL(filename)) 
-        #tenure own buying
-          filename <- paste0("output/townsend/1991/5a_ascii_grid1991_townsend_TnOwnBy.asc")
-          tenure_owm_mortgage <- as.matrix(readGDAL(filename)) 
+        filename <- paste0("output/townsend/1991/5a_ascii_grid1991_townsend_TnOwnOcc.asc")
+        owner_occupied_households <- as.matrix(readGDAL(filename)) 
         #sum total
-          total_households_tenure <- non_owner_occupied_households + tenure_own_outright + tenure_owm_mortgage
+        total_households_tenure <- non_owner_occupied_households + owner_occupied_households
   #overcrowding
     #count households Overcrowding
       filename <- paste0("output/townsend/1991/5a_ascii_grid1991_townsend_Oc1p.asc")
       overcrowded_households <- as.matrix(readGDAL(filename))
+    #count households Overcrowding
+      filename <- paste0("output/townsend/1991/5a_ascii_grid1991_townsend_Ocno.asc")
+      non_overcrowded_households <- as.matrix(readGDAL(filename))
     #total households (overcrowding)
-      filename <- paste0("output/townsend/1991/5a_ascii_grid1991_townsend_OcTotal.asc")
-      total_households_overcrowding <- as.matrix(readGDAL(filename))
+      total_households_overcrowding <- overcrowded_households + non_overcrowded_households
       
 #Calculations of percentage
     #Unemployed

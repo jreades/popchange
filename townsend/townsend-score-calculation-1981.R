@@ -18,7 +18,7 @@
       unemployed_persons <- as.matrix(readGDAL(filename))
     #total economically active
         #comprised of all employed + unemployed
-          filename <- paste0("output/townsend/1981/5a_ascii_grid1981_Townsend_Employed.asc")
+          filename <- paste0("output/townsend/1981/5a_ascii_grid1981_Townsend_Employall.asc")
           all_employed <- as.matrix(readGDAL(filename))
           all_economically_active_persons <- all_employed + unemployed_persons
   #no car or van
@@ -26,33 +26,30 @@
       filename <- paste0("output/townsend/1981/5a_ascii_grid1981_Townsend_NoCar.asc")
       no_car_van_households <- as.matrix(readGDAL(filename))
     #total households (car)
-      filename <- paste0("output/townsend/1981/5a_ascii_grid1981_Townsend_Total.asc")
-      all_households_car <- as.matrix(readGDAL(filename))
-      #update total with count of households when count > total
-      all_households_car[which(no_car_van_households > all_households_car)] <- no_car_van_households[which(no_car_van_households > all_households_car)]
+      filename <- paste0("output/townsend/1981/5a_ascii_grid1981_Townsend_Car.asc")
+      car_van_households <- as.matrix(readGDAL(filename))
+      all_households_car <- no_car_van_households + car_van_households
       
   #non owner occupied households
     #count non owner occupied households
       #tenure_owner_occipied (only variable avaliable)
         filename <- paste0("output/townsend/1981/5a_ascii_grid1981_townsend_TNOwnOcc.asc")
         tenure_owner_occ <- as.matrix(readGDAL(filename))      
+      #calculate difference
+        filename <- paste0("output/townsend/1981/5a_ascii_grid1981_townsend_TNRent.asc")
+        non_owner_occupied_households <- as.matrix(readGDAL(filename))
       #total
         filename <- paste0("output/townsend/1981/5a_ascii_grid1981_townsend_Total.asc")
-        tenure_total <- as.matrix(readGDAL(filename))      
-      #calculate difference
-        non_owner_occupied_households <- tenure_total - tenure_owner_occ
-      #total households (overcrowding)
-        filename <- paste0("output/townsend/1981/5a_ascii_grid1981_townsend_Total.asc")
-        total_households_tenure <- as.matrix(readGDAL(filename))
+        tenure_total <- tenure_owner_occ + non_owner_occupied_households      
   #overcrowding
     #count households Overcrowding
-      filename <- paste0("output/townsend/1981/5a_ascii_grid1981_townsend_Oc1_15.asc")
+      filename <- paste0("output/townsend/1981/5a_ascii_grid1981_townsend_Oc1p.asc")
       overcrowded_households <- as.matrix(readGDAL(filename))
-    #count households not overcrowded
-      filename <- paste0("output/townsend/1981/5a_ascii_grid1981_townsend_NonOc.asc")
-      households_not_overcrowded <- as.matrix(readGDAL(filename))
+    #count households not Overcrowding
+      filename <- paste0("output/townsend/1981/5a_ascii_grid1981_townsend_OcNot.asc")
+      not_overcrowded_households <- as.matrix(readGDAL(filename))  
     #total households (overcrowding)
-      total_households_overcrowding <- overcrowded_households + households_not_overcrowded
+      total_households_overcrowding <- overcrowded_households + not_overcrowded_households
       
 #Calculations of percentage
   #Unemployed
@@ -100,11 +97,11 @@
    #townsend_z_score <- non_own_occ_pc
      
   #set file export name
-   filename_part <- "1981_townsend_z_scores"
-   #filename_part <- "1981_townsend_unemployed_pc"
-   #filename_part <- "1981_townsend_overcrowded_pc"
-   #filename_part <- "1981_townsend_no_car_van_pc"
-   #filename_part <- "1981_townsend_non_own_occ_pc"
+     filename_part <- "1981_townsend_z_scores"
+     #filename_part <- "1981_townsend_unemployed_pc"
+     #filename_part <- "1981_townsend_overcrowded_pc"
+     #filename_part <- "1981_townsend_no_car_van_pc"
+     #filename_part <- "1981_townsend_non_own_occ_pc"
 
 #export to ASC grid
   

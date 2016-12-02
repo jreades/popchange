@@ -24,61 +24,40 @@
   #count non owner occupied households
     #non owner occupied households
       #count non owner occupied households
-        #tenure rent Council
-          filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_TnRentLA.asc")
-          tenure_rent_LA <- as.matrix(readGDAL(filename))
-        #tenure_rent_unfurnished
-          filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_TnRentUn.asc")
-          tenure_rent_Un <- as.matrix(readGDAL(filename))     
-        #tenure_rent_furnished
-          filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_TnRentFr.asc")
-          tenure_rent_Fr <- as.matrix(readGDAL(filename)) 
+          filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_TnRent.asc")
+          tenure_rent <- as.matrix(readGDAL(filename)) 
         #sum non owner occupied
-          non_owner_occupied_households <- tenure_rent_LA + tenure_rent_Un + tenure_rent_Fr
+          non_owner_occupied_households <- tenure_rent
       #total households
         #tenure own occupied  
           filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_TnOwnOcc.asc")
           tenure_own_occupied <- as.matrix(readGDAL(filename)) 
-        #tenure other
-          filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_TnOther.asc")
-          tenure_other <- as.matrix(readGDAL(filename)) 
         #sum total
-          total_households_tenure <- non_owner_occupied_households + tenure_own_occupied + tenure_other
+          total_households_tenure <- non_owner_occupied_households + tenure_own_occupied
   #overcrowding (> 1 PPR)
     #count households Overcrowding 
-      #households 1 - 1.5
-        filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_Oc1_15.asc")
-        households_1_15 <- as.matrix(readGDAL(filename))
-      #households > 1.5
-        filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_Oc15.asc")
-        households_15 <- as.matrix(readGDAL(filename))  
-      #overcrowded total
-        #households 1 - 1.5
-        overcrowded_households <- households_1_15 + households_15
-      #households 0.75 - 1  
-        filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_Oc075_1.asc")
-        households_075_1 <- as.matrix(readGDAL(filename))  
-      #households 0.5 - 0.75
-        filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_Oc05_075.asc")
-        households_05_075 <- as.matrix(readGDAL(filename))  
-      #households < 0.5  
-        filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_Oc05.asc")
-        households_05 <- as.matrix(readGDAL(filename))  
+      #households 1 +
+        filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_OC.asc")
+        overcrowded_households <- as.matrix(readGDAL(filename))
+      #households lt 1  
+        filename <- paste0("output/townsend/1971/5a_ascii_grid1971_townsend_Ocnot.asc")
+        households_lt1 <- as.matrix(readGDAL(filename))  
       #total households (overcrowding)        
-        total_households_overcrowding <- overcrowded_households + households_075_1 + households_05_075 + households_05
-  #no car or van
+        total_households_overcrowding <- overcrowded_households + households_lt1
+    #no car or van
     #count households with no car or van
       filename <- paste0("output/townsend/1971/5a_ascii_grid1971_Townsend_NoCar.asc")
       no_car_van_households <- as.matrix(readGDAL(filename))
+    #count households with no car or van
+      filename <- paste0("output/townsend/1971/5a_ascii_grid1971_Townsend_Car.asc")
+      car_van_households <- as.matrix(readGDAL(filename))
     #total households (car)
       #filename <- paste0("output/townsend/1981/5a_ascii_grid1981_Townsend_Total.asc")
       #all_households_car <- as.matrix(readGDAL(filename))
       #no total available. Use Tenure total instead
       #non owner occupied households
-      all_households_car <- total_households_tenure
-      #update total with count of households when count > total
-        all_households_car[which(no_car_van_households > all_households_car)] <- no_car_van_households[which(no_car_van_households > all_households_car)]
-      
+      all_households_car <- no_car_van_households + car_van_households
+    
         
 #Calculations of percentage
   #Unemployed
@@ -121,7 +100,7 @@
      #townsend_z_score <- unemployed_pc
      #townsend_z_score <- overcrowded_pc
      #townsend_z_score <- no_car_van_pc
-     #townsend_z_score <- non_own_occ_pc
+     ##townsend_z_score <- non_own_occ_pc
      
 #set file export name
      filename_part <- "1971_townsend_z_scores"
