@@ -65,158 +65,182 @@ Entered and uploaded to Postgres DB,Uploaded to popchange-data.liverpool.ac.uk,P
 ,,,x,Health,General Health,1981,,,,,,0,Not Available,
 ,,,x,Health,General Health,1971,,,,,,0,Not Available,
 ,,,x,Health,General Health,1991,,,,,,0,Not Available,
-#N/A,20160823,NA,20161115,Age,Age All Categories,2001,KS002,ks0020001,,2001-OA-attributes_ks002,AgeAll,6,,5a_ascii_grid2001_Age_AgeAll.asc
-20161114,20160823,20160823,20161115,Age,Age 0 – 14,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age0_14,,,5a_ascii_grid2001_Age_Age0_14.asc
-20161122,20160823,20160823,20161115,Age,Age 15 – 19,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age15_19,,,
-20161122,20160823,20160823,20161115,Age,Age 20 – 24,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age20_24,,,
-20161122,20160823,20160823,20161115,Age,Age 25 – 29,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age25_29,,,
-20161122,20160823,20160823,20161115,Age,Age 30 – 44,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age30_34,,,
-20161122,20160823,20160823,20161115,Age,Age 45 – 59,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age45_59,,,
-20161122,20160823,20160823,20161115,Age,Age 60 – 64,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age60_64,,,
-20161122,20160823,20160823,20161115,Age,Age 65 plus,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age65p,,,
-#N/A,20160823,done,20161115,Age,Age 0 to 4,2001,KS002,ks0020002,,2001-OA-attributes_ks002,Age0-4,6,,5a_ascii_grid2001_Age_Age0.4.asc
-#N/A,20160823,done,20161115,Age,Age 5 to 7,2001,KS002,ks0020003,,2001-OA-attributes_ks002,Age5-7,6,,5a_ascii_grid2001_Age_Age10.14.asc
-#N/A,20160823,done,20161115,Age,Age 8 to 9,2001,KS002,ks0020004,,2001-OA-attributes_ks002,Age8-9,8,,5a_ascii_grid2001_Age_Age15.asc
-#N/A,20160823,done,20161115,Age,Age 10 to 14,2001,KS002,ks0020005,,2001-OA-attributes_ks002,Age10-14,5,,5a_ascii_grid2001_Age_Age16.17.asc
-#N/A,20160823,done,20161115,Age,Age 15,2001,KS002,ks0020006,,2001-OA-attributes_ks002,Age15,8,,5a_ascii_grid2001_Age_Age18.19.asc
-#N/A,20160823,done,20161115,Age,Age 16 to 17,2001,KS002,ks0020007,,2001-OA-attributes_ks002,Age16-17,8,,5a_ascii_grid2001_Age_Age20.24.asc
-#N/A,20160823,done,20161115,Age,Age 18 to 19,2001,KS002,ks0020008,,2001-OA-attributes_ks002,Age18-19,8,,5a_ascii_grid2001_Age_Age25.29.asc
-#N/A,20160823,done,20161115,Age,Age 20 to 24,2001,KS002,ks0020009,,2001-OA-attributes_ks002,Age20-24,8,,5a_ascii_grid2001_Age_Age30.44.asc
-#N/A,20160823,done,20161115,Age,Age 25 to 29,2001,KS002,ks0020010,,2001-OA-attributes_ks002,Age25-29,8,,5a_ascii_grid2001_Age_Age45.59.asc
-#N/A,20160823,done,20161115,Age,Age 30 to 44,2001,KS002,ks0020011,,2001-OA-attributes_ks002,Age30-44,8,,5a_ascii_grid2001_Age_Age5.7.asc
-#N/A,20160823,done,20161115,Age,Age 45 to 59,2001,KS002,ks0020012,,2001-OA-attributes_ks002,Age45-59,8,,5a_ascii_grid2001_Age_Age60.64.asc
-#N/A,20160823,done,20161115,Age,Age 60 to 64,2001,KS002,ks0020013,,2001-OA-attributes_ks002,Age60-64,8,,5a_ascii_grid2001_Age_Age65.69.asc
-#N/A,20160823,done,20161115,Age,Age 65 to 69,2001,KS002,ks0020014,,2001-OA-attributes_ks002,Age65-69,8,,5a_ascii_grid2001_Age_Age70.84.asc
-#N/A,20160823,done,20161115,Age,Age 70 to 84,2001,KS002,ks0020015,,2001-OA-attributes_ks002,Age70-84,8,,5a_ascii_grid2001_Age_Age8.9.asc
-#N/A,20160823,done,20161115,Age,Age 85 to 89,2001,KS002,ks0020016,,2001-OA-attributes_ks002,Age85-89,8,,5a_ascii_grid2001_Age_Age85.89.asc
-#N/A,20160823,done,20161115,Age,Age 90 plus,2001,KS002,ks0020017,,2001-OA-attributes_ks002,Age90plu,8,,5a_ascii_grid2001_Age_Age90plu.asc
-20161114,20160823,20160823,,Age,Age 0 – 14,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age0_14,,,5a_ascii_grid2011_Age_Age0_14.asc
-20161114,20160823,20160823,,Age,Age 15 – 19,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age15_19,,,5a_ascii_grid2011_Age_Age15_19.asc
-20161114,20160823,20160823,,Age,Age 20 – 24,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age20_24,,,5a_ascii_grid2011_Age_Age20_24.asc
-20161114,20160823,20160823,,Age,Age 25 – 29,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age25_29,,,5a_ascii_grid2011_Age_Age25_29.asc
-20161144,20160823,20160823,,Age,Age 30 – 44,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age30_34,,,5a_ascii_grid2011_Age_Age30_44.asc
-20161144,20160823,20160823,,Age,Age 45 – 59,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age45_59,,,5a_ascii_grid2011_Age_Age45_59.asc
-20161144,20160823,20160823,,Age,Age 60 – 64,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age60_64,,,5a_ascii_grid2011_Age_Age60_64.asc
-20161144,20160823,20160823,,Age,Age 65 plus,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age65p,,,5a_ascii_grid2011_Age_Age65p.asc
-#N/A,20160823,done,,Age,All categories: Age,2011,KS102,KS102EW0001,,2011-OA-attributes-ks102,Column Code,11,,5a_ascii_grid2011_Age_AgeAll.asc
-#N/A,20160823,done,,Age,Age 0 to 4,2011,KS102,KS102EW0002,,2011-OA-attributes-ks102,Age0-4,6,,5a_ascii_grid2011_Age_Age0.4.asc
-#N/A,20160823,done,,Age,Age 5 to 7,2011,KS102,KS102EW0003,,2011-OA-attributes-ks102,Age5-7,6,,5a_ascii_grid2011_Age_Age5.7.asc
-#N/A,20160823,done,,Age,Age 8 to 9,2011,KS102,KS102EW0004,,2011-OA-attributes-ks102,Age8-9,6,,5a_ascii_grid2011_Age_Age8.9.asc
-#N/A,20160823,done,,Age,Age 10 to 14,2011,KS102,KS102EW0005,,2011-OA-attributes-ks102,Age10-14,8,,5a_ascii_grid2011_Age_Age10.14.asc
-#N/A,20160823,done,,Age,Age 15,2011,KS102,KS102EW0006,,2011-OA-attributes-ks102,Age15,5,,5a_ascii_grid2011_Age_Age15.asc
-#N/A,20160823,done,,Age,Age 16 to 17,2011,KS102,KS102EW0007,,2011-OA-attributes-ks102,Age16-17,8,,5a_ascii_grid2011_Age_Age16.17.asc
-#N/A,20160823,done,,Age,Age 18 to 19,2011,KS102,KS102EW0008,,2011-OA-attributes-ks102,Age18-19,8,,5a_ascii_grid2011_Age_Age18.19.asc
-#N/A,20160823,done,,Age,Age 20 to 24,2011,KS102,KS102EW0009,,2011-OA-attributes-ks102,Age20-24,8,,5a_ascii_grid2011_Age_Age20.24.asc
-#N/A,20160823,done,,Age,Age 25 to 29,2011,KS102,KS102EW0010,,2011-OA-attributes-ks102,Age25-29,8,,5a_ascii_grid2011_Age_Age25.29.asc
-#N/A,20160823,done,,Age,Age 30 to 44,2011,KS102,KS102EW0011,,2011-OA-attributes-ks102,Age30-44,8,,5a_ascii_grid2011_Age_Age30.44.asc
-#N/A,20160823,done,,Age,Age 45 to 59,2011,KS102,KS102EW0012,,2011-OA-attributes-ks102,Age45-59,8,,5a_ascii_grid2011_Age_Age45.59.asc
-#N/A,20160823,done,,Age,Age 60 to 64,2011,KS102,KS102EW0013,,2011-OA-attributes-ks102,Age60-64,8,,5a_ascii_grid2011_Age_Age60.64.asc
-#N/A,20160823,done,,Age,Age 65 to 74,2011,KS102,KS102EW0014,,2011-OA-attributes-ks102,Age65-69,8,,5a_ascii_grid2011_Age_Age65.69.asc
-#N/A,20160823,done,,Age,Age 75 to 84,2011,KS102,KS102EW0015,,2011-OA-attributes-ks102,Age70-84,8,,5a_ascii_grid2011_Age_Age70.84.asc
-#N/A,20160823,done,,Age,Age 85 to 89,2011,KS102,KS102EW0016,,2011-OA-attributes-ks102,Age85-89,8,,5a_ascii_grid2011_Age_Age85.89.asc
-#N/A,20160823,done,,Age,Age 90 and over,2011,KS102,KS102EW0017,,2011-OA-attributes-ks102,Age90plu,8,,5a_ascii_grid2011_Age_Age90plu.asc
-#N/A,20160823,done,,Age,Mean age,2011,KS102,KS102EW0018,,2011-OA-attributes-ks102,AgeMean,7,,5a_ascii_grid2011_Age_AgeMean.asc
-#N/A,20160823,done,,Age,Median age,2011,KS102,KS102EW0019,,2011-OA-attributes-ks102,AgeMedin,8,,5a_ascii_grid2011_Age_AgeMedin.asc
-,,done,x,Age,Age 0 to 14 Males Single/Widowed/Divorced,1971,SAS07,c71s07_269,,1971_sas07_present_persons,A0-14MSi,8,,5a_ascii_grid1971_Age_A0.14MSi.asc
-,,done,x,Age,Age 0 to 14 Females Single/Widowed/Divorced,1971,SAS07,c71s07_297,,1971_sas07_present_persons,A0-14FSi,8,,5a_ascii_grid1971_Age_A0.14FSi.asc
-,,done,x,Age,Age 15 to 19 Males Single/Widowed/Divorced,1971,SAS07,c71s07_270,,1971_sas07_present_persons,A15-19MS,8,,5a_ascii_grid1971_Age_A15.19MS.asc
-,,done,x,Age,Age 15 to 19 Males Married,1971,SAS07,c71s07_284,,1971_sas07_present_persons,A15-19MM,8,,5a_ascii_grid1971_Age_A15.19MM.asc
-,,done,x,Age,Age 15 to 19 Females Single/Widowed/Divorced,1971,SAS07,c71s07_298,,1971_sas07_present_persons,A15-19FS,8,,5a_ascii_grid1971_Age_A15.19FS.asc
-,,done,x,Age,Age 15 to 19 Females Married ,1971,SAS07,c71s07_312,,1971_sas07_present_persons,A15-19FM,8,,5a_ascii_grid1971_Age_A15.19FM.asc
-,,done,x,Age,Age 20 to 24 Males Single/Widowed/Divorced,1971,SAS07,c71s07_271,,1971_sas07_present_persons,A20-24MS,8,,5a_ascii_grid1971_Age_A20.24MS.asc
-,,done,x,Age,Age 20 to 24 Males Married,1971,SAS07,c71s07_285,,1971_sas07_present_persons,A20-24MM,8,,5a_ascii_grid1971_Age_A20.24MM.asc
-,,done,x,Age,Age 20 to 24 Females Single/Widowed/Divorced,1971,SAS07,c71s07_299,,1971_sas07_present_persons,A20-24FS,8,,5a_ascii_grid1971_Age_A20.24FS.asc
-,,done,x,Age,Age 20 to 24 Females Married ,1971,SAS07,c71s07_313,,1971_sas07_present_persons,A20-24FM,8,,5a_ascii_grid1971_Age_A20.24FM.asc
-,,done,x,Age,Age 25 to 29 Males Single/Widowed/Divorced,1971,SAS07,c71s07_272,,1971_sas07_present_persons,A25-29MS,8,,5a_ascii_grid1971_Age_A25.29MS.asc
-,,done,x,Age,Age 25 to 29 Males Married,1971,SAS07,c71s07_286,,1971_sas07_present_persons,A25-29MM,8,,5a_ascii_grid1971_Age_A25.29MM.asc
-,,done,x,Age,Age 25 to 29 Females Single/Widowed/Divorced,1971,SAS07,c71s07_300,,1971_sas07_present_persons,A25-29FS,8,,5a_ascii_grid1971_Age_A25.29FS.asc
-,,done,x,Age,Age 25 to 29 Females Married ,1971,SAS07,c71s07_314,,1971_sas07_present_persons,A25-29FM,8,,5a_ascii_grid1971_Age_A25.29FM.asc
-,,done,x,Age,Age 30 to 34 Males Single/Widowed/Divorced,1971,SAS07,c71s07_273,,1971_sas07_present_persons,A30-34MS,8,,5a_ascii_grid1971_Age_A30.34MS.asc
-,,done,x,Age,Age 30 to 34 Males Married,1971,SAS07,c71s07_287,,1971_sas07_present_persons,A30-34MM,8,,5a_ascii_grid1971_Age_A30.34MM.asc
-,,done,x,Age,Age 30 to 34 Females Single/Widowed/Divorced,1971,SAS07,c71s07_301,,1971_sas07_present_persons,A30-34FS,8,,5a_ascii_grid1971_Age_A30.34FS.asc
-,,done,x,Age,Age 30 to 34 Females Married ,1971,SAS07,c71s07_315,,1971_sas07_present_persons,A30-34FM,8,,5a_ascii_grid1971_Age_A30.34FM.asc
-,,done,x,Age,Age 35 to 39 Males Single/Widowed/Divorced,1971,SAS07,c71s07_274,,1971_sas07_present_persons,A35-39MS,8,,5a_ascii_grid1971_Age_A35.39MS.asc
-,,done,x,Age,Age 35 to 39 Males Married,1971,SAS07,c71s07_288,,1971_sas07_present_persons,A35-39MM,8,,5a_ascii_grid1971_Age_A35.39MM.asc
-,,done,x,Age,Age 35 to 39 Females Single/Widowed/Divorced,1971,SAS07,c71s07_302,,1971_sas07_present_persons,A35-39FS,8,,5a_ascii_grid1971_Age_A35.39FS.asc
-,,done,x,Age,Age 35 to 39 Females Married ,1971,SAS07,c71s07_316,,1971_sas07_present_persons,A35-39FM,8,,5a_ascii_grid1971_Age_A35.39FM.asc
-,,done,x,Age,Age 40 to 44 Males Single/Widowed/Divorced,1971,SAS07,c71s07_275,,1971_sas07_present_persons,A40-44MS,8,,5a_ascii_grid1971_Age_A40.44MS.asc
-,,done,x,Age,Age 40 to 44 Males Married,1971,SAS07,c71s07_289,,1971_sas07_present_persons,A40-44MM,8,,5a_ascii_grid1971_Age_A40.44MM.asc
-,,done,x,Age,Age 40 to 44 Females Single/Widowed/Divorced,1971,SAS07,c71s07_303,,1971_sas07_present_persons,A40-44FS,8,,5a_ascii_grid1971_Age_A40.44FS.asc
-,,done,x,Age,Age 40 to 44 Females Married ,1971,SAS07,c71s07_317,,1971_sas07_present_persons,A40-44FM,8,,5a_ascii_grid1971_Age_A40.44FM.asc
-,,done,x,Age,Age 45 to 49 Males Single/Widowed/Divorced,1971,SAS07,c71s07_276,,1971_sas07_present_persons,A45-49MS,8,,5a_ascii_grid1971_Age_A45.49MS.asc
-,,done,x,Age,Age 45 to 49 Males Married,1971,SAS07,c71s07_290,,1971_sas07_present_persons,A45-49MM,8,,5a_ascii_grid1971_Age_A45.49MM.asc
-,,done,x,Age,Age 45 to 49 Females Single/Widowed/Divorced,1971,SAS07,c71s07_304,,1971_sas07_present_persons,A45-49FS,8,,5a_ascii_grid1971_Age_A45.49FS.asc
-,,done,x,Age,Age 45 to 49 Females Married ,1971,SAS07,c71s07_318,,1971_sas07_present_persons,A45-49FM,8,,5a_ascii_grid1971_Age_A45.49FM.asc
-,,done,x,Age,Age 50 to 54 Males Single/Widowed/Divorced,1971,SAS07,c71s07_277,,1971_sas07_present_persons,A50-54MS,8,,5a_ascii_grid1971_Age_A50.54MS.asc
-,,done,x,Age,Age 50 to 54 Males Married,1971,SAS07,c71s07_291,,1971_sas07_present_persons,A50-54MM,8,,5a_ascii_grid1971_Age_A50.54MM.asc
-,,done,x,Age,Age 50 to 54 Females Single/Widowed/Divorced,1971,SAS07,c71s07_305,,1971_sas07_present_persons,A50-54FS,8,,5a_ascii_grid1971_Age_A50.54FS.asc
-,,done,x,Age,Age 50 to 54 Females Married ,1971,SAS07,c71s07_319,,1971_sas07_present_persons,A50-54FM,8,,5a_ascii_grid1971_Age_A50.54FM.asc
-,,done,x,Age,Age 55 to 59 Males Single/Widowed/Divorced,1971,SAS07,c71s07_278,,1971_sas07_present_persons,A55-59MS,8,,5a_ascii_grid1971_Age_A55.59MS.asc
-,,done,x,Age,Age 55 to 59 Males Married,1971,SAS07,c71s07_292,,1971_sas07_present_persons,A55-59MM,8,,5a_ascii_grid1971_Age_A55.59MM.asc
-,,done,x,Age,Age 55 to 59 Females Single/Widowed/Divorced,1971,SAS07,c71s07_306,,1971_sas07_present_persons,A55-59FS,8,,5a_ascii_grid1971_Age_A55.59FS.asc
-,,done,x,Age,Age 55 to 59 Females Married ,1971,SAS07,c71s07_320,,1971_sas07_present_persons,A55-59FM,8,,5a_ascii_grid1971_Age_A55.59FM.asc
-,,done,x,Age,Age 60 to 64 Males Single/Widowed/Divorced,1971,SAS07,c71s07_279,,1971_sas07_present_persons,A60-64MS,8,,5a_ascii_grid1971_Age_A60.64MS.asc
-,,done,x,Age,Age 60 to 64 Males Married,1971,SAS07,c71s07_293,,1971_sas07_present_persons,A60-64MM,8,,5a_ascii_grid1971_Age_A60.64MM.asc
-,,done,x,Age,Age 60 to 64 Females Single/Widowed/Divorced,1971,SAS07,c71s07_307,,1971_sas07_present_persons,A60-64FS,8,,5a_ascii_grid1971_Age_A60.64FS.asc
-,,done,x,Age,Age 60 to 64 Females Married ,1971,SAS07,c71s07_321,,1971_sas07_present_persons,A60-64FM,8,,5a_ascii_grid1971_Age_A60.64FM.asc
-,,done,x,Age,Age 65 to 69 Males Single/Widowed/Divorced,1971,SAS07,c71s07_280,,1971_sas07_present_persons,A65-69MS,8,,5a_ascii_grid1971_Age_A65.69MS.asc
-,,done,x,Age,Age 65 to 69 Males Married,1971,SAS07,c71s07_294,,1971_sas07_present_persons,A65-69MM,8,,5a_ascii_grid1971_Age_A65.69MM.asc
-,,done,x,Age,Age 65 to 69 Females Single/Widowed/Divorced,1971,SAS07,c71s07_308,,1971_sas07_present_persons,A65-69FS,8,,5a_ascii_grid1971_Age_A65.69FS.asc
-,,done,x,Age,Age 65 to 69 Females Married ,1971,SAS07,c71s07_322,,1971_sas07_present_persons,A65-69FM,8,,5a_ascii_grid1971_Age_A65.69FM.asc
-,,done,x,Age,Age 70 to 74 Males Single/Widowed/Divorced,1971,SAS07,c71s07_281,,1971_sas07_present_persons,A70-75MS,8,,5a_ascii_grid1971_Age_A70.75MS.asc
-,,done,x,Age,Age 70 to 74 Males Married,1971,SAS07,c71s07_295,,1971_sas07_present_persons,A70-75MM,8,,5a_ascii_grid1971_Age_A70.75MM.asc
-,,done,x,Age,Age 70 to 74 Females Single/Widowed/Divorced,1971,SAS07,c71s07_309,,1971_sas07_present_persons,A70-75FS,8,,5a_ascii_grid1971_Age_A70.75FS.asc
-,,done,x,Age,Age 70 to 74 Females Married ,1971,SAS07,c71s07_323,,1971_sas07_present_persons,A70-75FM,8,,5a_ascii_grid1971_Age_A70.75FM.asc
-,,done,x,Age,Age 75+ Males Single/Widowed/Divorced,1971,SAS07,c71s07_282,,1971_sas07_present_persons,A75pMS,6,,5a_ascii_grid1971_Age_A75pMS.asc
-,,done,x,Age,Age 75+ Males Married,1971,SAS07,c71s07_296,,1971_sas07_present_persons,A75pMM,6,,5a_ascii_grid1971_Age_A75pMM.asc
-,,done,x,Age,Age 75+ Females Single/Widowed/Divorced,1971,SAS07,c71s07_310,,1971_sas07_present_persons,A75pFS,6,,5a_ascii_grid1971_Age_A75pFS.asc
-,,done,x,Age,Age 75+ Females Married ,1971,SAS07,c71s07_324,,1971_sas07_present_persons,A75pFM,6,,5a_ascii_grid1971_Age_A75pFM.asc
-,,done,x,Age,Total Males Single/Widowed/Divorced,1971,SAS07,c71s07_325,,1971_sas07_present_persons,ATotMS,6,,5a_ascii_grid1971_Age_ATotMS.asc
-,,done,x,Age,Total Males Married,1971,SAS07,c71s07_326,,1971_sas07_present_persons,ATotMM,6,,5a_ascii_grid1971_Age_ATotMM.asc
-,,done,x,Age,Total Females Single/Widowed/Divorced,1971,SAS07,c71s07_327,,1971_sas07_present_persons,ATotFS,6,,5a_ascii_grid1971_Age_ATotFS.asc
-,,done,x,Age,Total Females Married ,1971,SAS07,c71s07_328,,1971_sas07_present_persons,ATotFM,6,,5a_ascii_grid1971_Age_ATotFM.asc
-,,done,x,Age,All Age,1981,SAS02,[81sas020050],,"1981-OA-attributes-sas02,csv",AgeAll,6,,5a_ascii_grid20160310d_GB_1981_AgeAll.asc
-,,done,x,Age,Age 0 to 4,1981,SAS02,[81sas020057],,"1981-OA-attributes-sas02,csv",Age0_4,6,,5a_ascii_grid20160310d_GB_1981_Age0_4.asc
-,,done,x,Age,Age 5 to 9,1981,SAS02,[81sas020064],,"1981-OA-attributes-sas02,csv",Age5_9,6,,5a_ascii_grid20160310d_GB_1981_Age5_9.asc
-,,done,x,Age,Age 10 to 14,1981,SAS02,[81sas020071],,"1981-OA-attributes-sas02,csv",Age10_14,8,,5a_ascii_grid20160310d_GB_1981_Age10_14.asc
-,,done,x,Age,Age 15,1981,SAS02,[81sas020078],,"1981-OA-attributes-sas02,csv",Age15,5,,5a_ascii_grid20160310d_GB_1981_Age15.asc
-,,done,x,Age,Age 16 to 19,1981,SAS02,[81sas020085],,"1981-OA-attributes-sas02,csv",Age16_19,8,,5a_ascii_grid20160310d_GB_1981_Age16_19.asc
-,,done,x,Age,Age 20 to 24,1981,SAS02,[81sas020092],,"1981-OA-attributes-sas02,csv",Age20_24,8,,5a_ascii_grid20160310d_GB_1981_Age20_24.asc
-,,done,x,Age,Age 25 to 29,1981,SAS02,[81sas020099],,"1981-OA-attributes-sas02,csv",Age25_29,8,,5a_ascii_grid20160310d_GB_1981_Age25_29.asc
-,,done,x,Age,Age 30 to 34,1981,SAS02,[81sas020106],,"1981-OA-attributes-sas02,csv",Age30_34,8,,5a_ascii_grid20160310d_GB_1981_Age30_34.asc
-,,done,x,Age,Age 35 to 39,1981,SAS02,[81sas020113],,"1981-OA-attributes-sas02,csv",Age35_39,8,,5a_ascii_grid20160310d_GB_1981_Age35_39.asc
-,,done,x,Age,Age 40 to 44,1981,SAS02,[81sas020120],,"1981-OA-attributes-sas02,csv",Age40_44,8,,5a_ascii_grid20160310d_GB_1981_Age40_44.asc
-,,done,x,Age,Age 45 to 49,1981,SAS02,[81sas020127],,"1981-OA-attributes-sas02,csv",Age45_49,8,,5a_ascii_grid20160310d_GB_1981_Age45_49.asc
-,,done,x,Age,Age 50 to 54,1981,SAS02,[81sas020134],,"1981-OA-attributes-sas02,csv",Age50_54,8,,5a_ascii_grid20160310d_GB_1981_Age50_54.asc
-,,done,x,Age,Age 55 to 59,1981,SAS02,[81sas020141],,"1981-OA-attributes-sas02,csv",Age55_59,8,,5a_ascii_grid20160310d_GB_1981_Age55_59.asc
-,,done,x,Age,Age 60 to 64,1981,SAS02,[81sas020148],,"1981-OA-attributes-sas02,csv",Age60_64,8,,5a_ascii_grid20160310d_GB_1981_Age60_64.asc
-,,done,x,Age,Age 65 to 69,1981,SAS02,[81sas020155],,"1981-OA-attributes-sas02,csv",Age65_69,8,,5a_ascii_grid20160310d_GB_1981_Age65_69.asc
-,,done,x,Age,Age 70 to 74,1981,SAS02,[81sas020162],,"1981-OA-attributes-sas02,csv",Age70_74,8,,5a_ascii_grid20160310d_GB_1981_Age70_74.asc
-,,done,x,Age,Age 75 to 79,1981,SAS02,[81sas020169],,"1981-OA-attributes-sas02,csv",Age75_79,8,,5a_ascii_grid20160310d_GB_1981_Age75_79.asc
-,,done,x,Age,Age 80 to 84,1981,SAS02,[81sas020176],,"1981-OA-attributes-sas02,csv",Age80_84,8,,5a_ascii_grid20160310d_GB_1981_Age80_84.asc
-,,done,x,Age,Age 85 plus,1981,SAS02,[81sas020183],,"1981-OA-attributes-sas02,csv",Age85plus,9,,5a_ascii_grid20160310d_GB_1981_Age85plus.asc
-,,done,x,Age,Age All Catagories,1991,SAS02,s020001,,1991-OA-attributes-sas02,AgeAll,6,,5a_ascii_grid1991_Age_AgeAll.asc
-,,done,x,Age,Age 0 to 4,1991,SAS02,s020008,,1991-OA-attributes-sas02,Age0_4,6,,5a_ascii_grid1991_Age_Age0_4.asc
-,,done,x,Age,Age 5 to 9,1991,SAS02,s020015,,1991-OA-attributes-sas02,Age5_9,6,,5a_ascii_grid1991_Age_Age10_14.asc
-,,done,x,Age,Age 10 to 14,1991,SAS02,s020022,,1991-OA-attributes-sas02,Age10_14,8,,5a_ascii_grid1991_Age_Age15.asc
-,,done,x,Age,Age 15,1991,SAS02,s020029,,1991-OA-attributes-sas02,Age15,5,,5a_ascii_grid1991_Age_Age16_17.asc
-,,done,x,Age,Age 16 to 17,1991,SAS02,s020036,,1991-OA-attributes-sas02,Age16_17,8,,5a_ascii_grid1991_Age_Age18_19.asc
-,,done,x,Age,Age 18 to 19,1991,SAS02,s020043,,1991-OA-attributes-sas02,Age18_19,8,,5a_ascii_grid1991_Age_Age20_24.asc
-,,done,x,Age,Age 20 to 24,1991,SAS02,s020050,,1991-OA-attributes-sas02,Age20_24,8,,5a_ascii_grid1991_Age_Age25_29.asc
-,,done,x,Age,Age 25 to 29,1991,SAS02,s020057,,1991-OA-attributes-sas02,Age25_29,8,,5a_ascii_grid1991_Age_Age30_34.asc
-,,done,x,Age,Age 30 to 34,1991,SAS02,s020064,,1991-OA-attributes-sas02,Age30_34,8,,5a_ascii_grid1991_Age_Age35_39.asc
-,,done,x,Age,Age 35 to 39,1991,SAS02,s020071,,1991-OA-attributes-sas02,Age35_39,8,,5a_ascii_grid1991_Age_Age40_44.asc
-,,done,x,Age,Age 40 to 44,1991,SAS02,s020078,,1991-OA-attributes-sas02,Age40_44,8,,5a_ascii_grid1991_Age_Age45_49.asc
-,,done,x,Age,Age 45 to 49,1991,SAS02,s020085,,1991-OA-attributes-sas02,Age45_49,8,,5a_ascii_grid1991_Age_Age50_54.asc
-,,done,x,Age,Age 50 to 54,1991,SAS02,s020092,,1991-OA-attributes-sas02,Age50_54,8,,5a_ascii_grid1991_Age_Age55_59.asc
-,,done,x,Age,Age 55 to 59,1991,SAS02,s020099,,1991-OA-attributes-sas02,Age55_59,8,,5a_ascii_grid1991_Age_Age5_9.asc
-,,done,x,Age,Age 60 to 64,1991,SAS02,s020106,,1991-OA-attributes-sas02,Age60_64,8,,5a_ascii_grid1991_Age_Age60_64.asc
-,,done,x,Age,Age 65 to 69,1991,SAS02,s020113,,1991-OA-attributes-sas02,Age65_69,8,,5a_ascii_grid1991_Age_Age65_69.asc
-,,done,x,Age,Age 70 to 74,1991,SAS02,s020120,,1991-OA-attributes-sas02,Age70_74,8,,5a_ascii_grid1991_Age_Age70_74.asc
-,,done,x,Age,Age 75 to 79,1991,SAS02,s020127,,1991-OA-attributes-sas02,Age75_79,8,,5a_ascii_grid1991_Age_Age75_79.asc
-,,done,x,Age,Age 80 to 84,1991,SAS02,s020134,,1991-OA-attributes-sas02,Age80_84,8,,5a_ascii_grid1991_Age_Age80_84.asc
-,,done,x,Age,Age 85 to 98,1991,SAS02,s020141,,1991-OA-attributes-sas02,Age85_89,8,,5a_ascii_grid1991_Age_Age85_89.asc
-,,done,x,Age,Age 90 plus,1991,SAS02,s020148,,1991-OA-attributes-sas02,Age90plus,9,,5a_ascii_grid1991_Age_Age90plus.asc
+#N/A,(update),NA,20161205,Age,Age All Categories,2001,KS002,ks0020001,,2001-OA-attributes_ks002,AgeAll,6,,5a_ascii_grid2001_Age_AgeAll.asc
+(update),(update),20161205,20161205,Age,Age 0 – 14,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age0_14,,,5a_ascii_grid2001_Age_Age0_14.asc
+(update),(update),20161205,20161205,Age,Age 15 – 19,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age15_19,,,
+(update),(update),20161205,20161205,Age,Age 20 – 24,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age20_24,,,
+(update),(update),20161205,20161205,Age,Age 25 – 29,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age25_29,,,
+(update),(update),20161205,20161205,Age,Age 30 – 44,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age30_34,,,
+(update),(update),20161205,20161205,Age,Age 45 – 59,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age45_59,,,
+(update),(update),20161205,20161205,Age,Age 60 – 64,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age60_64,,,
+(update),(update),20161205,20161205,Age,Age 65 plus,2001,KS002,(derived),#N/A,2001-OA-attributes_ks002,Age65p,,,
+#N/A,(update),20161205,20161205,Age,Age 0 to 4,2001,KS002,ks0020002,,2001-OA-attributes_ks002,Age0-4,6,,5a_ascii_grid2001_Age_Age0.4.asc
+#N/A,(update),20161205,20161205,Age,Age 5 to 7,2001,KS002,ks0020003,,2001-OA-attributes_ks002,Age5-7,6,,5a_ascii_grid2001_Age_Age10.14.asc
+#N/A,(update),20161205,20161205,Age,Age 8 to 9,2001,KS002,ks0020004,,2001-OA-attributes_ks002,Age8-9,8,,5a_ascii_grid2001_Age_Age15.asc
+#N/A,(update),20161205,20161205,Age,Age 10 to 14,2001,KS002,ks0020005,,2001-OA-attributes_ks002,Age10-14,5,,5a_ascii_grid2001_Age_Age16.17.asc
+#N/A,(update),20161205,20161205,Age,Age 15,2001,KS002,ks0020006,,2001-OA-attributes_ks002,Age15,8,,5a_ascii_grid2001_Age_Age18.19.asc
+#N/A,(update),20161205,20161205,Age,Age 16 to 17,2001,KS002,ks0020007,,2001-OA-attributes_ks002,Age16-17,8,,5a_ascii_grid2001_Age_Age20.24.asc
+#N/A,(update),20161205,20161205,Age,Age 18 to 19,2001,KS002,ks0020008,,2001-OA-attributes_ks002,Age18-19,8,,5a_ascii_grid2001_Age_Age25.29.asc
+#N/A,(update),20161205,20161205,Age,Age 20 to 24,2001,KS002,ks0020009,,2001-OA-attributes_ks002,Age20-24,8,,5a_ascii_grid2001_Age_Age30.44.asc
+#N/A,(update),20161205,20161205,Age,Age 25 to 29,2001,KS002,ks0020010,,2001-OA-attributes_ks002,Age25-29,8,,5a_ascii_grid2001_Age_Age45.59.asc
+#N/A,(update),20161205,20161205,Age,Age 30 to 44,2001,KS002,ks0020011,,2001-OA-attributes_ks002,Age30-44,8,,5a_ascii_grid2001_Age_Age5.7.asc
+#N/A,(update),20161205,20161205,Age,Age 45 to 59,2001,KS002,ks0020012,,2001-OA-attributes_ks002,Age45-59,8,,5a_ascii_grid2001_Age_Age60.64.asc
+#N/A,(update),20161205,20161205,Age,Age 60 to 64,2001,KS002,ks0020013,,2001-OA-attributes_ks002,Age60-64,8,,5a_ascii_grid2001_Age_Age65.69.asc
+#N/A,(update),20161205,20161205,Age,Age 65 to 69,2001,KS002,ks0020014,,2001-OA-attributes_ks002,Age65-69,8,,5a_ascii_grid2001_Age_Age70.84.asc
+#N/A,(update),20161205,20161205,Age,Age 70 to 84,2001,KS002,ks0020015,,2001-OA-attributes_ks002,Age70-84,8,,5a_ascii_grid2001_Age_Age8.9.asc
+#N/A,(update),20161205,20161205,Age,Age 85 to 89,2001,KS002,ks0020016,,2001-OA-attributes_ks002,Age85-89,8,,5a_ascii_grid2001_Age_Age85.89.asc
+#N/A,(update),20161205,20161205,Age,Age 90 plus,2001,KS002,ks0020017,,2001-OA-attributes_ks002,Age90plu,8,,5a_ascii_grid2001_Age_Age90plu.asc
+(update),(update),20161205,20161205,Age,Age 0 – 14,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age0_14,,,5a_ascii_grid2011_Age_Age0_14.asc
+(update),(update),20161205,20161205,Age,Age 15 – 19,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age15_19,,,5a_ascii_grid2011_Age_Age15_19.asc
+(update),(update),20161205,20161205,Age,Age 20 – 24,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age20_24,,,5a_ascii_grid2011_Age_Age20_24.asc
+(update),(update),20161205,20161205,Age,Age 25 – 29,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age25_29,,,5a_ascii_grid2011_Age_Age25_29.asc
+(update),(update),20161205,20161205,Age,Age 30 – 44,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age30_34,,,5a_ascii_grid2011_Age_Age30_44.asc
+(update),(update),20161205,20161205,Age,Age 45 – 59,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age45_59,,,5a_ascii_grid2011_Age_Age45_59.asc
+(update),(update),20161205,20161205,Age,Age 60 – 64,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age60_64,,,5a_ascii_grid2011_Age_Age60_64.asc
+(update),(update),20161205,20161205,Age,Age 65 plus,2011,KS102,(derived),#N/A,2011-OA-attributes-ks102,Age65p,,,5a_ascii_grid2011_Age_Age65p.asc
+#N/A,(update),20161205,20161205,Age,All categories: Age,2011,KS102,KS102EW0001,,2011-OA-attributes-ks102,Column Code,11,,5a_ascii_grid2011_Age_AgeAll.asc
+#N/A,(update),20161205,20161205,Age,Age 0 to 4,2011,KS102,KS102EW0002,,2011-OA-attributes-ks102,Age0-4,6,,5a_ascii_grid2011_Age_Age0.4.asc
+#N/A,(update),20161205,20161205,Age,Age 5 to 7,2011,KS102,KS102EW0003,,2011-OA-attributes-ks102,Age5-7,6,,5a_ascii_grid2011_Age_Age5.7.asc
+#N/A,(update),20161205,20161205,Age,Age 8 to 9,2011,KS102,KS102EW0004,,2011-OA-attributes-ks102,Age8-9,6,,5a_ascii_grid2011_Age_Age8.9.asc
+#N/A,(update),20161205,20161205,Age,Age 10 to 14,2011,KS102,KS102EW0005,,2011-OA-attributes-ks102,Age10-14,8,,5a_ascii_grid2011_Age_Age10.14.asc
+#N/A,(update),20161205,20161205,Age,Age 15,2011,KS102,KS102EW0006,,2011-OA-attributes-ks102,Age15,5,,5a_ascii_grid2011_Age_Age15.asc
+#N/A,(update),20161205,20161205,Age,Age 16 to 17,2011,KS102,KS102EW0007,,2011-OA-attributes-ks102,Age16-17,8,,5a_ascii_grid2011_Age_Age16.17.asc
+#N/A,(update),20161205,20161205,Age,Age 18 to 19,2011,KS102,KS102EW0008,,2011-OA-attributes-ks102,Age18-19,8,,5a_ascii_grid2011_Age_Age18.19.asc
+#N/A,(update),20161205,20161205,Age,Age 20 to 24,2011,KS102,KS102EW0009,,2011-OA-attributes-ks102,Age20-24,8,,5a_ascii_grid2011_Age_Age20.24.asc
+#N/A,(update),20161205,20161205,Age,Age 25 to 29,2011,KS102,KS102EW0010,,2011-OA-attributes-ks102,Age25-29,8,,5a_ascii_grid2011_Age_Age25.29.asc
+#N/A,(update),20161205,20161205,Age,Age 30 to 44,2011,KS102,KS102EW0011,,2011-OA-attributes-ks102,Age30-44,8,,5a_ascii_grid2011_Age_Age30.44.asc
+#N/A,(update),20161205,20161205,Age,Age 45 to 59,2011,KS102,KS102EW0012,,2011-OA-attributes-ks102,Age45-59,8,,5a_ascii_grid2011_Age_Age45.59.asc
+#N/A,(update),20161205,20161205,Age,Age 60 to 64,2011,KS102,KS102EW0013,,2011-OA-attributes-ks102,Age60-64,8,,5a_ascii_grid2011_Age_Age60.64.asc
+#N/A,(update),20161205,20161205,Age,Age 65 to 74,2011,KS102,KS102EW0014,,2011-OA-attributes-ks102,Age65-69,8,,5a_ascii_grid2011_Age_Age65.69.asc
+#N/A,(update),20161205,20161205,Age,Age 75 to 84,2011,KS102,KS102EW0015,,2011-OA-attributes-ks102,Age70-84,8,,5a_ascii_grid2011_Age_Age70.84.asc
+#N/A,(update),20161205,20161205,Age,Age 85 to 89,2011,KS102,KS102EW0016,,2011-OA-attributes-ks102,Age85-89,8,,5a_ascii_grid2011_Age_Age85.89.asc
+#N/A,(update),20161205,20161205,Age,Age 90 and over,2011,KS102,KS102EW0017,,2011-OA-attributes-ks102,Age90plu,8,,5a_ascii_grid2011_Age_Age90plu.asc
+#N/A,(update),20161205,20161205,Age,Mean age,2011,KS102,KS102EW0018,,2011-OA-attributes-ks102,AgeMean,7,,5a_ascii_grid2011_Age_AgeMean.asc
+#N/A,(update),20161205,20161205,Age,Median age,2011,KS102,KS102EW0019,,2011-OA-attributes-ks102,AgeMedin,8,,5a_ascii_grid2011_Age_AgeMedin.asc
+#N/A,(update),20161205,20161205,Age,Age 0 to 14 Males Single/Widowed/Divorced,1971,SAS07,c71s07_269,,1971_sas07_present_persons,A0-14MSi,8,,5a_ascii_grid1971_Age_A0.14MSi.asc
+#N/A,(update),20161205,20161205,Age,Age 0 to 14 Females Single/Widowed/Divorced,1971,SAS07,c71s07_297,,1971_sas07_present_persons,A0-14FSi,8,,5a_ascii_grid1971_Age_A0.14FSi.asc
+#N/A,(update),20161205,20161205,Age,Age 15 to 19 Males Single/Widowed/Divorced,1971,SAS07,c71s07_270,,1971_sas07_present_persons,A15-19MS,8,,5a_ascii_grid1971_Age_A15.19MS.asc
+#N/A,(update),20161205,20161205,Age,Age 15 to 19 Males Married,1971,SAS07,c71s07_284,,1971_sas07_present_persons,A15-19MM,8,,5a_ascii_grid1971_Age_A15.19MM.asc
+#N/A,(update),20161205,20161205,Age,Age 15 to 19 Females Single/Widowed/Divorced,1971,SAS07,c71s07_298,,1971_sas07_present_persons,A15-19FS,8,,5a_ascii_grid1971_Age_A15.19FS.asc
+#N/A,(update),20161205,20161205,Age,Age 15 to 19 Females Married ,1971,SAS07,c71s07_312,,1971_sas07_present_persons,A15-19FM,8,,5a_ascii_grid1971_Age_A15.19FM.asc
+#N/A,(update),20161205,20161205,Age,Age 20 to 24 Males Single/Widowed/Divorced,1971,SAS07,c71s07_271,,1971_sas07_present_persons,A20-24MS,8,,5a_ascii_grid1971_Age_A20.24MS.asc
+#N/A,(update),20161205,20161205,Age,Age 20 to 24 Males Married,1971,SAS07,c71s07_285,,1971_sas07_present_persons,A20-24MM,8,,5a_ascii_grid1971_Age_A20.24MM.asc
+#N/A,(update),20161205,20161205,Age,Age 20 to 24 Females Single/Widowed/Divorced,1971,SAS07,c71s07_299,,1971_sas07_present_persons,A20-24FS,8,,5a_ascii_grid1971_Age_A20.24FS.asc
+#N/A,(update),20161205,20161205,Age,Age 20 to 24 Females Married ,1971,SAS07,c71s07_313,,1971_sas07_present_persons,A20-24FM,8,,5a_ascii_grid1971_Age_A20.24FM.asc
+#N/A,(update),20161205,20161205,Age,Age 25 to 29 Males Single/Widowed/Divorced,1971,SAS07,c71s07_272,,1971_sas07_present_persons,A25-29MS,8,,5a_ascii_grid1971_Age_A25.29MS.asc
+#N/A,(update),20161205,20161205,Age,Age 25 to 29 Males Married,1971,SAS07,c71s07_286,,1971_sas07_present_persons,A25-29MM,8,,5a_ascii_grid1971_Age_A25.29MM.asc
+#N/A,(update),20161205,20161205,Age,Age 25 to 29 Females Single/Widowed/Divorced,1971,SAS07,c71s07_300,,1971_sas07_present_persons,A25-29FS,8,,5a_ascii_grid1971_Age_A25.29FS.asc
+#N/A,(update),20161205,20161205,Age,Age 25 to 29 Females Married ,1971,SAS07,c71s07_314,,1971_sas07_present_persons,A25-29FM,8,,5a_ascii_grid1971_Age_A25.29FM.asc
+#N/A,(update),20161205,20161205,Age,Age 30 to 34 Males Single/Widowed/Divorced,1971,SAS07,c71s07_273,,1971_sas07_present_persons,A30-34MS,8,,5a_ascii_grid1971_Age_A30.34MS.asc
+#N/A,(update),20161205,20161205,Age,Age 30 to 34 Males Married,1971,SAS07,c71s07_287,,1971_sas07_present_persons,A30-34MM,8,,5a_ascii_grid1971_Age_A30.34MM.asc
+#N/A,(update),20161205,20161205,Age,Age 30 to 34 Females Single/Widowed/Divorced,1971,SAS07,c71s07_301,,1971_sas07_present_persons,A30-34FS,8,,5a_ascii_grid1971_Age_A30.34FS.asc
+#N/A,(update),20161205,20161205,Age,Age 30 to 34 Females Married ,1971,SAS07,c71s07_315,,1971_sas07_present_persons,A30-34FM,8,,5a_ascii_grid1971_Age_A30.34FM.asc
+#N/A,(update),20161205,20161205,Age,Age 35 to 39 Males Single/Widowed/Divorced,1971,SAS07,c71s07_274,,1971_sas07_present_persons,A35-39MS,8,,5a_ascii_grid1971_Age_A35.39MS.asc
+#N/A,(update),20161205,20161205,Age,Age 35 to 39 Males Married,1971,SAS07,c71s07_288,,1971_sas07_present_persons,A35-39MM,8,,5a_ascii_grid1971_Age_A35.39MM.asc
+#N/A,(update),20161205,20161205,Age,Age 35 to 39 Females Single/Widowed/Divorced,1971,SAS07,c71s07_302,,1971_sas07_present_persons,A35-39FS,8,,5a_ascii_grid1971_Age_A35.39FS.asc
+#N/A,(update),20161205,20161205,Age,Age 35 to 39 Females Married ,1971,SAS07,c71s07_316,,1971_sas07_present_persons,A35-39FM,8,,5a_ascii_grid1971_Age_A35.39FM.asc
+#N/A,(update),20161205,20161205,Age,Age 40 to 44 Males Single/Widowed/Divorced,1971,SAS07,c71s07_275,,1971_sas07_present_persons,A40-44MS,8,,5a_ascii_grid1971_Age_A40.44MS.asc
+#N/A,(update),20161205,20161205,Age,Age 40 to 44 Males Married,1971,SAS07,c71s07_289,,1971_sas07_present_persons,A40-44MM,8,,5a_ascii_grid1971_Age_A40.44MM.asc
+#N/A,(update),20161205,20161205,Age,Age 40 to 44 Females Single/Widowed/Divorced,1971,SAS07,c71s07_303,,1971_sas07_present_persons,A40-44FS,8,,5a_ascii_grid1971_Age_A40.44FS.asc
+#N/A,(update),20161205,20161205,Age,Age 40 to 44 Females Married ,1971,SAS07,c71s07_317,,1971_sas07_present_persons,A40-44FM,8,,5a_ascii_grid1971_Age_A40.44FM.asc
+#N/A,(update),20161205,20161205,Age,Age 45 to 49 Males Single/Widowed/Divorced,1971,SAS07,c71s07_276,,1971_sas07_present_persons,A45-49MS,8,,5a_ascii_grid1971_Age_A45.49MS.asc
+#N/A,(update),20161205,20161205,Age,Age 45 to 49 Males Married,1971,SAS07,c71s07_290,,1971_sas07_present_persons,A45-49MM,8,,5a_ascii_grid1971_Age_A45.49MM.asc
+#N/A,(update),20161205,20161205,Age,Age 45 to 49 Females Single/Widowed/Divorced,1971,SAS07,c71s07_304,,1971_sas07_present_persons,A45-49FS,8,,5a_ascii_grid1971_Age_A45.49FS.asc
+#N/A,(update),20161205,20161205,Age,Age 45 to 49 Females Married ,1971,SAS07,c71s07_318,,1971_sas07_present_persons,A45-49FM,8,,5a_ascii_grid1971_Age_A45.49FM.asc
+#N/A,(update),20161205,20161205,Age,Age 50 to 54 Males Single/Widowed/Divorced,1971,SAS07,c71s07_277,,1971_sas07_present_persons,A50-54MS,8,,5a_ascii_grid1971_Age_A50.54MS.asc
+#N/A,(update),20161205,20161205,Age,Age 50 to 54 Males Married,1971,SAS07,c71s07_291,,1971_sas07_present_persons,A50-54MM,8,,5a_ascii_grid1971_Age_A50.54MM.asc
+#N/A,(update),20161205,20161205,Age,Age 50 to 54 Females Single/Widowed/Divorced,1971,SAS07,c71s07_305,,1971_sas07_present_persons,A50-54FS,8,,5a_ascii_grid1971_Age_A50.54FS.asc
+#N/A,(update),20161205,20161205,Age,Age 50 to 54 Females Married ,1971,SAS07,c71s07_319,,1971_sas07_present_persons,A50-54FM,8,,5a_ascii_grid1971_Age_A50.54FM.asc
+#N/A,(update),20161205,20161205,Age,Age 55 to 59 Males Single/Widowed/Divorced,1971,SAS07,c71s07_278,,1971_sas07_present_persons,A55-59MS,8,,5a_ascii_grid1971_Age_A55.59MS.asc
+#N/A,(update),20161205,20161205,Age,Age 55 to 59 Males Married,1971,SAS07,c71s07_292,,1971_sas07_present_persons,A55-59MM,8,,5a_ascii_grid1971_Age_A55.59MM.asc
+#N/A,(update),20161205,20161205,Age,Age 55 to 59 Females Single/Widowed/Divorced,1971,SAS07,c71s07_306,,1971_sas07_present_persons,A55-59FS,8,,5a_ascii_grid1971_Age_A55.59FS.asc
+#N/A,(update),20161205,20161205,Age,Age 55 to 59 Females Married ,1971,SAS07,c71s07_320,,1971_sas07_present_persons,A55-59FM,8,,5a_ascii_grid1971_Age_A55.59FM.asc
+#N/A,(update),20161205,20161205,Age,Age 60 to 64 Males Single/Widowed/Divorced,1971,SAS07,c71s07_279,,1971_sas07_present_persons,A60-64MS,8,,5a_ascii_grid1971_Age_A60.64MS.asc
+#N/A,(update),20161205,20161205,Age,Age 60 to 64 Males Married,1971,SAS07,c71s07_293,,1971_sas07_present_persons,A60-64MM,8,,5a_ascii_grid1971_Age_A60.64MM.asc
+#N/A,(update),20161205,20161205,Age,Age 60 to 64 Females Single/Widowed/Divorced,1971,SAS07,c71s07_307,,1971_sas07_present_persons,A60-64FS,8,,5a_ascii_grid1971_Age_A60.64FS.asc
+#N/A,(update),20161205,20161205,Age,Age 60 to 64 Females Married ,1971,SAS07,c71s07_321,,1971_sas07_present_persons,A60-64FM,8,,5a_ascii_grid1971_Age_A60.64FM.asc
+#N/A,(update),20161205,20161205,Age,Age 65 to 69 Males Single/Widowed/Divorced,1971,SAS07,c71s07_280,,1971_sas07_present_persons,A65-69MS,8,,5a_ascii_grid1971_Age_A65.69MS.asc
+#N/A,(update),20161205,20161205,Age,Age 65 to 69 Males Married,1971,SAS07,c71s07_294,,1971_sas07_present_persons,A65-69MM,8,,5a_ascii_grid1971_Age_A65.69MM.asc
+#N/A,(update),20161205,20161205,Age,Age 65 to 69 Females Single/Widowed/Divorced,1971,SAS07,c71s07_308,,1971_sas07_present_persons,A65-69FS,8,,5a_ascii_grid1971_Age_A65.69FS.asc
+#N/A,(update),20161205,20161205,Age,Age 65 to 69 Females Married ,1971,SAS07,c71s07_322,,1971_sas07_present_persons,A65-69FM,8,,5a_ascii_grid1971_Age_A65.69FM.asc
+#N/A,(update),20161205,20161205,Age,Age 70 to 74 Males Single/Widowed/Divorced,1971,SAS07,c71s07_281,,1971_sas07_present_persons,A70-75MS,8,,5a_ascii_grid1971_Age_A70.75MS.asc
+#N/A,(update),20161205,20161205,Age,Age 70 to 74 Males Married,1971,SAS07,c71s07_295,,1971_sas07_present_persons,A70-75MM,8,,5a_ascii_grid1971_Age_A70.75MM.asc
+#N/A,(update),20161205,20161205,Age,Age 70 to 74 Females Single/Widowed/Divorced,1971,SAS07,c71s07_309,,1971_sas07_present_persons,A70-75FS,8,,5a_ascii_grid1971_Age_A70.75FS.asc
+#N/A,(update),20161205,20161205,Age,Age 70 to 74 Females Married ,1971,SAS07,c71s07_323,,1971_sas07_present_persons,A70-75FM,8,,5a_ascii_grid1971_Age_A70.75FM.asc
+#N/A,(update),20161205,20161205,Age,Age 75+ Males Single/Widowed/Divorced,1971,SAS07,c71s07_282,,1971_sas07_present_persons,A75pMS,6,,5a_ascii_grid1971_Age_A75pMS.asc
+#N/A,(update),20161205,20161205,Age,Age 75+ Males Married,1971,SAS07,c71s07_296,,1971_sas07_present_persons,A75pMM,6,,5a_ascii_grid1971_Age_A75pMM.asc
+#N/A,(update),20161205,20161205,Age,Age 75+ Females Single/Widowed/Divorced,1971,SAS07,c71s07_310,,1971_sas07_present_persons,A75pFS,6,,5a_ascii_grid1971_Age_A75pFS.asc
+#N/A,(update),20161205,20161205,Age,Age 75+ Females Married ,1971,SAS07,c71s07_324,,1971_sas07_present_persons,A75pFM,6,,5a_ascii_grid1971_Age_A75pFM.asc
+#N/A,(update),20161205,20161205,Age,Total Males Single/Widowed/Divorced,1971,SAS07,c71s07_325,,1971_sas07_present_persons,ATotMS,6,,5a_ascii_grid1971_Age_ATotMS.asc
+#N/A,(update),20161205,20161205,Age,Total Males Married,1971,SAS07,c71s07_326,,1971_sas07_present_persons,ATotMM,6,,5a_ascii_grid1971_Age_ATotMM.asc
+#N/A,(update),20161205,20161205,Age,Total Females Single/Widowed/Divorced,1971,SAS07,c71s07_327,,1971_sas07_present_persons,ATotFS,6,,5a_ascii_grid1971_Age_ATotFS.asc
+#N/A,(update),20161205,20161205,Age,Total Females Married ,1971,SAS07,c71s07_328,,1971_sas07_present_persons,ATotFM,6,,5a_ascii_grid1971_Age_ATotFM.asc
+(update),(update),20161205,20161205,Age,Age 0 – 14,1971,SAS07,(derived),#N/A,1971_sas07_present_persons,Age0_14,,,
+(update),(update),20161205,20161205,Age,Age 15 – 19,1971,SAS07,(derived),#N/A,1971_sas07_present_persons,Age15_19,,,
+(update),(update),20161205,20161205,Age,Age 20 – 24,1971,SAS07,(derived),#N/A,1971_sas07_present_persons,Age20_24,,,
+(update),(update),20161205,20161205,Age,Age 25 – 29,1971,SAS07,(derived),#N/A,1971_sas07_present_persons,Age25_29,,,
+(update),(update),20161205,20161205,Age,Age 30 – 44,1971,SAS07,(derived),#N/A,1971_sas07_present_persons,Age30_34,,,
+(update),(update),20161205,20161205,Age,Age 45 – 59,1971,SAS07,(derived),#N/A,1971_sas07_present_persons,Age45_59,,,
+(update),(update),20161205,20161205,Age,Age 60 – 64,1971,SAS07,(derived),#N/A,1971_sas07_present_persons,Age60_64,,,
+(update),(update),20161205,20161205,Age,Age 65 plus,1971,SAS07,(derived),#N/A,1971_sas07_present_persons,Age65p,,,
+#N/A,(update),20161205,20161205,Age,All Age,1981,SAS02,[81sas020050],,"1981-OA-attributes-sas02,csv",AgeAll,6,,5a_ascii_grid20160310d_GB_1981_AgeAll.asc
+#N/A,(update),20161205,20161205,Age,Age 0 to 4,1981,SAS02,[81sas020057],,"1981-OA-attributes-sas02,csv",Age0_4,6,,5a_ascii_grid20160310d_GB_1981_Age0_4.asc
+#N/A,(update),20161205,20161205,Age,Age 5 to 9,1981,SAS02,[81sas020064],,"1981-OA-attributes-sas02,csv",Age5_9,6,,5a_ascii_grid20160310d_GB_1981_Age5_9.asc
+#N/A,(update),20161205,20161205,Age,Age 10 to 14,1981,SAS02,[81sas020071],,"1981-OA-attributes-sas02,csv",Age10_14,8,,5a_ascii_grid20160310d_GB_1981_Age10_14.asc
+#N/A,(update),20161205,20161205,Age,Age 15,1981,SAS02,[81sas020078],,"1981-OA-attributes-sas02,csv",Age15,5,,5a_ascii_grid20160310d_GB_1981_Age15.asc
+#N/A,(update),20161205,20161205,Age,Age 16 to 19,1981,SAS02,[81sas020085],,"1981-OA-attributes-sas02,csv",Age16_19,8,,5a_ascii_grid20160310d_GB_1981_Age16_19.asc
+#N/A,(update),20161205,20161205,Age,Age 20 to 24,1981,SAS02,[81sas020092],,"1981-OA-attributes-sas02,csv",Age20_24,8,,5a_ascii_grid20160310d_GB_1981_Age20_24.asc
+#N/A,(update),20161205,20161205,Age,Age 25 to 29,1981,SAS02,[81sas020099],,"1981-OA-attributes-sas02,csv",Age25_29,8,,5a_ascii_grid20160310d_GB_1981_Age25_29.asc
+#N/A,(update),20161205,20161205,Age,Age 30 to 34,1981,SAS02,[81sas020106],,"1981-OA-attributes-sas02,csv",Age30_34,8,,5a_ascii_grid20160310d_GB_1981_Age30_34.asc
+#N/A,(update),20161205,20161205,Age,Age 35 to 39,1981,SAS02,[81sas020113],,"1981-OA-attributes-sas02,csv",Age35_39,8,,5a_ascii_grid20160310d_GB_1981_Age35_39.asc
+#N/A,(update),20161205,20161205,Age,Age 40 to 44,1981,SAS02,[81sas020120],,"1981-OA-attributes-sas02,csv",Age40_44,8,,5a_ascii_grid20160310d_GB_1981_Age40_44.asc
+#N/A,(update),20161205,20161205,Age,Age 45 to 49,1981,SAS02,[81sas020127],,"1981-OA-attributes-sas02,csv",Age45_49,8,,5a_ascii_grid20160310d_GB_1981_Age45_49.asc
+#N/A,(update),20161205,20161205,Age,Age 50 to 54,1981,SAS02,[81sas020134],,"1981-OA-attributes-sas02,csv",Age50_54,8,,5a_ascii_grid20160310d_GB_1981_Age50_54.asc
+#N/A,(update),20161205,20161205,Age,Age 55 to 59,1981,SAS02,[81sas020141],,"1981-OA-attributes-sas02,csv",Age55_59,8,,5a_ascii_grid20160310d_GB_1981_Age55_59.asc
+#N/A,(update),20161205,20161205,Age,Age 60 to 64,1981,SAS02,[81sas020148],,"1981-OA-attributes-sas02,csv",Age60_64,8,,5a_ascii_grid20160310d_GB_1981_Age60_64.asc
+#N/A,(update),20161205,20161205,Age,Age 65 to 69,1981,SAS02,[81sas020155],,"1981-OA-attributes-sas02,csv",Age65_69,8,,5a_ascii_grid20160310d_GB_1981_Age65_69.asc
+#N/A,(update),20161205,20161205,Age,Age 70 to 74,1981,SAS02,[81sas020162],,"1981-OA-attributes-sas02,csv",Age70_74,8,,5a_ascii_grid20160310d_GB_1981_Age70_74.asc
+#N/A,(update),20161205,20161205,Age,Age 75 to 79,1981,SAS02,[81sas020169],,"1981-OA-attributes-sas02,csv",Age75_79,8,,5a_ascii_grid20160310d_GB_1981_Age75_79.asc
+#N/A,(update),20161205,20161205,Age,Age 80 to 84,1981,SAS02,[81sas020176],,"1981-OA-attributes-sas02,csv",Age80_84,8,,5a_ascii_grid20160310d_GB_1981_Age80_84.asc
+#N/A,(update),20161205,20161205,Age,Age 85 plus,1981,SAS02,[81sas020183],,"1981-OA-attributes-sas02,csv",Age85plus,9,,5a_ascii_grid20160310d_GB_1981_Age85plus.asc
+(update),(update),20161205,20161205,Age,Age 0 – 14,1981,SAS02,(derived),#N/A,"1981-OA-attributes-sas02,csv",Age0_14,,,
+(update),(update),20161205,20161205,Age,Age 15 – 19,1981,SAS02,(derived),#N/A,"1981-OA-attributes-sas02,csv",Age15_19,,,
+(update),(update),20161205,20161205,Age,Age 20 – 24,1981,SAS02,(derived),#N/A,"1981-OA-attributes-sas02,csv",Age20_24,,,
+(update),(update),20161205,20161205,Age,Age 25 – 29,1981,SAS02,(derived),#N/A,"1981-OA-attributes-sas02,csv",Age25_29,,,
+(update),(update),20161205,20161205,Age,Age 30 – 44,1981,SAS02,(derived),#N/A,"1981-OA-attributes-sas02,csv",Age30_34,,,
+(update),(update),20161205,20161205,Age,Age 45 – 59,1981,SAS02,(derived),#N/A,"1981-OA-attributes-sas02,csv",Age45_59,,,
+(update),(update),20161205,20161205,Age,Age 60 – 64,1981,SAS02,(derived),#N/A,"1981-OA-attributes-sas02,csv",Age60_64,,,
+(update),(update),20161205,20161205,Age,Age 65 plus,1981,SAS02,(derived),#N/A,"1981-OA-attributes-sas02,csv",Age65p,,,
+(update),(update),20161205,20161205,Age,Age 0 – 14,1991,SAS02,(derived),#N/A,1991-OA-attributes-sas02,Age0_14,,,
+(update),(update),20161205,20161205,Age,Age 15 – 19,1991,SAS02,(derived),#N/A,1991-OA-attributes-sas02,Age15_19,,,
+(update),(update),20161205,20161205,Age,Age 20 – 24,1991,SAS02,(derived),#N/A,1991-OA-attributes-sas02,Age20_24,,,
+(update),(update),20161205,20161205,Age,Age 25 – 29,1991,SAS02,(derived),#N/A,1991-OA-attributes-sas02,Age25_29,,,
+(update),(update),20161205,20161205,Age,Age 30 – 44,1991,SAS02,(derived),#N/A,1991-OA-attributes-sas02,Age30_34,,,
+(update),(update),20161205,20161205,Age,Age 45 – 59,1991,SAS02,(derived),#N/A,1991-OA-attributes-sas02,Age45_59,,,
+(update),(update),20161205,20161205,Age,Age 60 – 64,1991,SAS02,(derived),#N/A,1991-OA-attributes-sas02,Age60_64,,,
+(update),(update),20161205,20161205,Age,Age 65 plus,1991,SAS02,(derived),#N/A,1991-OA-attributes-sas02,Age65p,,,
+#N/A,(update),20161205,20161205,Age,Age All Categories,1991,SAS02,s020001,,1991-OA-attributes-sas02,AgeAll,6,,5a_ascii_grid1991_Age_AgeAll.asc
+#N/A,(update),20161205,20161205,Age,Age 0 to 4,1991,SAS02,s020008,,1991-OA-attributes-sas02,Age0_4,6,,5a_ascii_grid1991_Age_Age0_4.asc
+#N/A,(update),20161205,20161205,Age,Age 5 to 9,1991,SAS02,s020015,,1991-OA-attributes-sas02,Age5_9,6,,5a_ascii_grid1991_Age_Age10_14.asc
+#N/A,(update),20161205,20161205,Age,Age 10 to 14,1991,SAS02,s020022,,1991-OA-attributes-sas02,Age10_14,8,,5a_ascii_grid1991_Age_Age15.asc
+#N/A,(update),20161205,20161205,Age,Age 15,1991,SAS02,s020029,,1991-OA-attributes-sas02,Age15,5,,5a_ascii_grid1991_Age_Age16_17.asc
+#N/A,(update),20161205,20161205,Age,Age 16 to 17,1991,SAS02,s020036,,1991-OA-attributes-sas02,Age16_17,8,,5a_ascii_grid1991_Age_Age18_19.asc
+#N/A,(update),20161205,20161205,Age,Age 18 to 19,1991,SAS02,s020043,,1991-OA-attributes-sas02,Age18_19,8,,5a_ascii_grid1991_Age_Age20_24.asc
+#N/A,(update),20161205,20161205,Age,Age 20 to 24,1991,SAS02,s020050,,1991-OA-attributes-sas02,Age20_24,8,,5a_ascii_grid1991_Age_Age25_29.asc
+#N/A,(update),20161205,20161205,Age,Age 25 to 29,1991,SAS02,s020057,,1991-OA-attributes-sas02,Age25_29,8,,5a_ascii_grid1991_Age_Age30_34.asc
+#N/A,(update),20161205,20161205,Age,Age 30 to 34,1991,SAS02,s020064,,1991-OA-attributes-sas02,Age30_34,8,,5a_ascii_grid1991_Age_Age35_39.asc
+#N/A,(update),20161205,20161205,Age,Age 35 to 39,1991,SAS02,s020071,,1991-OA-attributes-sas02,Age35_39,8,,5a_ascii_grid1991_Age_Age40_44.asc
+#N/A,(update),20161205,20161205,Age,Age 40 to 44,1991,SAS02,s020078,,1991-OA-attributes-sas02,Age40_44,8,,5a_ascii_grid1991_Age_Age45_49.asc
+#N/A,(update),20161205,20161205,Age,Age 45 to 49,1991,SAS02,s020085,,1991-OA-attributes-sas02,Age45_49,8,,5a_ascii_grid1991_Age_Age50_54.asc
+#N/A,(update),20161205,20161205,Age,Age 50 to 54,1991,SAS02,s020092,,1991-OA-attributes-sas02,Age50_54,8,,5a_ascii_grid1991_Age_Age55_59.asc
+#N/A,(update),20161205,20161205,Age,Age 55 to 59,1991,SAS02,s020099,,1991-OA-attributes-sas02,Age55_59,8,,5a_ascii_grid1991_Age_Age5_9.asc
+#N/A,(update),20161205,20161205,Age,Age 60 to 64,1991,SAS02,s020106,,1991-OA-attributes-sas02,Age60_64,8,,5a_ascii_grid1991_Age_Age60_64.asc
+#N/A,(update),20161205,20161205,Age,Age 65 to 69,1991,SAS02,s020113,,1991-OA-attributes-sas02,Age65_69,8,,5a_ascii_grid1991_Age_Age65_69.asc
+#N/A,(update),20161205,20161205,Age,Age 70 to 74,1991,SAS02,s020120,,1991-OA-attributes-sas02,Age70_74,8,,5a_ascii_grid1991_Age_Age70_74.asc
+#N/A,(update),20161205,20161205,Age,Age 75 to 79,1991,SAS02,s020127,,1991-OA-attributes-sas02,Age75_79,8,,5a_ascii_grid1991_Age_Age75_79.asc
+#N/A,(update),20161205,20161205,Age,Age 80 to 84,1991,SAS02,s020134,,1991-OA-attributes-sas02,Age80_84,8,,5a_ascii_grid1991_Age_Age80_84.asc
+#N/A,(update),20161205,20161205,Age,Age 85 to 98,1991,SAS02,s020141,,1991-OA-attributes-sas02,Age85_89,8,,5a_ascii_grid1991_Age_Age85_89.asc
+#N/A,(update),20161205,20161205,Age,Age 90 plus,1991,SAS02,s020148,,1991-OA-attributes-sas02,Age90plus,9,,5a_ascii_grid1991_Age_Age90plus.asc
 ,,#N/A,20160822,Total Population,Usual Resident Population: All people,2001,KS001,ks0010001,,2001-OA-attributes_ks001.csv,UsRsPopA,8,,5a_ascii_grid2001_Total_Population_UsRsPopA
 ,,#N/A,20160822,Total Population,Usual Resident Population: Males,2001,KS001,ks0010002,,2001-OA-attributes_ks001.csv,UsRsPopM,8,,5a_ascii_grid2001_Total_Population_UsRsPopM
 ,,#N/A,20160822,Total Population,Usual Resident Population: Females,2001,KS001,ks0010003,,2001-OA-attributes_ks001.csv,UsRsPopF,8,,5a_ascii_grid2001_Total_Population_UsRsPopF
