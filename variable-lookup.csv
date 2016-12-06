@@ -241,43 +241,43 @@ Entered and uploaded to Postgres DB,Uploaded to popchange-data.liverpool.ac.uk,P
 #N/A,(update),20161205,20161205,Age,Age 80 to 84,1991,SAS02,s020134,,1991-OA-attributes-sas02,Age80_84,8,,5a_ascii_grid1991_Age_Age80_84.asc
 #N/A,(update),20161205,20161205,Age,Age 85 to 98,1991,SAS02,s020141,,1991-OA-attributes-sas02,Age85_89,8,,5a_ascii_grid1991_Age_Age85_89.asc
 #N/A,(update),20161205,20161205,Age,Age 90 plus,1991,SAS02,s020148,,1991-OA-attributes-sas02,Age90plus,9,,5a_ascii_grid1991_Age_Age90plus.asc
-,,#N/A,20160822,Total Population,Usual Resident Population: All people,2001,KS001,ks0010001,,2001-OA-attributes_ks001.csv,UsRsPopA,8,,5a_ascii_grid2001_Total_Population_UsRsPopA
-,,#N/A,20160822,Total Population,Usual Resident Population: Males,2001,KS001,ks0010002,,2001-OA-attributes_ks001.csv,UsRsPopM,8,,5a_ascii_grid2001_Total_Population_UsRsPopM
-,,#N/A,20160822,Total Population,Usual Resident Population: Females,2001,KS001,ks0010003,,2001-OA-attributes_ks001.csv,UsRsPopF,8,,5a_ascii_grid2001_Total_Population_UsRsPopF
-,,#N/A,20160822,Total Population,Usual Resident Population: People in Households,2001,KS001,ks0010004,,2001-OA-attributes_ks001.csv,UsRsPopH,8,,5a_ascii_grid2001_Total_Population_UsRsPopH
-,,#N/A,20160822,Total Population,Usual Resident Population: People living in communal establishments,2001,KS001,ks0010005,,2001-OA-attributes_ks001.csv,UsRsPopC,8,,5a_ascii_grid2001_Total_Population_UsRsPopC
-,,#N/A,20160822,Total Population,Usual Resident Population: Students away from home,2001,KS001,ks0010006,,2001-OA-attributes_ks001.csv,UsRsPopS,8,,5a_ascii_grid2001_Total_Population_UsRsPopS
-,,#N/A,20160822,Total Population,Usual Resident Population: All people,2011,KS101,KS101EW0001,,2011-OA-attributes-ks101,URPopAll,8,,5a_ascii_grid2011_Total_Population_URPopAll
-,,#N/A,20160822,Total Population,Usual Resident Population: Males,2011,KS101,KS101EW0002,,2011-OA-attributes-ks101,URPopM,6,,5a_ascii_grid2011_Total_Population_URPopM
-,,#N/A,20160822,Total Population,Usual Resident Population: Females,2011,KS101,KS101EW0003,,2011-OA-attributes-ks101,URPopF,6,,5a_ascii_grid2011_Total_Population_URPopF
-,,#N/A,20160822,Total Population,Usual Resident Population: Lives in a household,2011,KS101,KS101EW0004,,2011-OA-attributes-ks101,URPopH,6,,5a_ascii_grid2011_Total_Population_URPopH
-,,#N/A,20160822,Total Population,Usual Resident Population: Lives in a communal establishment,2011,KS101,KS101EW0005,,2011-OA-attributes-ks101,URPopC,6,,5a_ascii_grid2011_Total_Population_URPopC
-,,#N/A,20160822,Total Population,Usual Resident Population: Schoolchild of full-time student ages over 4 at their non term-time address,2011,KS101,KS101EW0006,,2011-OA-attributes-ks101,URPopS,6,,5a_ascii_grid2011_Total_Population_URPopS
-,,#N/A,20161115,Total Population,Present residents,1991,SAS01,s010001,,1991-OA-attributes-sas01,TPPres,6,,5a_ascii_grid1991_Total_Population_TPPres.asc
-,,#N/A,20161115,Total Population,Absent Residents (part of household present),1991,SAS01,s010008,,1991-OA-attributes-sas01,TPPtAb,6,,5a_ascii_grid1991_Total_Population_TPPtAb.asc
-,,#N/A,20161115,Total Population,Absent residents (wholly absent household – enumerated),1991,SAS01,s010015,,1991-OA-attributes-sas01,TPAbEn,6,,5a_ascii_grid1991_Total_Population_TPAbEn.asc
-,,#N/A,20161115,Total Population,Absent residents (wholly absent household – imputed),1991,SAS01,s010022,,1991-OA-attributes-sas01,TPAbIm,6,,5a_ascii_grid1991_Total_Population_TPAbIm.asc
-,,#N/A,20161115,Total Population,Visitors,1991,SAS01,s010029,,1991-OA-attributes-sas01,TPVis,5,,5a_ascii_grid1991_Total_Population_TPVis.asc
-,,#N/A,20161115,Total Population,Visitors – Resident in UK,1991,SAS01,s010036,,1991-OA-attributes-sas01,TPVisRUK,8,,5a_ascii_grid1991_Total_Population_TPVisRUK.asc
-,,#N/A,20161115,Total Population,Visitors – Resident outside UK,1991,SAS01,s010043,,1991-OA-attributes-sas01,TPVisNR,7,,5a_ascii_grid1991_Total_Population_TPVisNR.asc
-,,#N/A,20161115,Total Population,Persons Present 1991: 1971 Base,1991,SAS01,s010050,,1991-OA-attributes-sas01,TP71Bs,6,,5a_ascii_grid1991_Total_Population_TP71Bs.asc
-,,#N/A,20161115,Total Population,Persons Present 1991: 1981 Base,1991,SAS01,s010057,,1991-OA-attributes-sas01,TP81Bs,6,,5a_ascii_grid1991_Total_Population_TP81Bs.asc
-,,#N/A,20161115,Total Population,Persons Present 1991: 1991 Base,1991,SAS01,s010064,,1991-OA-attributes-sas01,TP91Bs,6,,5a_ascii_grid1991_Total_Population_TP91Bs.asc
-,,#N/A,20161115,Total Population,All present residents,1981,SAS01,[81sas010001],,1981-OA-attributes-sas01,PBPres,6,,5a_ascii_grid1981_Total_Population_PBPres
-,,#N/A,20161115,Total Population,All Absent Residents (part of household present),1981,SAS01,[81sas010008],,1981-OA-attributes-sas01,PBPtAb,6,,5a_ascii_grid1981_Total_Population_PBPtAb
-,,#N/A,20161115,Total Population,All Visitors,1981,SAS01,[81sas010015],,1981-OA-attributes-sas01,PBVis,5,,5a_ascii_grid1981_Total_Population_PBVis
-,,#N/A,20161115,Total Population,All Visitors – Resident in UK,1981,SAS01,[81sas010022],,1981-OA-attributes-sas01,PBVisRUK ,9,,5a_ascii_grid1981_Total_Population_PBVisRUK
-,,#N/A,20161115,Total Population,All Visitors – Resident outside UK,1981,SAS01,[81sas010029],,1981-OA-attributes-sas01,PBVisNR,7,,5a_ascii_grid1981_Total_Population_PBVisNR
-,,#N/A,20161115,Total Population,Persons Present 1981: 1971 Base,1981,SAS01,[81sas010036],,1981-OA-attributes-sas01,PB71Bs,6,,5a_ascii_grid1981_Total_Population_PB71Bs
-,,#N/A,20161115,Total Population,Persons Present 1981: 1981 Base,1981,SAS01,[81sas010043],,1981-OA-attributes-sas01,TP81Bs,6,,5a_ascii_grid1981_Total_Population_TP81Bs
-,,#N/A,20160822,Total Population,Population present,1971,SAS01,c71s01_032,,1971-OA-attributes-sas01,PBPres,6,,5a_ascii_grid1971_Total_Population_PBPres.asc
-,,#N/A,20160822,Total Population,Visitors resident in LA,1971,SAS01,c71s01_033,,1971-OA-attributes-sas01,PBVisRLA,8,,5a_ascii_grid1971_Total_Population_PBVisRLA.asc
-,,#N/A,20160822,Total Population,Visitors to LA: resident in GB,1971,SAS01,c71s01_034,,1971-OA-attributes-sas01,PBVisRGB,8,,5a_ascii_grid1971_Total_Population_PBVisRGB.asc
-,,#N/A,20160822,Total Population,Visitors to GB,1971,SAS01,c71s01_035,,1971-OA-attributes-sas01,PBVisGB,7,,5a_ascii_grid1971_Total_Population_PBVisGB.asc
-,,#N/A,20160822,Total Population,Population in private households,1971,SAS01,c71s01_036,,1971-OA-attributes-sas01,PBPHs,5,,5a_ascii_grid1971_Total_Population_PBPHs.asc
-,,#N/A,20160822,Total Population,Population in private households: residents at address of enum.,1971,SAS01,c71s01_037,,1971-OA-attributes-sas01,PBPHsR,6,,5a_ascii_grid1971_Total_Population_PBPHsR.asc
-,,#N/A,20160822,Total Population,Population not in private households,1971,SAS01,c71s01_038,,1971-OA-attributes-sas01,PBNPHo,6,,5a_ascii_grid1971_Total_Population_PBNPHo.asc
-,,#N/A,20160822,Total Population,Population not in private households: residents at address of enum.,1971,SAS01,c71s01_039,,1971-OA-attributes-sas01,PBNPHoR,7,,5a_ascii_grid1971_Total_Population_PBNPHoR.asc
+,,#N/A,20161206,Total Population,Usual Resident Population: All people,2001,KS001,ks0010001,,2001-OA-attributes_ks001.csv,UsRsPopA,8,,5a_ascii_grid2001_Total_Population_UsRsPopA
+,,#N/A,20161206,Total Population,Usual Resident Population: Males,2001,KS001,ks0010002,,2001-OA-attributes_ks001.csv,UsRsPopM,8,,5a_ascii_grid2001_Total_Population_UsRsPopM
+,,#N/A,20161206,Total Population,Usual Resident Population: Females,2001,KS001,ks0010003,,2001-OA-attributes_ks001.csv,UsRsPopF,8,,5a_ascii_grid2001_Total_Population_UsRsPopF
+,,#N/A,20161206,Total Population,Usual Resident Population: People in Households,2001,KS001,ks0010004,,2001-OA-attributes_ks001.csv,UsRsPopH,8,,5a_ascii_grid2001_Total_Population_UsRsPopH
+,,#N/A,20161206,Total Population,Usual Resident Population: People living in communal establishments,2001,KS001,ks0010005,,2001-OA-attributes_ks001.csv,UsRsPopC,8,,5a_ascii_grid2001_Total_Population_UsRsPopC
+,,#N/A,20161206,Total Population,Usual Resident Population: Students away from home,2001,KS001,ks0010006,,2001-OA-attributes_ks001.csv,UsRsPopS,8,,5a_ascii_grid2001_Total_Population_UsRsPopS
+,,#N/A,20161206,Total Population,Usual Resident Population: All people,2011,KS101,KS101EW0001,,2011-OA-attributes-ks101,URPopAll,8,,5a_ascii_grid2011_Total_Population_URPopAll
+,,#N/A,20161206,Total Population,Usual Resident Population: Males,2011,KS101,KS101EW0002,,2011-OA-attributes-ks101,URPopM,6,,5a_ascii_grid2011_Total_Population_URPopM
+,,#N/A,20161206,Total Population,Usual Resident Population: Females,2011,KS101,KS101EW0003,,2011-OA-attributes-ks101,URPopF,6,,5a_ascii_grid2011_Total_Population_URPopF
+,,#N/A,20161206,Total Population,Usual Resident Population: Lives in a household,2011,KS101,KS101EW0004,,2011-OA-attributes-ks101,URPopH,6,,5a_ascii_grid2011_Total_Population_URPopH
+,,#N/A,20161206,Total Population,Usual Resident Population: Lives in a communal establishment,2011,KS101,KS101EW0005,,2011-OA-attributes-ks101,URPopC,6,,5a_ascii_grid2011_Total_Population_URPopC
+,,#N/A,20161206,Total Population,Usual Resident Population: Schoolchild of full-time student ages over 4 at their non term-time address,2011,KS101,KS101EW0006,,2011-OA-attributes-ks101,URPopS,6,,5a_ascii_grid2011_Total_Population_URPopS
+,,#N/A,20161206,Total Population,Present residents,1991,SAS01,s010001,,1991-OA-attributes-sas01,TPPres,6,,5a_ascii_grid1991_Total_Population_TPPres.asc
+,,#N/A,20161206,Total Population,Absent Residents (part of household present),1991,SAS01,s010008,,1991-OA-attributes-sas01,TPPtAb,6,,5a_ascii_grid1991_Total_Population_TPPtAb.asc
+,,#N/A,20161206,Total Population,Absent residents (wholly absent household – enumerated),1991,SAS01,s010015,,1991-OA-attributes-sas01,TPAbEn,6,,5a_ascii_grid1991_Total_Population_TPAbEn.asc
+,,#N/A,20161206,Total Population,Absent residents (wholly absent household – imputed),1991,SAS01,s010022,,1991-OA-attributes-sas01,TPAbIm,6,,5a_ascii_grid1991_Total_Population_TPAbIm.asc
+,,#N/A,20161206,Total Population,Visitors,1991,SAS01,s010029,,1991-OA-attributes-sas01,TPVis,5,,5a_ascii_grid1991_Total_Population_TPVis.asc
+,,#N/A,20161206,Total Population,Visitors – Resident in UK,1991,SAS01,s010036,,1991-OA-attributes-sas01,TPVisRUK,8,,5a_ascii_grid1991_Total_Population_TPVisRUK.asc
+,,#N/A,20161206,Total Population,Visitors – Resident outside UK,1991,SAS01,s010043,,1991-OA-attributes-sas01,TPVisNR,7,,5a_ascii_grid1991_Total_Population_TPVisNR.asc
+,,#N/A,20161206,Total Population,Persons Present 1991: 1971 Base,1991,SAS01,s010050,,1991-OA-attributes-sas01,TP71Bs,6,,5a_ascii_grid1991_Total_Population_TP71Bs.asc
+,,#N/A,20161206,Total Population,Persons Present 1991: 1981 Base,1991,SAS01,s010057,,1991-OA-attributes-sas01,TP81Bs,6,,5a_ascii_grid1991_Total_Population_TP81Bs.asc
+,,#N/A,20161206,Total Population,Persons Present 1991: 1991 Base,1991,SAS01,s010064,,1991-OA-attributes-sas01,TP91Bs,6,,5a_ascii_grid1991_Total_Population_TP91Bs.asc
+,,#N/A,20161206,Total Population,All present residents,1981,SAS01,[81sas010001],,1981-OA-attributes-sas01,PBPres,6,,5a_ascii_grid1981_Total_Population_PBPres
+,,#N/A,20161206,Total Population,All Absent Residents (part of household present),1981,SAS01,[81sas010008],,1981-OA-attributes-sas01,PBPtAb,6,,5a_ascii_grid1981_Total_Population_PBPtAb
+,,#N/A,20161206,Total Population,All Visitors,1981,SAS01,[81sas010015],,1981-OA-attributes-sas01,PBVis,5,,5a_ascii_grid1981_Total_Population_PBVis
+,,#N/A,20161206,Total Population,All Visitors – Resident in UK,1981,SAS01,[81sas010022],,1981-OA-attributes-sas01,PBVisRUK ,9,,5a_ascii_grid1981_Total_Population_PBVisRUK
+,,#N/A,20161206,Total Population,All Visitors – Resident outside UK,1981,SAS01,[81sas010029],,1981-OA-attributes-sas01,PBVisNR,7,,5a_ascii_grid1981_Total_Population_PBVisNR
+,,#N/A,20161206,Total Population,Persons Present 1981: 1971 Base,1981,SAS01,[81sas010036],,1981-OA-attributes-sas01,PB71Bs,6,,5a_ascii_grid1981_Total_Population_PB71Bs
+,,#N/A,20161206,Total Population,Persons Present 1981: 1981 Base,1981,SAS01,[81sas010043],,1981-OA-attributes-sas01,TP81Bs,6,,5a_ascii_grid1981_Total_Population_TP81Bs
+,,#N/A,20161206,Total Population,Population present,1971,SAS01,c71s01_032,,1971-OA-attributes-sas01,PBPres,6,,5a_ascii_grid1971_Total_Population_PBPres.asc
+,,#N/A,20161206,Total Population,Visitors resident in LA,1971,SAS01,c71s01_033,,1971-OA-attributes-sas01,PBVisRLA,8,,5a_ascii_grid1971_Total_Population_PBVisRLA.asc
+,,#N/A,20161206,Total Population,Visitors to LA: resident in GB,1971,SAS01,c71s01_034,,1971-OA-attributes-sas01,PBVisRGB,8,,5a_ascii_grid1971_Total_Population_PBVisRGB.asc
+,,#N/A,20161206,Total Population,Visitors to GB,1971,SAS01,c71s01_035,,1971-OA-attributes-sas01,PBVisGB,7,,5a_ascii_grid1971_Total_Population_PBVisGB.asc
+,,#N/A,20161206,Total Population,Population in private households,1971,SAS01,c71s01_036,,1971-OA-attributes-sas01,PBPHs,5,,5a_ascii_grid1971_Total_Population_PBPHs.asc
+,,#N/A,20161206,Total Population,Population in private households: residents at address of enum.,1971,SAS01,c71s01_037,,1971-OA-attributes-sas01,PBPHsR,6,,5a_ascii_grid1971_Total_Population_PBPHsR.asc
+,,#N/A,20161206,Total Population,Population not in private households,1971,SAS01,c71s01_038,,1971-OA-attributes-sas01,PBNPHo,6,,5a_ascii_grid1971_Total_Population_PBNPHo.asc
+,,#N/A,20161206,Total Population,Population not in private households: residents at address of enum.,1971,SAS01,c71s01_039,,1971-OA-attributes-sas01,PBNPHoR,7,,5a_ascii_grid1971_Total_Population_PBNPHoR.asc
 ,x,x,x,Ethnicity,DATA NOT AVAILABLE,1971,-,-,,-,-,-,-,DATA NOT AVALIABLE
 ,x,x,x,Ethnicity,DATA NOT AVAILABLE,1981,-,-,,-,-,-,-,DATA NOT AVALIABLE
 ,,20161017,x,Ethnicity,Total,1991,SAS06,s060001,,1991-OA-attributes-sas06,ETotal1,7,,5a_ascii_grid1991_Ethnicity_ETotal1.asc
