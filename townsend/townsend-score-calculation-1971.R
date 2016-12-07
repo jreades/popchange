@@ -100,7 +100,7 @@
      #townsend_z_score <- unemployed_pc
      #townsend_z_score <- overcrowded_pc
      #townsend_z_score <- no_car_van_pc
-     ##townsend_z_score <- non_own_occ_pc
+     #townsend_z_score <- non_own_occ_pc
      
 #set file export name
      filename_part <- "1971_townsend_z_scores"

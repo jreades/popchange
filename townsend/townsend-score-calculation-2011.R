@@ -14,7 +14,7 @@
 #Read in source Townsend data
   #unemployment
     #count unemployed        
-      filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_EAUnem.asc")
+      filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_Unemploy.asc")
       unemployed_persons <- as.matrix(readGDAL(filename))
     #total employed
       #comprised of all employed (full + part + self)
@@ -24,7 +24,7 @@
       all_economically_active_persons <- all_employed + unemployed_persons
   #no car or van
     #count households with no car or van
-      filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_CarNoCar.asc")
+      filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_NoCarVan.asc")
       no_car_van_households <- as.matrix(readGDAL(filename))
     #count households with car or van
       filename <- paste0("output/townsend/2011/5a_ascii_grid2011_Townsend_CarVan.asc")
