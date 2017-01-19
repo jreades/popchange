@@ -11,12 +11,12 @@ This outlines the inputs required for the basic analysis:
 Prepare the Census data you wish to use. An example of this file is OA_attributes.csv / OA_1991_attributes.csv. This is a CSV file containing a list of all the OAs or EDs (depending on the census year) and the one or more attributes you wish to create a grid for. One grid will be created for each attribute you enter. For example:
 
 |  GeographyCode | AllPresRes  |  TotalPop | EtWh  |  EtBlCab |
-|---|---|---|---|---|
- | 01AAFA01 | 256 | 349 | 312 | 2   | 
- | 01AAFA02 | 132 | 156 | 134 | 1   | 
- | 01AAFA03 | 182 | 229 | 221 | 0   | 
- | 01AAFA04 | 0 | 0 | 0 | 0   | 
- | 01AAFA05 | 272 | 327 | 304 | 0   | 
+| --- | --- | --- | --- | --- |
+| 01AAFA01 | 256 | 349 | 312 | 2   | 
+| 01AAFA02 | 132 | 156 | 134 | 1   | 
+| 01AAFA03 | 182 | 229 | 221 | 0   | 
+| 01AAFA04 | 0 | 0 | 0 | 0   | 
+| 01AAFA05 | 272 | 327 | 304 | 0   | 
 
 
 Things to note:
