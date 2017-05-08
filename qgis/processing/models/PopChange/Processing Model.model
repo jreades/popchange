@@ -261,26 +261,12 @@
                 "values": {
                     "name": "QGISDIFFERENCE_4", 
                     "paramsFolded": true, 
-                    "outputs": {
-                        "OUTPUT": {
-                            "values": {
-                                "description": "Valid", 
-                                "pos": {
-                                    "values": {
-                                        "y": 725.2597546874998, 
-                                        "x": 1211.4785492656242
-                                    }, 
-                                    "class": "point"
-                                }
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ModelerOutput"
-                        }
-                    }, 
+                    "outputs": {}, 
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 680.2597546874998, 
-                            "x": 1011.4785492656242
+                            "y": 660.2597546874999, 
+                            "x": 956.4785492656242
                         }, 
                         "class": "point"
                     }, 
@@ -304,36 +290,7 @@
                     }, 
                     "active": true, 
                     "consoleName": "qgis:difference", 
-                    "description": "Difference"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
-            "QGISREPROJECTLAYER_1": {
-                "values": {
-                    "name": "QGISREPROJECTLAYER_1", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 141.0, 
-                            "x": 118.0
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "name": "coastline"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
-                        }, 
-                        "TARGET_CRS": "EPSG:27700"
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:reprojectlayer", 
-                    "description": "Reproject Coastline"
+                    "description": "Difference Other"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
@@ -365,6 +322,36 @@
                     "active": true, 
                     "consoleName": "qgis:dissolve", 
                     "description": "Dissolve Natural"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISSIMPLIFYGEOMETRIES_1": {
+                "values": {
+                    "name": "QGISSIMPLIFYGEOMETRIES_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 217.19808718749997, 
+                            "x": 118.78147904687467
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISREPROJECTLAYER_1", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "TOLERANCE": 7.5
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:simplifygeometries", 
+                    "description": "Simplify Coastline"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
@@ -429,16 +416,16 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISSIMPLIFYGEOMETRIES_1": {
+            "QGISREPROJECTLAYER_1": {
                 "values": {
-                    "name": "QGISSIMPLIFYGEOMETRIES_1", 
+                    "name": "QGISREPROJECTLAYER_1", 
                     "paramsFolded": true, 
                     "outputs": {}, 
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 217.19808718749997, 
-                            "x": 118.78147904687467
+                            "y": 141.0, 
+                            "x": 118.0
                         }, 
                         "class": "point"
                     }, 
@@ -446,16 +433,15 @@
                     "params": {
                         "INPUT": {
                             "values": {
-                                "alg": "QGISREPROJECTLAYER_1", 
-                                "output": "OUTPUT"
+                                "name": "coastline"
                             }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
                         }, 
-                        "TOLERANCE": 7.5
+                        "TARGET_CRS": "EPSG:27700"
                     }, 
                     "active": true, 
-                    "consoleName": "qgis:simplifygeometries", 
-                    "description": "Simplify Coastline"
+                    "consoleName": "qgis:reprojectlayer", 
+                    "description": "Reproject Coastline"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
@@ -547,16 +533,16 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISREPROJECTLAYER_5": {
+            "QGISSIMPLIFYGEOMETRIES_5": {
                 "values": {
-                    "name": "QGISREPROJECTLAYER_5", 
+                    "name": "QGISSIMPLIFYGEOMETRIES_5", 
                     "paramsFolded": true, 
                     "outputs": {}, 
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 142.15273131249998, 
-                            "x": 782.1288211562501
+                            "y": 214.01072285937488, 
+                            "x": 1000.5644105781248
                         }, 
                         "class": "point"
                     }, 
@@ -564,15 +550,61 @@
                     "params": {
                         "INPUT": {
                             "values": {
-                                "name": "leisure"
+                                "alg": "QGISREPROJECTLAYER_2", 
+                                "output": "OUTPUT"
                             }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
                         }, 
-                        "TARGET_CRS": "EPSG:27700"
+                        "TOLERANCE": null
                     }, 
                     "active": true, 
-                    "consoleName": "qgis:reprojectlayer", 
-                    "description": "Reproject Leisure"
+                    "consoleName": "qgis:simplifygeometries", 
+                    "description": "Simplify Other"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISDISSOLVE_4": {
+                "values": {
+                    "name": "QGISDISSOLVE_4", 
+                    "paramsFolded": true, 
+                    "outputs": {
+                        "OUTPUT": {
+                            "values": {
+                                "description": "Valid", 
+                                "pos": {
+                                    "values": {
+                                        "y": 810.2597546874999, 
+                                        "x": 1281.4785492656242
+                                    }, 
+                                    "class": "point"
+                                }
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ModelerOutput"
+                        }
+                    }, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 735.2597546874999, 
+                            "x": 1131.4785492656242
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISDIFFERENCE_4", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "DISSOLVE_ALL": true, 
+                        "FIELD": null
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:dissolve", 
+                    "description": "Dissolve"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
@@ -666,16 +698,16 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISSIMPLIFYGEOMETRIES_5": {
+            "QGISREPROJECTLAYER_5": {
                 "values": {
-                    "name": "QGISSIMPLIFYGEOMETRIES_5", 
+                    "name": "QGISREPROJECTLAYER_5", 
                     "paramsFolded": true, 
                     "outputs": {}, 
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 214.01072285937488, 
-                            "x": 1000.5644105781248
+                            "y": 142.15273131249998, 
+                            "x": 782.1288211562501
                         }, 
                         "class": "point"
                     }, 
@@ -683,16 +715,15 @@
                     "params": {
                         "INPUT": {
                             "values": {
-                                "alg": "QGISREPROJECTLAYER_2", 
-                                "output": "OUTPUT"
+                                "name": "leisure"
                             }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
                         }, 
-                        "TOLERANCE": null
+                        "TARGET_CRS": "EPSG:27700"
                     }, 
                     "active": true, 
-                    "consoleName": "qgis:simplifygeometries", 
-                    "description": "Simplify Other"
+                    "consoleName": "qgis:reprojectlayer", 
+                    "description": "Reproject Leisure"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }
