@@ -2,7 +2,7 @@
 # against either the entire UK (sort of)
 # of a selected region from within the UK.
 r.filter     <- 'GREATER_LONDON_AUTHORITY' # Region to filter (see FILE_NAME field in shapefile)
-g.resolution <- 5000                       # Grid resolution in metres
+g.resolution <- 1000                       # Grid resolution in metres
 
 # Use the Boundary Line data set -- district_borough_unitary_region.shp
 
@@ -12,6 +12,37 @@ library(ggmap)    # for fortifying shapefiles
 library(raster)
 library(rgeos)
 library(sp)
+#library(osmar)
+
+# FILTERING OUT UNLIKELY BUILT UP AREAS
+# 1. Need the coatline of Britain at high-water:
+#    Best free version I've found: http://openstreetmapdata.com/data/land-polygons 
+#    -> See extracted UK_and_Ireland_Full.shp file for already subsetted data
+#    Note: you can't do this with polylines from GB Boundary Line since they can't be joined effectively (or quickly)
+# 2. Need land use data (download os pbf):
+#    Best free version is the GeoFabrik nightly builds: http://download.geofabrik.de/europe/great-britain.html
+# 3. Need to select polygons unlikely to be hosting (or to have hosted) development:
+#    natural = wetland, water, heath, moor, wood, upland_fell, unimproved_grassland, mud, grass, grassland, fell, dune, coastline, beach, bay
+#    landuse = forest, airfield, allotments, brownfield, churchyard, famland, farmyard, greenfield, landfill, marsh, meadow, orchard, park, quarry, reservoir, runway, scrub, vineyard, waterway, runway 
+#    leisure = park, sports_field, water_park, recreation_ground, quad_bikes, nature_reserve, golf, miniature_golf, marina, golf_course, 
+#    aeroway IS NOT NULL
+# 4. Convert PBF data to Shapefile:
+# ogr2ogr -f "ESRI Shapefile" -sql "select * from multipolygons where natural IN ('wetland', 'water', 'heath', 'moor', 'wood', 'upland_fell', 'unimproved_grassland', 'mud', 'grass', 'grassland', 'fell', 'dune', 'coastline', 'beach', 'bay')" wales-natural.shp wales-latest.osm.pbf --config ogr_interleaved_reading yes
+# ogr2ogr -f "ESRI Shapefile" -sql "select * from multipolygons where landuse IN ('cemetery', 'forest', 'airfield', 'allotments', 'brownfield', 'churchyard', 'famland', 'farmyard', 'greenfield', 'landfill', 'marsh', 'meadow', 'orchard', 'park', 'quarry', 'reservoir', 'runway', 'scrub', 'vineyard', 'waterway', 'runway')" wales-landuse.shp wales-latest.osm.pbf --config ogr_interleaved_reading yes
+# ogr2ogr -f "ESRI Shapefile" -sql "select * from multipolygons where leisure IN ('park', 'sports_field', 'water_park', 'recreation_ground', 'quad_bikes', 'nature_reserve', 'golf', 'miniature_golf', 'marina', 'golf_course')" wales-leisure.shp wales-latest.osm.pbf --config ogr_interleaved_reading yes
+# ogr2ogr -f "ESRI Shapefile" -sql "select * from multipolygons where aeroway IS NOT NULL" wales-tags.shp wales-latest.osm.pbf --config ogr_interleaved_reading yes
+
+coastline <- readOGR("./no-sync/land-polygons/", "UK_and_Ireland_Full-EPSG4326-5m")
+landuse   <- readOGR("./no-sync/OSM/", "wales-landuse")
+leisure   <- readOGR("./no-sync/OSM/", "wales-leisure")
+natural   <- readOGR("./no-sync/OSM/", "wales-natural")
+tags      <- readOGR("./no-sync/OSM/", "wales-tags")
+
+u.landuse <- aggregate(landuse)
+u.coastline <- aggregate(coastline)
+
+tmp <- erase(u.coastline,  u.landuse)
+plot(tmp)
 
 # First read in the shapefile, using the path to the shapefile and the shapefile name minus the
 # extension as arguments
@@ -73,6 +104,9 @@ r.shp.unitary <- aggregate(r.shp, by = "FILE_NAME")
 
 # Clip the grid to the regions polygons
 clip <- gIntersection(r.shp.unitary, sp.r, byid=TRUE, drop_lower_td=TRUE)
+
+# Knock out zones with no development
+#erase(spdf1,  spdf2)
 
 # And check our results
 map <- ggplot() +
