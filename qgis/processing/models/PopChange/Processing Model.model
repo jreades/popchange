@@ -1,40 +1,12 @@
 {
     "values": {
         "inputs": {
-            "landuse": {
-                "values": {
-                    "pos": {
-                        "values": {
-                            "y": 60.0, 
-                            "x": 340.0
-                        }, 
-                        "class": "point"
-                    }, 
-                    "param": {
-                        "values": {
-                            "isAdvanced": false, 
-                            "name": "landuse", 
-                            "shapetype": [
-                                2
-                            ], 
-                            "default": null, 
-                            "value": null, 
-                            "exported": null, 
-                            "hidden": false, 
-                            "optional": false, 
-                            "description": "Landuse"
-                        }, 
-                        "class": "processing.core.parameters.ParameterVector"
-                    }
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
-            }, 
             "natural": {
                 "values": {
                     "pos": {
                         "values": {
-                            "y": 60.0, 
-                            "x": 560.0
+                            "y": 55.97971307812499, 
+                            "x": 1256.8005181125984
                         }, 
                         "class": "point"
                     }, 
@@ -57,40 +29,12 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
             }, 
-            "other": {
-                "values": {
-                    "pos": {
-                        "values": {
-                            "y": 60.0, 
-                            "x": 1000.0
-                        }, 
-                        "class": "point"
-                    }, 
-                    "param": {
-                        "values": {
-                            "isAdvanced": false, 
-                            "name": "other", 
-                            "shapetype": [
-                                2
-                            ], 
-                            "default": null, 
-                            "value": null, 
-                            "exported": null, 
-                            "hidden": false, 
-                            "optional": true, 
-                            "description": "Other"
-                        }, 
-                        "class": "processing.core.parameters.ParameterVector"
-                    }
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
-            }, 
             "leisure": {
                 "values": {
                     "pos": {
                         "values": {
-                            "y": 60.0, 
-                            "x": 780.0
+                            "y": 55.69091409197255, 
+                            "x": 1548.1953864577536
                         }, 
                         "class": "point"
                     }, 
@@ -113,12 +57,95 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
             }, 
+            "regions": {
+                "values": {
+                    "pos": {
+                        "values": {
+                            "y": 55.681350078124865, 
+                            "x": 378.7486324775951
+                        }, 
+                        "class": "point"
+                    }, 
+                    "param": {
+                        "values": {
+                            "isAdvanced": false, 
+                            "name": "regions", 
+                            "shapetype": [
+                                2
+                            ], 
+                            "default": null, 
+                            "value": null, 
+                            "exported": null, 
+                            "hidden": false, 
+                            "optional": false, 
+                            "description": "Regions"
+                        }, 
+                        "class": "processing.core.parameters.ParameterVector"
+                    }
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
+            }, 
+            "simplify": {
+                "values": {
+                    "pos": {
+                        "values": {
+                            "y": 157.4018206885334, 
+                            "x": 130.415469480985
+                        }, 
+                        "class": "point"
+                    }, 
+                    "param": {
+                        "values": {
+                            "isAdvanced": false, 
+                            "name": "simplify", 
+                            "min": 0, 
+                            "default": 25, 
+                            "max": 1000, 
+                            "value": 25, 
+                            "hidden": false, 
+                            "isInteger": true, 
+                            "optional": true, 
+                            "description": "Simplify"
+                        }, 
+                        "class": "processing.core.parameters.ParameterNumber"
+                    }
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
+            }, 
+            "other": {
+                "values": {
+                    "pos": {
+                        "values": {
+                            "y": 55.979713078125, 
+                            "x": 1834.3566704148056
+                        }, 
+                        "class": "point"
+                    }, 
+                    "param": {
+                        "values": {
+                            "isAdvanced": false, 
+                            "name": "other", 
+                            "shapetype": [
+                                2
+                            ], 
+                            "default": null, 
+                            "value": null, 
+                            "exported": null, 
+                            "hidden": false, 
+                            "optional": true, 
+                            "description": "Other"
+                        }, 
+                        "class": "processing.core.parameters.ParameterVector"
+                    }
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
+            }, 
             "coastline": {
                 "values": {
                     "pos": {
                         "values": {
-                            "y": 60.0, 
-                            "x": 120.0
+                            "y": 55.21721540980488, 
+                            "x": 653.26305218783
                         }, 
                         "class": "point"
                     }, 
@@ -140,12 +167,69 @@
                     }
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
+            }, 
+            "landuse": {
+                "values": {
+                    "pos": {
+                        "values": {
+                            "y": 54.92841642365242, 
+                            "x": 957.7119764314643
+                        }, 
+                        "class": "point"
+                    }, 
+                    "param": {
+                        "values": {
+                            "isAdvanced": false, 
+                            "name": "landuse", 
+                            "shapetype": [
+                                2
+                            ], 
+                            "default": null, 
+                            "value": null, 
+                            "exported": null, 
+                            "hidden": false, 
+                            "optional": false, 
+                            "description": "Landuse"
+                        }, 
+                        "class": "processing.core.parameters.ParameterVector"
+                    }
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
             }
         }, 
         "helpContent": {}, 
         "group": "PopChange", 
         "name": "Process Layers", 
         "algs": {
+            "QGISCREATESPATIALINDEX_1": {
+                "values": {
+                    "name": "QGISCREATESPATIALINDEX_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 460.61399052868813, 
+                            "x": 591.9493912092876
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISINTERSECTION_1", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:createspatialindex", 
+                    "description": "Index Regions"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
             "QGISDIFFERENCE_1": {
                 "values": {
                     "name": "QGISDIFFERENCE_1", 
@@ -154,8 +238,8 @@
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 395.57513343749986, 
-                            "x": 327.3916317656242
+                            "y": 603.2653502281742, 
+                            "x": 865.7245589078599
                         }, 
                         "class": "point"
                     }, 
@@ -163,7 +247,7 @@
                     "params": {
                         "INPUT": {
                             "values": {
-                                "alg": "QGISSIMPLIFYGEOMETRIES_1", 
+                                "alg": "QGISCREATESPATIALINDEX_1", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -171,7 +255,7 @@
                         "IGNORE_INVALID": false, 
                         "OVERLAY": {
                             "values": {
-                                "alg": "QGISSIMPLIFYGEOMETRIES_2", 
+                                "alg": "QGISCREATESPATIALINDEX_2", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -191,8 +275,8 @@
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 487.9174440624999, 
-                            "x": 552.017186765624
+                            "y": 688.2714831561257, 
+                            "x": 1099.3257813628447
                         }, 
                         "class": "point"
                     }, 
@@ -208,7 +292,7 @@
                         "IGNORE_INVALID": false, 
                         "OVERLAY": {
                             "values": {
-                                "alg": "QGISSIMPLIFYGEOMETRIES_3", 
+                                "alg": "QGISCREATESPATIALINDEX_3", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -228,8 +312,8 @@
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 594.2988518749999, 
-                            "x": 754.9459552031242
+                            "y": 793.0239963418479, 
+                            "x": 1346.234704723336
                         }, 
                         "class": "point"
                     }, 
@@ -245,7 +329,7 @@
                         "IGNORE_INVALID": false, 
                         "OVERLAY": {
                             "values": {
-                                "alg": "QGISSIMPLIFYGEOMETRIES_4", 
+                                "alg": "QGISCREATESPATIALINDEX_4", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -261,12 +345,26 @@
                 "values": {
                     "name": "QGISDIFFERENCE_4", 
                     "paramsFolded": true, 
-                    "outputs": {}, 
+                    "outputs": {
+                        "OUTPUT": {
+                            "values": {
+                                "description": "Valid", 
+                                "pos": {
+                                    "values": {
+                                        "y": 931.6761078095644, 
+                                        "x": 1767.314034307165
+                                    }, 
+                                    "class": "point"
+                                }
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ModelerOutput"
+                        }
+                    }, 
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 660.2597546874999, 
-                            "x": 956.4785492656242
+                            "y": 886.6761078095644, 
+                            "x": 1567.314034307165
                         }, 
                         "class": "point"
                     }, 
@@ -282,7 +380,7 @@
                         "IGNORE_INVALID": false, 
                         "OVERLAY": {
                             "values": {
-                                "alg": "QGISSIMPLIFYGEOMETRIES_5", 
+                                "alg": "QGISCREATESPATIALINDEX_5", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -294,128 +392,6 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISDISSOLVE_3": {
-                "values": {
-                    "name": "QGISDISSOLVE_3", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 292.1224940624998, 
-                            "x": 563.5037208281242
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "alg": "QGISSIMPLIFYGEOMETRIES_3", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "DISSOLVE_ALL": true, 
-                        "FIELD": null
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:dissolve", 
-                    "description": "Dissolve Natural"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
-            "QGISSIMPLIFYGEOMETRIES_1": {
-                "values": {
-                    "name": "QGISSIMPLIFYGEOMETRIES_1", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 217.19808718749997, 
-                            "x": 118.78147904687467
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "alg": "QGISREPROJECTLAYER_1", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "TOLERANCE": 7.5
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:simplifygeometries", 
-                    "description": "Simplify Coastline"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
-            "QGISSIMPLIFYGEOMETRIES_2": {
-                "values": {
-                    "name": "QGISSIMPLIFYGEOMETRIES_2", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 214.01072285937488, 
-                            "x": 342.57745103124967
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "alg": "QGISREPROJECTLAYER_3", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "TOLERANCE": null
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:simplifygeometries", 
-                    "description": "Simplify Landuse"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
-            "QGISDISSOLVE_2": {
-                "values": {
-                    "name": "QGISDISSOLVE_2", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 289.5699309374998, 
-                            "x": 784.3004311406241
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "alg": "QGISSIMPLIFYGEOMETRIES_4", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "DISSOLVE_ALL": true, 
-                        "FIELD": null
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:dissolve", 
-                    "description": "Dissolve Leisure"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
             "QGISREPROJECTLAYER_1": {
                 "values": {
                     "name": "QGISREPROJECTLAYER_1", 
@@ -424,8 +400,8 @@
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 141.0, 
-                            "x": 118.0
+                            "y": 132.58962676421947, 
+                            "x": 653.3656454967752
                         }, 
                         "class": "point"
                     }, 
@@ -445,6 +421,35 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
+            "QGISCREATESPATIALINDEX_3": {
+                "values": {
+                    "name": "QGISCREATESPATIALINDEX_3", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 463.87177978224304, 
+                            "x": 1274.4562398290361
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISSIMPLIFYGEOMETRIES_3", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:createspatialindex", 
+                    "description": "Index Natural"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
             "QGISREPROJECTLAYER_2": {
                 "values": {
                     "name": "QGISREPROJECTLAYER_2", 
@@ -453,8 +458,8 @@
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 144.0, 
-                            "x": 999.0
+                            "y": 120.92957512322259, 
+                            "x": 1834.6967660554308
                         }, 
                         "class": "point"
                     }, 
@@ -474,170 +479,6 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISSIMPLIFYGEOMETRIES_3": {
-                "values": {
-                    "name": "QGISSIMPLIFYGEOMETRIES_3", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 216.6909141406249, 
-                            "x": 562.3531360937498
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "alg": "QGISREPROJECTLAYER_4", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "TOLERANCE": null
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:simplifygeometries", 
-                    "description": "Simplify Natural"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
-            "QGISREPROJECTLAYER_4": {
-                "values": {
-                    "name": "QGISREPROJECTLAYER_4", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 139.47254003124996, 
-                            "x": 561.0130404531249
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "name": "natural"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
-                        }, 
-                        "TARGET_CRS": "EPSG:27700"
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:reprojectlayer", 
-                    "description": "Reproject Natural"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
-            "QGISSIMPLIFYGEOMETRIES_5": {
-                "values": {
-                    "name": "QGISSIMPLIFYGEOMETRIES_5", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 214.01072285937488, 
-                            "x": 1000.5644105781248
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "alg": "QGISREPROJECTLAYER_2", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "TOLERANCE": null
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:simplifygeometries", 
-                    "description": "Simplify Other"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
-            "QGISDISSOLVE_4": {
-                "values": {
-                    "name": "QGISDISSOLVE_4", 
-                    "paramsFolded": true, 
-                    "outputs": {
-                        "OUTPUT": {
-                            "values": {
-                                "description": "Valid", 
-                                "pos": {
-                                    "values": {
-                                        "y": 810.2597546874999, 
-                                        "x": 1281.4785492656242
-                                    }, 
-                                    "class": "point"
-                                }
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ModelerOutput"
-                        }
-                    }, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 735.2597546874999, 
-                            "x": 1131.4785492656242
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "alg": "QGISDIFFERENCE_4", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "DISSOLVE_ALL": true, 
-                        "FIELD": null
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:dissolve", 
-                    "description": "Dissolve"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
-            "QGISSIMPLIFYGEOMETRIES_4": {
-                "values": {
-                    "name": "QGISSIMPLIFYGEOMETRIES_4", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 215.3508184999999, 
-                            "x": 787.4892037187499
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "alg": "QGISREPROJECTLAYER_5", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "TOLERANCE": null
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:simplifygeometries", 
-                    "description": "Simplify Leisure"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
             "QGISREPROJECTLAYER_3": {
                 "values": {
                     "name": "QGISREPROJECTLAYER_3", 
@@ -646,8 +487,8 @@
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 140.81263567187494, 
-                            "x": 342.5774510312499
+                            "y": 125.88668392898471, 
+                            "x": 953.8777482457415
                         }, 
                         "class": "point"
                     }, 
@@ -667,16 +508,16 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISDISSOLVE_1": {
+            "QGISREPROJECTLAYER_4": {
                 "values": {
-                    "name": "QGISDISSOLVE_1", 
+                    "name": "QGISREPROJECTLAYER_4", 
                     "paramsFolded": true, 
                     "outputs": {}, 
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 290.39617437499993, 
-                            "x": 1000.7887255156245
+                            "y": 124.25778930220724, 
+                            "x": 1259.6273528885158
                         }, 
                         "class": "point"
                     }, 
@@ -684,17 +525,15 @@
                     "params": {
                         "INPUT": {
                             "values": {
-                                "alg": "QGISSIMPLIFYGEOMETRIES_5", 
-                                "output": "OUTPUT"
+                                "name": "natural"
                             }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
                         }, 
-                        "DISSOLVE_ALL": true, 
-                        "FIELD": null
+                        "TARGET_CRS": "EPSG:27700"
                     }, 
                     "active": true, 
-                    "consoleName": "qgis:dissolve", 
-                    "description": "Dissolve Other"
+                    "consoleName": "qgis:reprojectlayer", 
+                    "description": "Reproject Natural"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
@@ -706,8 +545,8 @@
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 142.15273131249998, 
-                            "x": 782.1288211562501
+                            "y": 120.42240207634757, 
+                            "x": 1551.9531022407816
                         }, 
                         "class": "point"
                     }, 
@@ -724,6 +563,339 @@
                     "active": true, 
                     "consoleName": "qgis:reprojectlayer", 
                     "description": "Reproject Leisure"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISCREATESPATIALINDEX_5": {
+                "values": {
+                    "name": "QGISCREATESPATIALINDEX_5", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 465.50067440902046, 
+                            "x": 1829.9093075601438
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISSIMPLIFYGEOMETRIES_5", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:createspatialindex", 
+                    "description": "Index Other"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISCREATESPATIALINDEX_4": {
+                "values": {
+                    "name": "QGISCREATESPATIALINDEX_4", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 465.5006744090206, 
+                            "x": 1559.5127995150885
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISSIMPLIFYGEOMETRIES_4", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:createspatialindex", 
+                    "description": "Index Leisure"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISSIMPLIFYGEOMETRIES_1": {
+                "values": {
+                    "name": "QGISSIMPLIFYGEOMETRIES_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 258.2444544804481, 
+                            "x": 651.2010331605065
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISREPROJECTLAYER_1", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "TOLERANCE": {
+                            "values": {
+                                "name": "simplify"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:simplifygeometries", 
+                    "description": "Simplify Coastline"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISSIMPLIFYGEOMETRIES_2": {
+                "values": {
+                    "name": "QGISSIMPLIFYGEOMETRIES_2", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 251.4066026224786, 
+                            "x": 955.4027435823815
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISREPROJECTLAYER_3", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "TOLERANCE": {
+                            "values": {
+                                "name": "simplify"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:simplifygeometries", 
+                    "description": "Simplify Landuse"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISSIMPLIFYGEOMETRIES_3": {
+                "values": {
+                    "name": "QGISSIMPLIFYGEOMETRIES_3", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 253.90189420771327, 
+                            "x": 1271.3184142621099
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISREPROJECTLAYER_4", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "TOLERANCE": {
+                            "values": {
+                                "name": "simplify"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:simplifygeometries", 
+                    "description": "Simplify Natural"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISSIMPLIFYGEOMETRIES_4": {
+                "values": {
+                    "name": "QGISSIMPLIFYGEOMETRIES_4", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 254.4794921800182, 
+                            "x": 1545.2755229219151
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISREPROJECTLAYER_5", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "TOLERANCE": {
+                            "values": {
+                                "name": "simplify"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:simplifygeometries", 
+                    "description": "Simplify Leisure"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISSIMPLIFYGEOMETRIES_5": {
+                "values": {
+                    "name": "QGISSIMPLIFYGEOMETRIES_5", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 251.2217029264633, 
+                            "x": 1822.178722964864
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISREPROJECTLAYER_2", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "TOLERANCE": {
+                            "values": {
+                                "name": "simplify"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:simplifygeometries", 
+                    "description": "Simplify Other"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISSIMPLIFYGEOMETRIES_6": {
+                "values": {
+                    "name": "QGISSIMPLIFYGEOMETRIES_6", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 256.0267400670881, 
+                            "x": 385.0706803039415
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "name": "regions"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }, 
+                        "TOLERANCE": {
+                            "values": {
+                                "name": "simplify"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:simplifygeometries", 
+                    "description": "Simplify Regions"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISCREATESPATIALINDEX_2": {
+                "values": {
+                    "name": "QGISCREATESPATIALINDEX_2", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 468.75846366257537, 
+                            "x": 951.9351037271024
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISSIMPLIFYGEOMETRIES_2", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:createspatialindex", 
+                    "description": "Index Landuse"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISINTERSECTION_1": {
+                "values": {
+                    "name": "QGISINTERSECTION_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 379.1692591898161, 
+                            "x": 595.2071804628425
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT2": {
+                            "values": {
+                                "alg": "QGISSIMPLIFYGEOMETRIES_6", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISSIMPLIFYGEOMETRIES_1", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "IGNORE_NULL": true
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:intersection", 
+                    "description": "Intersection"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }
