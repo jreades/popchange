@@ -1,34 +1,6 @@
 {
     "values": {
         "inputs": {
-            "other": {
-                "values": {
-                    "pos": {
-                        "values": {
-                            "y": 60.0, 
-                            "x": 1000.0
-                        }, 
-                        "class": "point"
-                    }, 
-                    "param": {
-                        "values": {
-                            "isAdvanced": false, 
-                            "name": "other", 
-                            "shapetype": [
-                                2
-                            ], 
-                            "default": null, 
-                            "value": null, 
-                            "exported": null, 
-                            "hidden": false, 
-                            "optional": true, 
-                            "description": "Other"
-                        }, 
-                        "class": "processing.core.parameters.ParameterVector"
-                    }
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
-            }, 
             "landuse": {
                 "values": {
                     "pos": {
@@ -85,19 +57,19 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
             }, 
-            "coastline": {
+            "other": {
                 "values": {
                     "pos": {
                         "values": {
                             "y": 60.0, 
-                            "x": 120.0
+                            "x": 1000.0
                         }, 
                         "class": "point"
                     }, 
                     "param": {
                         "values": {
                             "isAdvanced": false, 
-                            "name": "coastline", 
+                            "name": "other", 
                             "shapetype": [
                                 2
                             ], 
@@ -105,8 +77,8 @@
                             "value": null, 
                             "exported": null, 
                             "hidden": false, 
-                            "optional": false, 
-                            "description": "Coastline"
+                            "optional": true, 
+                            "description": "Other"
                         }, 
                         "class": "processing.core.parameters.ParameterVector"
                     }
@@ -140,6 +112,34 @@
                     }
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
+            }, 
+            "coastline": {
+                "values": {
+                    "pos": {
+                        "values": {
+                            "y": 60.0, 
+                            "x": 120.0
+                        }, 
+                        "class": "point"
+                    }, 
+                    "param": {
+                        "values": {
+                            "isAdvanced": false, 
+                            "name": "coastline", 
+                            "shapetype": [
+                                2
+                            ], 
+                            "default": null, 
+                            "value": null, 
+                            "exported": null, 
+                            "hidden": false, 
+                            "optional": false, 
+                            "description": "Coastline"
+                        }, 
+                        "class": "processing.core.parameters.ParameterVector"
+                    }
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.ModelerParameter"
             }
         }, 
         "helpContent": {}, 
@@ -163,7 +163,7 @@
                     "params": {
                         "INPUT": {
                             "values": {
-                                "alg": "QGISDISSOLVE_5", 
+                                "alg": "QGISSIMPLIFYGEOMETRIES_1", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -171,7 +171,7 @@
                         "IGNORE_INVALID": false, 
                         "OVERLAY": {
                             "values": {
-                                "alg": "QGISDISSOLVE_4", 
+                                "alg": "QGISSIMPLIFYGEOMETRIES_2", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -208,7 +208,7 @@
                         "IGNORE_INVALID": false, 
                         "OVERLAY": {
                             "values": {
-                                "alg": "QGISDISSOLVE_3", 
+                                "alg": "QGISSIMPLIFYGEOMETRIES_3", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -245,7 +245,7 @@
                         "IGNORE_INVALID": false, 
                         "OVERLAY": {
                             "values": {
-                                "alg": "QGISDISSOLVE_2", 
+                                "alg": "QGISSIMPLIFYGEOMETRIES_4", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -267,8 +267,8 @@
                                 "description": "Valid", 
                                 "pos": {
                                     "values": {
-                                        "y": 758.4430753124997, 
-                                        "x": 1191.0580442656244
+                                        "y": 725.2597546874998, 
+                                        "x": 1211.4785492656242
                                     }, 
                                     "class": "point"
                                 }
@@ -296,7 +296,7 @@
                         "IGNORE_INVALID": false, 
                         "OVERLAY": {
                             "values": {
-                                "alg": "QGISDISSOLVE_1", 
+                                "alg": "QGISSIMPLIFYGEOMETRIES_5", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -308,16 +308,16 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISSIMPLIFYGEOMETRIES_1": {
+            "QGISREPROJECTLAYER_1": {
                 "values": {
-                    "name": "QGISSIMPLIFYGEOMETRIES_1", 
+                    "name": "QGISREPROJECTLAYER_1", 
                     "paramsFolded": true, 
                     "outputs": {}, 
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 217.19808718749997, 
-                            "x": 118.78147904687467
+                            "y": 141.0, 
+                            "x": 118.0
                         }, 
                         "class": "point"
                     }, 
@@ -325,16 +325,15 @@
                     "params": {
                         "INPUT": {
                             "values": {
-                                "alg": "QGISREPROJECTLAYER_1", 
-                                "output": "OUTPUT"
+                                "name": "coastline"
                             }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
                         }, 
-                        "TOLERANCE": 7.5
+                        "TARGET_CRS": "EPSG:27700"
                     }, 
                     "active": true, 
-                    "consoleName": "qgis:simplifygeometries", 
-                    "description": "Simplify Coastline"
+                    "consoleName": "qgis:reprojectlayer", 
+                    "description": "Reproject Coastline"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
@@ -399,36 +398,6 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISSIMPLIFYGEOMETRIES_3": {
-                "values": {
-                    "name": "QGISSIMPLIFYGEOMETRIES_3", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 216.6909141406249, 
-                            "x": 562.3531360937498
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "alg": "QGISREPROJECTLAYER_4", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "TOLERANCE": null
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:simplifygeometries", 
-                    "description": "Simplify Natural"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
             "QGISDISSOLVE_2": {
                 "values": {
                     "name": "QGISDISSOLVE_2", 
@@ -460,16 +429,16 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISREPROJECTLAYER_1": {
+            "QGISSIMPLIFYGEOMETRIES_1": {
                 "values": {
-                    "name": "QGISREPROJECTLAYER_1", 
+                    "name": "QGISSIMPLIFYGEOMETRIES_1", 
                     "paramsFolded": true, 
                     "outputs": {}, 
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 141.0, 
-                            "x": 118.0
+                            "y": 217.19808718749997, 
+                            "x": 118.78147904687467
                         }, 
                         "class": "point"
                     }, 
@@ -477,15 +446,16 @@
                     "params": {
                         "INPUT": {
                             "values": {
-                                "name": "coastline"
+                                "alg": "QGISREPROJECTLAYER_1", 
+                                "output": "OUTPUT"
                             }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
                         }, 
-                        "TARGET_CRS": "EPSG:27700"
+                        "TOLERANCE": 7.5
                     }, 
                     "active": true, 
-                    "consoleName": "qgis:reprojectlayer", 
-                    "description": "Reproject Coastline"
+                    "consoleName": "qgis:simplifygeometries", 
+                    "description": "Simplify Coastline"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
@@ -518,16 +488,16 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISREPROJECTLAYER_3": {
+            "QGISSIMPLIFYGEOMETRIES_3": {
                 "values": {
-                    "name": "QGISREPROJECTLAYER_3", 
+                    "name": "QGISSIMPLIFYGEOMETRIES_3", 
                     "paramsFolded": true, 
                     "outputs": {}, 
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 140.81263567187494, 
-                            "x": 342.5774510312499
+                            "y": 216.6909141406249, 
+                            "x": 562.3531360937498
                         }, 
                         "class": "point"
                     }, 
@@ -535,15 +505,16 @@
                     "params": {
                         "INPUT": {
                             "values": {
-                                "name": "landuse"
+                                "alg": "QGISREPROJECTLAYER_4", 
+                                "output": "OUTPUT"
                             }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
                         }, 
-                        "TARGET_CRS": "EPSG:27700"
+                        "TOLERANCE": null
                     }, 
                     "active": true, 
-                    "consoleName": "qgis:reprojectlayer", 
-                    "description": "Reproject Landuse"
+                    "consoleName": "qgis:simplifygeometries", 
+                    "description": "Simplify Natural"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
@@ -605,68 +576,6 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISDISSOLVE_4": {
-                "values": {
-                    "name": "QGISDISSOLVE_4", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 295.1250953124998, 
-                            "x": 345.25957364062424
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "alg": "QGISSIMPLIFYGEOMETRIES_2", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "DISSOLVE_ALL": true, 
-                        "FIELD": null
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:dissolve", 
-                    "description": "Dissolve Landuse"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
-            "QGISDISSOLVE_5": {
-                "values": {
-                    "name": "QGISDISSOLVE_5", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 295.5751334374998, 
-                            "x": 121.91030020312402
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "alg": "QGISSIMPLIFYGEOMETRIES_1", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "DISSOLVE_ALL": true, 
-                        "FIELD": null
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:dissolve", 
-                    "description": "Dissolve Coastline"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
             "QGISSIMPLIFYGEOMETRIES_4": {
                 "values": {
                     "name": "QGISSIMPLIFYGEOMETRIES_4", 
@@ -694,6 +603,35 @@
                     "active": true, 
                     "consoleName": "qgis:simplifygeometries", 
                     "description": "Simplify Leisure"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISREPROJECTLAYER_3": {
+                "values": {
+                    "name": "QGISREPROJECTLAYER_3", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 140.81263567187494, 
+                            "x": 342.5774510312499
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "name": "landuse"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }, 
+                        "TARGET_CRS": "EPSG:27700"
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:reprojectlayer", 
+                    "description": "Reproject Landuse"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
