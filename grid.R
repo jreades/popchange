@@ -22,6 +22,10 @@ library(sp)
 # 2. Need land use data (download os pbf):
 #    Best free version is the GeoFabrik nightly builds: http://download.geofabrik.de/europe/great-britain.html
 # 3. Need to select polygons unlikely to be hosting (or to have hosted) development:
+####################
+# TRY THIS TO RESOLVE WATER ISSUE:
+# ogr2ogr -f "ESRI Shapefile" -sql "select * from multipolygons where natural IS NOT NULL" wales-natural-full.shp ~/Downloads/wales-latest.osm.pbf --config ogr_interleaved_reading yes
+####################
 #    natural = wetland, water, heath, moor, wood, upland_fell, unimproved_grassland, mud, grass, grassland, fell, dune, coastline, beach, bay
 #    landuse = forest, airfield, allotments, brownfield, churchyard, famland, farmyard, greenfield, landfill, marsh, meadow, orchard, park, quarry, reservoir, runway, scrub, vineyard, waterway, runway 
 #    leisure = park, sports_field, water_park, recreation_ground, quad_bikes, nature_reserve, golf, miniature_golf, marina, golf_course, 
