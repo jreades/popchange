@@ -117,52 +117,9 @@
         "group": "PopChange", 
         "name": "Process Layers (Post Coastline Test)", 
         "algs": {
-            "QGISSELECTBYLOCATION_1": {
+            "QGISDIFFERENCE_1": {
                 "values": {
-                    "name": "QGISSELECTBYLOCATION_1", 
-                    "paramsFolded": true, 
-                    "outputs": {}, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 324.40720336636195, 
-                            "x": 581.093864343175
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "name": "regions"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
-                        }, 
-                        "PREDICATE": [
-                            "intersects", 
-                            "contains", 
-                            "touches", 
-                            "overlaps"
-                        ], 
-                        "PRECISION": 0.0, 
-                        "INTERSECT": {
-                            "values": {
-                                "alg": "QGISPOLYGONFROMLAYEREXTENT_1", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "METHOD": 0
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:selectbylocation", 
-                    "description": "Select Districts by Location"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
-            "QGISDIFFERENCE_2": {
-                "values": {
-                    "name": "QGISDIFFERENCE_2", 
+                    "name": "QGISDIFFERENCE_1", 
                     "paramsFolded": true, 
                     "outputs": {
                         "OUTPUT": {
@@ -170,8 +127,8 @@
                                 "description": "Valid", 
                                 "pos": {
                                     "values": {
-                                        "y": 663.7584636625754, 
-                                        "x": 1517.6273528885158
+                                        "y": 788.7584636625754, 
+                                        "x": 1168.6273528885158
                                     }, 
                                     "class": "point"
                                 }
@@ -182,16 +139,18 @@
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 618.7584636625754, 
-                            "x": 1317.6273528885158
+                            "y": 743.7584636625754, 
+                            "x": 968.6273528885158
                         }, 
                         "class": "point"
                     }, 
-                    "dependencies": [], 
+                    "dependencies": [
+                        "QGISDISSOLVE_1"
+                    ], 
                     "params": {
                         "INPUT": {
                             "values": {
-                                "alg": "QGISDIFFERENCE_1", 
+                                "alg": "QGISCREATESPATIALINDEX_1", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -199,7 +158,7 @@
                         "IGNORE_INVALID": true, 
                         "OVERLAY": {
                             "values": {
-                                "alg": "QGISCREATESPATIALINDEX_3", 
+                                "alg": "QGISDISSOLVE_1", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -240,16 +199,16 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISDIFFERENCE_1": {
+            "QGISSIMPLIFYGEOMETRIES_1": {
                 "values": {
-                    "name": "QGISDIFFERENCE_1", 
+                    "name": "QGISSIMPLIFYGEOMETRIES_1", 
                     "paramsFolded": true, 
                     "outputs": {}, 
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 551.7584636625754, 
-                            "x": 959.6273528885158
+                            "y": 246.75846366257542, 
+                            "x": 1261.6273528885158
                         }, 
                         "class": "point"
                     }, 
@@ -257,23 +216,21 @@
                     "params": {
                         "INPUT": {
                             "values": {
-                                "alg": "QGISCREATESPATIALINDEX_1", 
+                                "alg": "QGISREPROJECTLAYER_4", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
                         }, 
-                        "IGNORE_INVALID": true, 
-                        "OVERLAY": {
+                        "TOLERANCE": {
                             "values": {
-                                "alg": "QGISCREATESPATIALINDEX_2", 
-                                "output": "OUTPUT"
+                                "name": "simplify"
                             }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
                         }
                     }, 
                     "active": true, 
-                    "consoleName": "qgis:difference", 
-                    "description": "Difference"
+                    "consoleName": "qgis:simplifygeometries", 
+                    "description": "Simplify Natural"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
@@ -287,8 +244,8 @@
                                 "description": "Selected Districts", 
                                 "pos": {
                                     "values": {
-                                        "y": 419.6253024658988, 
-                                        "x": 809.691601955733
+                                        "y": 412.6253024658988, 
+                                        "x": 1091.691601955733
                                     }, 
                                     "class": "point"
                                 }
@@ -357,8 +314,8 @@
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 465.02756485334066, 
-                            "x": 587.5697526962663
+                            "y": 470.02756485334066, 
+                            "x": 586.5697526962663
                         }, 
                         "class": "point"
                     }, 
@@ -501,38 +458,131 @@
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
-            "QGISSIMPLIFYGEOMETRIES_1": {
+            "QGISDISSOLVE_1": {
                 "values": {
-                    "name": "QGISSIMPLIFYGEOMETRIES_1", 
+                    "name": "QGISDISSOLVE_1", 
+                    "paramsFolded": true, 
+                    "outputs": {
+                        "OUTPUT": {
+                            "values": {
+                                "description": "Dissolved OSM", 
+                                "pos": {
+                                    "values": {
+                                        "y": 685.7584636625754, 
+                                        "x": 1422.6273528885158
+                                    }, 
+                                    "class": "point"
+                                }
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ModelerOutput"
+                        }
+                    }, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 640.7584636625754, 
+                            "x": 1222.6273528885158
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [
+                        "QGISUNION_1"
+                    ], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "alg": "QGISUNION_1", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "DISSOLVE_ALL": true, 
+                        "FIELD": null
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:dissolve", 
+                    "description": "Dissolve OSM Data"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISSELECTBYLOCATION_1": {
+                "values": {
+                    "name": "QGISSELECTBYLOCATION_1", 
                     "paramsFolded": true, 
                     "outputs": {}, 
                     "outputsFolded": true, 
                     "pos": {
                         "values": {
-                            "y": 246.75846366257542, 
-                            "x": 1261.6273528885158
+                            "y": 324.40720336636195, 
+                            "x": 581.093864343175
+                        }, 
+                        "class": "point"
+                    }, 
+                    "dependencies": [
+                        "QGISPOLYGONFROMLAYEREXTENT_1"
+                    ], 
+                    "params": {
+                        "INPUT": {
+                            "values": {
+                                "name": "regions"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                        }, 
+                        "PREDICATE": [
+                            "intersects", 
+                            "contains", 
+                            "touches", 
+                            "overlaps"
+                        ], 
+                        "PRECISION": 0.0, 
+                        "INTERSECT": {
+                            "values": {
+                                "alg": "QGISPOLYGONFROMLAYEREXTENT_1", 
+                                "output": "OUTPUT"
+                            }, 
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
+                        }, 
+                        "METHOD": 0
+                    }, 
+                    "active": true, 
+                    "consoleName": "qgis:selectbylocation", 
+                    "description": "Select Districts by Location"
+                }, 
+                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
+            }, 
+            "QGISUNION_1": {
+                "values": {
+                    "name": "QGISUNION_1", 
+                    "paramsFolded": true, 
+                    "outputs": {}, 
+                    "outputsFolded": true, 
+                    "pos": {
+                        "values": {
+                            "y": 550.7584636625754, 
+                            "x": 1219.6273528885158
                         }, 
                         "class": "point"
                     }, 
                     "dependencies": [], 
                     "params": {
-                        "INPUT": {
+                        "INPUT2": {
                             "values": {
-                                "alg": "QGISREPROJECTLAYER_4", 
+                                "alg": "QGISCREATESPATIALINDEX_3", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
                         }, 
-                        "TOLERANCE": {
+                        "INPUT": {
                             "values": {
-                                "name": "simplify"
+                                "alg": "QGISCREATESPATIALINDEX_2", 
+                                "output": "OUTPUT"
                             }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromInput"
+                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
                         }
                     }, 
                     "active": true, 
-                    "consoleName": "qgis:simplifygeometries", 
-                    "description": "Simplify Natural"
+                    "consoleName": "qgis:union", 
+                    "description": "Union"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }
