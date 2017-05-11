@@ -31,18 +31,25 @@ library(sp)
 #    leisure = park, sports_field, water_park, recreation_ground, quad_bikes, nature_reserve, golf, miniature_golf, marina, golf_course, 
 #    aeroway IS NOT NULL
 # 4. Convert PBF data to Shapefile:
-# ogr2ogr -f "ESRI Shapefile" -t_srs EPSG:27700 -s_srs EPSG:4326 -sql "select * from multipolygons where natural IN ('wetland', 'water', 'heath', 'moor', 'wood', 'upland_fell', 'unimproved_grassland', 'mud', 'grass', 'grassland', 'fell', 'dune', 'coastline', 'beach', 'bay') OR landuse IN ('forest', 'marsh', 'meadow', 'park', 'reservoir', 'scrub', 'waterway', 'greenfield')" wales-natural.shp wales-latest.osm.pbf -overwrite --config ogr_interleaved_reading yes
-# ogr2ogr -dialect sqlite -sql "SELECT natural, ST_Union(geometry) FROM 'wales-natural' GROUP BY natural" wales-natural-2.shp wales-natural.shp -overwrite --config ogr_interleaved_reading yes
+# ogr2ogr -f "ESRI Shapefile" -t_srs EPSG:27700 -s_srs EPSG:4326 -sql "select * from multipolygons where natural IN ('wetland', 'water', 'heath', 'moor', 'wood', 'upland_fell', 'unimproved_grassland', 'mud', 'grass', 'grassland', 'fell', 'dune', 'coastline', 'beach', 'bay')" wales-natural.shp wales-latest.osm.pbf -overwrite --config ogr_interleaved_reading yes
+# ogr2ogr -dialect sqlite -sql "SELECT natural, ST_Union(ST_Buffer(geometry,1.0)) FROM 'wales-natural' GROUP BY natural" wales-natural-2.shp wales-natural.shp -overwrite --config ogr_interleaved_reading yes
 
 # ogr2ogr -f "ESRI Shapefile" -t_srs EPSG:27700 -s_srs EPSG:4326 -sql "select * from lines where waterway IN ('river','canal')" wales-rivers.shp ./OSM/wales-latest.osm.pbf overwrite --config ogr_interleaved_reading yes
 
 # ogr2ogr -f "ESRI Shapefile" -t_srs EPSG:27700 -s_srs EPSG:4326 -sql "select * from multipolygons where landuse IN ('cemetery', 'airfield', 'allotments', 'brownfield', 'churchyard', 'farmland', 'farmyard',  'landfill', 'orchard', 'quarry', 'runway', 'vineyard', 'forest', 'marsh', 'meadow', 'park', 'reservoir', 'scrub', 'waterway', 'greenfield')" wales-landuse.shp wales-latest.osm.pbf overwrite --config ogr_interleaved_reading yes
-# ogr2ogr -dialect sqlite -sql "SELECT landuse, ST_Union(geometry) FROM 'wales-landuse' GROUP BY landuse" wales-landuse-2.shp wales-landuse.shp -overwrite --config ogr_interleaved_reading yes
+# ogr2ogr -dialect sqlite -sql "SELECT landuse, ST_Union(ST_Buffer(geometry,1.0)) FROM 'wales-landuse' GROUP BY landuse" wales-landuse-2.shp wales-landuse.shp -overwrite --config ogr_interleaved_reading yes
 
 # ogr2ogr -f "ESRI Shapefile" -t_srs EPSG:27700 -s_srs EPSG:4326 -sql "select * from multipolygons where leisure IN ('park', 'sports_field', 'water_park', 'recreation_ground', 'quad_bikes', 'nature_reserve', 'golf', 'miniature_golf', 'marina', 'golf_course')" wales-leisure.shp wales-latest.osm.pbf overwrite --config ogr_interleaved_reading yes
-# ogr2ogr -dialect sqlite -sql "SELECT leisure, ST_Union(geometry) FROM 'wales-leisure' GROUP BY leisure" wales-leisure-2.shp wales-leisure.shp -overwrite --config ogr_interleaved_reading yes
+# ogr2ogr -dialect sqlite -sql "SELECT leisure, ST_Union(ST_Buffer(geometry,1.0)) FROM 'wales-leisure' GROUP BY leisure" wales-leisure-2.shp wales-leisure.shp -overwrite --config ogr_interleaved_reading yes
 
 # ogr2ogr -f "ESRI Shapefile" -t_srs EPSG:27700 -s_srs EPSG:4326 -sql "select * from multipolygons where aeroway IS NOT NULL" wales-tags.shp wales-latest.osm.pbf overwrite --config ogr_interleaved_reading yes
+
+# ogr2ogr -f "ESRI Shapefile" wales-all.shp wales-natural-2.shp
+# ogr2ogr -f "ESRI Shapefile" -update -append wales-all.shp wales-landuse-2.shp -nln merge
+# ogr2ogr -f "ESRI Shapefile" -update -append wales-all.shp wales-leisure-2.shp -nln merge
+# ogr2ogr -f "ESRI Shapefile" -update -append wales-all.shp wales-tags.shp -nln merge
+
+# ogr2ogr -dialect sqlite -sql "SELECT 'Union', ST_Union(ST_Buffer(geometry,0.1)) from 'wales-all'" wales-union.shp wales-all.shp overwrite --config ogr_interleaved_reading yes
 
 coastline <- readOGR("./no-sync/land-polygons/", "UK_and_Ireland_Full-EPSG4326-5m")
 landuse   <- readOGR("./no-sync/OSM/", "wales-landuse")
