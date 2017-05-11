@@ -144,9 +144,7 @@
                         }, 
                         "class": "point"
                     }, 
-                    "dependencies": [
-                        "QGISDISSOLVE_1"
-                    ], 
+                    "dependencies": [], 
                     "params": {
                         "INPUT": {
                             "values": {
@@ -158,7 +156,7 @@
                         "IGNORE_INVALID": true, 
                         "OVERLAY": {
                             "values": {
-                                "alg": "QGISDISSOLVE_1", 
+                                "alg": "QGISUNION_1", 
                                 "output": "OUTPUT"
                             }, 
                             "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
@@ -455,53 +453,6 @@
                     "active": true, 
                     "consoleName": "qgis:reprojectlayer", 
                     "description": "Reproject Natural"
-                }, 
-                "class": "processing.modeler.ModelerAlgorithm.Algorithm"
-            }, 
-            "QGISDISSOLVE_1": {
-                "values": {
-                    "name": "QGISDISSOLVE_1", 
-                    "paramsFolded": true, 
-                    "outputs": {
-                        "OUTPUT": {
-                            "values": {
-                                "description": "Dissolved OSM", 
-                                "pos": {
-                                    "values": {
-                                        "y": 685.7584636625754, 
-                                        "x": 1422.6273528885158
-                                    }, 
-                                    "class": "point"
-                                }
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ModelerOutput"
-                        }
-                    }, 
-                    "outputsFolded": true, 
-                    "pos": {
-                        "values": {
-                            "y": 640.7584636625754, 
-                            "x": 1222.6273528885158
-                        }, 
-                        "class": "point"
-                    }, 
-                    "dependencies": [
-                        "QGISUNION_1"
-                    ], 
-                    "params": {
-                        "INPUT": {
-                            "values": {
-                                "alg": "QGISUNION_1", 
-                                "output": "OUTPUT"
-                            }, 
-                            "class": "processing.modeler.ModelerAlgorithm.ValueFromOutput"
-                        }, 
-                        "DISSOLVE_ALL": true, 
-                        "FIELD": null
-                    }, 
-                    "active": true, 
-                    "consoleName": "qgis:dissolve", 
-                    "description": "Dissolve OSM Data"
                 }, 
                 "class": "processing.modeler.ModelerAlgorithm.Algorithm"
             }, 
