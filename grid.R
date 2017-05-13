@@ -17,6 +17,16 @@ library(rgeos)
 library(sp)
 #library(osmar)
 
+# Create bounding box from Shapefile -- 
+# we can then feed this into the OGR
+# query to subset the OSM data by region.
+e <- as(raster::extent(500000, 140000, 550000, 200000), "SpatialPolygons")
+proj4string(e) = CRS("+init=epsg:27700")
+t = spTransform(e, CRS("+init=epsg:4326"))
+extent(t)
+# SUPPORTS: ogr2ogr -t_srs EPSG:27700 -s_srs EPSG:4326 -sql "select * from multipolygons where natural IN ('wetland', 'water', 'heath', 'moor', 'wood', 'upland_fell', 'unimproved_grassland', 'mud', 'grass', 'grassland', 'fell', 'dune', 'coastline', 'beach', 'bay')" -spat -6.044675 51.63855 -0.4446272 54.83485 -f "ESRI Shapefile" test.shp ./OSM/england-latest.osm.pbf -overwrite --config ogr_interleaved_reading yes
+# ogr2ogr -t_srs EPSG:27700 -s_srs EPSG:4326 -spat 500000 140000 505000 160000 -spat_srs EPSG:27700 -f "ESRI Shapefile" test ./OSM/england-latest.osm.pbf -overwrite --config ogr_interleaved_reading yes SHPT=POLYGON
+
 # FILTERING OUT UNLIKELY TO HAVE BEEN BUILT UP AREAS -- 
 # What I'm aiming for here is _excluding_ those parts of
 # Great Britain that are unlikely to have _ever_ been 
