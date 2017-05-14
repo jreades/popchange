@@ -20,11 +20,13 @@ library(sp)
 # Create bounding box from Shapefile -- 
 # we can then feed this into the OGR
 # query to subset the OSM data by region.
+#481115,120145,584414,236650
 e <- as(raster::extent(500000, 140000, 550000, 200000), "SpatialPolygons")
 proj4string(e) = CRS("+init=epsg:27700")
+extent(e)
 t = spTransform(e, CRS("+init=epsg:4326"))
 extent(t)
-# SUPPORTS: ogr2ogr -t_srs EPSG:27700 -s_srs EPSG:4326 -sql "select * from multipolygons where natural IN ('wetland', 'water', 'heath', 'moor', 'wood', 'upland_fell', 'unimproved_grassland', 'mud', 'grass', 'grassland', 'fell', 'dune', 'coastline', 'beach', 'bay')" -spat -6.044675 51.63855 -0.4446272 54.83485 -f "ESRI Shapefile" test.shp ./OSM/england-latest.osm.pbf -overwrite --config ogr_interleaved_reading yes
+# SUPPORTS: ogr2ogr -t_srs EPSG:27700 -s_srs EPSG:4326 -sql "select * from multipolygons where natural IN ('wetland', 'water', 'heath', 'moor', 'wood', 'upland_fell', 'unimproved_grassland', 'mud', 'grass', 'grassland', 'fell', 'dune', 'coastline', 'beach', 'bay')" -clipsrc -6.044675 51.63855 -0.4446272 54.83485 -f "ESRI Shapefile" test ./OSM/england-latest.osm.pbf -overwrite --config ogr_interleaved_reading yes -nlt POLYGON -skipfailures
 # ogr2ogr -t_srs EPSG:27700 -s_srs EPSG:4326 -spat 500000 140000 505000 160000 -spat_srs EPSG:27700 -f "ESRI Shapefile" test ./OSM/england-latest.osm.pbf -overwrite --config ogr_interleaved_reading yes SHPT=POLYGON
 
 # FILTERING OUT UNLIKELY TO HAVE BEEN BUILT UP AREAS -- 
@@ -143,7 +145,7 @@ for (k in ls(osm.classes)) {
     print("     Extracting and reprojecting data from PBF file...")
     print("     This may take between 1-10 minutes.")
     #print(cmd1)
-    system2(c(ogr.lib, cmd1), wait=TRUE)
+    system2(ogr.lib, cmd1, wait=TRUE)
   } else {
     print("     Step 1 file already exists. Skipping.")
   }
@@ -152,7 +154,7 @@ for (k in ls(osm.classes)) {
     print("     Simplifying and performing union on OSM classes...")
     print("     This may take anywhere from 5-45 minutes.")
     #print(cmd2)
-    system2(c(ogr.lib, cmd2), wait=TRUE)
+    system2(ogr.lib, cmd2, wait=TRUE)
   } else {
     print("     Step 2 file already exists. Skipping.")
   }
@@ -180,7 +182,7 @@ for (k in ls(osm.classes)) {
     }
   } else {
     print("     Appending to 'merged' shapefile")
-    system2(c(ogr.lib, file.merge, file.step2, '-append', '-update'), wait=TRUE)
+    system2(ogr.lib, file.merge, file.step2, '-append', '-update', wait=TRUE)
   }
 }
 
