@@ -24,9 +24,21 @@ rm(list = ls())
 # Point open to infer something about population
 # density within the OA/ED/raster grid so I 
 # will attempt to retain that.
+#
+# SETUP: this script expects the following dir
+# structure -- the data directories are not 
+# found in git because of the data volumes 
+# associated with extracting and processing 
+# OSM features.
+#
+# popchange/
+#   no-sync/ # Don't manage content here with Git
+#      OS/   # For Ordnance Survey data
+#      OSM/  # For OSM data
+#      land-polygons/ # Also OSM, but from different source
+#      processed/     # Outputs from gridding process at national and regional levels
 ########################################
-r.filter     <- 'GREATER_LONDON_AUTHORITY' # Region to filter (see FILE_NAME field in Boundary Line data from OS)
-r.filter     <- 'CITY_OF_PLYMOUTH_(B)' 
+r.filter     <- 'London' 
 r.buffer     <- 10000                      # Buffer to draw around region to filter (in metres)
 osm.region   <- 'england'                  # Which bit of Great Britain are we looking at? (matches Geofabrik OSM file name)
 osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)
@@ -37,16 +49,14 @@ g.anchor     <- 10000                      # Round grid min/max x and y to neare
 library(devtools)                          # Needs to be on to use GitHub version of ggplot2
 dev_mode(on = T)
 install_github("hadley/ggplot2")           # Gain access to geom_sf?
-library(ggplot2)                           # for general plotting
+install_github("edzer/sfr")
 
+library(ggplot2)                           # for general plotting
 library(viridis)
 library(rgdal)                             # R wrapper around GDAL/OGR
-# library(ggmap)                          # for fortifying shapefiles
 library(raster)                            # Useful functions for merging/aggregation
-#library(rgeos)
-#library(sp)
 library(DBI)
-library(sf)                                # Replaces sp and does away with need for several older libs
+library(sfr)                               # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
 
 # FILTERING OUT 'UNLIKELY TO HAVE BEEN BUILT UP' AREAS -- 
 # As outlined above... what I'm aiming for here is _excluding_ 
@@ -71,10 +81,12 @@ library(sf)                                # Replaces sp and does away with need
 #       (it's not perfect -- the OS' generalised, clipped boundaries are better)
 #    -> See http://geoportal.statistics.gov.uk/datasets/2039e084c4e8427981514b2a7fdd077e_0 (for 2014 boundaries)
 #
-# 2. Use this to clip the OS Boundary Line data to high-water coastline:
+# 2. If necessary, we can use this to clip the OS Boundary Line data to high-water coastline:
 #    -> See https://www.ordnancesurvey.co.uk/business-and-government/products/boundary-line.html 
 #       (in particular: district_borough_unitary_region.shp)
 #    -> Saved output of this in paste(c(os.path,'UK-Regions-Clipped.shp'),collapse=" ")
+#    -> Alternatively, use the Regions generalised clipped data file to get only GOR
+#       (See http://geoportal.statistics.gov.uk/datasets/f99b145881724e15a04a8a113544dfc5_2)
 #
 # 3. Generate land use data from OSM data (download os pbf):
 #    -> GeoFabrik nightly builds: http://download.geofabrik.de/europe/great-britain.html
@@ -108,12 +120,13 @@ osm.classes$not_null = c('aeroway') # IS NOT NULL -- these are a bit different
 # Step 1: Filter for the region based on boundary line with a buffer
 # First read in the shapefile, using the path to the shapefile and the shapefile name minus the
 # extension as arguments
-shp <- st_read(paste(c(os.path, "UK-Regions-Clipped-10m.shp"), collapse="/"), stringsAsFactors=T)
+shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=T)
 
 # Check projection
 shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
 print(st_crs(shp))
 
+# Very slow for some reason
 ggplot(shp) +
   geom_sf(aes(fill=AREA)) +
   scale_fill_viridis("Area") +
@@ -127,25 +140,36 @@ if (is.null(r.filter)) {
   # Next the shapefile has to be converted to a dataframe for use in ggplot2
   r.shp <- st_buffer(st_union(shp), r.buffer, nQuadSegs=100)
 } else {
-  print(paste("Filtering FILE_NAME attribute on",r.filter))
+  print(paste("Filtering for",r.filter))
   
   # Next the shapefile has to be converted to a dataframe for use in ggplot2
-  r.shp <- st_buffer(st_union(shp[shp$FILE_NAME==r.filter,]), r.buffer, nQuadSegs=100)
+  # Use this for filtering on districts: 
+  #r.shp <- st_buffer(st_union(shp[shp$FILE_NAME==r.filter,]), r.buffer, nQuadSegs=100)
+  # Use this for filtering on GOR regions:
+  r.shp <- st_buffer(shp[shp$rgn16nm==r.filter,], r.buffer, nQuadSegs=100)
 }
-st_write(r.shp, dsn=paste(c(os.path,'filterregion.shp'), collapse="/"), layer='filterregion', delete_dsn=TRUE)
+#st_write(r.shp, dsn=paste(c(os.path,'filterregion.shp'), collapse="/"), layer='filterregion', delete_dsn=TRUE)
 
 # Create bounding box from buffer -- 
 # we can then feed this into the OGR
 # query to subset the OSM data by region.
+
+# What are the boundaries of the region?
 xmin = floor(st_bbox(r.shp)['xmin']/g.anchor)*g.anchor
 xmax = ceiling(st_bbox(r.shp)['xmax']/g.anchor)*g.anchor
 ymin = floor(st_bbox(r.shp)['ymin']/g.anchor)*g.anchor
 ymax = ceiling(st_bbox(r.shp)['ymax']/g.anchor)*g.anchor
+
+# Create an extent from these and then transform
+# to EPSG:4326 so that we can work out the coordinates
+# to use for clipping the OSM data
 e <- as(raster::extent(xmin, xmax, ymin, ymax), "SpatialPolygons")
 proj4string(e) = CRS("+init=epsg:27700")
 e.sf = st_as_sf(e)
 e.st = st_transform(e.sf, '+init=epsg:4326')
 st_bbox(e.st)
+
+# For validation
 st_write(e.st, paste(c(os.path,'filterbounds.shp'),collapse="/"), layer='filterbounds', delete_dsn=TRUE)
 
 xmin = round(st_bbox(e.st)['xmin'], digits=4)
@@ -160,18 +184,23 @@ ymax = round(st_bbox(e.st)['ymax'], digits=4)
         sep = "", collapse = "-")
 }
 
+# Use this to avoid namespace clashes
+# when we write the output to disk --
+# if we've filtered a region from inside
+# the nation-state (e.g. the GLA from within
+# England) then this will modify the 'the.region'
+# variable so include this information.
 the.region = osm.region
 if (!is.null(r.filter)) {
   the.region = gsub("-[(].[])]","",paste(the.region,.simpleCap(r.filter),sep="-"),perl=TRUE)
 }
 print(the.region)
 
-file.osm   = paste(c(osm.path, gsub('{region}',osm.region,'{region}-latest.osm.pbf', perl=TRUE)), collapse="/")
-file.clip  = paste(c(osm.path, gsub('{region}',the.region,'{region}-clip.shp', perl=TRUE)), collapse="/")
-#osm.clip = c('-f "SQLite"', paste(c('-clipsrc',xmin,ymin,xmax,ymax)), file.clip, file.osm, '-dsco SPATIALITE=YES', '-nlt PROMOTE_TO_MULTI', '-skipfailures', '-overwrite', '--config ogr_interleaved_reading yes')
-osm.clip = c('-f "ESRI Shapefile"', '-sql "SELECT * FROM multipolygons"', paste(c('-clipsrc',xmin,ymin,xmax,ymax)), file.clip, file.osm, '-skipfailures', '-overwrite', '--config ogr_interleaved_reading yes')
+file.osm  = paste(c(osm.path, gsub('{region}',osm.region,'{region}-latest.osm.pbf', perl=TRUE)), collapse="/")
+file.clip = paste(c(osm.path, gsub('{region}',the.region,'{region}-clip.shp', perl=TRUE)), collapse="/")
+osm.clip  = c('-f "ESRI Shapefile"', '-sql "SELECT * FROM multipolygons"', paste(c('-clipsrc',xmin,ymin,xmax,ymax)), file.clip, file.osm, '-skipfailures', '-overwrite', '--config ogr_interleaved_reading yes')
 
-
+print("Clipping OSM data source (if r.filter specified)")
 print(paste(c(ogr.lib, osm.clip),collapse=" "))
 system2(ogr.lib, osm.clip, wait=TRUE)
 
@@ -182,11 +211,11 @@ for (k in ls(osm.classes)) {
   file.step1 = paste(c(out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step1.shp', perl=TRUE), perl=TRUE)), collapse="/")
   file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
   
-  osm.extract = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326', '-sql "select * from multipolygons where {key} IN ({val})"', file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
-  osm.alternate.extract = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326', '-sql "select * from multipolygons where {val}"', file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
+  osm.extract = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326', '-where "{key} IN ({val})"', file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
+  osm.alternate.extract = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326', '-where "{val}"', file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
   
-  osm.union = c('-dialect sqlite', gsub('{buffer}',osm.buffer,gsub('{simplify}',osm.simplify,'-sql "SELECT {key} AS UseClass, ST_Union(ST_Buffer(ST_Simplify(geometry,{simplify}),{buffer})) FROM \'{region}-{key}-step1\' GROUP BY {key}"',perl=TRUE),perl=TRUE), file.step2, file.step1, '-overwrite', '--config ogr_interleaved_reading yes') # -clipsrc 480000 140000 580000 220000 -skipfailures
-  osm.alternate.union = c('-dialect sqlite', gsub('{buffer}',osm.buffer,gsub('{simplify}',osm.simplify,'-sql "SELECT \'Other\' AS UseClass, ST_Union(ST_Buffer(ST_Simplify(geometry,{simplify}),{buffer})) FROM \'{region}-{key}-step1\'"',perl=TRUE),perl=TRUE), file.step2, file.step1, '-overwrite', '--config ogr_interleaved_reading yes') # -clipsrc 480000 140000 580000 220000 -skipfailures
+  osm.union = c('-dialect sqlite', gsub('{buffer}',osm.buffer,gsub('{simplify}',osm.simplify,'-sql "SELECT {key} AS UseClass, ST_Union(ST_Buffer(ST_Simplify(geometry,{simplify}),{buffer})) FROM \'{region}-{key}-step1\' GROUP BY {key}"',perl=TRUE),perl=TRUE), file.step2, file.step1, '-overwrite', '--config ogr_interleaved_reading yes') 
+  osm.alternate.union = c('-dialect sqlite', gsub('{buffer}',osm.buffer,gsub('{simplify}',osm.simplify,'-sql "SELECT \'Other\' AS UseClass, ST_Union(ST_Buffer(ST_Simplify(geometry,{simplify}),{buffer})) FROM \'{region}-{key}-step1\'"',perl=TRUE),perl=TRUE), file.step2, file.step1, '-overwrite', '--config ogr_interleaved_reading yes') 
   
   if (k == 'not_null') {
     val = paste(paste("(", osm.classes[[k]], " IS NOT NULL", ")", sep=""), collapse=" OR ")
@@ -198,11 +227,11 @@ for (k in ls(osm.classes)) {
     cmd2 = osm.union 
   }
   
-  cmd1 = gsub('{val}', val, gsub('{key}', k, gsub('{region}', osm.region, cmd1, perl=TRUE), perl=TRUE), perl=TRUE)
-  cmd2 = gsub('{val}', val, gsub('{key}', k, gsub('{region}', osm.region, cmd2, perl=TRUE), perl=TRUE), perl=TRUE)
+  cmd1 = gsub('{val}', val, gsub('{key}', k, gsub('{region}', the.region, cmd1, perl=TRUE), perl=TRUE), perl=TRUE)
+  cmd2 = gsub('{val}', val, gsub('{key}', k, gsub('{region}', the.region, cmd2, perl=TRUE), perl=TRUE), perl=TRUE)
   
   if (!file.exists(file.step1)) {
-    print("     Extracting and reprojecting data from PBF file...")
+    print("     Extracting and reprojecting data from clip file...")
     print("     This may take between 1-10 minutes.")
     print(paste(c(ogr.lib, cmd1), collapse=" "))
     system2(ogr.lib, cmd1, wait=TRUE)
@@ -212,7 +241,7 @@ for (k in ls(osm.classes)) {
   
   if (!file.exists(file.step2)) {
     print("     Simplifying and performing union on OSM classes...")
-    print("     This may take anywhere from 5-300 minutes.")
+    print("     This may take anywhere from 2-200 minutes.")
     print(paste(c(ogr.lib, cmd2), collapse=" "))
     system2(ogr.lib, cmd2, wait=TRUE)
   } else {
@@ -222,7 +251,8 @@ for (k in ls(osm.classes)) {
 
 # And merge them into a single shapefile while subsetting 
 # down to a region based on the bounding box
-file.merge = paste(c(out.path, gsub('{region}',osm.region,'{region}-merge.shp', perl=TRUE)), collapse="/")
+file.merge = paste(c(out.path, gsub('{region}',the.region,'{region}-merge.shp', perl=TRUE)), collapse="/")
+cmd3 = c()
 for (k in ls(osm.classes)) {
   print(paste("Processing OSM class:", k))
   
@@ -235,7 +265,7 @@ for (k in ls(osm.classes)) {
   #print(paste(ogr.lib, file.merge, file.step2, '-dialect sqlite', sql.query, '-f "ESRI Shapefile"'))
   #system2(ogr.lib, file.merge, file.step2,'-dialect sqlite', sql.query, '-f "ESRI Shapefile"')
   
-  file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',osm.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+  file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
   if (!file.exists(file.merge)) {
     print("     Creating 'merged' shapefile...")
     for (ext in c('.shp','.shx','.prj','.dbf')) {
@@ -243,20 +273,25 @@ for (k in ls(osm.classes)) {
     }
   } else {
     print("     Appending to 'merged' shapefile")
-    system2(ogr.lib, file.merge, file.step2, '-append', '-update', wait=TRUE)
+    print(paste(c(ogr.lib, file.merge, file.step2, '-append', '-update', ';'), collapse=" "))
+    #system2(ogr.lib, file.merge, file.step2, '-append', '-update', wait=TRUE)
+    cmd3 = c(cmd3, ogr.lib, file.merge, file.step2, '-append', '-update', ';')
   }
 }
+print(paste(cmd3, collapse=" "))
+system2(cmd3) # This seems to work better than trying to get R to wait on each merge call
+print(paste("Merged data in",file.merge))
 
 # Before combining them all in a single multipolygon
 # that we can use as a filter on the EDs and OAs
-file.final = paste(c(out.path, gsub('{region}',osm.region,'{region}-final.shp', perl=TRUE)), collapse="/")
-final.sql  = gsub('{region}', osm.region, '"SELECT \'Union\' AS \'Filter\', ST_Union(geometry) from \'{region}-merge\'"', perl=TRUE)
+file.final = paste(c(out.path, gsub('{region}',the.region,'{region}-final.shp', perl=TRUE)), collapse="/")
+final.sql  = gsub('{region}', the.region, '"SELECT \'Union\' AS \'Filter\', ST_Union(geometry) from \'{region}-merge\'"', perl=TRUE)
 final.cmd  = c('-sql', final.sql, '-dialect','sqlite', file.final, file.merge, '-overwrite', '--config ogr_interleaved_reading yes')
 
 print(paste(c(ogr.lib, final.cmd), collapse=" "))
 # May need to be run from command line -- 
 # or may need a completely different approach
-#system2(ogr.lib, final.cmd)
+system2(ogr.lib, final.cmd, wait=TRUE)
 
 # ogr2ogr -f "ESRI Shapefile" -t_srs EPSG:27700 -s_srs EPSG:4326 -sql "select * from lines where waterway IN ('river','canal')" wales-rivers.shp ./OSM/wales-latest.osm.pbf overwrite --config ogr_interleaved_reading yes
 
