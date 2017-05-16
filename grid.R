@@ -38,7 +38,7 @@ rm(list = ls())
 #      land-polygons/ # Also OSM, but from different source
 #      processed/     # Outputs from gridding process at national and regional levels
 ########################################
-r.filter     <- 'London' 
+r.filter     <- 'South West'               # London, North West, North East, Yorkshire and The Humber, East Midlands, West Midlands, East of England, South East, South West
 r.buffer     <- 10000                      # Buffer to draw around region to filter (in metres)
 osm.region   <- 'england'                  # Which bit of Great Britain are we looking at? (matches Geofabrik OSM file name)
 osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)
@@ -46,17 +46,18 @@ osm.simplify <- 10.0                       # Simplify distance to use on OSM fea
 g.resolution <- 1000                       # Grid resolution (in metres)
 g.anchor     <- 10000                      # Round grid min/max x and y to nearest... (in metres)
 
-library(devtools)                          # Needs to be on to use GitHub version of ggplot2
-dev_mode(on = T)
-install_github("hadley/ggplot2")           # Gain access to geom_sf?
-install_github("edzer/sfr")
-
-library(ggplot2)                           # for general plotting
 library(viridis)
 library(rgdal)                             # R wrapper around GDAL/OGR
 library(raster)                            # Useful functions for merging/aggregation
 library(DBI)
-library(sfr)                               # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
+library(sf)                                # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
+
+library(devtools)                          # Needs to be on to use GitHub version of ggplot2
+dev_mode(on = T)
+install_github("hadley/ggplot2")           # Gain access to geom_sf?
+#install_github("edzer/sfr")
+
+library(ggplot2)                           # for general plotting
 
 # FILTERING OUT 'UNLIKELY TO HAVE BEEN BUILT UP' AREAS -- 
 # As outlined above... what I'm aiming for here is _excluding_ 
@@ -127,11 +128,11 @@ shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
 print(st_crs(shp))
 
 # Very slow for some reason
-ggplot(shp) +
-  geom_sf(aes(fill=AREA)) +
-  scale_fill_viridis("Area") +
-  ggtitle("UK Districts") +
-  theme_bw()
+# ggplot(shp) +
+#   geom_sf(aes(fill=AREA)) +
+#   scale_fill_viridis("Area") +
+#   ggtitle("UK Districts") +
+#   theme_bw()
 
 if (is.null(r.filter)) {
   print("No filter on input shape.")
@@ -164,8 +165,9 @@ ymax = ceiling(st_bbox(r.shp)['ymax']/g.anchor)*g.anchor
 # to EPSG:4326 so that we can work out the coordinates
 # to use for clipping the OSM data
 e <- as(raster::extent(xmin, xmax, ymin, ymax), "SpatialPolygons")
-proj4string(e) = CRS("+init=epsg:27700")
+#proj4string(e) = CRS("+init=epsg:27700")
 e.sf = st_as_sf(e)
+e.sf <- e.sf %>% st_set_crs(NA) %>% st_set_crs(27700)
 e.st = st_transform(e.sf, '+init=epsg:4326')
 st_bbox(e.st)
 
@@ -179,9 +181,9 @@ ymax = round(st_bbox(e.st)['ymax'], digits=4)
 
 # Useful for making it easier to read
 .simpleCap <- function(x) {
-  s <- strsplit(tolower(x), "_")[[1]]
+  s <- strsplit(tolower(x), "[_ ]")[[1]]
   paste(toupper(substring(s, 1, 1)), substring(s, 2),
-        sep = "", collapse = "-")
+        sep = "", collapse = "_")
 }
 
 # Use this to avoid namespace clashes
