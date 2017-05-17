@@ -38,7 +38,8 @@ rm(list = ls())
 #      land-polygons/ # Also OSM, but from different source
 #      processed/     # Outputs from gridding process at national and regional levels
 ########################################
-r.filter     <- 'South West'               # London, North West, North East, Yorkshire and The Humber, East Midlands, West Midlands, East of England, South East, South West
+r.all        <- c('London','North West','North East','Yorkshire and The Humber','East Midlands','West Midlands','East of England','South East','South West')
+r.filter     <- 'South East'               
 r.buffer     <- 10000                      # Buffer to draw around region to filter (in metres)
 osm.region   <- 'england'                  # Which bit of Great Britain are we looking at? (matches Geofabrik OSM file name)
 osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)
@@ -56,8 +57,7 @@ library(devtools)                          # Needs to be on to use GitHub versio
 dev_mode(on = T)
 install_github("hadley/ggplot2")           # Gain access to geom_sf?
 #install_github("edzer/sfr")
-
-library(ggplot2)                           # for general plotting
+#library(ggplot2)                           # for general plotting
 
 # FILTERING OUT 'UNLIKELY TO HAVE BEEN BUILT UP' AREAS -- 
 # As outlined above... what I'm aiming for here is _excluding_ 
@@ -111,12 +111,21 @@ out.path = c(getwd(),'no-sync','processed')
 
 # Set up the classes that we want to pull from the OSM PBF
 # file. Each of these corresponds to a column configured 
-# via the osmconf.ini file.
+# via the osmconf.ini file. In truth, the way OSM works 
+# means that these columns are not strictly enforced (so,
+# for instance, common can show up in leisure too). This 
+# is why we merge them all and search for all of them in 
+# all of the columns that we check.
 osm.classes = new.env()
-osm.classes$natural = c('wetland', 'water', 'heath', 'moor', 'wood', 'upland_fell', 'unimproved_grassland', 'mud', 'grass', 'grassland', 'fell', 'dune', 'coastline', 'beach', 'bay')
+osm.classes$natural = c('wetland', 'water', 'heath', 'moor', 'wood', 'upland_fell', 'unimproved_grassland', 'mud', 'grass', 'grassland', 'fell', 'dune', 'coastline', 'beach', 'bay', 'common')
 osm.classes$landuse = c('cemetery', 'airfield', 'allotments', 'brownfield', 'churchyard', 'farmland', 'farmyard',  'landfill', 'orchard', 'quarry', 'runway', 'vineyard', 'forest', 'marsh', 'meadow', 'park', 'reservoir', 'scrub', 'waterway', 'greenfield') 
 osm.classes$leisure = c('park', 'sports_field', 'water_park', 'recreation_ground', 'quad_bikes', 'nature_reserve', 'golf', 'miniature_golf', 'marina', 'golf_course') 
 osm.classes$not_null = c('aeroway') # IS NOT NULL -- these are a bit different
+osm.classes$other_tags = c('%Forest"', '%Common"%', '%Heath"%') # Other: "designation"=>"Swinley Forest"
+
+osm.classes$natural = unique(c(osm.classes$natural, osm.classes$landuse, osm.classes$leisure))
+osm.classes$landuse = osm.classes$natural
+osm.classes$leisure = osm.classes$natural
 
 # Step 1: Filter for the region based on boundary line with a buffer
 # First read in the shapefile, using the path to the shapefile and the shapefile name minus the
@@ -171,8 +180,8 @@ e.sf <- e.sf %>% st_set_crs(NA) %>% st_set_crs(27700)
 e.st = st_transform(e.sf, '+init=epsg:4326')
 st_bbox(e.st)
 
-# For validation
-st_write(e.st, paste(c(os.path,'filterbounds.shp'),collapse="/"), layer='filterbounds', delete_dsn=TRUE)
+# For validation of bbox -- if needed
+# st_write(e.st, paste(c(os.path,'filterbounds.shp'),collapse="/"), layer='filterbounds', delete_dsn=TRUE)
 
 xmin = round(st_bbox(e.st)['xmin'], digits=4)
 xmax = round(st_bbox(e.st)['xmax'], digits=4)
@@ -202,9 +211,14 @@ file.osm  = paste(c(osm.path, gsub('{region}',osm.region,'{region}-latest.osm.pb
 file.clip = paste(c(osm.path, gsub('{region}',the.region,'{region}-clip.shp', perl=TRUE)), collapse="/")
 osm.clip  = c('-f "ESRI Shapefile"', '-sql "SELECT * FROM multipolygons"', paste(c('-clipsrc',xmin,ymin,xmax,ymax)), file.clip, file.osm, '-skipfailures', '-overwrite', '--config ogr_interleaved_reading yes')
 
-print("Clipping OSM data source (if r.filter specified)")
-print(paste(c(ogr.lib, osm.clip),collapse=" "))
-system2(ogr.lib, osm.clip, wait=TRUE)
+# Step 0: Subset the OSM file for a region (usually only done with England)
+if (!file.exists(file.clip)) {
+  print("Clipping OSM data source (if r.filter specified)")
+  print(paste(c(ogr.lib, osm.clip),collapse=" "))
+  system2(ogr.lib, osm.clip, wait=TRUE)
+} else {
+  print("Have already clipped OSM data to this region, skipping this operation...")
+}
 
 # Step 1: Select OSM classes and extract to reprojected shapefile
 for (k in ls(osm.classes)) {
