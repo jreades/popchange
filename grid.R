@@ -275,14 +275,28 @@ for (k in ls(osm.classes)) {
     }
   } else {
     print("     Appending to 'merged' shapefile")
-    print(paste(c(ogr.lib, file.merge, file.step2, '-append', '-update', ';'), collapse=" "))
+    print(paste(c(ogr.lib, file.merge, file.step2, '-append', '-update;'), collapse=" "))
     #system2(ogr.lib, file.merge, file.step2, '-append', '-update', wait=TRUE)
-    cmd3 = c(cmd3, ogr.lib, file.merge, file.step2, '-append', '-update', ';')
+    cmd3 = c(cmd3, ogr.lib, file.merge, file.step2, '-append', '-update',';')
   }
 }
+# Remove the last ';' as extraneous
+cmd3[-length(cmd3)]
+# Useful output
 print(paste(cmd3, collapse=" "))
+#######################
+# Looks like this is best written to a 
+# shell script file and then executed 
+# from R rather than trying to make it a 
+# single system2() call from R.
 system2(cmd3) # This seems to work better than trying to get R to wait on each merge call
 print(paste("Merged data in",file.merge))
+
+#write(paste0("grid_m_", columnNames[c], " <- matrix(grid_IDd$", columnNames[c], "WghPop, nrow = nrow(grid_m_ID), ncol = ncol(grid_m_ID), byrow = FALSE)"), "tmp/tmp.R")
+#source that script file (to evaluate and load output)
+#source("tmp/tmp.R")
+#remove the script file for tidiness
+#file.remove("tmp/tmp.R")
 
 # Before combining them all in a single multipolygon
 # that we can use as a filter on the EDs and OAs
