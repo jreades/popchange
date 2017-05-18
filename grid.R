@@ -39,9 +39,9 @@ rm(list = ls())
 #      processed/     # Outputs from gridding process at national and regional levels
 ########################################
 r.all        <- c('London','North West','North East','Yorkshire and The Humber','East Midlands','West Midlands','East of England','South East','South West')
-r.filter     <- 'South East'               
+r.filter     <- NA               # Set to NA for Scotland and Wales          
 r.buffer     <- 10000                      # Buffer to draw around region to filter (in metres)
-osm.region   <- 'england'                  # Which bit of Great Britain are we looking at? (matches Geofabrik OSM file name)
+osm.region   <- 'Scotland'                 # Which bit of Great Britain? (matches Geofabrik OSM file name %>% ucfirst: England, Scotland, Wales)
 osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)
 osm.simplify <- 10.0                       # Simplify distance to use on OSM features to help speed up calculations (in metres)
 g.resolution <- 1000                       # Grid resolution (in metres)
@@ -53,9 +53,9 @@ library(raster)                            # Useful functions for merging/aggreg
 library(DBI)
 library(sf)                                # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
 
-library(devtools)                          # Needs to be on to use GitHub version of ggplot2
-dev_mode(on = T)
-install_github("hadley/ggplot2")           # Gain access to geom_sf?
+#library(devtools)                          # Needs to be on to use GitHub version of ggplot2
+#dev_mode(on = T)
+#install_github("hadley/ggplot2")           # Gain access to geom_sf?
 #install_github("edzer/sfr")
 #library(ggplot2)                           # for general plotting
 
@@ -123,6 +123,8 @@ osm.classes$leisure = c('park', 'sports_field', 'water_park', 'recreation_ground
 osm.classes$not_null = c('aeroway') # IS NOT NULL -- these are a bit different
 osm.classes$other_tags = c('%Forest"', '%Common"%', '%Heath"%') # Other: "designation"=>"Swinley Forest"
 
+# Merge all classes to deal with inconsistency in tagging
+# by OSM contributors
 osm.classes$natural = unique(c(osm.classes$natural, osm.classes$landuse, osm.classes$leisure))
 osm.classes$landuse = osm.classes$natural
 osm.classes$leisure = osm.classes$natural
@@ -130,11 +132,6 @@ osm.classes$leisure = osm.classes$natural
 # Step 1: Filter for the region based on boundary line with a buffer
 # First read in the shapefile, using the path to the shapefile and the shapefile name minus the
 # extension as arguments
-shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=T)
-
-# Check projection
-shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
-print(st_crs(shp))
 
 # Very slow for some reason
 # ggplot(shp) +
@@ -143,14 +140,27 @@ print(st_crs(shp))
 #   ggtitle("UK Districts") +
 #   theme_bw()
 
-if (is.null(r.filter)) {
+if (is.na(r.filter)) {
   print("No filter on input shape.")
   print("Processing entire zone.")
   
-  # Next the shapefile has to be converted to a dataframe for use in ggplot2
-  r.shp <- st_buffer(st_union(shp), r.buffer, nQuadSegs=100)
+  shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_GB_BGC.shp"), collapse="/"), stringsAsFactors=T)
+  
+  # Check projection
+  shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
+  print(st_crs(shp))
+  
+  # Extract country from shapefile:
+  r.shp <- shp[shp$CTRY11NM==osm.region,]
+  
 } else {
   print(paste("Filtering for",r.filter))
+  
+  shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=T)
+  
+  # Check projection
+  shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
+  print(st_crs(shp))
   
   # Next the shapefile has to be converted to a dataframe for use in ggplot2
   # Use this for filtering on districts: 
@@ -158,6 +168,7 @@ if (is.null(r.filter)) {
   # Use this for filtering on GOR regions:
   r.shp <- st_buffer(shp[shp$rgn16nm==r.filter,], r.buffer, nQuadSegs=100)
 }
+# Useful for auditing, not necessary in producting
 #st_write(r.shp, dsn=paste(c(os.path,'filterregion.shp'), collapse="/"), layer='filterregion', delete_dsn=TRUE)
 
 # Create bounding box from buffer -- 
@@ -192,7 +203,7 @@ ymax = round(st_bbox(e.st)['ymax'], digits=4)
 .simpleCap <- function(x) {
   s <- strsplit(tolower(x), "[_ ]")[[1]]
   paste(toupper(substring(s, 1, 1)), substring(s, 2),
-        sep = "", collapse = "_")
+          sep = "", collapse = "_")
 }
 
 # Use this to avoid namespace clashes
@@ -202,20 +213,28 @@ ymax = round(st_bbox(e.st)['ymax'], digits=4)
 # England) then this will modify the 'the.region'
 # variable so include this information.
 the.region = osm.region
-if (!is.null(r.filter)) {
+if (!is.na(r.filter)) {
   the.region = gsub("-[(].[])]","",paste(the.region,.simpleCap(r.filter),sep="-"),perl=TRUE)
 }
 print(the.region)
 
-file.osm  = paste(c(osm.path, gsub('{region}',osm.region,'{region}-latest.osm.pbf', perl=TRUE)), collapse="/")
-file.clip = paste(c(osm.path, gsub('{region}',the.region,'{region}-clip.shp', perl=TRUE)), collapse="/")
-osm.clip  = c('-f "ESRI Shapefile"', '-sql "SELECT * FROM multipolygons"', paste(c('-clipsrc',xmin,ymin,xmax,ymax)), file.clip, file.osm, '-skipfailures', '-overwrite', '--config ogr_interleaved_reading yes')
+file.osm   = paste(c(osm.path, gsub('{region}',tolower(osm.region),'{region}-latest.osm.pbf', perl=TRUE)), collapse="/")
+file.clip  = paste(c(osm.path, gsub('{region}',the.region,'{region}-clip.shp', perl=TRUE)), collapse="/")
+osm.clip   = c('-f "ESRI Shapefile"', '-sql "SELECT * FROM multipolygons"', paste(c('-clipsrc',xmin,ymin,xmax,ymax)), file.clip, file.osm, '-skipfailures', '-overwrite', '--config ogr_interleaved_reading yes')
+osm.noclip = c('-f "ESRI Shapefile"', '-sql "SELECT * FROM multipolygons"', file.clip, file.osm, '-skipfailures', '-overwrite', '--config ogr_interleaved_reading yes')
 
 # Step 0: Subset the OSM file for a region (usually only done with England)
 if (!file.exists(file.clip)) {
-  print("Clipping OSM data source (if r.filter specified)")
-  print(paste(c(ogr.lib, osm.clip),collapse=" "))
-  system2(ogr.lib, osm.clip, wait=TRUE)
+  if (is.na(r.filter)) {
+    print("Converting OSM multipolygon data to shapefile...")
+    print(paste(c(ogr.lib, osm.noclip),collapse=" "))
+    system2(ogr.lib, osm.noclip, wait=TRUE)
+  } else {
+    print("Converting OSM multipolygon data to shapefile...")
+    print("and clipping OSM data source using bbox extracted from r.filter")
+    print(paste(c(ogr.lib, osm.clip),collapse=" "))
+    system2(ogr.lib, osm.clip, wait=TRUE)
+  }
 } else {
   print("Have already clipped OSM data to this region, skipping this operation...")
 }
