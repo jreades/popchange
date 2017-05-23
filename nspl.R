@@ -97,14 +97,19 @@ dt$buasd11 <- factor(dt$buasd11, exclude=c(""))
 
 # There's not much from pre-1980 that is reliable
 # as that's connected to the introduction of GridLink
-ggplot(dt) + geom_bar( aes(x=dointr), stat="count" ) + ggtitle("Date of Introduction") + ylab("Year") + xlab("Count")
-ggplot(dt) + geom_bar( aes(x=doterm), stat="count" ) + ggtitle("Date of Termination") + ylab("Year") + xlab("Count")
+#ggplot(dt) + geom_bar( aes(x=dointr), stat="count" ) + ggtitle("Date of Introduction") + ylab("Year") + xlab("Count")
+#ggplot(dt) + geom_bar( aes(x=doterm), stat="count" ) + ggtitle("Date of Termination") + ylab("Year") + xlab("Count")
 
 .simpleCap <- function(x) {
   s <- strsplit(tolower(x), "[_ ]")[[1]]
   paste(toupper(substring(s, 1, 1)), substring(s, 2),
         sep = "", collapse = "_")
 }
+
+# We currently only process data for Great Britain
+# and drop it for NI, Channel Islands & Isle of Man
+dt <- dt[ !dt$ctry %in% c('Northern Ireland','Channel Islands','Isle of Man'), ]
+dt <- dt[ !dt$osgrdind==9, ]
 
 r.countries  <- c('England', 'Scotland', 'Wales')
 r.regions    <- c('London','North West','North East','Yorkshire and The Humber','East Midlands','West Midlands','East of England','South East','South West') # Applies to England only / NA for Scotland and Wales at this time
@@ -148,22 +153,37 @@ for (r in r.iter) {
   }
   
   # Region-Buffered shape
+  cat("  Buffering region to control for edge effects.")
   rb.shp <- st_buffer(r.shp, r.buffer)
-}
-
-# Use the region-buffered shape to select stuff falling 
-# within the buffered boundary at each time-step for our
-# analysis
-dt.sf = st_as_sf(dt, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
-
-.tst <- function(x) {
-  #print(x)
-  if (length(x) == 0) { 
-    FALSE
-  } else { 
-    TRUE
+  
+  # Use the region-buffered shape to select postcodes falling 
+  # within the buffered boundary at each time-step for our
+  # analysis
+  dt.sf = st_as_sf(dt, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
+  
+  .flatten <- function(x) {
+    if (length(x) == 0) { 
+      FALSE
+    } else { 
+      TRUE
+    }
+  }
+  # Save the output of st_within and then 
+  # convert that to a logical vector using
+  # sapply and the .flatten function
+  cat("  Selecting postcodes falling within regional buffer.")
+  is.within    <- st_within(dt.sf, rb.shp)
+  dt.region    <- subset(dt, sapply(is.within, .flatten))
+  
+  # Note: No viable data from 1971
+  for (y in c(1981, 1991, 2001, 2011)) {
+    cat(paste("    Processing postcodes available in year:",y),"\n")
+    y.as_date = as.Date(paste(c(y,'01','01'),collapse="-"))
+    dt.region.y = subset(dt.region, dt.region$dointr < y.as_date & (is.na(dt.region$doterm) | dt.region$doterm < y.as_date))
+    dt.region.y.sf <- st_as_sf(dt.region.y, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
+    st_write(dt.region.y.sf, paste(c(nspl.path, paste(c(the.label,y,"NSPL.shp"),collapse="_")), collapse="/"), delete_layer=TRUE)
+    #plot(dt.region.sf)
   }
 }
-tmp <- st_within(dt.sf, rb.shp)
-tmp2 <- sapply(tmp, .tst)
-unique(tmp2)
+
+cat("Done...\n")
