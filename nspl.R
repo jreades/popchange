@@ -156,4 +156,14 @@ for (r in r.iter) {
 # analysis
 dt.sf = st_as_sf(dt, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
 
+.tst <- function(x) {
+  #print(x)
+  if (length(x) == 0) { 
+    FALSE
+  } else { 
+    TRUE
+  }
+}
 tmp <- st_within(dt.sf, rb.shp)
+tmp2 <- sapply(tmp, .tst)
+unique(tmp2)
