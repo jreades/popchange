@@ -140,6 +140,12 @@ osm.classes$natural = unique(c(osm.classes$natural, osm.classes$landuse, osm.cla
 osm.classes$landuse = osm.classes$natural
 osm.classes$leisure = osm.classes$natural
 
+.simpleCap <- function(x) {
+  s <- strsplit(tolower(x), "[_ ]")[[1]]
+  paste(toupper(substring(s, 1, 1)), substring(s, 2),
+        sep = "", collapse = "_")
+}
+
 # Enables us to loop over all large regions
 # in the dataset without having to load each
 # individually

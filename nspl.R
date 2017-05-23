@@ -12,12 +12,15 @@ rm(list = ls())
 #
 ########################################
 library(data.table)
+library(ggplot2)
+library(zoo)
 library(DBI)
 library(sf)  # Replaces sp and does away with need for several older libs (sf == production)
 
 # We assume that spatial data is stored under the current 
 # working directory but in a no-sync directory since these
 # files are enormous.
+os.path   = c(getwd(),'no-sync','OS')
 nspl.path = c(getwd(),'no-sync','NSPL')
 raw.file  = 'NSPL_FEB_2017_UK.csv'
 raw.path  = c(nspl.path,'NSPL_FEB_2017_UK','Data')
@@ -68,6 +71,89 @@ cat(paste("NSPL file dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 # - lat: latitutde to 6 decimal places
 # - long: longitude to 6 decimal places
 ###################
-to.drop = c('pcd','pcd2','cty','laua','ward','hlthau','hro','pcon','eer','teclec','ttwa','pct','nuts','lsoa11','msoa11','wz11','ccg','bua','lep1','lep2','pfa','imd')
+to.drop = c('pcd','pcd2','cty','laua','ward','hlthau','hro','pcon','eer','teclec','ttwa','pct','nuts','lsoa11','msoa11','wz11','ccg','bua11','lep1','lep2','pfa','imd')
 dt[,c(to.drop):=NULL]
 
+# Convert introduction/termination to date class
+dt$dointr <- as.Date(as.yearmon(dt$dointr,'%Y%m'))
+dt$doterm <- as.Date(as.yearmon(dt$doterm,'%Y%m'))
+
+# Convert usertype to factor
+dt$usertype <- factor(dt$usertype, labels=c('Small','Large'))
+
+# Convert grid info to numeric
+dt$oseast1m <- as.numeric(dt$oseast1m)
+dt$osnrth1m <- as.numeric(dt$osnrth1m)
+dt$osgrdind <- as.numeric(dt$osgrdind)
+
+# Convert country, GoR and Park to factor
+dt$ctry <- factor(dt$ctry, labels=c('England','Channel Islands','Isle of Man','Northern Ireland','Scotland','Wales'), exclude=c("")) # E92000001 L93000001 M83000003 N92000002 S92000003 W92000004
+dt$gor  <- factor(dt$gor, labels=c('North East','North West','Yorkshire and The Humber','East Midlands','West Midlands','East of England','London','South East','South est','Channel Islands','Isle of Man','Northern Ireland','Scotland','Wales'), exclude=c("")) # E12000001 E12000002 E12000003 E12000004 E12000005 E12000006 E12000007 E12000008 E12000009 L99999999 M99999999 N99999999 S99999999 W99999999
+dt$park <- factor(dt$park, exclude=c(""))
+
+# Convert Rural/Urban and BUA Sub-Division indicator to factor
+dt$ru11ind <- factor(dt$ru11ind, exclude=c(""))
+dt$buasd11 <- factor(dt$buasd11, exclude=c(""))
+
+# There's not much from pre-1980 that is reliable
+# as that's connected to the introduction of GridLink
+ggplot(dt) + geom_bar( aes(x=dointr), stat="count" ) + ggtitle("Date of Introduction") + ylab("Year") + xlab("Count")
+ggplot(dt) + geom_bar( aes(x=doterm), stat="count" ) + ggtitle("Date of Termination") + ylab("Year") + xlab("Count")
+
+.simpleCap <- function(x) {
+  s <- strsplit(tolower(x), "[_ ]")[[1]]
+  paste(toupper(substring(s, 1, 1)), substring(s, 2),
+        sep = "", collapse = "_")
+}
+
+r.countries  <- c('England', 'Scotland', 'Wales')
+r.regions    <- c('London','North West','North East','Yorkshire and The Humber','East Midlands','West Midlands','East of England','South East','South West') # Applies to England only / NA for Scotland and Wales at this time
+r.iter       <- c(paste(r.countries[1],r.regions),r.countries[2:length(r.countries)])
+r.buffer     <- 10000 
+
+for (r in r.iter) {
+  the.label <- .simpleCap(r)
+  the.country <- strsplit(r, " ")[[1]][1]
+  the.region <- paste(strsplit(r, " ")[[1]][-1], collapse=" ")
+  
+  cat(paste("\n","======================\n","Processing data for:", the.country,"\n"))
+  
+  if (length(the.region) == 0) { # No filtering for regions
+    cat("  No filter. Processing entire country.\n")
+    
+    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_GB_BGC.shp"), collapse="/"), stringsAsFactors=T)
+    
+    # Set projection (issues with reading in even properly projected files)
+    shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
+    #print(st_crs(shp)) # Check reprojection
+    
+    # Extract country from shapefile
+    r.shp <- shp[shp$CTRY11NM==the.country,]
+    
+  } else { # Filtering for regions
+    r.filter.name <- sub("^[^ ]+ ","",r, perl=TRUE)
+    cat(paste("  Processing internal GoR region:", the.region,"\n")) 
+    
+    shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=T)
+    
+    # Set projection
+    shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
+    #print(st_crs(shp))
+    
+    # Next the shapefile has to be converted to a dataframe for use in ggplot2
+    # Would need to implemented this way for filtering on districts: 
+    #r.shp <- shp[shp$FILE_NAME==r.filter,]
+    # Use this for filtering on GOR regions:
+    r.shp <- shp[shp$rgn16nm==the.region,]
+  }
+  
+  # Region-Buffered shape
+  rb.shp <- st_buffer(r.shp, r.buffer)
+}
+
+# Use the region-buffered shape to select stuff falling 
+# within the buffered boundary at each time-step for our
+# analysis
+dt.sf = st_as_sf(dt, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
+
+tmp <- st_within(dt.sf, rb.shp)
