@@ -123,7 +123,7 @@ for (r in r.iter) {
   
   cat(paste("\n","======================\n","Processing data for:", the.country,"\n"))
   
-  if (length(the.region) == 0) { # No filtering for regions
+  if (length(the.region) == 0 | the.region=="") { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
     shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_GB_BGC.shp"), collapse="/"), stringsAsFactors=T)
@@ -176,10 +176,11 @@ for (r in r.iter) {
   dt.region    <- subset(dt, sapply(is.within, .flatten))
   
   # Note: No viable data from 1971
+  overwrite=TRUE
   for (y in c(1981, 1991, 2001, 2011)) {
     cat(paste("    Processing postcodes available in year:",y),"\n")
     region.y.path = paste(c(nspl.path, paste(c(the.label,y,"NSPL.shp"),collapse="_")), collapse="/")
-    if (file.exists(region.y.path)) {
+    if (file.exists(region.y.path) & overwrite==FALSE) {
       cat("    Skipping since output file already exists:\n        ",region.y.path,"\n")
     } else {
       y.as_date = as.Date(paste(c(y,'01','01'),collapse="-"))
