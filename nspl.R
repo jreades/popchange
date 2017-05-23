@@ -178,11 +178,17 @@ for (r in r.iter) {
   # Note: No viable data from 1971
   for (y in c(1981, 1991, 2001, 2011)) {
     cat(paste("    Processing postcodes available in year:",y),"\n")
-    y.as_date = as.Date(paste(c(y,'01','01'),collapse="-"))
-    dt.region.y = subset(dt.region, dt.region$dointr < y.as_date & (is.na(dt.region$doterm) | dt.region$doterm < y.as_date))
-    dt.region.y.sf <- st_as_sf(dt.region.y, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
-    st_write(dt.region.y.sf, paste(c(nspl.path, paste(c(the.label,y,"NSPL.shp"),collapse="_")), collapse="/"), delete_layer=TRUE)
-    #plot(dt.region.sf)
+    region.y.path = paste(c(nspl.path, paste(c(the.label,y,"NSPL.shp"),collapse="_")), collapse="/")
+    if (file.exists(region.y.path)) {
+      cat("    Skipping since output file already exists:\n        ",region.y.path,"\n")
+    } else {
+      y.as_date = as.Date(paste(c(y,'01','01'),collapse="-"))
+      dt.region.y = subset(dt.region, dt.region$dointr < y.as_date & (is.na(dt.region$doterm) | dt.region$doterm < y.as_date))
+      cat("    Have",dim(dt.region.y)[1],"postcodes\n")
+      dt.region.y.sf <- st_as_sf(dt.region.y, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
+      st_write(dt.region.y.sf, region.y.path, delete_layer=TRUE)
+      #plot(dt.region.sf)
+    }
   }
 }
 
