@@ -20,6 +20,16 @@ rm(list = ls())
 # density within the OA/ED/raster grid so I 
 # will attempt to retain that.
 #
+# LONG-TERM: based on some issues I'm having with
+# R/R-Studio and system2 calls, my guess is that 
+# R has some kind of timeout on long-running unix
+# commands. A better long-term approach would, 
+# instead of having commands fired off from R, have
+# R write a shell script that is fired at the end
+# of the R script. That would be (oddly) more robust
+# agains the timeouts *and* it would make auditing
+# a bit easier.
+#
 # SETUP: this script expects the following dir
 # structure -- the data directories are not 
 # found in git because of the data volumes 
@@ -318,7 +328,12 @@ for (r in r.iter) {
   # shell script file and then executed 
   # from R rather than trying to make it a 
   # single system2() call from R.
+  if (! file.exists("merge.sh")) {
+    write("#!/bin/bash", file="merge.sh")
+  }
+  write(paste('echo "Starting merging: ',the.region,'"',sep=""), file="merge.sh", append=TRUE)
   write(paste(cmd3, collapse=" "), file="merge.sh", append=TRUE)
+  write(paste('echo "Done merging: ',the.region,'"',sep=""), file="merge.sh", append=TRUE)
 }
 
 # Step 4: Do the merge using a shell script to 

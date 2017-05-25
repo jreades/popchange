@@ -71,7 +71,7 @@ cat(paste("NSPL file dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 # - lat: latitutde to 6 decimal places
 # - long: longitude to 6 decimal places
 ###################
-to.drop = c('pcd','pcd2','cty','laua','ward','hlthau','hro','pcon','eer','teclec','ttwa','pct','nuts','lsoa11','msoa11','wz11','ccg','bua11','lep1','lep2','pfa','imd')
+to.drop = c('pcd','pcd2','cty','laua','ward','hlthau','hro','pcon','eer','teclec','ttwa','pct','nuts','lsoa11','msoa11','wz11','ccg','bua11','buasd11','lep1','lep2','pfa','imd')
 dt[,c(to.drop):=NULL]
 
 # Convert introduction/termination to date class
@@ -109,7 +109,11 @@ dt$buasd11 <- factor(dt$buasd11, exclude=c(""))
 # We currently only process data for Great Britain
 # and drop it for NI, Channel Islands & Isle of Man
 dt <- dt[ !dt$ctry %in% c('Northern Ireland','Channel Islands','Isle of Man'), ]
+# These ones don't have a useable location
 dt <- dt[ !dt$osgrdind==9, ]
+# And these ones are 'large' users of postcodes so
+# presumably not residential
+dt <- dt[ !dt$usertype==1, ]
 
 r.countries  <- c('England', 'Scotland', 'Wales')
 r.regions    <- c('London','North West','North East','Yorkshire and The Humber','East Midlands','West Midlands','East of England','South East','South West') # Applies to England only / NA for Scotland and Wales at this time
