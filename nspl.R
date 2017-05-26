@@ -130,6 +130,7 @@ r.countries  <- c('England', 'Scotland', 'Wales')
 r.regions    <- c('London','North West','North East','Yorkshire and The Humber','East Midlands','West Midlands','East of England','South East','South West') # Applies to England only / NA for Scotland and Wales at this time
 r.iter       <- c(paste(r.countries[1],r.regions),r.countries[2:length(r.countries)])
 r.buffer     <- 10000 
+r.simplify   <- 500
 
 for (r in r.iter) {
   the.label <- .simpleCap(r)
@@ -168,8 +169,8 @@ for (r in r.iter) {
   }
   
   # Region-Buffered shape
-  cat("  Buffering region to control for edge effects.")
-  rb.shp <- st_buffer(r.shp, r.buffer)
+  cat("  Simplifying and buffering region to control for edge effects.")
+  rb.shp <- st_buffer(st_simplify(r.shp, r.simplify), r.buffer)
   
   # Use the region-buffered shape to select postcodes falling 
   # within the buffered boundary at each time-step for our
