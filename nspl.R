@@ -87,18 +87,27 @@ dt$osnrth1m <- as.numeric(dt$osnrth1m)
 dt$osgrdind <- as.numeric(dt$osgrdind)
 
 # Convert country, GoR and Park to factor
-dt$ctry <- factor(dt$ctry, labels=c('England','Channel Islands','Isle of Man','Northern Ireland','Scotland','Wales'), exclude=c("")) # E92000001 L93000001 M83000003 N92000002 S92000003 W92000004
-dt$gor  <- factor(dt$gor, labels=c('North East','North West','Yorkshire and The Humber','East Midlands','West Midlands','East of England','London','South East','South est','Channel Islands','Isle of Man','Northern Ireland','Scotland','Wales'), exclude=c("")) # E12000001 E12000002 E12000003 E12000004 E12000005 E12000006 E12000007 E12000008 E12000009 L99999999 M99999999 N99999999 S99999999 W99999999
+dt$ctry <- factor(dt$ctry, levels=c('E92000001','L93000001','M83000003','N92000002','S92000003','W92000004'), labels=c('England','Channel Islands','Isle of Man','Northern Ireland','Scotland','Wales'), exclude=c(""))
+dt$gor  <- factor(dt$gor, levels=c('E12000001','E12000002','E12000003','E12000004','E12000005','E12000006','E12000007','E12000008','E12000009','L99999999','M99999999','N99999999','S99999999','W99999999'), labels=c('North East','North West','Yorkshire and The Humber','East Midlands','West Midlands','East of England','London','South East','South est','Channel Islands','Isle of Man','Northern Ireland','Scotland','Wales'), exclude=c(""))
 dt$park <- factor(dt$park, exclude=c(""))
 
-# Convert Rural/Urban and BUA Sub-Division indicator to factor
+# Convert Rural/Urban indicator to factor
 dt$ru11ind <- factor(dt$ru11ind, exclude=c(""))
-dt$buasd11 <- factor(dt$buasd11, exclude=c(""))
 
 # There's not much from pre-1980 that is reliable
 # as that's connected to the introduction of GridLink
-#ggplot(dt) + geom_bar( aes(x=dointr), stat="count" ) + ggtitle("Date of Introduction") + ylab("Year") + xlab("Count")
-#ggplot(dt) + geom_bar( aes(x=doterm), stat="count" ) + ggtitle("Date of Termination") + ylab("Year") + xlab("Count")
+ggplot(dt, aes(x=dointr)) + 
+  geom_bar(stat="count") + 
+  ggtitle("Date of Introduction") + 
+  ylab("Count") + 
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(dt, aes(x=doterm)) + 
+  geom_bar(stat="count") + 
+  ggtitle("Date of Termination") + 
+  ylab("Count") + 
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 .simpleCap <- function(x) {
   s <- strsplit(tolower(x), "[_ ]")[[1]]
@@ -113,7 +122,9 @@ dt <- dt[ !dt$ctry %in% c('Northern Ireland','Channel Islands','Isle of Man'), ]
 dt <- dt[ !dt$osgrdind==9, ]
 # And these ones are 'large' users of postcodes so
 # presumably not residential
-dt <- dt[ !dt$usertype==1, ]
+dt <- dt[ !dt$usertype=='Large', ]
+
+cat(paste("NSPL final dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 
 r.countries  <- c('England', 'Scotland', 'Wales')
 r.regions    <- c('London','North West','North East','Yorkshire and The Humber','East Midlands','West Midlands','East of England','South East','South West') # Applies to England only / NA for Scotland and Wales at this time
@@ -187,9 +198,12 @@ for (r in r.iter) {
     if (file.exists(region.y.path) & overwrite==FALSE) {
       cat("    Skipping since output file already exists:\n        ",region.y.path,"\n")
     } else {
-      y.as_date = as.Date(paste(c(y,'01','01'),collapse="-"))
-      dt.region.y = subset(dt.region, dt.region$dointr < y.as_date & (is.na(dt.region$doterm) | dt.region$doterm < y.as_date))
-      cat("    Have",dim(dt.region.y)[1],"postcodes\n")
+      # Census Day is normally late-March or early-April
+      y.as_date = as.Date(paste(c(y,'03','15'),collapse="-"))
+      # We could do this in one go, but it's more legible not to
+      dt.region.y <- subset(dt.region, dt.region$dointr <= y.as_date)
+      dt.region.y <- subset(dt.region.y, (is.na(dt.region.y$doterm) | dt.region.y$doterm > y.as_date))
+      cat("    Have",dim(dt.region.y)[1],"active postcodes in",y,"\n")
       dt.region.y.sf <- st_as_sf(dt.region.y, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
       st_write(dt.region.y.sf, region.y.path, delete_layer=TRUE)
       #plot(dt.region.sf)
