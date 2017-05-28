@@ -30,6 +30,7 @@ r.countries  <- c('England', 'Scotland', 'Wales')
 r.regions    <- c('London','North West','North East','Yorkshire and The Humber','East Midlands','West Midlands','East of England','South East','South West') # Applies to England only / NA for Scotland and Wales at this time
 r.iter       <- c(paste(r.countries[1],r.regions),r.countries[2:length(r.countries)])
 r.buffer     <- 10000                      # Buffer to draw around region to filter (in metres)
+r.simplify   <- 500
 
 # Create raster grid of arbitrary size:
 # https://gis.stackexchange.com/questions/154537/generating-grid-shapefile-in-r
@@ -38,7 +39,7 @@ r.buffer     <- 10000                      # Buffer to draw around region to fil
 # output no matter what the user specifies -- in other words, we don't 
 # want grids starting at an Easting of 519,728 so it makes sense to round
 # down (to be below and to the right) to the nearest... 10k?
-g.resolution <- 750                        # Grid resolution (in metres)
+g.resolution <- 500                        # Grid resolution (in metres)
 g.anchor     <- 10000                      # Anchor grid min/max x and y at nearest... (in metres)
 
 library(rgdal)                             # R wrapper around GDAL/OGR
@@ -56,6 +57,12 @@ ogr.lib = '/Library/Frameworks/GDAL.framework/Programs/ogr2ogr'
 os.path = c(getwd(),'no-sync','OS')
 osm.path = c(getwd(),'no-sync','OSM')
 out.path = c(getwd(),'no-sync','grid')
+
+.simpleCap <- function(x) {
+  s <- strsplit(tolower(x), "[_ ]")[[1]]
+  paste(toupper(substring(s, 1, 1)), substring(s, 2),
+        sep = "", collapse = "_")
+}
 
 for (r in r.iter) {
   the.label <- .simpleCap(r)
@@ -93,6 +100,10 @@ for (r in r.iter) {
     r.shp <- shp[shp$rgn16nm==the.region,]
   }
   
+  # Simplify and buffer
+  cat(" Simplifying and buffering region to speed up next stages\n")
+  r.shp <- st_buffer(st_simplify(r.shp, r.simplify), r.buffer)
+  
   cat("  Working out extent of region and rounding up/down to nearest ",g.anchor,"m\n")
 
   r.ext = st_bbox(r.shp)
@@ -120,16 +131,12 @@ for (r in r.iter) {
   # convert that to a logical vector using
   # sapply and the .flatten function
   cat("  Selecting cells falling within regional buffer.")
-  is.within    <- st_intersects(sp.r, st_buffer(r.shp, r.buffer)) 
+  is.within    <- st_intersects(sp.r, r.shp) 
   sp.region    <- subset(sp.r, sapply(is.within, .flatten))
   
-  st_write(sp.region, paste(c(out.path,'bounds.shp'),collapse="/"), layer='bounds', delete_dsn=TRUE)
-  
-  # Clip the grid to the regions polygons
-  clip <- gIntersection(r.shp.unitary, sp.r, byid=TRUE, drop_lower_td=TRUE)
+  # And write out the buffered grid ref
+  st_write(sp.region, paste(c(out.path,paste(the.label,'.shp',sep="")),collapse="/"), layer='bounds', delete_dsn=TRUE)
 }
-
-
 
 # Knock out zones with no development
 #erase(spdf1,  spdf2)
