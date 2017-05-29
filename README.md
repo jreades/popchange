@@ -15,7 +15,16 @@ The forked repo is designed to support full replication using _**only**_ open co
 
 ## Generating Your Own Grids
 
-For information on how to use the code to generate your own grids, please see: [Process for Running Code](process-for-running-code.md).
+For information on how to use the code to generate your own grids, please see: [CODE.md](CODE.md).
 
-## Notes to Self:
-- Need to think what could be done with line features (roads and large rivers) to help suppress areas.
+# Notes for Improvements
+
+These are 'notes to self' on larger issues not yet fully addressed but which would streamline and/or improve the allocation process.
+
+## OSM-to-Bash Script
+
+Based on some issues I'm having with R/R-Studio and long-running system2 calls, my guess is that R has some kind of timeout on unix commands. A better long-term approach would, instead of having commands fired off from R, have R write a shell script that is fired at the end of the R script. That would be (oddly) more robust agains the timeouts *and* it would make auditing/re-running code a bit easier.
+
+## Line Features in OSM
+
+Current, we only process polygon features from the OSM data files, so this excludes rivers and roads from our grid weighting process. Somehow OSM 'knows' how to render river and road widths from the centreline, but I can't quite figure it out (yet). So we need to think what could be done with line features (roads and large rivers) to help suppress 'non-buildable' areas.

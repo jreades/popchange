@@ -12,149 +12,21 @@ rm(list = ls())
 # OAs and need to apportion them across more than
 # one grid cell.
 #
-# It won't be perfect, but it should be more 
-# robust than existing approaches which are
-# based solely on smoothing and assignment 
-# by centroid. I _do_ like the use of the
-# NSPL to infer something about population
-# density within the OA/ED/raster grid so I 
-# will attempt to retain that.
-#
-# LONG-TERM: based on some issues I'm having with
-# R/R-Studio and system2 calls, my guess is that 
-# R has some kind of timeout on long-running unix
-# commands. A better long-term approach would, 
-# instead of having commands fired off from R, have
-# R write a shell script that is fired at the end
-# of the R script. That would be (oddly) more robust
-# agains the timeouts *and* it would make auditing
-# a bit easier.
-#
-# SETUP: this script expects the following dir
-# structure -- the data directories are not 
-# found in git because of the data volumes 
-# associated with extracting and processing 
-# OSM features.
-#
-# popchange/
-#   no-sync/ # Don't manage content here with Git
-#      OS/   # For Ordnance Survey data
-#      OSM/  # For OSM data
-#      land-polygons/ # Also OSM, but from different source
-#      processed/     # Outputs from gridding process at national and regional levels
-#
-# FILTERING OUT 'UNLIKELY TO HAVE BEEN BUILT UP' AREAS -- 
-# As outlined above... what I'm aiming for here is _excluding_ 
-# those parts of Great Britain that are unlikely to have 
-# been developed and then reverted to an undeveloped land use
-# within the timeframe of a downloadable Census.
-#
-# The only widely available source of high-res *open* data on 
-# such areas is OSM. The Ordnance Survey has some very nice 
-# open data for Great Britain but that doesn't generalise well
-# (especially for the locations of buildings). As well, their
-# boundary line polygon data is not clipped to the high-water 
-# mark, so that's another place we'll get 'development' creeping 
-# into places it won't have happened. Meanwhile, the polyline
-# high-water data can't be used to clip the boundary polygons.
-# 
-# Weeee, this is fun.
-#
 # So, on a conceptual level, what we do here is:
-# 1. Get the high-water coastline of Britain from the Generalised, Clipped Country boundaries from the OS, or from OSM:
-#    -> See http://geoportal.statistics.gov.uk/datasets/2039e084c4e8427981514b2a7fdd077e_0 (for 2014 boundaries)
-#    -> See http://openstreetmapdata.com/data/land-polygons 
-#       (it's not perfect -- the OS' generalised, clipped boundaries are better -- but it's totally open)
-#
-# 2. Use this to clip the administrative area boundaries:
-#    -> See http://geoportal.statistics.gov.uk/datasets/f99b145881724e15a04a8a113544dfc5_2
-#       (For England you can use the Regions generalised clipped data file to get only GOR:
-#        Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp)
-#    -> See https://www.ordnancesurvey.co.uk/business-and-government/products/boundary-line.html 
-#       (in particular: district_borough_unitary_region.shp for getting smaller areas within countries)
-#    -> I have done some additional clipping to remove the upper reaches of the Thames near London and similar
-#
-# 3. Generate land use data from OSM data (download as pbf file):
-#    -> GeoFabrik nightly builds: http://download.geofabrik.de/europe/great-britain.html
-#
-# 4. Combine this land use data into a single file that suppresses 
-#    areas from the later population distribution function.
+# 1. Get the high-water coastline of Britain from the 
+#    Generalised, Clipped Country boundaries from the OS
+# 2. Use this to clip the administrative area boundaries 
+#    for the countries/regions to the high-water line
+# 3. Extract land use data from OSM data
+# 4. Combine this land use data into a single file that 
+#    suppresses areas from the later population distribution 
+#    function.
 ########################################
-# The strings here should match the Geofabrik OSM file name 
-# (allowing for %>% ucfirst these are England, Scotland, Wales).
-r.countries  <- c('England', 'Scotland', 'Wales')
 
-# For England there is so much data that it makes sense 
-# to break it down into regions. Even if our approach 
-# below is a little inefficient (the bounding box for
-# the South East actually includes all of London!) it 
-# reduces the overall processing power required to 
-# achieve the outputs and also theoretically enables
-# it to be parallelised. We do not need to do this for
-# Scotland and Wales, although if we dove below the GoR
-# scale then we could use the district boundaries to 
-# speed this up still further (although at the cost of 
-# many more outputs to track and manage).
-r.regions    <- c('London','North West','North East','Yorkshire and The Humber','East Midlands','West Midlands','East of England','South East','South West') # Applies to England only / NA for Scotland and Wales at this time
-
-# We use the combination to generate an iterator.
-r.iter       <- c(paste(r.countries[1],r.regions),r.countries[2:length(r.countries)])
-r.buffer     <- 10000                      # Buffer to draw around region to filter (in metres)
-osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)
-osm.simplify <- 10.0                       # Simplify distance to use on OSM features to help speed up calculations (in metres)
-
-library(rgdal)                             # R wrapper around GDAL/OGR
-library(raster)                            # Useful functions for merging/aggregation
+library(rgdal)   # R wrapper around GDAL/OGR
+library(raster)  # Useful functions for merging/aggregation
 library(DBI)
-library(sf)                                # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
-
-# Where to find ogr2ogr -- on my system this is the OSX 
-# location when installed from the fantastic KyngChaos web site
-ogr.lib = '/Library/Frameworks/GDAL.framework/Programs/ogr2ogr'
-
-# We assume that spatial data is stored under the current 
-# working directory but in a no-sync directory since these
-# files are enormous.
-os.path = c(getwd(),'no-sync','OS')
-osm.path = c(getwd(),'no-sync','OSM')
-out.path = c(getwd(),'no-sync','processed')
-
-# Set up the classes that we want to pull from the OSM PBF
-# file. Each of these corresponds to a column configured 
-# via the osmconf.ini file. In truth, the way OSM works 
-# means that these columns are not strictly enforced (so,
-# for instance, common can show up in leisure too). This 
-# is why we merge them all and search for all of them in 
-# all of the columns that we check.
-#
-# Note: it would be tempting to include some major features
-# like national parks in this process; however, in the UK it
-# is possible to have development within a national park (e.g.
-# Aviemore within Cairngorms National Park; various
-# within Peak District National Park) so I have deliberately
-# left this land use out of the data pull.
-osm.classes = new.env()
-osm.classes$natural = c('wetland', 'water', 'heath', 'moor', 'wood', 'upland_fell', 'unimproved_grassland', 'mud', 'grass', 'grassland', 'fell', 'dune', 'coastline', 'beach', 'bay', 'common', 'scrub')
-osm.classes$landuse = c('cemetery', 'airfield', 'allotments', 'brownfield', 'churchyard', 'farmland', 'farmyard',  'landfill', 'orchard', 'quarry', 'runway', 'vineyard', 'forest', 'marsh', 'meadow', 'park', 'reservoir', 'scrub', 'waterway', 'greenfield', 'village_green', 'playground') 
-osm.classes$leisure = c('park', 'sports_field', 'water_park', 'recreation_ground', 'quad_bikes', 'nature_reserve', 'golf', 'miniature_golf', 'marina', 'golf_course', 'pitch', 'track') 
-# These are amenity IS NOT NULL and these are NOT IN...
-osm.classes$amenity = c('student_accomodation','retirement_home','nursing_home','hospice')
-# These are NOT NULL...
-osm.classes$not_null = c('aeroway') 
-# This *could* be useful in theory but doesn't seem to add much value in practice
-#osm.classes$other_tags = c('%Forest%', '%Common%', '%Heath%') # Based on the Other field: "designation"=>"Swinley Forest"
-
-# Merge all classes to deal with inconsistency in tagging
-# by OSM contributors
-osm.classes$natural = unique(c(osm.classes$natural, osm.classes$landuse, osm.classes$leisure))
-osm.classes$landuse = osm.classes$natural
-osm.classes$leisure = osm.classes$natural
-
-.simpleCap <- function(x) {
-  s <- strsplit(tolower(x), "[_ ]")[[1]]
-  paste(toupper(substring(s, 1, 1)), substring(s, 2),
-        sep = "", collapse = "_")
-}
+library(sf)      # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
 
 # Enables us to loop over all large regions
 # in the dataset without having to load each
@@ -261,8 +133,8 @@ for (r in r.iter) {
   for (k in ls(osm.classes)) {
     print(paste("Processing OSM class:", k))
     
-    file.step1 = paste(c(out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step1.shp', perl=TRUE), perl=TRUE)), collapse="/")
-    file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step1 = paste(c(osm.out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step1.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step2 = paste(c(osm.out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
     
     osm.extract = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326', '-where "{key} IN ({val})"', file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
     osm.alternate.extract = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326', '-where "{val}"', file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
@@ -303,12 +175,12 @@ for (r in r.iter) {
   }
   
   # Step 3: Merge them into a single shapefile 
-  file.merge = paste(c(out.path, gsub('{region}',the.region,'{region}-merge.shp', perl=TRUE)), collapse="/")
+  file.merge = paste(c(osm.out.path, gsub('{region}',the.region,'{region}-merge.shp', perl=TRUE)), collapse="/")
   cmd3 = c()
   for (k in ls(osm.classes)) {
     print(paste("Processing OSM class:", k))
     
-    file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step2 = paste(c(osm.out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
     if (!file.exists(file.merge)) {
       print("     Creating 'merged' shapefile...")
       for (ext in c('.shp','.shx','.prj','.dbf')) {
@@ -346,7 +218,7 @@ system2('/bin/sh', file.merge, wait=TRUE)
 
 # Step 5: Combine everything into a single filter
 
-file.final = paste(c(out.path, gsub('{region}',the.region,'{region}-final.shp', perl=TRUE)), collapse="/")
+file.final = paste(c(osm.out.path, gsub('{region}',the.region,'{region}-final.shp', perl=TRUE)), collapse="/")
 final.sql  = gsub('{region}', the.region, '"SELECT \'Union\' AS \'Filter\', ST_Union(geometry) from \'{region}-merge\'"', perl=TRUE)
 final.cmd  = c('-sql', final.sql, '-dialect','sqlite', file.final, file.merge, '-overwrite', '--config ogr_interleaved_reading yes')
 

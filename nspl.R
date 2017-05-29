@@ -11,6 +11,8 @@ rm(list = ls())
 # available testing and research.
 #
 ########################################
+source('config.R')
+
 library(data.table)
 library(ggplot2)
 library(zoo)
@@ -20,8 +22,6 @@ library(sf)  # Replaces sp and does away with need for several older libs (sf ==
 # We assume that spatial data is stored under the current 
 # working directory but in a no-sync directory since these
 # files are enormous.
-os.path   = c(getwd(),'no-sync','OS')
-nspl.path = c(getwd(),'no-sync','NSPL')
 raw.file  = 'NSPL_FEB_2017_UK.csv'
 raw.path  = c(nspl.path,'NSPL_FEB_2017_UK','Data')
 
@@ -109,12 +109,6 @@ ggplot(dt, aes(x=doterm)) +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
-.simpleCap <- function(x) {
-  s <- strsplit(tolower(x), "[_ ]")[[1]]
-  paste(toupper(substring(s, 1, 1)), substring(s, 2),
-        sep = "", collapse = "_")
-}
-
 # We currently only process data for Great Britain
 # and drop it for NI, Channel Islands & Isle of Man
 dt <- dt[ !dt$ctry %in% c('Northern Ireland','Channel Islands','Isle of Man'), ]
@@ -125,12 +119,6 @@ dt <- dt[ !dt$osgrdind==9, ]
 dt <- dt[ !dt$usertype=='Large', ]
 
 cat(paste("NSPL final dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
-
-r.countries  <- c('England', 'Scotland', 'Wales')
-r.regions    <- c('London','North West','North East','Yorkshire and The Humber','East Midlands','West Midlands','East of England','South East','South West') # Applies to England only / NA for Scotland and Wales at this time
-r.iter       <- c(paste(r.countries[1],r.regions),r.countries[2:length(r.countries)])
-r.buffer     <- 10000 
-r.simplify   <- 500
 
 for (r in r.iter) {
   the.label <- .simpleCap(r)

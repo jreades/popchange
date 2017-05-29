@@ -54,6 +54,16 @@ For simplicty's sake, we use the PBF resources provided by GeoFabrik:
 
 These files will need to be placed in the correct directory (and they should all have names as per the original downloaded file) so that the scripts can find them.
 
+### Why Not Use OS OpenData?
+
+Increasingly, the OS provides high-resolution open data for non-commercial (and commercial) applications, so why not use, say, the buildings layer from the OS Local data? There are two reasons for this:
+
+1. Because the building-level data is broken up by grid tile and zipped together with a host of other features. Consequently, downloading this data for all of Great Britain would entail downloading many GB of data, most of which we don't actually need, and the portions of which we do need balloon the in-memory process into many GB as wel!
+
+2. Becase the buildings are actually changing and we have no history in the OS's data set of when a particular building was constructed. Consequently, it makes more sense to _exclude_ land uses that are incompatible with development (forst, reservoirs, etc.) from the weighting of the grid instead of _including_ only those areas that we think were built upon.
+
+These two issues push us towards using the OSM data instead: it's more manageable to download and process, and it's more compatible with land use analysis. An _additional_ benefit of this approach is the gain we make in terms of potential comparability/reuse across countries. Right now the process as developed is only for Great Britain, but in principle it should be possible to fork/update the code to run anywhere else that has OSM coverage and where we can work out a fairly reliable ontology for land use.
+
 ### Filtering Out Areas
 
 What we're aiming for here is _excluding_ those parts of Great Britain that are unlikely to have been developed, and to then have reverted to an undeveloped land within the timeframe of a downloadable Census (i.e. 1971 onwards). So we wouldn't expect marsh to emerge on land that was previously used for housing, for instance.

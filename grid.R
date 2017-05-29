@@ -1,68 +1,18 @@
 rm(list = ls())
 #########################################
 # Creates a grid of arbitrary resolution 
-# against a selected region from within Great 
-# Britain.
-#
-# The idea is to try to make a fully replicable
-# process drawing solely on open data and a FOSS
-# stack. This script should be run *after* osm.R
-# since that is what creates the 'sieve' through
-# which we'll filter out raster cells that can't
-# have any people in them. This hsould improve the
-# population allocation process later that makes 
-# use of the nspl.R outputs.
-#
-# SETUP: this script expects the following dir
-# structure -- the data directories are not 
-# found in git because of the data volumes 
-# associated with extracting and processing 
-# OSM features.
-#
-# popchange/
-#   no-sync/ # Don't manage content here with Git
-#      OS/   # For Ordnance Survey data
-#      OSM/  # For OSM data
-#      land-polygons/ # Also OSM, but from different source
-#      processed/     # Outputs from gridding process at national and regional levels
+# for Scotland, Wales, and the GoR regions
+# of England.
 ########################################
-r.countries  <- c('England', 'Scotland', 'Wales')
-r.regions    <- c('London','North West','North East','Yorkshire and The Humber','East Midlands','West Midlands','East of England','South East','South West') # Applies to England only / NA for Scotland and Wales at this time
-r.iter       <- c(paste(r.countries[1],r.regions),r.countries[2:length(r.countries)])
-r.buffer     <- 10000                      # Buffer to draw around region to filter (in metres)
-r.simplify   <- 500
+source('config.R')
 
 # Create raster grid of arbitrary size:
 # https://gis.stackexchange.com/questions/154537/generating-grid-shapefile-in-r
 
-# We need to work out xmin and ymin such that we get a fairly consistent
-# output no matter what the user specifies -- in other words, we don't 
-# want grids starting at an Easting of 519,728 so it makes sense to round
-# down (to be below and to the right) to the nearest... 10k?
-g.resolution <- 500                        # Grid resolution (in metres)
-g.anchor     <- 10000                      # Anchor grid min/max x and y at nearest... (in metres)
-
-library(rgdal)                             # R wrapper around GDAL/OGR
-library(raster)                            # Useful functions for merging/aggregation
-library(DBI)
-library(sf)                                # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
-
-# Where to find ogr2ogr -- this is the OSX location when installed
-# from the fantastic KyngChaos web site
-ogr.lib = '/Library/Frameworks/GDAL.framework/Programs/ogr2ogr'
-
-# We assume that spatial data is stored under the current 
-# working directory but in a no-sync directory since these
-# files are enormous.
-os.path = c(getwd(),'no-sync','OS')
-osm.path = c(getwd(),'no-sync','OSM')
-out.path = c(getwd(),'no-sync','grid')
-
-.simpleCap <- function(x) {
-  s <- strsplit(tolower(x), "[_ ]")[[1]]
-  paste(toupper(substring(s, 1, 1)), substring(s, 2),
-        sep = "", collapse = "_")
-}
+library(rgdal)   # R wrapper around GDAL/OGR
+library(raster)  # Useful functions for merging/aggregation
+library(DBI)     # Required by sf
+library(sf)      # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
 
 for (r in r.iter) {
   the.label <- .simpleCap(r)
@@ -135,7 +85,7 @@ for (r in r.iter) {
   sp.region    <- subset(sp.r, sapply(is.within, .flatten))
   
   # And write out the buffered grid ref
-  st_write(sp.region, paste(c(out.path,paste(the.label,'.shp',sep="")),collapse="/"), layer='bounds', delete_dsn=TRUE)
+  st_write(sp.region, paste(c(grid.out.path,paste(the.label,'.shp',sep="")),collapse="/"), layer='bounds', delete_dsn=TRUE)
 }
 
 # Knock out zones with no development
