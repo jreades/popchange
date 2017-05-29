@@ -1,0 +1,145 @@
+<!-- test compile using X -->
+
+# Generating Grids
+
+The R scripts contained in this project repo allow you to take any Census attribute for any Census year (1971-2011) and convert it to a regular grid for some or all of Great Britain (Scotland, England & Wales).
+
+In order to run the scripts, you will need to do a number of things:
+- Ensure that you have GDAL, it's associated tools, and all of the requisite R libraries installed.
+- Adjust the [config.R](./config.R) file to suit your needs.
+- Download the open data upon which the gridding (a.k.a. rasterisation) process depends.
+- Download the Census data that you want to rasterise.
+
+Let's tackle each of these turn...
+
+# GDAL and R
+
+Although there is no reason why the code in this project would _not_ work on Windows, I do not have (and do not intend to purchase) a Windows system for the purposes of testing this. The principal issue that I would anticipate is that the paths will become problematic so the code to write/read data will become substantially more complex. A function might take care of this without too much trouble, but it's not a high priority for me. It's open source: if you want it, then please feel free to fork and contribute!
+
+### GDAL / OGR
+
+GDAL should be fairly easy to install on a \*nix system of any flavour as the libraries should be available via 'app stores' and also as compilable source. On a Mac, I typically use the excellent [KyngChaos](http://www.kyngchaos.com/software/frameworks) installers as they also support QGIS out-of-the-box.
+
+We need GDAL because we make extensive use of the [ogr2ogr](http://www.gdal.org/ogr2ogr.html) utility. Although many of the operations performed could _theoretically_ be done within a R-only solution, `ogr2ogr` is much, much faster and less memory-intensive. It also gives us a way to translate between many different formats and to dynamically clip the input region (which is essential for England since there is just so much data).
+
+### R libraries
+
+This code makes use of the following R libs:
+
+- DBI
+- data.table
+- ggplot2
+- raster
+- rgdal
+- sf
+- zoo
+
+The `sf` library is the long-term replacement for `sp` and does away with the need to do things like fortify the data frame. Performance seems pretty good too and it uses a PostgreSQL/PostGIS-like approach that includes functions like `st_buffer` and `st_simplify`!
+
+The `raster` library is used to create the underlying grid.
+
+# Open Data Resources
+
+The idea of this fork to try to make a fully replicable process that draws solely on open data and a FOSS stack, and that can be run solely as code without recourse to Arc or QGIS. _(Yes, I know QGIS is scriptable.)_
+
+## OpenStreetMap (OSM)
+
+We work from the premise that certain types of land use were highly unlikely to ever have _been_ built on in any meaningful way over the time period covered by digitised Censuses (Censi?) going back to the 1970s. We can use those areas to influence our calculation of population dispersion when we take our EDs and OAs and need to apportion them across more than one grid cell. It won't be perfect, but it should be more robust than existing approaches which are based solely on smoothing and assignment by centroid.
+
+For simplicty's sake, we use the PBF resources provided by GeoFabrik:
+
+- England (> 700MB): http://download.geofabrik.de/europe/great-britain/england-latest.osm.pbf
+- Scotland (> 100MB): http://download.geofabrik.de/europe/great-britain/scotland-latest.osm.pbf
+- Wales (> 50MB): http://download.geofabrik.de/europe/great-britain/wales-latest.osm.pbf
+
+These files will need to be placed in the correct directory (and they should all have names as per the original downloaded file) so that the scripts can find them.
+
+### Filtering Out Areas
+
+What we're aiming for here is _excluding_ those parts of Great Britain that are unlikely to have been developed, and to then have reverted to an undeveloped land within the timeframe of a downloadable Census (i.e. 1971 onwards). So we wouldn't expect marsh to emerge on land that was previously used for housing, for instance.
+
+The only widely available source of high-res *open* data on such areas is OSM. The Ordnance Survey has some very nice  open data for Great Britain but that doesn't generalise well (especially for the locations of buildings). As well, their boundary line polygon data is not clipped to the high-water mark, so that's another place we'll get 'development' creeping into places it won't have happened. Meanwhile, the polyline high-water data can't be used to clip the boundary polygons because they aren't 'closed'.
+
+More details can be found in the `osm.R` file.
+
+## Ordnance Survey (OS)
+
+We do make use of _some_ OS data because it remains the most accurate and, increasinly, is available on an open basis. The [GeoPortal](http://geoportal.statistics.gov.uk/datasets/) (when it's working) is the best way to access this data:
+
+- Generalised, Clipped Country Boundaries: http://geoportal.statistics.gov.uk/datasets/2039e084c4e8427981514b2a7fdd077e_0. You could also get most of this via [OSM's land polygons](http://openstreetmapdata.com/data/land-polygons), but this data set is clipped further inland for tidal rivers (e.g. the Thames) so it produces better result.
+- The administrative boundaries for the Government Office for Regions (GoR): http://geoportal.statistics.gov.uk/datasets/f99b145881724e15a04a8a113544dfc5_2. In particular, we're interested in: `Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp`
+
+We use these to achieve two things:
+1. To give us the country boundaries that are needed for processing Wales and Scotland, while also clipping all three nations to the high-water line.
+2. To give us the regions that makes up England so that we can break up the processing into smaller chunks.
+
+In short, \#2 gives us access to parallelisation options as long as the grid aligns across regional boundaries (more on this in the `grid.R` file).
+
+## National Statistics Postcode Lookup
+
+Work by the PopChange PI, [Chris Lloyd](https://www.liverpool.ac.uk/environmental-sciences/staff/christopher-lloyd/), indicates that postcode centroids are a useful proxy for population density ([Google Scholar](https://scholar.google.co.uk/citations?user=E-1TaYoAAAAJ&hl=en&oi=sra)).
+
+There are a number of postcode resources available for the UK, including the seemingly promising CodePoint-Open via the OS Open Data. Unfortunately, that data set has no 'history' so we can't track the introduction and termination of postcodes.
+
+There are two sources that _do_ have this history:
+1. The NSPL
+2. The ONSPD
+
+A discussion of the tradeoffs between these two data sets can be found here in the National Archives [web archive](http://webarchive.nationalarchives.gov.uk/20160105160709/http://www.ons.gov.uk/ons/guide-method/geography/products/postcode-directories/-nspp-/index.html).
+
+For consistency with earlier work we've opted to use the NSPL from the [GeoPortal](https://geoportal.statistics.gov.uk).
+
+More details can be found in the `nspl.R` file.
+
+# Census Data Resources
+
+If you wish to calculate grids for another variable, download data:
+
+- Casweb (1971 - 2001)
+- - For 2001, you need to do England, Scotland and Wales separately and combine them into one file (usually the variable structure matches for England and Wales, and is similar for Scotland).
+- - For 1991, some tables are structured differently and so you need to download separately and combine them as above.
+- - For 1971, need to run code to allocate 71 EDs to 81 EDs As per script.
+
+- For 2011
+- - England download from Nomis (https://www.nomisweb.co.uk/census/2011/bulk/r2_2) for England and Wales
+- - Scotland download from Scotland Census (http://www.scotlandscensus.gov.uk/ods-web/data-warehouse.html#bulkdatatab)
+- - Some Scotland variables are ordered very differently (e.g. Country of Birth & Ethnicity). Combine these carefully!
+- - Also replace '- 'in Scotland 11 with '0'. This is easiest done in TextWrangler than LibreOffice Calc.)
+
+The OA proportions layer is provided.
+
+If you are looking to provide the grids you generate back to the resource, please add the info into data-summary.xlsx.
+
+Work out field names (max 8 characters)
+- Copy field names into input data file.
+
+## Preparing Census Data
+
+Prepare the Census data you wish to use. An example of this file is OA_attributes.csv / OA_1991_attributes.csv. This is a CSV file containing a list of all the OAs or EDs (depending on the census year) and the one or more attributes you wish to create a grid for. One grid will be created for each attribute you enter. For example:
+
+|  GeographyCode | AllPresRes  |  TotalPop | EtWh  |  EtBlCab |
+| --- | --- | --- | --- | --- |
+| 01AAFA01 | 256 | 349 | 312 | 2   |
+| 01AAFA02 | 132 | 156 | 134 | 1   |
+| 01AAFA03 | 182 | 229 | 221 | 0   |
+| 01AAFA04 | 0 | 0 | 0 | 0   |
+| 01AAFA05 | 272 | 327 | 304 | 0   |
+
+
+Things to note:
+- The first column *must* be called "GeographyCode".
+- You can have any number of columns (but for each column you have, the processing will take longer).
+- Attribute column names need to be less than 10 characters to support the shapefile format.
+
+## Running the Code
+
+**_Needs to be updated for new process_**
+
+Update lines 56-62 to update year and grids.
+I usually run line 56 (read in attributes) to check field names are all correct.
+
+Run code in file (analysis-no-overlay.R)
+
+Check output
+- include output file names in data summary
+- File output in directory structure
