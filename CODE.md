@@ -1,5 +1,20 @@
 <!-- test compile using X -->
 
+# Setting Up
+
+The R scripts expect the directory structure set out below. The data directories are not found in git because of the data volumes associated with extracting and processing OSM, OS & NSPL features.
+
+Directory structure:
+- `popchange/`
+  - `no-sync/`     # Don't manage content here with Git
+    - `OS/`        # For Ordnance Survey data
+    - `OSM/`       # For OSM data
+    - `NSPL/`      # National Statistics postcode data
+    - `grid/`      # Grid output for regions
+    - `processed/` # Outputs from gridding process at national and regional levels
+
+**_Note:_** Processing all of the raw data for these will consume roughly 50GB of diskspace. This consumption arises because of the intermediate outputs associated with the OSM data: they permit greater flexibility in weighting and auditability but at the cost of higher levels of diskspace usage.
+
 # Generating Grids
 
 The R scripts contained in this project repo allow you to take any Census attribute for any Census year (1971-2011) and convert it to a regular grid for some or all of Great Britain (Scotland, England & Wales).
