@@ -27,4 +27,6 @@ Based on some issues I'm having with R/R-Studio and long-running system2 calls, 
 
 ## Line Features in OSM
 
-Current, we only process polygon features from the OSM data files, so this excludes rivers and roads from our grid weighting process. Somehow OSM 'knows' how to render river and road widths from the centreline, but I can't quite figure it out (yet). So we need to think what could be done with line features (roads and large rivers) to help suppress 'non-buildable' areas.
+Currently, we only process polygon features from the OSM data files, so this excludes rivers and roads from our grid weighting process. Somehow OSM 'knows' how to render river and road widths from the centreline, but I can't quite figure it out (yet). So we need to think what could be done with line features (roads and large rivers) to help suppress 'non-buildable' areas.
+
+In addition, it seems like processing roads would be helpful in terms of constraining where the population can be assigned when working with smaller grid sizes. This would allow us to deal with some persistent issues relating to the way that development is allowed inside national parks and AONBs (for instance) such that you can't simply use the boundaries of a national park as the basis for population suppression (in the way that can use smaller woodlands or forests or lakes). In this context, we might want to insist that only grid cells within 100m of a road (of any grade) can be assigned population and use that as an additional constraint with the land use filter.

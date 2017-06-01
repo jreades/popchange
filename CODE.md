@@ -125,6 +125,8 @@ For consistency with earlier work we've opted to use the NSPL from the [GeoPorta
 
 More details can be found in the `nspl.R` file.
 
+---
+_I Have not done any work from here on_
 # Census Data Resources
 
 If you wish to calculate grids for another variable, download data:
@@ -158,7 +160,6 @@ Prepare the Census data you wish to use. An example of this file is OA_attribute
 | 01AAFA03 | 182 | 229 | 221 | 0   |
 | 01AAFA04 | 0 | 0 | 0 | 0   |
 | 01AAFA05 | 272 | 327 | 304 | 0   |
-
 
 Things to note:
 - The first column *must* be called "GeographyCode".
