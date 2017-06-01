@@ -1,5 +1,3 @@
-
-
 # SETUP: the scripts expect the following dir
 # structure -- the data directories are not 
 # found in git because of the data volumes 
@@ -15,11 +13,12 @@
 
 # Where to find ogr2ogr -- this is the OSX location when installed
 # from the fantastic KyngChaos web site
-ogr.lib = '/Library/Frameworks/GDAL.framework/Programs/ogr2ogr'
+ogr.lib  = '/Library/Frameworks/GDAL.framework/Programs/ogr2ogr'
+ogr.info = '/Library/Frameworks/GDAL.framework/Programs/ogrinfo'
 
 # The strings here should match the Geofabrik OSM file name 
 # (allowing for %>% ucfirst these are England, Scotland, Wales).
-r.countries  <- c('England', 'Scotland', 'Wales')
+r.countries  <- c('England', 'Scotland', 'Wales', 'Northern Ireland')
 
 # For England there is so much data that it makes sense 
 # to break it down into regions. Even if our approach 
@@ -98,4 +97,13 @@ osm.classes$leisure = osm.classes$natural
   s <- strsplit(tolower(x), "[_ ]")[[1]]
   paste(toupper(substring(s, 1, 1)), substring(s, 2),
         sep = "", collapse = "_")
+}
+
+if (! file.exists(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"))) {
+  cat(paste(replicate(45, "="), collapse = ""), "\n")
+  cat(paste(replicate(45, "="), collapse = ""), "\n")
+  cat("Have you run the ni-preprocessing.R script yet?\n")
+  cat("This is critical to the remaining processes!\n")
+  cat(paste(replicate(45, "="), collapse = ""), "\n")
+  cat(paste(replicate(45, "="), collapse = ""), "\n")
 }

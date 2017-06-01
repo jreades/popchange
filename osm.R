@@ -22,6 +22,7 @@ rm(list = ls())
 #    suppresses areas from the later population distribution 
 #    function.
 ########################################
+source('config.R')
 
 library(rgdal)   # R wrapper around GDAL/OGR
 library(raster)  # Useful functions for merging/aggregation
@@ -34,7 +35,13 @@ library(sf)      # Replaces sp and does away with need for several older libs (s
 for (r in r.iter) {
   the.region <- .simpleCap(r)
   osm.region <- strsplit(r, " ")[[1]][1]
-  if (osm.region==the.region) {
+  
+  # Inelegant, but can't figure out a way around it
+  if (the.region=='Northern_Ireland') {
+    osm.region='Northern-Ireland'
+  }
+  
+  if (osm.region==the.region || the.region=='Northern_Ireland') {
     r.filter <- FALSE
   } else {
     r.filter <- TRUE
@@ -44,7 +51,7 @@ for (r in r.iter) {
   if (r.filter==FALSE) { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
-    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_GB_BGC.shp"), collapse="/"), stringsAsFactors=T)
+    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=T)
     
     # Set projection (issues with reading in even properly projected files)
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)

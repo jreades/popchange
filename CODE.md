@@ -66,6 +66,7 @@ For simplicty's sake, we use the PBF resources provided by GeoFabrik:
 - England (> 700MB): http://download.geofabrik.de/europe/great-britain/england-latest.osm.pbf
 - Scotland (> 100MB): http://download.geofabrik.de/europe/great-britain/scotland-latest.osm.pbf
 - Wales (> 50MB): http://download.geofabrik.de/europe/great-britain/wales-latest.osm.pbf
+- Northern Ireland / Ireland (> 125MB): 
 
 These files will need to be placed in the correct directory (and they should all have names as per the original downloaded file) so that the scripts can find them.
 
@@ -99,6 +100,14 @@ We use these to achieve two things:
 2. To give us the regions that makes up England so that we can break up the processing into smaller chunks.
 
 In short, \#2 gives us access to parallelisation options as long as the grid aligns across regional boundaries (more on this in the `grid.R` file).
+
+## Ordnance Survey of Norther Ireland (OSNI)
+
+For reasons best known to itself, OSNI has made it far more difficult to find and access open data -- I couldn't even locate information about what projection was being used! At any rate, the large scale boundary data set _is_ open and can be downloaded for free, so this is what I've used:  http://osni-spatial-ni.opendata.arcgis.com/datasets?q=Boundaries&sort_by=relevance
+
+The projection is EPSG:29901 (OSNI 1952 / Irish National Grid).
+
+**_Note: in order to make this work reasonably efficiently, you will need to run a pre-processing step on the NI data in order to merge it into the OS GB data set. I have written code to complete this step for you._**
 
 ## National Statistics Postcode Lookup
 
