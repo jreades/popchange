@@ -96,22 +96,22 @@ dt$ru11ind <- factor(dt$ru11ind, exclude=c(""))
 
 # There's not much from pre-1980 that is reliable
 # as that's connected to the introduction of GridLink
-ggplot(dt, aes(x=dointr)) + 
-  geom_bar(stat="count") + 
-  ggtitle("Date of Introduction") + 
-  ylab("Count") + 
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y") + 
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
-ggplot(dt, aes(x=doterm)) + 
-  geom_bar(stat="count") + 
-  ggtitle("Date of Termination") + 
-  ylab("Count") + 
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y") + 
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+# ggplot(dt, aes(x=dointr)) + 
+#   geom_bar(stat="count") + 
+#   ggtitle("Date of Introduction") + 
+#   ylab("Count") + 
+#   scale_x_date(date_breaks = "1 year", date_labels = "%Y") + 
+#   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+# ggplot(dt, aes(x=doterm)) + 
+#   geom_bar(stat="count") + 
+#   ggtitle("Date of Termination") + 
+#   ylab("Count") + 
+#   scale_x_date(date_breaks = "1 year", date_labels = "%Y") + 
+#   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
-# We currently only process data for Great Britain
-# and drop it for NI, Channel Islands & Isle of Man
-dt <- dt[ !dt$ctry %in% c('Northern Ireland','Channel Islands','Isle of Man'), ]
+# We currently only process data for the UK
+# and drop it for Channel Islands & Isle of Man
+dt <- dt[ !dt$ctry %in% c('Channel Islands','Isle of Man'), ]
 # These ones don't have a useable location
 dt <- dt[ !dt$osgrdind==9, ]
 # And these ones are 'large' users of postcodes so
