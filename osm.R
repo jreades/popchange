@@ -33,22 +33,18 @@ library(sf)      # Replaces sp and does away with need for several older libs (s
 # in the dataset without having to load each
 # individually
 for (r in r.iter) {
+  
+  cat(paste("\n","======================\n","Processing data for:",r,"\n"))
+  
   the.region <- .simpleCap(r)
   osm.region <- strsplit(r, " ")[[1]][1]
   
   # Inelegant, but can't figure out a way around it
   if (the.region=='Northern_Ireland') {
-    osm.region='Northern-Ireland'
-  }
-  
-  if (osm.region==the.region || the.region=='Northern_Ireland') {
-    r.filter <- FALSE
-  } else {
-    r.filter <- TRUE
-  }
-  cat(paste("\n","======================\n","Processing data for:",osm.region,"\n"))
-  
-  if (r.filter==FALSE) { # No filtering for regions
+    osm.region    <- 'Northern-Ireland'
+    r.filter      <- TRUE
+    r.filter.name <- 'Northern Ireland'
+    
     cat("  No filter. Processing entire country.\n")
     
     shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=T)
@@ -59,22 +55,42 @@ for (r in r.iter) {
     
     # Extract country from shapefile
     r.shp <- shp[shp$CTRY11NM==osm.region,]
-    
-  } else { # Filtering for regions
-    r.filter.name <- sub("^[^ ]+ ","",r, perl=TRUE)
-    cat(paste("  Processing internal region:", the.region,"\n")) 
-    
-    shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=T)
-    
-    # Set projection
-    shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
-    #print(st_crs(shp))
-    
-    # Next the shapefile has to be converted to a dataframe for use in ggplot2
-    # Would need to implemented this way for filtering on districts: 
-    #r.shp <- st_buffer(shp[shp$FILE_NAME==r.filter,], r.buffer, nQuadSegs=100)
-    # Use this for filtering on GOR regions:
-    r.shp <- st_buffer(shp[shp$rgn16nm==r.filter.name,], r.buffer, nQuadSegs=100)
+  } else {
+    # Everywhere else besides Northern Ireland
+    if (osm.region==the.region) {
+      r.filter <- FALSE
+    } else {
+      r.filter <- TRUE
+    }
+  
+    if (r.filter==FALSE) { # No filtering for regions
+      cat("  No filter. Processing entire country.\n")
+      
+      shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=T)
+      
+      # Set projection (issues with reading in even properly projected files)
+      shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
+      #print(st_crs(shp)) # Check reprojection
+      
+      # Extract country from shapefile
+      r.shp <- shp[shp$CTRY11NM==osm.region,]
+      
+    } else { # Filtering for regions
+      r.filter.name <- sub("^[^ ]+ ","",r, perl=TRUE)
+      cat(paste("  Processing internal region:", the.region,"\n")) 
+      
+      shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=T)
+      
+      # Set projection
+      shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
+      #print(st_crs(shp))
+      
+      # Next the shapefile has to be converted to a dataframe for use in ggplot2
+      # Would need to implemented this way for filtering on districts: 
+      #r.shp <- st_buffer(shp[shp$FILE_NAME==r.filter,], r.buffer, nQuadSegs=100)
+      # Use this for filtering on GOR regions:
+      r.shp <- st_buffer(shp[shp$rgn16nm==r.filter.name,], r.buffer, nQuadSegs=100)
+    }
   }
   # Useful for auditing, not necessary in production
   #st_write(r.shp, dsn=paste(c(os.path,'filterregion.shp'), collapse="/"), layer='filterregion', delete_dsn=TRUE)
@@ -117,8 +133,11 @@ for (r in r.iter) {
   cat(paste(c("Bounding Box:",xmin,xmax,ymin,ymax)))
   cat(file.osm,"\n")
   cat(file.clip,"\n")
-  cat(osm.clip,"\n")
-  cat(osm.noclip,"\n")
+  if (r.filter==TRUE) {
+    cat(osm.clip,"\n")  
+  } else {
+    cat(osm.noclip,"\n") 
+  }
   
   # Step 1: Subset the OSM file for a region (usually only done with England)
   if (!file.exists(file.clip)) {
@@ -128,7 +147,7 @@ for (r in r.iter) {
       system2(ogr.lib, osm.noclip, wait=TRUE)
     } else {
       cat("Converting OSM multipolygon data to shapefile...\n")
-      cat(paste("and clipping OSM data source using bbox extracted from",r.filter.name),"\n")
+      cat(paste("and clipping OSM data source using bbox for",r.filter.name),"\n")
       print(paste(c(ogr.lib, osm.clip),collapse=" "))
       system2(ogr.lib, osm.clip, wait=TRUE)
     }
