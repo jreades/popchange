@@ -6,6 +6,10 @@ rm(list = ls())
 ########################################
 source('config.R')
 
+# Temporary mod
+g.resolution=100
+g.anchor=2000
+
 # Create raster grid of arbitrary size:
 # https://gis.stackexchange.com/questions/154537/generating-grid-shapefile-in-r
 
@@ -63,6 +67,7 @@ for (r in r.iter) {
   y.max = ceiling(r.ext['ymax']/g.anchor)*g.anchor
 
   # Resolution is the length of the grid on one side (if only one number then you get a square grid)
+  cat("  Creating raster grid\n")
   r <- raster(xmn=x.min, ymn=y.min, xmx=x.max,  ymx=y.max, crs=CRS('+init=epsg:27700'), resolution=g.resolution)
   r[] <- 1:ncell(r)
   sp.r <- as(r, "SpatialPolygons")
