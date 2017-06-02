@@ -13,7 +13,9 @@ rm(list = ls())
 ########################################
 source('config.R')
 
-library(data.table)
+overwrite=TRUE
+
+library(dtplyr)
 library(ggplot2)
 library(zoo)
 library(DBI)
@@ -25,7 +27,9 @@ library(sf)  # Replaces sp and does away with need for several older libs (sf ==
 raw.file  = 'NSPL_FEB_2017_UK.csv'
 raw.path  = c(nspl.path,'NSPL_FEB_2017_UK','Data')
 
-dt = fread(paste(c(raw.path,raw.file), collapse="/"))
+# Load the data using fread from data.table package
+# (whichi is no longer explosed directly using dtplyr)
+dt = data.table::fread(paste(c(raw.path,raw.file), collapse="/"))
 
 cat(paste("NSPL file dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 
@@ -120,17 +124,43 @@ dt <- dt[ !dt$usertype=='Large', ]
 
 cat(paste("NSPL final dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 
+# Need to reproject NI (it's in EPSG:29901)
+# into EPSG:27700
+dt.ni    <- subset(dt, ctry=='Northern Ireland')
+dt.ni.sf <- st_as_sf(dt.ni, coords=c("oseast1m","osnrth1m"), crs=29901, agr = "constant")
+t <- st_coordinates(st_transform(dt.ni.sf, 27700))
+dt.ni$oseast1m = t[,1]
+dt.ni$osnrth1m = t[,2]
+
+# And update the data.table
+data.table::setkey(dt, pcds)
+data.table::setkey(dt.ni, pcds)
+dt[dt.ni, oseast1m := i.oseast1m ]
+dt[dt.ni, osnrth1m := i.osnrth1m ]
+rm(t,dt.ni,dt.ni.sf)
+
+# Use the region-buffered shape to select postcodes falling 
+# within the buffered boundary at each time-step for our
+# analysis
+dt.sf = st_as_sf(dt, coords=c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
+
+# Now process the sub-regions
 for (r in r.iter) {
   the.label <- .simpleCap(r)
   the.country <- strsplit(r, " ")[[1]][1]
-  the.region <- paste(strsplit(r, " ")[[1]][-1], collapse=" ")
+  the.region  <- paste(strsplit(r, " ")[[1]][-1], collapse=" ")
+  
+  if (r=='Northern Ireland') {
+    the.country <- 'Northern-Ireland'
+    the.region  <- ""
+  }
   
   cat(paste("\n","======================\n","Processing data for:", the.country,"\n"))
   
   if (length(the.region) == 0 | the.region=="") { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
-    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_GB_BGC.shp"), collapse="/"), stringsAsFactors=T)
+    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=T)
     
     # Set projection (issues with reading in even properly projected files)
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -141,7 +171,7 @@ for (r in r.iter) {
     
   } else { # Filtering for regions
     r.filter.name <- sub("^[^ ]+ ","",r, perl=TRUE)
-    cat(paste("  Processing internal GoR region:", the.region,"\n")) 
+    cat("  Processing internal GoR region:", the.region,"\n") 
     
     shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=T)
     
@@ -149,7 +179,6 @@ for (r in r.iter) {
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
     #print(st_crs(shp))
     
-    # Next the shapefile has to be converted to a dataframe for use in ggplot2
     # Would need to implemented this way for filtering on districts: 
     #r.shp <- shp[shp$FILE_NAME==r.filter,]
     # Use this for filtering on GOR regions:
@@ -159,11 +188,6 @@ for (r in r.iter) {
   # Region-Buffered shape
   cat("  Simplifying and buffering region to control for edge effects.")
   rb.shp <- st_buffer(st_simplify(r.shp, r.simplify), r.buffer)
-  
-  # Use the region-buffered shape to select postcodes falling 
-  # within the buffered boundary at each time-step for our
-  # analysis
-  dt.sf = st_as_sf(dt, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
   
   .flatten <- function(x) {
     if (length(x) == 0) { 
@@ -175,16 +199,15 @@ for (r in r.iter) {
   # Save the output of st_within and then 
   # convert that to a logical vector using
   # sapply and the .flatten function
-  cat("  Selecting postcodes falling within regional buffer.")
+  cat("  Selecting postcodes falling within regional buffer.\n")
   is.within    <- st_within(dt.sf, rb.shp)
   dt.region    <- subset(dt, sapply(is.within, .flatten))
   
   # Note: No viable data from 1971
-  overwrite=TRUE
   for (y in c(1981, 1991, 2001, 2011)) {
-    cat(paste("    Processing postcodes available in year:",y),"\n")
+    cat("    Processing postcodes available in year:",y,"\n")
     region.y.path = paste(c(nspl.path, paste(c(the.label,y,"NSPL.shp"),collapse="_")), collapse="/")
-    if (file.exists(region.y.path) & overwrite==FALSE) {
+    if (!file.exists(region.y.path) & overwrite==FALSE) {
       cat("    Skipping since output file already exists:\n        ",region.y.path,"\n")
     } else {
       # Census Day is normally late-March or early-April
@@ -192,7 +215,33 @@ for (r in r.iter) {
       # We could do this in one go, but it's more legible not to
       dt.region.y <- subset(dt.region, dt.region$dointr <= y.as_date)
       dt.region.y <- subset(dt.region.y, (is.na(dt.region.y$doterm) | dt.region.y$doterm > y.as_date))
-      cat("    Have",dim(dt.region.y)[1],"active postcodes in",y,"\n")
+      
+      ########
+      # Useful diagnostics about active postcodes at
+      # same northing and easting
+      
+      # Can't use signif since we have numbers ranging
+      # from 100s to 100,000s. 
+      dt.region.y$oseast10m = round(dt.region.y$oseast1m/10)*10
+      dt.region.y$osnrth10m = round(dt.region.y$osnrth1m/10)*10
+      
+      # How many are exact matches
+      test = dt.region.y %>% 
+        dplyr::group_by_(.dots=c("oseast1m","osnrth1m")) %>% 
+        dplyr::summarize(n=n())
+      test = test[test$n > 1, ]
+      
+      # How many are near matches
+      test2 = dt.region.y %>% 
+        dplyr::group_by_(.dots=c("oseast10m","osnrth10m")) %>% 
+        dplyr::summarize(n=n())
+      test2 = test2[test2$n > 1, ]
+      
+      cat("Diagnostics for:",the.region,"in year",y,"\n")
+      cat("    Total active postcodes: ",dim(dt.region.y)[1],"\n")
+      cat("    Exact duplicates: ",sum(test$n)," (1m resolution)\n")
+      cat("    Rough duplicates: ",sum(test2$n)," (10m resolution)\n")
+      
       dt.region.y.sf <- st_as_sf(dt.region.y, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
       st_write(dt.region.y.sf, region.y.path, delete_layer=TRUE)
       #plot(dt.region.sf)
