@@ -47,7 +47,7 @@ for (r in r.iter) {
     
     cat("  No filter. Processing entire country.\n")
     
-    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=T)
+    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection (issues with reading in even properly projected files)
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -66,7 +66,7 @@ for (r in r.iter) {
     if (r.filter==FALSE) { # No filtering for regions
       cat("  No filter. Processing entire country.\n")
       
-      shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=T)
+      shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
       
       # Set projection (issues with reading in even properly projected files)
       shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -79,7 +79,7 @@ for (r in r.iter) {
       r.filter.name <- sub("^[^ ]+ ","",r, perl=TRUE)
       cat(paste("  Processing internal region:", the.region,"\n")) 
       
-      shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=T)
+      shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
       
       # Set projection
       shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -93,7 +93,7 @@ for (r in r.iter) {
     }
   }
   # Useful for auditing, not necessary in production
-  #st_write(r.shp, dsn=paste(c(os.path,'filterregion.shp'), collapse="/"), layer='filterregion', delete_dsn=TRUE)
+  #st_write(r.shp, dsn=paste(c(os.path,'filterregion.shp'), collapse="/"), layer='filterregion', delete_dsn=TRUE, quiet=TRUE)
   
   # Create bounding box from buffer -- 
   # we can then feed this into the OGR
@@ -117,7 +117,7 @@ for (r in r.iter) {
   #st_bbox(e.st)
   
   # For validation of bbox -- not needed in production
-  # st_write(e.st, paste(c(os.path,'filterbounds.shp'),collapse="/"), layer='filterbounds', delete_dsn=TRUE)
+  # st_write(e.st, paste(c(os.path,'filterbounds.shp'),collapse="/"), layer='filterbounds', delete_dsn=TRUE, quiet=TRUE)
   
   xmin = round(st_bbox(e.st)['xmin'], digits=4)
   xmax = round(st_bbox(e.st)['xmax'], digits=4)

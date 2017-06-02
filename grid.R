@@ -23,12 +23,17 @@ for (r in r.iter) {
   the.country <- strsplit(r, " ")[[1]][1]
   the.region <- paste(strsplit(r, " ")[[1]][-1], collapse=" ")
   
-  cat(paste("\n","======================\n","Processing data for:", the.country,"\n"))
+  if (r=='Northern Ireland') {
+    the.country <- 'Northern-Ireland'
+    the.region  <- ""
+  }
+  
+  cat("\n","======================\n","Processing data for:", the.country,"\n")
   
   if (length(the.region) == 0 | the.region=="") { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
-    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_GB_BGC.shp"), collapse="/"), stringsAsFactors=T)
+    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection (issues with reading in even properly projected files)
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -39,9 +44,9 @@ for (r in r.iter) {
     
   } else { # Filtering for regions
     r.filter.name <- sub("^[^ ]+ ","",r, perl=TRUE)
-    cat(paste("  Processing internal GoR region:", the.region,"\n")) 
+    cat("  Processing internal GoR region:", the.region,"\n") 
     
-    shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=T)
+    shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -68,9 +73,9 @@ for (r in r.iter) {
 
   # Resolution is the length of the grid on one side (if only one number then you get a square grid)
   cat("  Creating raster grid\n")
-  r <- raster(xmn=x.min, ymn=y.min, xmx=x.max,  ymx=y.max, crs=CRS('+init=epsg:27700'), resolution=g.resolution)
-  r[] <- 1:ncell(r)
-  sp.r <- as(r, "SpatialPolygons")
+  ra.r <- raster(xmn=x.min, ymn=y.min, xmx=x.max,  ymx=y.max, crs=CRS('+init=epsg:27700'), resolution=g.resolution)
+  ra.r[] <- 1:ncell(r)
+  sp.r <- as(ra.r, "SpatialPolygons")
   sp.r <- st_as_sf(sp.r) %>% st_set_crs(NA) %>% st_set_crs(27700)
   
   # Now clip it down to the region + a buffer distance...
@@ -90,7 +95,7 @@ for (r in r.iter) {
   sp.region    <- subset(sp.r, sapply(is.within, .flatten))
   
   # And write out the buffered grid ref
-  st_write(sp.region, paste(c(grid.out.path,paste(the.label,'.shp',sep="")),collapse="/"), layer='bounds', delete_dsn=TRUE)
+  st_write(sp.region, paste(c(grid.out.path,paste(the.label,'.shp',sep="")),collapse="/"), layer='bounds', delete_dsn=TRUE, quiet=TRUE)
 }
 
 # Knock out zones with no development

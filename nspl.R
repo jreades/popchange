@@ -160,7 +160,7 @@ for (r in r.iter) {
   if (length(the.region) == 0 | the.region=="") { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
-    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=T)
+    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection (issues with reading in even properly projected files)
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -173,7 +173,7 @@ for (r in r.iter) {
     r.filter.name <- sub("^[^ ]+ ","",r, perl=TRUE)
     cat("  Processing internal GoR region:", the.region,"\n") 
     
-    shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=T)
+    shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -205,7 +205,6 @@ for (r in r.iter) {
   
   # Note: No viable data from 1971
   for (y in c(1981, 1991, 2001, 2011)) {
-    cat("    Processing postcodes available in year:",y,"\n")
     region.y.path = paste(c(nspl.path, paste(c(the.label,y,"NSPL.shp"),collapse="_")), collapse="/")
     if (!file.exists(region.y.path) & overwrite==FALSE) {
       cat("    Skipping since output file already exists:\n        ",region.y.path,"\n")
@@ -237,13 +236,13 @@ for (r in r.iter) {
         dplyr::summarize(n=n())
       test2 = test2[test2$n > 1, ]
       
-      cat("Diagnostics for:",the.region,"in year",y,"\n")
+      cat("Diagnostics for:",r,"in year",y,"\n")
       cat("    Total active postcodes: ",dim(dt.region.y)[1],"\n")
-      cat("    Exact duplicates: ",sum(test$n)," (1m resolution)\n")
-      cat("    Rough duplicates: ",sum(test2$n)," (10m resolution)\n")
+      cat("    Postcodes at same location: ",sum(test$n)," (1m resolution)\n")
+      cat("    Postcodes at same location: ",sum(test2$n)," (10m resolution)\n")
       
       dt.region.y.sf <- st_as_sf(dt.region.y, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
-      st_write(dt.region.y.sf, region.y.path, delete_layer=TRUE)
+      st_write(dt.region.y.sf, region.y.path, delete_layer=TRUE, quiet=TRUE)
       #plot(dt.region.sf)
     }
   }
