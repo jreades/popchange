@@ -123,13 +123,13 @@ for (r in r.iter) {
 #erase(spdf1,  spdf2)
 
 # And check our results
-map <- ggplot() +
-  geom_polygon(data=clip, 
-               aes(x=long, y=lat, group=group),
-               color='grey', size=0.4) +
-  #geom_path(data=clip, 
-  #          aes(x=long, y=lat, group=group),
-  #          color='red', size=0.2) + 
-  labs(x="Easting", y="Northing", title="Gridded Region") +
-  coord_equal(ratio=1) # square plot to avoid the distortion
-print(map)
+# map <- ggplot() +
+#   geom_polygon(data=clip, 
+#                aes(x=long, y=lat, group=group),
+#                color='grey', size=0.4) +
+#   #geom_path(data=clip, 
+#   #          aes(x=long, y=lat, group=group),
+#   #          color='red', size=0.2) + 
+#   labs(x="Easting", y="Northing", title="Gridded Region") +
+#   coord_equal(ratio=1) # square plot to avoid the distortion
+# print(map)
