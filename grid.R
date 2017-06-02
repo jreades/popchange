@@ -80,7 +80,7 @@ for (r in r.iter) {
   
   # We need this to pass in an extent to crop
   # and a sp data frame to mask
-  r.sp <- as(r.shp, "SpatialPolygons")
+  r.sp <- as(r.shp, "Spatial")
   
   # The crop function shouldn't make any difference
   # as we've already used the extent to creat the 
