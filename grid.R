@@ -9,6 +9,7 @@ source('config.R')
 # Temporary mod
 g.resolution=100
 g.anchor=2000
+r.buffer=5000
 
 # Create raster grid of arbitrary size:
 # https://gis.stackexchange.com/questions/154537/generating-grid-shapefile-in-r
@@ -58,6 +59,7 @@ for (r in r.iter) {
     # Use this for filtering on GOR regions:
     r.shp <- shp[shp$rgn16nm==the.region,]
   }
+  rm(shp)
   
   # Simplify and buffer
   cat(" Simplifying and buffering region to speed up next stages\n")
@@ -75,11 +77,30 @@ for (r in r.iter) {
   cat("  Creating raster grid\n")
   ra.r <- raster(xmn=x.min, ymn=y.min, xmx=x.max,  ymx=y.max, crs=CRS('+init=epsg:27700'), resolution=g.resolution)
   ra.r[] <- 1:ncell(r)
+  
+  # We need this to pass in an extent to crop
+  # and a sp data frame to mask
+  r.sp <- as(r.shp, "SpatialPolygons")
+  
+  # The crop function shouldn't make any difference
+  # as we've already used the extent to creat the 
+  # raster, but the mask should reduce the number of
+  # polygons generated and, consequently, the processing
+  # time. At the limit it may replace the st_within test
+  # below.
+  ra.r <- mask(crop(ra.r, extent(r.sp)), r.sp)
+  
+  # Tidy up
+  rm(r.sp, r.ext, x.min, y.min, x.max, y.max)
+  
+  # Convert the raster to polygons so that we are working
+  # directly with a grid and reproject it as a sf object
   sp.r <- as(ra.r, "SpatialPolygons")
   sp.r <- st_as_sf(sp.r) %>% st_set_crs(NA) %>% st_set_crs(27700)
   
   # Now clip it down to the region + a buffer distance...
-  
+  # Need a function to extract usable info from the 
+  # st_intersects call.
   .flatten <- function(x) {
     if (length(x) == 0) { 
       FALSE
