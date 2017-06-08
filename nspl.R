@@ -248,4 +248,27 @@ for (r in r.iter) {
   }
 }
 
+r = 'Northern Ireland'
+y = 1991
+# Now create the Voronoi
+for (r in r.iter) {
+  the.label <- .simpleCap(r)
+  the.country <- strsplit(r, " ")[[1]][1]
+  the.region  <- paste(strsplit(r, " ")[[1]][-1], collapse=" ")
+  
+  if (r=='Northern Ireland') {
+    the.country <- 'Northern-Ireland'
+    the.region  <- ""
+  }
+  
+  cat("\n","======================\n","Creating Voronoi Polygons for:", the.label,"\n")
+  
+  for (y in c(1981, 1991, 2001, 2011)) {
+    cat("    ","Reading shape data for year:", y,"\n")
+    region.y.path <- paste(c(nspl.path, paste(c(the.label,y,"NSPL.shp"),collapse="_")), collapse="/")
+    dt.region     <- st_read(region.y.path, quiet=TRUE)
+    dt.v          <- st_voronoi(dt.region, st_buffer(st_simplify(dt.region, r.simplify), r.buffer), dTolerance=5.0)
+  }
+}
+
 cat("Done...\n")

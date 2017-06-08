@@ -9,11 +9,21 @@ Directory structure:
   - `no-sync/`     # Don't manage content here with Git
     - `OS/`        # For Ordnance Survey data
     - `OSM/`       # For OSM data
+    - `Roads/`     # For Roads data
     - `NSPL/`      # National Statistics postcode data
     - `grid/`      # Grid output for regions
     - `processed/` # Outputs from gridding process at national and regional levels
 
 **_Note:_** Processing all of the raw data for these will consume roughly 50GB of diskspace. This consumption arises because of the intermediate outputs associated with the OSM data: they permit greater flexibility in weighting and auditability but at the cost of higher levels of diskspace usage.
+
+## SF & Other Libs on a Mac
+
+On my Mac I've intalled GDAL and GEOS using the libraries provided by [KyngChaos]{}. These put the necessary external resources under /Library/Frameworks/...
+
+To install a version of `sf` that enables `st_voronoi` functionality you must link to a version of GEOS > 3.5. Installing rgeos and sf via RStudio repeatedly linked to older versions of me (even when I tried to install using `type='source'`) so I eventually had to download the tarball from CRAN, `gunzip` it, and install from the Terminal:
+`R CMD INSTALL sf_0.4-3.tar --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config
+--with-proj-include=/Library/Frameworks/PROJ.framework/Headers
+--with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'`
 
 # Generating Grids
 
@@ -124,6 +134,26 @@ A discussion of the tradeoffs between these two data sets can be found here in t
 For consistency with earlier work we've opted to use the NSPL from the [GeoPortal](https://geoportal.statistics.gov.uk).
 
 More details can be found in the `nspl.R` file.
+
+## Roads
+
+The location of roads is helpful in terms of constraining where population can be assigned when working with smaller grid sizes. For, say, a 100m grid you would have many empty cells, particularly in rural areas, and using the centroid or smearing the population across the entire postcode would return results that looked fairly improbable to users. One way around this is to think about the cues provided by roads and the ways that they are markers of settlement patterns. Using this approach would allow us to deal with some persistent issues relating to the way that development is allowed/has happened inside national parks and AONB boundaries (for instance) such that you can't simply use the boundaries of a national park as the basis for population suppression in the way that you *can* use smaller woodlands or forests or lakes. In this context, we might want to insist that only grid cells within a set distance of a road (of any grade) can be assigned population and use that as an additional constraint with the land use filter.
+
+### OSM Roads
+
+Currently, we only process polygon features from the OSM data files, so this excludes rivers and roads from our grid weighting process. Somehow OSM 'knows' how to render river and road widths from the centreline, but I can't quite figure it out (yet) from the Geofabrik pre-compiled downloads. I think that, for pragmatic reasons, they may not even contain the road data at the level I want (certainly not in NI) so we need to think what could be done to select and download line features (roads and large rivers) to help suppress 'non-buildable' areas and also to constrain areas where development _could_ occur.
+
+### Open Roads
+
+There _is_ road network data available from other sources: both the Ordnance Survey and OSNI produce open data products for roads. They tend not to go down to the driveway level, which is a shame as this would be particularly helpful in rural areas for locating households.
+
+#### England & Wales
+
+I have made use of the "OS Open Roads" data product (ca. 500MB) available from the OS Open site: https://www.ordnancesurvey.co.uk/opendatadownload/products.html.
+
+#### Northern Ireland
+
+I have made us of the "OSNI Open Data - 50k Transport Line" data set (ca. 3MB) available from: http://osni-spatial-ni.opendata.arcgis.com/datasets/f9b780573ecb446a8e7acf2235ed886e_2.
 
 ---
 _I Have not done any work from here on_
