@@ -21,9 +21,8 @@ Directory structure:
 On my Mac I've intalled GDAL and GEOS using the libraries provided by [KyngChaos]{}. These put the necessary external resources under /Library/Frameworks/...
 
 To install a version of `sf` that enables `st_voronoi` functionality you must link to a version of GEOS > 3.5. Installing rgeos and sf via RStudio repeatedly linked to older versions of me (even when I tried to install using `type='source'`) so I eventually had to download the tarball from CRAN, `gunzip` it, and install from the Terminal:
-`R CMD INSTALL sf_0.4-3.tar --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config
---with-proj-include=/Library/Frameworks/PROJ.framework/Headers
---with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'`
+- `R CMD INSTALL rgeos_0.3-23.tar.gz --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config'`
+- `R CMD INSTALL sf_0.4-3.tar --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config --with-proj-include=/Library/Frameworks/PROJ.framework/Headers --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'`
 
 # Generating Grids
 

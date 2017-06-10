@@ -1,4 +1,9 @@
 rm(list = ls())
+##################
+##################
+# Convert to sf_make_grid
+##################
+##################
 #########################################
 # Creates a grid of arbitrary resolution 
 # for Scotland, Wales, and the GoR regions
@@ -72,7 +77,13 @@ for (r in r.iter) {
   y.min = floor(r.ext['ymin']/g.anchor)*g.anchor
   x.max = ceiling(r.ext['xmax']/g.anchor)*g.anchor
   y.max = ceiling(r.ext['ymax']/g.anchor)*g.anchor
-
+  
+  ################
+  ################
+  # Convert to sf_make_grid
+  ################
+  ################
+  
   # Resolution is the length of the grid on one side (if only one number then you get a square grid)
   cat("  Creating raster grid\n")
   ra.r <- raster(xmn=x.min, ymn=y.min, xmx=x.max,  ymx=y.max, crs=CRS('+init=epsg:27700'), resolution=g.resolution)

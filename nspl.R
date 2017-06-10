@@ -12,6 +12,7 @@ rm(list = ls())
 #
 ########################################
 source('config.R')
+source('funcs.R')
 
 overwrite=TRUE
 
@@ -146,48 +147,14 @@ dt.sf = st_as_sf(dt, coords=c("oseast1m","osnrth1m"), crs=27700, agr = "constant
 
 # Now process the sub-regions
 for (r in r.iter) {
-  the.label <- .simpleCap(r)
-  the.country <- strsplit(r, " ")[[1]][1]
-  the.region  <- paste(strsplit(r, " ")[[1]][-1], collapse=" ")
   
-  if (r=='Northern Ireland') {
-    the.country <- 'Northern-Ireland'
-    the.region  <- ""
-  }
+  params = set.params(r)
   
-  cat(paste("\n","======================\n","Processing data for:", the.country,"\n"))
-  
-  if (length(the.region) == 0 | the.region=="") { # No filtering for regions
-    cat("  No filter. Processing entire country.\n")
-    
-    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
-    
-    # Set projection (issues with reading in even properly projected files)
-    shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
-    #print(st_crs(shp)) # Check reprojection
-    
-    # Extract country from shapefile
-    r.shp <- shp[shp$CTRY11NM==the.country,]
-    
-  } else { # Filtering for regions
-    r.filter.name <- sub("^[^ ]+ ","",r, perl=TRUE)
-    cat("  Processing internal GoR region:", the.region,"\n") 
-    
-    shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
-    
-    # Set projection
-    shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
-    #print(st_crs(shp))
-    
-    # Would need to implemented this way for filtering on districts: 
-    #r.shp <- shp[shp$FILE_NAME==r.filter,]
-    # Use this for filtering on GOR regions:
-    r.shp <- shp[shp$rgn16nm==the.region,]
-  }
+  cat(paste("\n","======================\n","Processing data for:", params$country,"\n"))
   
   # Region-Buffered shape
   cat("  Simplifying and buffering region to control for edge effects.")
-  rb.shp <- st_buffer(st_simplify(r.shp, r.simplify), r.buffer)
+  rb.shp <- buffer.region(r)
   
   .flatten <- function(x) {
     if (length(x) == 0) { 
@@ -205,7 +172,7 @@ for (r in r.iter) {
   
   # Note: No viable data from 1971
   for (y in c(1981, 1991, 2001, 2011)) {
-    region.y.path = paste(c(nspl.path, paste(c(the.label,y,"NSPL.shp"),collapse="_")), collapse="/")
+    region.y.path = paste(c(nspl.path, paste(c(params$label,y,"NSPL.shp"),collapse="_")), collapse="/")
     if (!file.exists(region.y.path) & overwrite==FALSE) {
       cat("    Skipping since output file already exists:\n        ",region.y.path,"\n")
     } else {
@@ -248,26 +215,40 @@ for (r in r.iter) {
   }
 }
 
-r = 'Northern Ireland'
+r = 'Wales'
 y = 1991
 # Now create the Voronoi
 for (r in r.iter) {
-  the.label <- .simpleCap(r)
-  the.country <- strsplit(r, " ")[[1]][1]
-  the.region  <- paste(strsplit(r, " ")[[1]][-1], collapse=" ")
+  params = set.params(r)
   
-  if (r=='Northern Ireland') {
-    the.country <- 'Northern-Ireland'
-    the.region  <- ""
-  }
+  cat("\n","======================\n","Creating Voronoi Polygons for:", params$label,"\n")
   
-  cat("\n","======================\n","Creating Voronoi Polygons for:", the.label,"\n")
+  # Region-Buffered shape
+  cat("  Simplifying and buffering region to control for edge effects.")
+  rb.shp <- buffer.region(r)
   
   for (y in c(1981, 1991, 2001, 2011)) {
     cat("    ","Reading shape data for year:", y,"\n")
-    region.y.path <- paste(c(nspl.path, paste(c(the.label,y,"NSPL.shp"),collapse="_")), collapse="/")
+    region.y.path <- paste(c(nspl.path, paste(c(params$label,y,"NSPL.shp"),collapse="_")), collapse="/")
+    region.v.path <- paste(c(nspl.path, paste(c(params$label,y,"NSPL","Voronoi.shp"),collapse="_")), collapse="/")
     dt.region     <- st_read(region.y.path, quiet=TRUE)
-    dt.v          <- st_voronoi(dt.region, st_buffer(st_simplify(dt.region, r.simplify), r.buffer), dTolerance=5.0)
+    dt.region     <- dt.region %>% st_set_crs(NA) %>% st_set_crs(27700)
+    
+    if (st_crs(rb.shp)$epsg != st_crs(dt.region)$epsg) {
+      cat(paste(rep("=",25),collapse="="), "\n")
+      cat(paste(rep("=",25),collapse="="), "\n")
+      print("The EPSG values don't match for the two files!")
+      cat(paste(rep("=",25),collapse="="), "\n")
+      cat(paste(rep("=",25),collapse="="), "\n")
+    }
+    
+    dt.multi      <- st_multipoint(st_coordinates( st_geometry(dt.region) ))
+    rb.poly       <- st_geometry(rb.shp)
+    dt.v          <- st_sfc(st_voronoi(dt.multi, st_sfc(rb.poly), dTolerance=0.0)) # Cropping doesn't seem to work...
+    dt.v          <- dt.v %>% st_set_crs(27700) %>% st_cast()
+    # Now need to join postcodes back on to
+    # the Voronoi polygons
+    st_write(t, region.v.path, delete_layer=TRUE, quiet=TRUE)
   }
 }
 
