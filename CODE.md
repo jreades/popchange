@@ -46,6 +46,12 @@ export PATH="/usr/local/opt/gdal2/bin:/usr/local/bin:/opt/local/bin:/opt/local/s
 
 Note the commenting out of the anaconda path _while installing and configuring gdal via brew_.
 
+Finally, I had to reinstall `rgeos` and `rgdal` (and added `sp` for good measure) as well as `sf` to get everything working. When these libraries are imported you should see a version of GEOS >= 3.5 and GDAL > 2.0 being used. I am no longer 100% certain, but think that I might have had to install `sf` via:
+```
+library(devtools)
+devtools::install_github('edzer/sfr')
+```
+
 # Generating Grids
 
 The R scripts contained in this project repo allow you to take any Census attribute for any Census year (1971-2011) and convert it to a regular grid for some or all of Great Britain (Scotland, England & Wales).
