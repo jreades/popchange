@@ -20,9 +20,31 @@ Directory structure:
 
 On my Mac I've intalled GDAL and GEOS using the libraries provided by [KyngChaos]{}. These put the necessary external resources under /Library/Frameworks/...
 
-To install a version of `sf` that enables `st_voronoi` functionality you must link to a version of GEOS > 3.5. Installing rgeos and sf via RStudio repeatedly linked to older versions of me (even when I tried to install using `type='source'`) so I eventually had to download the tarball from CRAN, `gunzip` it, and install from the Terminal:
+To install a version of `sf` that enables `st_voronoi` functionality you must link to a version of GEOS > 3.5. Installing rgeos and sf via RStudio repeatedly linked to older versions of me (even when I tried to install using `type='source'`) so I eventually tried downloading the tarball from CRAN, `gunzip`-ing it, and installing from the Terminal:
 - `R CMD INSTALL rgeos_0.3-23.tar.gz --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config'`
 - `R CMD INSTALL sf_0.4-3.tar --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config --with-proj-include=/Library/Frameworks/PROJ.framework/Headers --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'`
+
+This **_should have worked_** but did not. So I finally resorted to Homebrew:
+```
+brew doctor
+brew prune
+brew update
+brew install homebrew/science/netcdf
+brew install jasper
+brew install gdal2 --with-armadillo --with-complete --with-libkml --with-unsupported
+brew link --force gdal2
+cp /usr/local/opt/gdal2/lib/libgdal.20.dylib /usr/local/opt/gdal2/lib/libgdal.20.dylib.orig
+chmod +w /usr/local/opt/gdal2/lib/libgdal.20.dylib
+install_name_tool -change @rpath/libjasper.4.dylib /usr/local/opt/jasper/lib/libjasper.4.dylib -change @rpath/libnetcdf.11.dylib /usr/local/opt/netcdf/lib/libnetcdf.11.4.0.dylib /usr/local/opt/gdal2/lib/libgdal.20.dylib
+```
+
+Since I had Anaconda Python installed I also ended up mucking about with my `.bash_profile`, which looks like this:
+```
+export PATH="/usr/local/opt/gdal2/bin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/cairo/Programs:/Applications/QGIS.app/Contents/MacOS/bin:/usr/local/mysql/bin:/Library/Frameworks/GDAL.framework/Programs:$PATH"
+#export PATH="/Applications/anaconda3/bin:$PATH"
+```
+
+Note the commenting out of the anaconda path _while installing and configuring gdal via brew_.
 
 # Generating Grids
 
