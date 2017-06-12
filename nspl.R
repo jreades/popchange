@@ -20,7 +20,10 @@ library(dtplyr)
 library(ggplot2)
 library(zoo)
 library(DBI)
-library(sf)  # Replaces sp and does away with need for several older libs (sf == production)
+library(spatstat) # Required for owin
+library(sp)       # Required for KDE process
+require(rgdal)    # Required for readOGR to get around issue with sf and running KDE
+library(sf)       # Replaces sp (usually) and does away with need for several older libs (sf == production)
 
 # We assume that spatial data is stored under the current 
 # working directory but in a no-sync directory since these
@@ -217,6 +220,53 @@ for (r in r.iter) {
 
 r = 'Wales'
 y = 1991
+# Kriging and KDE
+for (r in r.iter) {
+  params = set.params(r)
+  
+  cat("\n","======================\n","Kriging:", params$label,"\n")
+  
+  # Region-Buffered shape
+  cat("  Simplifying and buffering region to control for edge effects.")
+  rb.shp <- buffer.region(r)
+  
+  # This is a kludge to get around a problem that I 
+  # encountered with converting directly from sf objects
+  # to SpatialPolygons -- owin() refused to work with the
+  # converted class (complained about missing 'W' weights 
+  # vector). Writing this data out and then reading it back
+  # in via OGR appears to work without a hitch. As best I 
+  # can tell from investigation the issue has something to 
+  # do with holes; however, the examples I found in which 
+  # someone had resolved this via a function didn't work 
+  # for me so the issue must be buried pretty deep in the 
+  # drivers.
+  fn = 'region.tmp.shp'            # Makes it easy to tidy up
+  delete.shp(fn)                   # Check doesn't exist already
+  st_write(rb.shp, fn, quiet=TRUE) # Write it out
+  r.sp   <- readOGR(fn)            # Read it back i
+  w      <- as.owin(r.sp)          # Window for ppp below
+  delete.shp(fn)                   # And tidy up
+  
+  for (y in c(1981, 1991, 2001, 2011)) {
+    cat("    ","Reading shape data for year:", y,"\n")
+    region.y.path <- paste(c(nspl.path, paste(c(params$label,y,"NSPL.shp"),collapse="_")), collapse="/")
+    region.k.path <- paste(c(nspl.path, paste(c(params$label,y,"NSPL","Kriged.shp"),collapse="_")), collapse="/")
+    dt.region     <- st_read(region.y.path, quiet=TRUE)
+    
+    # Extract postcode points from the sf object
+    pts <- st_coordinates(dt.region)
+    
+    # Jitter to avoid two postcodes sitting on top of each other
+    p <- ppp(jitter(pts[,1], amount=1), jitter(pts[,2], amount=1), window=w)
+    
+    # Possibly: https://github.com/samuelbosch/blogbits/blob/master/kernel_density/splancs_kernel_density.R
+    K1 <- density(p, sigma=1500, bw="SJ", kernel="epanechnikov")
+    plot(K1, main=NULL)
+    #contour(K1, add=TRUE)
+  }
+}
+
 # Now create the Voronoi
 for (r in r.iter) {
   params = set.params(r)

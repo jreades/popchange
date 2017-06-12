@@ -35,7 +35,7 @@ r.regions    <- c('London','North West','North East','Yorkshire and The Humber',
 
 r.iter       <- c(paste(r.countries[1],r.regions),r.countries[2:length(r.countries)])
 
-r.buffer     <- 10000                      # Buffer to draw around region to filter (in metres)
+r.buffer     <- 5000                       # Buffer to draw around region to filter (in metres)
 r.simplify   <- 500
 osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)
 osm.simplify <- 10.0                       # Simplify distance to use on OSM features to help speed up calculations (in metres)
@@ -46,8 +46,8 @@ osm.simplify <- 10.0                       # Simplify distance to use on OSM fea
 # We need to work out xmin and ymin such that we get a fairly consistent
 # output no matter what the user specifies -- in other words, we don't 
 # want grids starting at an Easting of 519,728 so it makes sense to round
-# down (to be below and to the right) to the nearest... 10k?
-g.resolution <- 500                        # Grid resolution (in metres)
+# down (to be below and to the right) to the nearest... 'x' km?
+g.resolution <- 1000                        # Grid resolution (in metres)
 g.anchor     <- 10000                      # Anchor grid min/max x and y at nearest... (in metres)
 
 # We assume that spatial data is stored under the current 
