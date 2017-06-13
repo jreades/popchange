@@ -1,9 +1,4 @@
 rm(list = ls())
-##################
-##################
-# Convert to sf_make_grid
-##################
-##################
 #########################################
 # Creates a grid of arbitrary resolution 
 # for Scotland, Wales, and the GoR regions
@@ -12,15 +7,6 @@ rm(list = ls())
 source('config.R')
 source('funcs.R')
 
-# Temporary mod
-r.buffer=5000
-
-# Create raster grid of arbitrary size:
-# https://gis.stackexchange.com/questions/154537/generating-grid-shapefile-in-r
-
-#library(rgdal)   # R wrapper around GDAL/OGR
-#library(raster)  # Useful functions for merging/aggregation
-#library(DBI)     # Required by sf
 library(sf)      # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
 
 for (r in r.iter) {

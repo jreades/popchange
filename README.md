@@ -15,12 +15,60 @@ The forked repo is designed to support full replication using _**only**_ open co
 
 ## Generating Your Own Grids
 
-For information on how to use the code to generate your own grids, please see: [CODE.md](CODE.md).
+For more detail about how to use the code to generate your own grids, please see: [CODE.md](CODE.md).
 
+**_Note:_** Processing all of the raw data for these will consume roughly 50GB of diskspace. This consumption arises primarily because of the intermediate outputs associated with the OSM data: they permit greater flexibility in weighting and auditability but at the cost of higher levels of diskspace usage.
+
+But here is the general overview:
+
+### Getting the Code 
+
+Clone or download the repo to somewhere easy to find.
+
+### Create the Directory Structure 
+
+Under the `popchange` directory the `setup.R` script will create a set of data directories; these are not found in git because of the volumes associated with extracting and processing OSM, OS & NSPL features. The layout is:
+
+- `popchange/      # The repo`
+  - `no-sync/      # Don't manage content here with Git`
+    - `OS/         # For Ordnance Survey data`
+    - `OSM/        # For OSM data`
+    - `Roads/      # For Roads data`
+    - `NSPL/       # National Statistics postcode data`
+    - `Voronoi/    # National Statistics postcode data`
+    - `grid/       # Grid output for regions`
+    - `processed/  # Outputs from gridding process at national and regional levels`
+
+### Downloading the Open Data
+
+* The 100km OS shapefile tiles (so all five files) from [github.com/charlesroper](https://github.com/charlesroper/OSGB_Grids)
+* England OSM (> 700MB): [england-latest.osm.pbf](http://download.geofabrik.de/europe/great-britain/england-latest.osm.pbf)
+* Scotland OSM (> 100MB): [scotland-latest.osm.pbf](http://download.geofabrik.de/europe/great-britain/scotland-latest.osm.pbf)
+* Wales OSM (> 50MB): [wales-latest.osm.pbf](http://download.geofabrik.de/europe/great-britain/wales-latest.osm.pbf)
+* Northern Ireland / Ireland OSM (> 125MB): [ireland-and-northern-ireland-latest.pbf](http://download.geofabrik.de/europe/ireland-and-northern-ireland-latest.osm.pbf)
+* Admin boundaries: [Regions 2016 Generalised Clipped Boundaries in England](http://geoportal.statistics.gov.uk/datasets/regions-december-2016-generalised-clipped-boundaries-in-england)
+* Country boundaries: [Countries 2016 Generalised Clipped Boundaries in Great Britain](http://geoportal.statistics.gov.uk/datasets/countries-december-2016-generalised-clipped-boundaries-in-great-britain)
+* NI boundaries: [OSNI Open Data Largescale Boundaries - NI Outline](http://osni-spatial-ni.opendata.arcgis.com/datasets/d9dfdaf77847401e81efc9471dcd09e1_0) (subject to change, I'd expect)
+* OS OpenRoads: [OS OpenData Products](https://www.ordnancesurvey.co.uk/opendatadownload/products.html)
+* OSNI Roads: [OSNI Open Data - 50k Transport Line](http://osni-spatial-ni.opendata.arcgis.com/datasets/f9b780573ecb446a8e7acf2235ed886e_2) (subject to change, I'd expect)
+
+### Running the Code to Enable Population Gridding
+
+Run the scripts in the following order to set up all of the data needed to actually do population allocations:
+
+1. `setup.R` (to set up the data directories)
+2. `ni-preprocessing.R`
+3. `grid.R`
+4. `osm.R`
+5. `roads.R`
+6. `nspl.R`
+7. `assemble.R`
+8. `allocate.R`
+  
 # Notes for Improvements
 
 These are 'notes to self' on larger issues not yet fully addressed but which would streamline and/or improve the allocation process.
 
 ## OSM-to-Bash Script
 
-Based on some issues I'm having with R/R-Studio and long-running system2 calls, my guess is that R has some kind of timeout on unix commands. A better long-term approach would, instead of having commands fired off from R, have R write a shell script that is fired at the end of the R script. That would be (oddly) more robust agains the timeouts *and* it would make auditing/re-running code a bit easier.
+Based on some issues I'm having with R/R-Studio with the `osm.R` file and long-running `system2` calls, my guess is that R has some kind of timeout on unix commands. A better long-term approach would, instead of having commands fired off from R, be to have R write a shell script that is fired at the end of the R file. That would be (oddly) more robust agains the timeouts *and* it would make auditing/re-running code a bit easier.

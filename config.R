@@ -11,11 +11,13 @@
 #      land-polygons/ # Also OSM, but from different source
 #      processed/     # Outputs from gridding process at national and regional levels
 
+########## Software Configuration
 # Where to find ogr2ogr -- this is the OSX location when installed
 # from the fantastic KyngChaos web site
 ogr.lib  = '/Library/Frameworks/GDAL.framework/Programs/ogr2ogr'
 ogr.info = '/Library/Frameworks/GDAL.framework/Programs/ogrinfo'
 
+########## Regions Configuration
 # The strings here should match the Geofabrik OSM file name 
 # (allowing for %>% ucfirst these are England, Scotland, Wales).
 r.countries  <- c('England', 'Scotland', 'Wales', 'Northern Ireland')
@@ -35,32 +37,38 @@ r.regions    <- c('London','North West','North East','Yorkshire and The Humber',
 
 r.iter       <- c(paste(r.countries[1],r.regions),r.countries[2:length(r.countries)])
 
-r.buffer     <- 5000                       # Buffer to draw around region to filter (in metres)
-r.simplify   <- 500
-osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)
-osm.simplify <- 10.0                       # Simplify distance to use on OSM features to help speed up calculations (in metres)
+########## Region Buffer Configuration
+r.buffer       <- 5000                       # Buffer to draw around region to filter (in metres)
+r.simplify     <- 500                        # Simplify the boundaries before drawing the buffer (for performance)
 
-# Create raster grid of arbitrary size:
-# https://gis.stackexchange.com/questions/154537/generating-grid-shapefile-in-r
+########## Roads Buffer Configuration
+roads.buffer   <- 150                        # Buffer to draw around roads to filter (in metres)
+roads.simplify <- 100                        # Simplify the roads before drawing the buffer (for performance)
 
+########## Grid Configuration
 # We need to work out xmin and ymin such that we get a fairly consistent
 # output no matter what the user specifies -- in other words, we don't 
-# want grids starting at an Easting of 519,728 so it makes sense to round
-# down (to be below and to the right) to the nearest... 'x' km?
-g.resolution <- 1000                        # Grid resolution (in metres)
-g.anchor     <- 10000                      # Anchor grid min/max x and y at nearest... (in metres)
+# want grids starting at an Easting of 519 or 728 so it makes sense to round
+# the bounding box for the region to the nearest... 'x' km?
+g.resolution   <- 250                        # Grid resolution (in metres)
+g.anchor       <- 5000                       # Anchor grid min/max x and y at nearest... (in metres)
 
+########## Data Storage Configuration
 # We assume that spatial data is stored under the current 
 # working directory but in a no-sync directory since these
 # files are enormous.
 os.path = c(getwd(),'no-sync','OS')
 osm.path = c(getwd(),'no-sync','OSM')
 nspl.path = c(getwd(),'no-sync','NSPL')
-
+roads.path = c(getwd(),'no-sync','Roads')
 grid.out.path = c(getwd(),'no-sync','grid')
 osm.out.path = c(getwd(),'no-sync','processed')
 
-# Set up the classes that we want to pull from the OSM PBF
+########## OSM Configuration
+osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)
+osm.simplify <- 10.0                       # Simplify distance to use on OSM features to help speed up calculations (in metres)
+
+# Set up the OSM classes that we want to pull from the PBF
 # file. Each of these corresponds to a column configured 
 # via the osmconf.ini file. In truth, the way OSM works 
 # means that these columns are not strictly enforced (so,
@@ -93,12 +101,7 @@ osm.classes$natural = unique(c(osm.classes$natural, osm.classes$landuse, osm.cla
 osm.classes$landuse = osm.classes$natural
 osm.classes$leisure = osm.classes$natural
 
-.simpleCap <- function(x) {
-  s <- strsplit(tolower(x), "[_ ]")[[1]]
-  paste(toupper(substring(s, 1, 1)), substring(s, 2),
-        sep = "", collapse = "_")
-}
-
+########## Sanity check -- we only need to run this once...
 if (! file.exists(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"))) {
   cat(paste(replicate(45, "="), collapse = ""), "\n")
   cat(paste(replicate(45, "="), collapse = ""), "\n")

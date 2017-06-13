@@ -1,30 +1,21 @@
 <!-- test compile using X -->
 
-# Setting Up
-
-The R scripts expect the directory structure set out below. The data directories are not found in git because of the data volumes associated with extracting and processing OSM, OS & NSPL features.
-
-Directory structure:
-- `popchange/`
-  - `no-sync/`     # Don't manage content here with Git
-    - `OS/`        # For Ordnance Survey data
-    - `OSM/`       # For OSM data
-    - `Roads/`     # For Roads data
-    - `NSPL/`      # National Statistics postcode data
-    - `grid/`      # Grid output for regions
-    - `processed/` # Outputs from gridding process at national and regional levels
-
-**_Note:_** Processing all of the raw data for these will consume roughly 50GB of diskspace. This consumption arises because of the intermediate outputs associated with the OSM data: they permit greater flexibility in weighting and auditability but at the cost of higher levels of diskspace usage.
-
 ## SF & Other Libs on a Mac
 
-On my Mac I've intalled GDAL and GEOS using the libraries provided by [KyngChaos]{}. These put the necessary external resources under /Library/Frameworks/...
+On my Mac I've intalled GDAL and GEOS using the libraries provided by [KyngChaos](http://www.kyngchaos.com/software/frameworks). These put the necessary external resources (GDAL, GEOS, PROJ) under `/Library/Frameworks/...`
 
-To install a version of `sf` that enables `st_voronoi` functionality you must link to a version of GEOS > 3.5. Installing rgeos and sf via RStudio repeatedly linked to older versions of me (even when I tried to install using `type='source'`) so I eventually tried downloading the tarball from CRAN, `gunzip`-ing it, and installing from the Terminal:
-- `R CMD INSTALL rgeos_0.3-23.tar.gz --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config'`
-- `R CMD INSTALL sf_0.4-3.tar --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config --with-proj-include=/Library/Frameworks/PROJ.framework/Headers --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'`
+To install a version of `sf` that enables `st_voronoi` functionality you **_must_** link to a version of `GEOS` > 3.5. Installing `rgeos` and `sf` via RStudio repeatedly linked to older versions for me (even when I tried to install using `type='source'`) so I eventually tried downloading the tarball from CRAN, `gunzip`-ing it, and installing from the Terminal:
+```
+R CMD INSTALL rgeos_0.3-23.tar.gz --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config'
+R CMD INSTALL sf_0.4-3.tar --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config --with-proj-include=/Library/Frameworks/PROJ.framework/Headers --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
+```
 
-This **_should have worked_** but did not. So I finally resorted to Homebrew:
+This **_should have worked_** but did not. In retrospect, I think that this might have been because I'd missed an old compiler flag in my `.bash_profile` that was pointing to GDAL 1.11 (which no longer existed). The correct flag would have been:
+```
+export CFLAGS=Library/Frameworks/GDAL.framework/unix/bin/gdal-config
+```
+
+However, I finally resorted to Homebrew (which I had already installed and which probably didn't help with compiling `sf`):
 ```
 brew doctor
 brew prune
@@ -38,10 +29,11 @@ chmod +w /usr/local/opt/gdal2/lib/libgdal.20.dylib
 install_name_tool -change @rpath/libjasper.4.dylib /usr/local/opt/jasper/lib/libjasper.4.dylib -change @rpath/libnetcdf.11.dylib /usr/local/opt/netcdf/lib/libnetcdf.11.4.0.dylib /usr/local/opt/gdal2/lib/libgdal.20.dylib
 ```
 
-Since I had Anaconda Python installed I also ended up mucking about with my `.bash_profile`, which looks like this:
+### Important Note
+Since I had Anaconda Python installed I also ended up mucking about with my `.bash_profile` before doing the Homebrew work, and it ended up looking like this:
 ```
 export PATH="/usr/local/opt/gdal2/bin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/cairo/Programs:/Applications/QGIS.app/Contents/MacOS/bin:/usr/local/mysql/bin:/Library/Frameworks/GDAL.framework/Programs:$PATH"
-#export PATH="/Applications/anaconda3/bin:$PATH"
+#export PATH="/Applications/anaconda/bin:$PATH"
 ```
 
 Note the commenting out of the anaconda path _while installing and configuring gdal via brew_.
@@ -51,6 +43,8 @@ Finally, I had to reinstall `rgeos` and `rgdal` (and added `sp` for good measure
 library(devtools)
 devtools::install_github('edzer/sfr')
 ```
+
+**_If you are starting this with a clean system I'd appreciate an update on which approach worked for you!_**
 
 # Generating Grids
 
@@ -100,10 +94,10 @@ We work from the premise that certain types of land use were highly unlikely to 
 
 For simplicty's sake, we use the PBF resources provided by GeoFabrik:
 
-- England (> 700MB): http://download.geofabrik.de/europe/great-britain/england-latest.osm.pbf
-- Scotland (> 100MB): http://download.geofabrik.de/europe/great-britain/scotland-latest.osm.pbf
-- Wales (> 50MB): http://download.geofabrik.de/europe/great-britain/wales-latest.osm.pbf
-- Northern Ireland / Ireland (> 125MB): 
+* England OSM (> 700MB): [england-latest.osm.pbf](http://download.geofabrik.de/europe/great-britain/england-latest.osm.pbf)
+* Scotland OSM (> 100MB): [scotland-latest.osm.pbf](http://download.geofabrik.de/europe/great-britain/scotland-latest.osm.pbf)
+* Wales OSM (> 50MB): [wales-latest.osm.pbf](http://download.geofabrik.de/europe/great-britain/wales-latest.osm.pbf)
+* Northern Ireland / Ireland OSM (> 125MB): [ireland-and-northern-ireland-latest.pbf](http://download.geofabrik.de/europe/ireland-and-northern-ireland-latest.osm.pbf)
 
 These files will need to be placed in the correct directory (and they should all have names as per the original downloaded file) so that the scripts can find them.
 
@@ -127,10 +121,12 @@ More details can be found in the `osm.R` file.
 
 ## Ordnance Survey (OS)
 
-We do make use of _some_ OS data because it remains the most accurate and, increasinly, is available on an open basis. The [GeoPortal](http://geoportal.statistics.gov.uk/datasets/) (when it's working) is the best way to access this data:
+We do make use of _some_ OS data because it remains the most accurate and, increasinly, is available on an open basis. The [GeoPortal](https://geoportal.statistics.gov.uk/datasets/) (when it's working) is the best way to access this data:
 
-- Generalised, Clipped Country Boundaries: http://geoportal.statistics.gov.uk/datasets/2039e084c4e8427981514b2a7fdd077e_0. You could also get most of this via [OSM's land polygons](http://openstreetmapdata.com/data/land-polygons), but this data set is clipped further inland for tidal rivers (e.g. the Thames) so it produces better result.
-- The administrative boundaries for the Government Office for Regions (GoR): http://geoportal.statistics.gov.uk/datasets/f99b145881724e15a04a8a113544dfc5_2. In particular, we're interested in: `Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp`
+* Admin boundaries: [Regions 2016 Generalised Clipped Boundaries in England](http://geoportal.statistics.gov.uk/datasets/regions-december-2016-generalised-clipped-boundaries-in-england)
+* Country boundaries: [Countries 2016 Generalised Clipped Boundaries in Great Britain](http://geoportal.statistics.gov.uk/datasets/countries-december-2016-generalised-clipped-boundaries-in-great-britain)
+
+You could also get most of this via [OSM's land polygons](http://openstreetmapdata.com/data/land-polygons), but this data set is clipped further inland for tidal rivers (e.g. the Thames) so it produces better result.
 
 We use these to achieve two things:
 1. To give us the country boundaries that are needed for processing Wales and Scotland, while also clipping all three nations to the high-water line.
@@ -140,7 +136,9 @@ In short, \#2 gives us access to parallelisation options as long as the grid ali
 
 ## Ordnance Survey of Norther Ireland (OSNI)
 
-For reasons best known to itself, OSNI has made it far more difficult to find and access open data -- I couldn't even locate information about what projection was being used! At any rate, the large scale boundary data set _is_ open and can be downloaded for free, so this is what I've used:  http://osni-spatial-ni.opendata.arcgis.com/datasets?q=Boundaries&sort_by=relevance
+For reasons best known to itself, OSNI has made it far more difficult to find and access open data -- I couldn't even locate information about what projection was being used! At any rate, the large scale boundary data set _is_ open and can be downloaded for free, so this is what I've used:
+
+* NI boundaries: [OSNI Open Data Largescale Boundaries - NI Outline](http://osni-spatial-ni.opendata.arcgis.com/datasets/d9dfdaf77847401e81efc9471dcd09e1_0) (subject to change, I'd expect)
 
 The projection is EPSG:29901 (OSNI 1952 / Irish National Grid).
 
@@ -158,7 +156,9 @@ There are two sources that _do_ have this history:
 
 A discussion of the tradeoffs between these two data sets can be found here in the National Archives [web archive](http://webarchive.nationalarchives.gov.uk/20160105160709/http://www.ons.gov.uk/ons/guide-method/geography/products/postcode-directories/-nspp-/index.html).
 
-For consistency with earlier work we've opted to use the NSPL from the [GeoPortal](https://geoportal.statistics.gov.uk).
+For consistency with earlier work we've opted to use the CSV file for the latest NSPL from the [GeoPortal](https://geoportal.statistics.gov.uk):
+
+* [National Statistics Postcode Lookup (Latest) Centroids](https://opendata.arcgis.com/datasets/055c2d8135ca4297a85d624bb68aefdb_0.csv)
 
 More details can be found in the `nspl.R` file.
 
@@ -176,14 +176,19 @@ There _is_ road network data available from other sources: both the Ordnance Sur
 
 #### England & Wales
 
-I have made use of the "OS Open Roads" data product (ca. 500MB) available from the OS Open site: https://www.ordnancesurvey.co.uk/opendatadownload/products.html.
+I have made use of the "OS Open Roads" data product (ca. 500MB) available from the OS Open site: 
+
+* [OpenData Products](https://www.ordnancesurvey.co.uk/opendatadownload/products.html).
 
 #### Northern Ireland
 
-I have made us of the "OSNI Open Data - 50k Transport Line" data set (ca. 3MB) available from: http://osni-spatial-ni.opendata.arcgis.com/datasets/f9b780573ecb446a8e7acf2235ed886e_2.
+I have made us of the "OSNI Open Data - 50k Transport Line" data set (ca. 3MB) available from:
+
+* [OSNI Open Data - 50k Transport Line](http://osni-spatial-ni.opendata.arcgis.com/datasets/f9b780573ecb446a8e7acf2235ed886e_2)
 
 ---
-_I Have not done any work from here on_
+_**I have not done any work from here on to update the documentation**_
+
 # Census Data Resources
 
 If you wish to calculate grids for another variable, download data:
