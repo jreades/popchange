@@ -159,25 +159,18 @@ for (r in r.iter) {
   cat("  Simplifying and buffering region to control for edge effects.")
   rb.shp <- buffer.region(r)
   
-  .flatten <- function(x) {
-    if (length(x) == 0) { 
-      FALSE
-    } else { 
-      TRUE
-    }
-  }
   # Save the output of st_within and then 
   # convert that to a logical vector using
   # sapply and the .flatten function
   cat("  Selecting postcodes falling within regional buffer.\n")
-  is.within    <- st_within(dt.sf, rb.shp)
-  dt.region    <- subset(dt, sapply(is.within, .flatten))
+  is.within <- st_within(dt.df, rb.shp) %>% lengths()
+  dt.region <- subset(dt, is.within==1)
   
   # Note: No viable data from 1971
   for (y in c(1981, 1991, 2001, 2011)) {
     region.y.path = paste(c(nspl.path, paste(c(params$label,y,"NSPL.shp"),collapse="_")), collapse="/")
     if (!file.exists(region.y.path) & overwrite==FALSE) {
-      cat("    Skipping since output file already exists:\n        ",region.y.path,"\n")
+      cat("    Skipping since output file already exists:","\n","        ",region.y.path,"\n")
     } else {
       # Census Day is normally late-March or early-April
       y.as_date = as.Date(paste(c(y,'03','15'),collapse="-"))

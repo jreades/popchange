@@ -20,16 +20,7 @@ for (r in r.iter) {
   rb.shp <- buffer.region(r)
   
   cat("  Working out extent of region and rounding up/down to nearest ",g.anchor,"m\n")
-
-  r.ext = st_bbox(rb.shp)
-  x.min = floor(r.ext['xmin']/g.anchor)*g.anchor
-  y.min = floor(r.ext['ymin']/g.anchor)*g.anchor
-  x.max = ceiling(r.ext['xmax']/g.anchor)*g.anchor
-  y.max = ceiling(r.ext['ymax']/g.anchor)*g.anchor
-  
-  # Create a box for this
-  box <- st_polygon(list(rbind(c(x.min,y.min),c(x.max,y.min),c(x.max,y.max),c(x.min,y.max),c(x.min,y.min))))
-  box <- st_sfc(box) %>% st_set_crs(NA) %>% st_set_crs(27700)
+  box <- make.box(rb.shp)
   
   # Resolution is the length of the grid on one side (if only one number then you get a square grid)
   cat("  Creating raster grid\n")

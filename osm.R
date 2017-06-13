@@ -23,6 +23,7 @@ rm(list = ls())
 #    function.
 ########################################
 source('config.R')
+source('funcs.R')
 
 library(rgdal)   # R wrapper around GDAL/OGR
 library(raster)  # Useful functions for merging/aggregation
@@ -34,66 +35,16 @@ library(sf)      # Replaces sp and does away with need for several older libs (s
 # individually
 for (r in r.iter) {
   
-  cat(paste("\n","======================\n","Processing data for:",r,"\n"))
+  params = set.params(r)
   
-  the.region <- .simpleCap(r)
-  osm.region <- strsplit(r, " ")[[1]][1]
+  cat("\n","======================\n","Processing data for:",r,"\n")
   
-  # Inelegant, but can't figure out a way around it
-  if (the.region=='Northern_Ireland') {
-    osm.region    <- 'Northern-Ireland'
-    r.filter      <- TRUE
-    r.filter.name <- 'Northern Ireland'
-    
-    cat("  No filter. Processing entire country.\n")
-    
-    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
-    
-    # Set projection (issues with reading in even properly projected files)
-    shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
-    #print(st_crs(shp)) # Check reprojection
-    
-    # Extract country from shapefile
-    r.shp <- shp[shp$CTRY11NM==osm.region,]
-  } else {
-    # Everywhere else besides Northern Ireland
-    if (osm.region==the.region) {
-      r.filter <- FALSE
-    } else {
-      r.filter <- TRUE
-    }
+  # Region-Buffered shape
+  cat("  Simplifying and buffering region to control for edge effects.")
+  rb.shp <- buffer.region(r)
   
-    if (r.filter==FALSE) { # No filtering for regions
-      cat("  No filter. Processing entire country.\n")
-      
-      shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
-      
-      # Set projection (issues with reading in even properly projected files)
-      shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
-      #print(st_crs(shp)) # Check reprojection
-      
-      # Extract country from shapefile
-      r.shp <- shp[shp$CTRY11NM==osm.region,]
-      
-    } else { # Filtering for regions
-      r.filter.name <- sub("^[^ ]+ ","",r, perl=TRUE)
-      cat(paste("  Processing internal region:", the.region,"\n")) 
-      
-      shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
-      
-      # Set projection
-      shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
-      #print(st_crs(shp))
-      
-      # Next the shapefile has to be converted to a dataframe for use in ggplot2
-      # Would need to implemented this way for filtering on districts: 
-      #r.shp <- st_buffer(shp[shp$FILE_NAME==r.filter,], r.buffer, nQuadSegs=100)
-      # Use this for filtering on GOR regions:
-      r.shp <- st_buffer(shp[shp$rgn16nm==r.filter.name,], r.buffer, nQuadSegs=100)
-    }
-  }
   # Useful for auditing, not necessary in production
-  #st_write(r.shp, dsn=paste(c(os.path,'filterregion.shp'), collapse="/"), layer='filterregion', delete_dsn=TRUE, quiet=TRUE)
+  #st_write(rb.shp, dsn=paste(c(os.path,'filterregion.shp'), collapse="/"), layer='filterregion', delete_dsn=TRUE, quiet=TRUE)
   
   # Create bounding box from buffer -- 
   # we can then feed this into the OGR
@@ -102,30 +53,24 @@ for (r in r.iter) {
   # actual boundaries
   
   # What are the boundaries of the region?
-  xmin = floor(st_bbox(r.shp)['xmin']/r.buffer)*r.buffer
-  xmax = ceiling(st_bbox(r.shp)['xmax']/r.buffer)*r.buffer
-  ymin = floor(st_bbox(r.shp)['ymin']/r.buffer)*r.buffer
-  ymax = ceiling(st_bbox(r.shp)['ymax']/r.buffer)*r.buffer
+  e = make.box(rb.shp)
   
   # Create an extent from these and then transform
   # to EPSG:4326 so that we can work out the coordinates
   # to use for clipping the OSM data
-  e <- as(raster::extent(xmin, xmax, ymin, ymax), "SpatialPolygons")
-  e.sf = st_as_sf(e)
-  e.sf <- e.sf %>% st_set_crs(NA) %>% st_set_crs(27700)
-  e.st = st_transform(e.sf, '+init=epsg:4326')
+  e.st = st_transform(e, '+init=epsg:4326')
   #st_bbox(e.st)
   
   # For validation of bbox -- not needed in production
   # st_write(e.st, paste(c(os.path,'filterbounds.shp'),collapse="/"), layer='filterbounds', delete_dsn=TRUE, quiet=TRUE)
   
-  xmin = round(st_bbox(e.st)['xmin'], digits=4)
-  xmax = round(st_bbox(e.st)['xmax'], digits=4)
-  ymin = round(st_bbox(e.st)['ymin'], digits=4)
-  ymax = round(st_bbox(e.st)['ymax'], digits=4)
+  xmin = st_bbox(e.st)['xmin']
+  xmax = st_bbox(e.st)['xmax']
+  ymin = st_bbox(e.st)['ymin']
+  ymax = st_bbox(e.st)['ymax']
   
-  file.osm   = paste(c(osm.path, gsub('{region}',tolower(osm.region),'{region}-latest.osm.pbf', perl=TRUE)), collapse="/")
-  file.clip  = paste(c(osm.path, gsub('{region}',the.region,'{region}-clip.shp', perl=TRUE)), collapse="/")
+  file.osm   = paste(c(osm.path, gsub('{region}',tolower(params$osm.country),'{region}-latest.osm.pbf', perl=TRUE)), collapse="/")
+  file.clip  = paste(c(osm.path, gsub('{region}',params$region,'{region}-clip.shp', perl=TRUE)), collapse="/")
   osm.clip   = c('-f "ESRI Shapefile"', '-sql "SELECT * FROM multipolygons"', paste(c('-clipsrc',xmin,ymin,xmax,ymax)), file.clip, file.osm, '-skipfailures', '-overwrite', '--config ogr_interleaved_reading yes')
   osm.noclip = c('-f "ESRI Shapefile"', '-sql "SELECT * FROM multipolygons"', file.clip, file.osm, '-skipfailures', '-overwrite', '--config ogr_interleaved_reading yes')
   
@@ -133,15 +78,12 @@ for (r in r.iter) {
   cat(paste(c("Bounding Box:",xmin,xmax,ymin,ymax)))
   cat(file.osm,"\n")
   cat(file.clip,"\n")
-  if (r.filter==TRUE) {
-    cat(osm.clip,"\n")  
-  } else {
-    cat(osm.noclip,"\n") 
-  }
+  cat(osm.clip,"\n")  
+  cat(osm.noclip,"\n") 
   
   # Step 1: Subset the OSM file for a region (usually only done with England)
   if (!file.exists(file.clip)) {
-    if (r.filter==FALSE) {
+    if (r %in% c('Northern Ireland','Scotland')) {
       cat("Converting OSM multipolygon data to shapefile...\n")
       print(paste(c(ogr.lib, osm.noclip),collapse=" "))
       system2(ogr.lib, osm.noclip, wait=TRUE)
@@ -159,8 +101,11 @@ for (r in r.iter) {
   for (k in ls(osm.classes)) {
     print(paste("Processing OSM class:", k))
     
-    file.step1 = paste(c(out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step1.shp', perl=TRUE), perl=TRUE)), collapse="/")
-    file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    # Missing what to do with amenity classes!
+    # These are amenity IS NOT NULL and these are NOT IN... (i.e. all amenities except these ones are *included*)
+    
+    file.step1 = paste(c(out.path, gsub('{key}',k,gsub('{region}',params$region,'{region}-{key}-step1.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',params$region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
     
     osm.extract = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326', '-where "{key} IN ({val})"', file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
     osm.alternate.extract = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326', '-where "{val}"', file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
@@ -178,8 +123,8 @@ for (r in r.iter) {
       cmd2 = osm.union 
     }
     
-    cmd1 = gsub('{val}', val, gsub('{key}', k, gsub('{region}', the.region, cmd1, perl=TRUE), perl=TRUE), perl=TRUE)
-    cmd2 = gsub('{val}', val, gsub('{key}', k, gsub('{region}', the.region, cmd2, perl=TRUE), perl=TRUE), perl=TRUE)
+    cmd1 = gsub('{val}', val, gsub('{key}', k, gsub('{region}', params$region, cmd1, perl=TRUE), perl=TRUE), perl=TRUE)
+    cmd2 = gsub('{val}', val, gsub('{key}', k, gsub('{region}', params$region, cmd2, perl=TRUE), perl=TRUE), perl=TRUE)
     
     if (!file.exists(file.step1)) {
       cat("     Extracting and reprojecting data from clip file...\n")
@@ -201,12 +146,12 @@ for (r in r.iter) {
   }
   
   # Step 3: Merge them into a single shapefile 
-  file.merge = paste(c(out.path, gsub('{region}',the.region,'{region}-merge.shp', perl=TRUE)), collapse="/")
+  file.merge = paste(c(out.path, gsub('{region}',params$region,'{region}-merge.shp', perl=TRUE)), collapse="/")
   cmd3 = c()
   for (k in ls(osm.classes)) {
     print(paste("Processing OSM class:", k))
     
-    file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',params$region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
     if (!file.exists(file.merge)) {
       print("     Creating 'merged' shapefile...")
       for (ext in c('.shp','.shx','.prj','.dbf')) {
@@ -229,9 +174,9 @@ for (r in r.iter) {
   if (! file.exists("merge.sh")) {
     write("#!/bin/bash", file="merge.sh")
   }
-  write(paste('echo "Starting merging: ',the.region,'"',sep=""), file="merge.sh", append=TRUE)
+  write(paste('echo "Starting merging: ',params$region,'"',sep=""), file="merge.sh", append=TRUE)
   write(paste(cmd3, collapse=" "), file="merge.sh", append=TRUE)
-  write(paste('echo "Done merging: ',the.region,'"',sep=""), file="merge.sh", append=TRUE)
+  write(paste('echo "Done merging: ',params$region,'"',sep=""), file="merge.sh", append=TRUE)
 }
 
 # Step 4: Do the merge using a shell script to 

@@ -13,6 +13,19 @@ delete.shp <- function(s) {
   }
 }
 
+make.box <- function(s) {
+  r.ext = st_bbox(s)
+  x.min = floor(r.ext['xmin']/g.anchor)*g.anchor
+  y.min = floor(r.ext['ymin']/g.anchor)*g.anchor
+  x.max = ceiling(r.ext['xmax']/g.anchor)*g.anchor
+  y.max = ceiling(r.ext['ymax']/g.anchor)*g.anchor
+  
+  # Create a box for this
+  box <- st_polygon(list(rbind(c(x.min,y.min),c(x.max,y.min),c(x.max,y.max),c(x.min,y.max),c(x.min,y.min))))
+  box <- st_sfc(box) %>% st_set_crs(NA) %>% st_set_crs(27700)
+  box
+}
+
 buffer.region <- function(r) {
   
   params = set.params(r)
@@ -117,9 +130,11 @@ set.params <- function(r) {
     the.region  <- ""
   }
   
-  params         = new.env()
-  params$label   = the.label
-  params$country = the.country
-  params$region  = the.region
+  params             = new.env()
+  params$label       = the.label
+  params$country     = the.country
+  params$region      = the.region
+  params$osm.country = tolower(the.country)
+  
   params
 }
