@@ -159,8 +159,8 @@ for (r in r.iter) {
   for (k in ls(osm.classes)) {
     print(paste("Processing OSM class:", k))
     
-    file.step1 = paste(c(osm.out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step1.shp', perl=TRUE), perl=TRUE)), collapse="/")
-    file.step2 = paste(c(osm.out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step1 = paste(c(out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step1.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
     
     osm.extract = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326', '-where "{key} IN ({val})"', file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
     osm.alternate.extract = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326', '-where "{val}"', file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
@@ -201,12 +201,12 @@ for (r in r.iter) {
   }
   
   # Step 3: Merge them into a single shapefile 
-  file.merge = paste(c(osm.out.path, gsub('{region}',the.region,'{region}-merge.shp', perl=TRUE)), collapse="/")
+  file.merge = paste(c(out.path, gsub('{region}',the.region,'{region}-merge.shp', perl=TRUE)), collapse="/")
   cmd3 = c()
   for (k in ls(osm.classes)) {
     print(paste("Processing OSM class:", k))
     
-    file.step2 = paste(c(osm.out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',the.region,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
     if (!file.exists(file.merge)) {
       print("     Creating 'merged' shapefile...")
       for (ext in c('.shp','.shx','.prj','.dbf')) {
@@ -238,20 +238,53 @@ for (r in r.iter) {
 # prevent race and timeout conditions... seems 
 # to be a weakness in RStudio/R in terms of
 # impatience with system calls.
-print(paste("Merge data script in",file.merge))
-print(paste(c('/bin/sh',file.merge), collapse=" "))
+cat("Merge data script in",file.merge,"\n")
+cat(paste(c('/bin/sh',file.merge), collapse=" "),"\n")
 system2('/bin/sh', file.merge, wait=TRUE)
+cat("Merge complete","\n")
 
-# Step 5: Combine everything into a single filter
+# Step 5: Aggregate land uses into a couple of 
+#         major categories and then intersect 
+#         with the grid
+cat("Starting integration with grid","\n")
+r.iter=c('Northern Ireland')
+for (r in r.iter) {
+  
+  params = set.params(r)
+  
+  cat("\n","======================\n","Processing data for:", params$region,"\n")
+  
+  grd <- st_read(paste(c(grid.out.path,paste(params$label,'.shp',sep="")),collapse="/"), quiet=TRUE)
+  grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
 
-file.final = paste(c(osm.out.path, gsub('{region}',the.region,'{region}-final.shp', perl=TRUE)), collapse="/")
-final.sql  = gsub('{region}', the.region, '"SELECT \'Union\' AS \'Filter\', ST_Union(geometry) from \'{region}-merge\'"', perl=TRUE)
-final.cmd  = c('-sql', final.sql, '-dialect','sqlite', file.final, file.merge, '-overwrite', '--config ogr_interleaved_reading yes')
+  # Now we need to load and aggregate the 'merged'
+  # file created above into the final classification.
+  rb.shp    <- buffer.region(r)
+  osgb.grid <- st_read( paste(c(roads.path,'OSGB_Grid_100km.shp'), collapse="/"), quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
+  
+  grid.intersects <- osgb.grid %>% st_intersects(rb.shp) %>% lengths()
+  grid.tiles      <- sort(osgb.grid$TILE_NAME[ which(grid.intersects==1) ])
+  rm(osgb.grid, grid.intersects)
+  
+  base.path = c(roads.path,'oproad_essh_gb','data')
+  
+  # Get the first tile from the list and 
+  # extract only the roads falling within
+  # the regional buffer
+  rds <- st_read( paste(c(base.path,paste( grid.tiles[1],"RoadLink.shp",sep="_")), collapse="/"), quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700) 
+  is.within <- rds.shp %>% st_intersects(rb.shp) %>% lengths()
+  rds <- subset(rds, is.within==1)
+  
+  cat("   Buffering around roads.","\n")
+  rds.buff <- st_buffer(st_simplify(rds, roads.simplify), roads.buffer)
+  
+  cat("   Calculating intersection with grid.","\n")
+  cell.intersects <- grd %>% st_intersects(rds.buff) %>% lengths()
+  
+  cat("   Writing cell intersection values to shapefile.","\n")
+  grd$nr_road = cell.intersects
+  st_write(grd, paste( c(out.path, paste('Roads',r,'grid.shp', sep="-")), collapse="/"), quiet=TRUE, delete_dsn=TRUE)
+}
 
-# May also need to be run from command line -- 
-# or may need a completely different approach
-# as above using a shell script
-print(paste(c(ogr.lib, final.cmd), collapse=" "))
-system2(ogr.lib, final.cmd, wait=TRUE)
+cat("Done linking buffered roads to grid.","\n")
 
-# ogr2ogr -f "ESRI Shapefile" -t_srs EPSG:27700 -s_srs EPSG:4326 -sql "select * from lines where waterway IN ('river','canal')" wales-rivers.shp ./OSM/wales-latest.osm.pbf overwrite --config ogr_interleaved_reading yes

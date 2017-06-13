@@ -62,7 +62,7 @@ osm.path = c(getwd(),'no-sync','OSM')
 nspl.path = c(getwd(),'no-sync','NSPL')
 roads.path = c(getwd(),'no-sync','Roads')
 grid.out.path = c(getwd(),'no-sync','grid')
-osm.out.path = c(getwd(),'no-sync','processed')
+out.path = c(getwd(),'no-sync','processed')
 
 ########## OSM Configuration
 osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)

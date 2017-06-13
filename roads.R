@@ -11,8 +11,9 @@ rm(list = ls())
 source('config.R')
 source('funcs.R')
 
-library(sf)      # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
+library(sf) # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
 
+r.iter=c('Northern Ireland')
 for (r in r.iter) {
   
   params = set.params(r)
@@ -63,16 +64,18 @@ for (r in r.iter) {
       rds <- rbind(rds, rds.shp)
       rm(rds.shp, is.within)
     }
-    cat("Done assembling roads data for region...","\n")
+    cat("   Done assembling roads data for region...","\n")
   }
   
-  cat("Buffering around roads.","\n")
+  cat("   Buffering around roads.","\n")
   rds.buff <- st_buffer(st_simplify(rds, roads.simplify), roads.buffer)
   
-  cat("Calculating intersection with grid.","\n")
+  cat("   Calculating intersection with grid.","\n")
   cell.intersects <- grd %>% st_intersects(rds.buff) %>% lengths()
   
-  cat("Writing cell intersection values to shapefile.","\n")
+  cat("   Writing cell intersection values to shapefile.","\n")
   grd$nr_road = cell.intersects
-  st_write(grd, 'test2.shp')
+  st_write(grd, paste( c(out.path, paste('Roads',r,'grid.shp', sep="-")), collapse="/"), quiet=TRUE, delete_dsn=TRUE)
 }
+
+cat("Done linking buffered roads to grid.","\n")
