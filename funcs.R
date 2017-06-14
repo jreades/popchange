@@ -26,11 +26,11 @@ make.box <- function(s) {
   box
 }
 
-buffer.region <- function(r) {
+buffer.region <- function(p) {
   
-  params = set.params(r)
+  params = p
   
-  if (r %in% c('Northern Ireland','Wales','Scotland')) { # No filtering for regions
+  if (params$country.nm %in% c('Northern Ireland','Wales','Scotland')) { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
     shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
@@ -40,11 +40,10 @@ buffer.region <- function(r) {
     #print(st_crs(shp)) # Check reprojection
     
     # Extract country from shapefile
-    r.shp <- shp[shp$CTRY11NM==params$country,]
+    r.shp <- shp[shp$CTRY11NM==params$country.nm,]
     
   } else { # Filtering for regions
-    r.filter.name <- sub("^[^ ]+ ","",r, perl=TRUE)
-    cat("  Processing internal GoR region:", params$region,"\n") 
+    cat("  Processing internal GoR region:", params$region.nm,"\n") 
     
     shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
     
@@ -55,7 +54,7 @@ buffer.region <- function(r) {
     # Would need to implemented this way for filtering on districts: 
     #r.shp <- shp[shp$FILE_NAME==r.filter,]
     # Use this for filtering on GOR regions:
-    r.shp <- shp[shp$rgn16nm==params$region,]
+    r.shp <- shp[shp$rgn16nm==params$region.nm,]
   }
   
   # Region-Buffered shape
@@ -64,11 +63,11 @@ buffer.region <- function(r) {
   r.buff
 }
 
-get.region <- function(r) {
+get.region <- function(p) {
   
-  params = set.params(r)
+  params = p
   
-  if (r %in% c('Northern Ireland','Wales','Scotland')) { # No filtering for regions
+  if (params$country.nm %in% c('Northern Ireland','Wales','Scotland')) { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
     shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
@@ -78,11 +77,10 @@ get.region <- function(r) {
     #print(st_crs(shp)) # Check reprojection
     
     # Extract country from shapefile
-    r.shp <- shp[shp$CTRY11NM==params$country,]
+    r.shp <- shp[shp$CTRY11NM==params$country.nm,]
     
   } else { # Filtering for regions
-    r.filter.name <- sub("^[^ ]+ ","",r, perl=TRUE)
-    cat("  Processing internal GoR region:", params$region,"\n") 
+    cat("  Processing internal GoR region:", params$region.nm,"\n") 
     
     shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
     
@@ -93,48 +91,29 @@ get.region <- function(r) {
     # Would need to implemented this way for filtering on districts: 
     #r.shp <- shp[shp$FILE_NAME==r.filter,]
     # Use this for filtering on GOR regions:
-    r.shp <- shp[shp$rgn16nm==params$region,]
+    r.shp <- shp[shp$rgn16nm==params$region.nm,]
   }
   
   r.shp
 }
-# 
-# fixholes = function(sp.obj) {
-#   require(rgeos)
-#   require(stringr)
-#   require(maptools)
-#   if(!inherits(sp.obj, "SpatialPolygons")) stop("Input object must be of class SpatialPolygons")
-#   pls = slot(sp.obj, "polygons")
-#   pls1 = lapply(pls, maptools::checkPolygonsHoles)
-#   slot(sp.obj, "polygons") = pls1
-#   return(sp.obj)
-# }
-# 
-# spdf2owin = function(spdf) {
-#   cp <- as(spdf, "SpatialPolygons")
-#   cregions <- slot(cp, "polygons")
-#   cregions <- lapply(cregions, function(x) { fixholes(SpatialPolygons(list(x))) })
-#   cwindows <- lapply(cregions, as.owin)
-#   ch <- hyperframe(window=cwindows)
-#   ch <- cbind.hyperframe(ch, spdf@data)
-#   return(ch)
-# }
 
 set.params <- function(r) {
-  the.label   <- .simpleCap(r)
   the.country <- strsplit(r, " ")[[1]][1]
   the.region  <- paste(strsplit(r, " ")[[1]][-1], collapse=" ")
   
   if (r=='Northern Ireland') {
-    the.country <- 'Northern-Ireland'
+    the.country <- 'Northern Ireland'
     the.region  <- ""
   }
   
   params             = new.env()
-  params$label       = the.label
-  params$country     = the.country
-  params$region      = the.region
-  params$osm.country = tolower(the.country)
+  params$country.nm  = the.country
+  params$region.nm   = the.region
+  params$display.nm  = (if(the.country=='England') { the.region } else { the.country })
+  params$file.nm     = .simpleCap( (if(the.country=='England') { the.region } else { the.country }) )
+  params$country     = .simpleCap(the.country)
+  params$region      = .simpleCap(the.region)
+  params$osm         = tolower(.simpleCap(the.country))
   
   params
 }
