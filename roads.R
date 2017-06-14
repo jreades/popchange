@@ -19,12 +19,6 @@ for (r in r.iter) {
   
   cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
   
-  cat("Loading grid with resolution",g.resolution,"m.\n")
-  grid.fn = paste(c(grid.out.path,paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")),collapse="/")
-  
-  grd <- st_read(grid.fn, quiet=TRUE)
-  grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
-  
   if (r == 'Northern Ireland') {
     full.path = paste(c(roads.path,'OSNI_Open_Data__50k_Transport_Line','OSNI_Open_Data__50k_Transport_Line.shp'),collapse="/")
     rds <- st_read(full.path, quiet=TRUE)
@@ -75,6 +69,12 @@ for (r in r.iter) {
   
   cat("   Buffering around roads.","\n")
   rds.buff <- st_buffer(st_simplify(rds, roads.simplify), roads.buffer)
+  
+  cat("Loading grid with resolution",g.resolution,"m.\n")
+  grid.fn = paste(c(grid.out.path,paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")),collapse="/")
+  
+  grd <- st_read(grid.fn, quiet=TRUE)
+  grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
   
   cat("   Calculating intersection with grid.","\n")
   cell.intersects <- grd %>% st_intersects(rds.buff) %>% lengths()
