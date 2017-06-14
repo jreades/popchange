@@ -12,3 +12,5 @@ process-for-running-code.html
 no-sync
 no-sync.*
 .DS_Store
+merge.sh
+*.qgs~
