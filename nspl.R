@@ -153,11 +153,11 @@ for (r in r.iter) {
   
   params = set.params(r)
   
-  cat(paste("\n","======================\n","Processing data for:", params$country,"\n"))
+  cat(paste("\n","======================\n","Processing data for:", params$display.nm,"\n"))
   
   # Region-Buffered shape
   cat("  Simplifying and buffering region to control for edge effects.")
-  rb.shp <- buffer.region(r)
+  rb.shp <- buffer.region(params)
   
   # Save the output of st_within and then 
   # convert that to a logical vector using
@@ -168,9 +168,9 @@ for (r in r.iter) {
   
   # Note: No viable data from 1971
   for (y in c(1981, 1991, 2001, 2011)) {
-    region.y.path = paste(c(nspl.path, paste(c(params$label,y,"NSPL.shp"),collapse="_")), collapse="/")
-    if (!file.exists(region.y.path) & overwrite==FALSE) {
-      cat("    Skipping since output file already exists:","\n","        ",region.y.path,"\n")
+    region.y.fn = paste(c(nspl.path, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
+    if (!file.exists(region.y.fn) & overwrite==FALSE) {
+      cat("    Skipping since output file already exists:","\n","        ",region.y.fn,"\n")
     } else {
       # Census Day is normally late-March or early-April
       y.as_date = as.Date(paste(c(y,'03','15'),collapse="-"))
@@ -200,12 +200,12 @@ for (r in r.iter) {
       test2 = test2[test2$n > 1, ]
       
       cat("Diagnostics for:",r,"in year",y,"\n")
-      cat("    Total active postcodes: ",dim(dt.region.y)[1],"\n")
-      cat("    Postcodes at same location: ",sum(test$n)," (1m resolution)\n")
-      cat("    Postcodes at same location: ",sum(test2$n)," (10m resolution)\n")
+      cat("    Total active postcodes:",dim(dt.region.y)[1],"\n")
+      cat("    Postcodes at same location:",sum(test$n),"(1m resolution)\n")
+      cat("    Postcodes at same location:",sum(test2$n),"(10m resolution)\n")
       
       dt.region.y.sf <- st_as_sf(dt.region.y, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
-      st_write(dt.region.y.sf, region.y.path, delete_layer=TRUE, quiet=TRUE)
+      st_write(dt.region.y.sf, region.y.fn, delete_layer=TRUE, quiet=TRUE)
       #plot(dt.region.sf)
     }
   }
@@ -217,23 +217,24 @@ y = 1991
 for (r in r.iter) {
   params = set.params(r)
   
-  cat("\n","======================\n","Kriging:", params$label,"\n")
+  cat("\n","======================\n","Kriging:", params$display.nm,"\n")
   
   # Region-Buffered shape
   cat("  Simplifying and buffering region to control for edge effects.")
-  rb.shp <- buffer.region(r)
+  rb.shp <- buffer.region(params)
   
-  # This is a kludge to get around a problem that I 
+  # This bit is a kludge to get around a problem that I 
   # encountered with converting directly from sf objects
   # to SpatialPolygons -- owin() refused to work with the
-  # converted class (complained about missing 'W' weights 
+  # converted data (complained about missing 'W' weights 
   # vector). Writing this data out and then reading it back
   # in via OGR appears to work without a hitch. As best I 
   # can tell from investigation the issue has something to 
   # do with holes; however, the examples I found in which 
   # someone had resolved this via a function didn't work 
-  # for me so the issue must be buried pretty deep in the 
-  # drivers.
+  # for me (and the performance was crap anyway) so the 
+  # issue became pointlessly complex to resolve. Some other
+  # time perhaps.
   fn = 'region.tmp.shp'            # Makes it easy to tidy up
   delete.shp(fn)                   # Check doesn't exist already
   st_write(rb.shp, fn, quiet=TRUE) # Write it out
@@ -243,9 +244,9 @@ for (r in r.iter) {
   
   for (y in c(1981, 1991, 2001, 2011)) {
     cat("    ","Reading shape data for year:", y,"\n")
-    region.y.path <- paste(c(nspl.path, paste(c(params$label,y,"NSPL.shp"),collapse="_")), collapse="/")
-    region.k.path <- paste(c(nspl.path, paste(c(params$label,y,"NSPL","Kriged.shp"),collapse="_")), collapse="/")
-    dt.region     <- st_read(region.y.path, quiet=TRUE)
+    region.y.fn   <- paste(c(nspl.path, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
+    region.k.path <- paste(c(nspl.path, paste(c(params$file.nm,y,"NSPL","Kriged.shp"),collapse="_")), collapse="/")
+    dt.region     <- st_read(region.y.fn, quiet=TRUE)
     
     # Extract postcode points from the sf object
     pts <- st_coordinates(dt.region)
@@ -264,17 +265,17 @@ for (r in r.iter) {
 for (r in r.iter) {
   params = set.params(r)
   
-  cat("\n","======================\n","Creating Voronoi Polygons for:", params$label,"\n")
+  cat("\n","======================\n","Creating Voronoi Polygons for:", params$display.nm,"\n")
   
   # Region-Buffered shape
   cat("  Simplifying and buffering region to control for edge effects.")
-  rb.shp <- buffer.region(r)
+  rb.shp <- buffer.region(params)
   
   for (y in c(1981, 1991, 2001, 2011)) {
     cat("    ","Reading shape data for year:", y,"\n")
-    region.y.path <- paste(c(nspl.path, paste(c(params$label,y,"NSPL.shp"),collapse="_")), collapse="/")
-    region.v.path <- paste(c(nspl.path, paste(c(params$label,y,"NSPL","Voronoi.shp"),collapse="_")), collapse="/")
-    dt.region     <- st_read(region.y.path, quiet=TRUE)
+    region.y.fn <- paste(c(nspl.path, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
+    region.v.fn <- paste(c(nspl.path, paste(c(params$file.nm,y,"NSPL","Voronoi.shp"),collapse="_")), collapse="/")
+    dt.region     <- st_read(region.y.fn, quiet=TRUE)
     dt.region     <- dt.region %>% st_set_crs(NA) %>% st_set_crs(27700)
     
     if (st_crs(rb.shp)$epsg != st_crs(dt.region)$epsg) {
@@ -291,8 +292,8 @@ for (r in r.iter) {
     dt.v          <- dt.v %>% st_set_crs(27700) %>% st_cast()
     # Now need to join postcodes back on to
     # the Voronoi polygons
-    st_write(t, region.v.path, delete_layer=TRUE, quiet=TRUE)
+    st_write(t, region.v.fn, delete_layer=TRUE, quiet=TRUE)
   }
 }
 
-cat("Done...\n")
+cat("Done processing NSPL data...\n")
