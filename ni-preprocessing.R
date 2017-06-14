@@ -3,6 +3,7 @@ rm(list = ls())
 # the processing of the UK data stack.
 
 source('config.R')
+source('funcs.R')
 
 # Create raster grid of arbitrary size:
 # https://gis.stackexchange.com/questions/154537/generating-grid-shapefile-in-r
@@ -11,7 +12,7 @@ raw.source   = paste(c(os.path, "OSNI_Open_Data_Largescale_Boundaries__NI_Outlin
 merge.source = paste(c(os.path, "OSNI_Open_Data_Largescale_Boundaries__NI_Outline-reprojected.shp"), collapse="/")
 os.source    = paste(c(os.path, "CTRY_DEC_2011_GB_BGC.shp"), collapse="/")
 merge.target = paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/")
-sql.update   = "UPDATE CTRY_DEC_2011_UK_BGC SET CTRY11NM='Northern-Ireland' WHERE CTRY11NM IS NULL"
+sql.update   = "UPDATE CTRY_DEC_2011_UK_BGC SET CTRY11NM='Northern Ireland' WHERE CTRY11NM IS NULL"
 
 # Copy the source GB file to UK since we're 
 # picking up the rest of Northern Ireland
