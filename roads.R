@@ -13,14 +13,16 @@ source('funcs.R')
 
 library(sf) # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
 
-r.iter=c('Northern Ireland')
 for (r in r.iter) {
   
   params = set.params(r)
   
-  cat("\n","======================\n","Processing data for:", params$country,"\n")
+  cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
   
-  grd <- st_read(paste(c(grid.out.path,paste(params$label,'.shp',sep="")),collapse="/"), quiet=TRUE)
+  cat("Loading grid with resolution",g.resolution,"m.\n")
+  grid.fn = paste(c(grid.out.path,paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")),collapse="/")
+  
+  grd <- st_read(grid.fn, quiet=TRUE)
   grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
   
   if (r == 'Northern Ireland') {
@@ -28,41 +30,45 @@ for (r in r.iter) {
     rds <- st_read(full.path, quiet=TRUE)
     rds <- rds%>% st_set_crs(NA) %>% st_set_crs(29901)
     rds <- st_transform(rds, 27700)
+    cat("   Loading roads for",r,"\n")
   } else {
     # Now we need to work out which tiles we need -- we
     # do this by using the 100km reference downloaded
     # from GitHub. You can bin the rest.
-    rb.shp    <- buffer.region(r)
+    rb.shp    <- buffer.region(params)
     osgb.grid <- st_read( paste(c(roads.path,'OSGB_Grid_100km.shp'), collapse="/"), quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
     
     grid.intersects <- osgb.grid %>% st_intersects(rb.shp) %>% lengths()
     grid.tiles      <- sort(osgb.grid$TILE_NAME[ which(grid.intersects==1) ])
     rm(osgb.grid, grid.intersects)
+    cat("   Loading roads from tiles",grid.tiles,"\n")
     
     base.path = c(roads.path,'oproad_essh_gb','data')
     
     # Get the first tile from the list and 
     # extract only the roads falling within
     # the regional buffer
-    rds <- st_read( paste(c(base.path,paste( grid.tiles[1],"RoadLink.shp",sep="_")), collapse="/"), quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700) 
-    is.within <- rds.shp %>% st_intersects(rb.shp) %>% lengths()
-    rds <- subset(rds, is.within==1)
+    rds.fn    <- paste(c(base.path,paste( grid.tiles[1],"RoadLink.shp",sep="_")), collapse="/")
+    rds       <- st_read(rds.fn, quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700) 
+    is.within <- rds %>% st_intersects(rb.shp) %>% lengths()
+    rds       <- subset(rds, is.within==1)
     
     # Get any other tiles from the list and
     # extract only the roads falling within
     # the regional buffer
     for (g in grid.tiles[2:length(grid.tiles)]) {
-      rds.shp <- st_read( paste(c(base.path,paste(g,"RoadLink.shp",sep="_")), collapse="/"), quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
+      rds.fn  <- paste(c(base.path,paste(g,"RoadLink.shp",sep="_")), collapse="/")
+      rds.shp <- st_read(rds.fn, quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
       
       # Save the output of st_within and then 
       # convert that to a logical vector to
       # subset
-      cat("  Selecting roads in ",g," falling within regional buffer.","\n")
+      cat("  Selecting roads in",g,"falling within regional buffer.","\n")
       is.within <- rds.shp %>% st_intersects(rb.shp) %>% lengths()
       rds.shp   <- subset(rds.shp, is.within==1)
       
       rds <- rbind(rds, rds.shp)
-      rm(rds.shp, is.within)
+      rm(rds.shp, is.within, rds.fn)
     }
     cat("   Done assembling roads data for region...","\n")
   }
@@ -72,10 +78,12 @@ for (r in r.iter) {
   
   cat("   Calculating intersection with grid.","\n")
   cell.intersects <- grd %>% st_intersects(rds.buff) %>% lengths()
+  grd$nr_road = cell.intersects
   
   cat("   Writing cell intersection values to shapefile.","\n")
-  grd$nr_road = cell.intersects
-  st_write(grd, paste( c(out.path, paste('Roads',r,'grid.shp', sep="-")), collapse="/"), quiet=TRUE, delete_dsn=TRUE)
+  roads.fn = paste( c(out.path, paste(params$file.nm,paste(g.resolution,'m',sep=""),'Roads','Grid.shp', sep="-")), collapse="/")
+  st_write(grd, roads.fn, quiet=TRUE, delete_dsn=TRUE)
+  rm(grd)
 }
 
 cat("Done linking buffered roads to grid.","\n")
