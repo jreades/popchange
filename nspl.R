@@ -29,7 +29,7 @@ library(sf)       # Replaces sp (usually) and does away with need for several ol
 # working directory but in a no-sync directory since these
 # files are enormous.
 raw.file  = 'NSPL_FEB_2017_UK.csv'
-raw.path  = c(nspl.path,'NSPL_FEB_2017_UK','Data')
+raw.path  = c(paths$nspl,'NSPL_FEB_2017_UK','Data')
 
 # Load the data using fread from data.table package
 # (whichi is no longer explosed directly using dtplyr)
@@ -168,7 +168,7 @@ for (r in r.iter) {
   
   # Note: No viable data from 1971
   for (y in c(1981, 1991, 2001, 2011)) {
-    region.y.fn = paste(c(nspl.path, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
+    region.y.fn = paste(c(paths$nspl, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
     if (!file.exists(region.y.fn) & overwrite==FALSE) {
       cat("    Skipping since output file already exists:","\n","        ",region.y.fn,"\n")
     } else {
@@ -244,8 +244,8 @@ for (r in r.iter) {
   
   for (y in c(1981, 1991, 2001, 2011)) {
     cat("    ","Reading shape data for year:", y,"\n")
-    region.y.fn   <- paste(c(nspl.path, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
-    region.k.path <- paste(c(nspl.path, paste(c(params$file.nm,y,"NSPL","Kriged.shp"),collapse="_")), collapse="/")
+    region.y.fn   <- paste(c(paths$nspl, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
+    region.k.path <- paste(c(paths$nspl, paste(c(params$file.nm,y,"NSPL","Kriged.shp"),collapse="_")), collapse="/")
     dt.region     <- st_read(region.y.fn, quiet=TRUE)
     
     # Extract postcode points from the sf object
@@ -273,8 +273,8 @@ for (r in r.iter) {
   
   for (y in c(1981, 1991, 2001, 2011)) {
     cat("    ","Reading shape data for year:", y,"\n")
-    region.y.fn <- paste(c(nspl.path, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
-    region.v.fn <- paste(c(nspl.path, paste(c(params$file.nm,y,"NSPL","Voronoi.shp"),collapse="_")), collapse="/")
+    region.y.fn <- paste(c(paths$nspl, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
+    region.v.fn <- paste(c(paths$nspl, paste(c(params$file.nm,y,"NSPL","Voronoi.shp"),collapse="_")), collapse="/")
     dt.region     <- st_read(region.y.fn, quiet=TRUE)
     dt.region     <- dt.region %>% st_set_crs(NA) %>% st_set_crs(27700)
     

@@ -1,4 +1,3 @@
-rm(list = ls())
 #########################################
 # The idea is to try to make a fully replicable
 # process drawing solely on open data and a FOSS
@@ -22,6 +21,8 @@ rm(list = ls())
 #    suppresses areas from the later population distribution 
 #    function.
 ########################################
+rm(list = ls()) # Clear the workspace
+
 source('config.R')
 source('funcs.R')
 
@@ -38,7 +39,7 @@ for (r in r.iter) {
   
   # Region-Buffered shape
   cat("  Retrieving regional boundaries.\n")
-  if (params$country.nm=='England') {
+  if (params$country.nm %in% c('England','Northern Ireland')) {
     rb.shp <- buffer.region(params)
   } else {
     rb.shp <- get.region(params)
@@ -47,29 +48,21 @@ for (r in r.iter) {
   # Useful for auditing, not necessary in production
   #st_write(rb.shp, dsn=paste(c(os.path,'filterregion.shp'), collapse="/"), layer='filterregion', delete_dsn=TRUE, quiet=TRUE)
   
-  # Create bounding box from buffer -- 
-  # we can then feed this into the OGR
-  # query to subset the OSM data by region
-  # without doing a more expensive check on
-  # actual boundaries
-  
   # What are the boundaries of the region?
   e = make.box(rb.shp)
   
-  # Create an extent from these and then transform
-  # to EPSG:4326 so that we can work out the coordinates
-  # to use for clipping the OSM data
+  # Transform to EPSG:4326 so that we can work out 
+  # the coordinates to use for clipping the OSM data
   e.st = st_transform(e, '+init=epsg:4326')
-  #st_bbox(e.st)
   
   # For validation of bbox -- not needed in production
   # st_write(e.st, paste(c(os.path,'filterbounds.shp'),collapse="/"), layer='filterbounds', delete_dsn=TRUE, quiet=TRUE)
   
-  file.osm   = paste(c(osm.path, gsub('{region}',params$osm,'{region}-latest.osm.pbf', perl=TRUE)), collapse="/")
-  file.clip  = paste(c(osm.path, gsub('{region}',params$file.nm,'{region}-clip.shp', perl=TRUE)), collapse="/")
+  file.osm   = paste(c(paths$osm, gsub('{region}',params$osm,'{region}-latest.osm.pbf', perl=TRUE)), collapse="/")
+  file.clip  = paste(c(paths$osm, gsub('{region}',params$file.nm,'{region}-clip.shp', perl=TRUE)), collapse="/")
   
   osm.clip   = c('-f "ESRI Shapefile"', '-sql "SELECT * FROM multipolygons"') 
-  if (params$country.nm == 'England') { 
+  if (params$country.nm %in% c('England','Northern Ireland')) { 
     xmin     = st_bbox(e.st)['xmin']
     xmax     = st_bbox(e.st)['xmax']
     ymin     = st_bbox(e.st)['ymin']
@@ -97,12 +90,9 @@ for (r in r.iter) {
   # Step 2: Select OSM classes and extract to reprojected shapefile
   for (k in ls(osm.classes)) {
     print(paste("Processing OSM class:", k))
-    ###############
-    # Missing what to do with amenity classes!
-    # These are amenity IS NOT NULL and these are NOT IN... (i.e. all amenities except these ones are *included*)
-    ###############
-    file.step1 = paste(c(out.path, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step1.shp', perl=TRUE), perl=TRUE)), collapse="/")
-    file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    
+    file.step1 = paste(c(paths$osm.out, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step1.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step2 = paste(c(paths$osm.out, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
     
     osm.extract = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326')
     osm.union = c('-dialect sqlite')
@@ -159,16 +149,16 @@ for (r in r.iter) {
   cat("\n","======================","\n","Setting up merge process for:",params$display.nm,"\n")
   
   
-  file.merge = paste(c(out.path, gsub('{region}',params$file.nm,'{region}-merge.shp', perl=TRUE)), collapse="/")
+  file.merge = paste(c(paths$osm, gsub('{region}',params$file.nm,'{region}-merge.shp', perl=TRUE)), collapse="/")
   cmd3 = c()
   i    = 0
   for (k in ls(osm.classes)) {
     cat("  Processing OSM class:",k,"\n")
     
-    file.step2 = paste(c(out.path, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step2 = paste(c(paths$osm.out, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
     #if (!file.exists(file.merge)) {
     if (i==0) {
-      cat("     Copying first shapefile to create merge base...\n")
+      cat("     Will copy first shapefile to create merge base...\n") # More reliable than doing this via OGR for some strange reason
       for (ext in c('.shp','.shx','.prj','.dbf')) {
         #file.copy(gsub('.shp',ext,file.step2,perl=TRUE), gsub('.shp',ext,file.merge,perl=TRUE), overwrite=TRUE)
         cmd3 = c(cmd3, '/bin/cp', gsub('.shp',ext,file.step2,perl=TRUE), gsub('.shp',ext,file.merge,perl=TRUE), ';')
@@ -216,14 +206,14 @@ for (r in r.iter) {
   cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
   
   cat("Loading grid with resolution",g.resolution,"m.\n")
-  grid.fn = paste(c(grid.out.path,paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")),collapse="/")
+  grid.fn = paste(c(paths$grid,paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")),collapse="/")
   
   grd <- st_read(grid.fn, quiet=TRUE)
   grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
   
   
   cat("   Writing cell intersection values to shapefile.","\n")
-  osm.fn = paste( c(out.path, paste(params$file.nm,paste(g.resolution,'m',sep=""),'OSM','Grid.shp', sep="-")), collapse="/")
+  osm.fn = paste( c(paths$osm.out, paste(params$file.nm,paste(g.resolution,'m',sep=""),'OSM','Grid.shp', sep="-")), collapse="/")
   st_write(grd, osm.fn, quiet=TRUE, delete_dsn=TRUE)
   rm(grd)
 }

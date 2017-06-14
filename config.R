@@ -57,12 +57,14 @@ g.anchor       <- 5000                       # Anchor grid min/max x and y at ne
 # We assume that spatial data is stored under the current 
 # working directory but in a no-sync directory since these
 # files are enormous.
-os.path = c(getwd(),'no-sync','OS')
-osm.path = c(getwd(),'no-sync','OSM')
-nspl.path = c(getwd(),'no-sync','NSPL')
-roads.path = c(getwd(),'no-sync','Roads')
-grid.out.path = c(getwd(),'no-sync','grid')
-out.path = c(getwd(),'no-sync','processed')
+paths = new.env()
+paths$os      = c(getwd(),'no-sync','OS')
+paths$osm     = c(getwd(),'no-sync','OSM')
+paths$nspl    = c(getwd(),'no-sync','NSPL')
+paths$roads   = c(getwd(),'no-sync','Roads')
+paths$grid    = c(getwd(),'no-sync','grid')
+paths$osm.out = c(getwd(),'no-sync','tmp')
+paths$final   = c(getwd(),'no-sync','final')
 
 ########## OSM Configuration
 osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)
@@ -102,7 +104,7 @@ osm.classes$landuse = osm.classes$natural
 osm.classes$leisure = osm.classes$natural
 
 ########## Sanity check -- we only need to run this once...
-if (! file.exists(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"))) {
+if (! file.exists(paste(c(paths$os, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"))) {
   cat(paste(replicate(45, "="), collapse = ""), "\n")
   cat(paste(replicate(45, "="), collapse = ""), "\n")
   cat("Have you run the ni-preprocessing.R script yet?\n")

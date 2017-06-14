@@ -33,7 +33,7 @@ buffer.region <- function(p) {
   if (params$country.nm %in% c('Northern Ireland','Wales','Scotland')) { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
-    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
+    shp <- st_read(paste(c(paths$os, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection (issues with reading in even properly projected files)
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -45,7 +45,7 @@ buffer.region <- function(p) {
   } else { # Filtering for regions
     cat("  Processing internal GoR region:", params$region.nm,"\n") 
     
-    shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
+    shp <- st_read(paste(c(paths$os, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -70,7 +70,7 @@ get.region <- function(p) {
   if (params$country.nm %in% c('Northern Ireland','Wales','Scotland')) { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
-    shp <- st_read(paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
+    shp <- st_read(paste(c(paths$os, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection (issues with reading in even properly projected files)
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -82,7 +82,7 @@ get.region <- function(p) {
   } else { # Filtering for regions
     cat("  Processing internal GoR region:", params$region.nm,"\n") 
     
-    shp <- st_read(paste(c(os.path, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
+    shp <- st_read(paste(c(paths$os, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), collapse="/"), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
