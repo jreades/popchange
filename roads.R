@@ -12,6 +12,23 @@ source('config.R')
 source('funcs.R')
 
 library(sf) # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
+library(Hmisc) # For %nin%
+
+openroads.map = new.env()
+openroads.map$motorway.src    = c("Motorway")
+openroads.map$motorway.target = 'Motorway'
+openroads.map$main.src        = c("A Road", "B Road")
+openroads.map$main.target     = 'Main'
+openroads.map$local.src       = c("Local Road", "Minor Road", "Local Access Road")
+openroads.map$local.target    = 'Local'
+
+osni.map = new.env()
+osni.map$motorway.src         = c("MOTORWAY", "DUAL_CARR")
+osni.map$motorway.target      = 'Motorway'
+osni.map$main.src             = c("A_CLASS", "B_CLASS")
+osni.map$main.target          = 'Main'
+osni.map$local.src            = c("<4M_TARRED", "CL_MINOR")
+osni.map$local.target         = 'Local'
 
 for (r in r.iter) {
   
@@ -24,7 +41,24 @@ for (r in r.iter) {
     rds <- st_read(full.path, quiet=TRUE)
     rds <- rds%>% st_set_crs(NA) %>% st_set_crs(29901)
     rds <- st_transform(rds, 27700)
-    cat("   Loading roads for",r,"\n")
+    
+    # Drop TEMA classes that we don't need -- 
+    # this includes overpasses because they 
+    # will count as 'extra' roads in the next 
+    # bit of processing and so we'd double-
+    # count the number of roads near each 
+    # grid square that had an overpass in or 
+    # near it.
+    rds <- subset(rds, rds$TEMA %nin% c('CL_RAIL','RL_TUNNEL','UNSHOWN_RL','CL_M_OVER','<4M_T_OVER'))
+    cat("   Done loading roads for",r,"\n")
+    
+    for (c in (grep("src", ls(osni.map), value=TRUE))) {
+      cat(c,"\n")
+      t = sub(".src",".target",c,perl=TRUE)
+      #eval(parse(text=paste("rds$",osni.map$))
+      #rds$TEMA %in% osni.map$main.src
+    }
+    
   } else {
     # Now we need to work out which tiles we need -- we
     # do this by using the 100km reference downloaded
@@ -43,7 +77,12 @@ for (r in r.iter) {
     # extract only the roads falling within
     # the regional buffer
     rds.fn    <- paste(c(base.path,paste( grid.tiles[1],"RoadLink.shp",sep="_")), collapse="/")
-    rds       <- st_read(rds.fn, quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700) 
+    rds       <- st_read(rds.fn, quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
+    
+    # Remove functions we're not interested in
+    rds       <- subset(rds, rds$function. %nin% c('Restricted Local Access Road', 'Secondary Access Road'))
+    
+    # And now select
     is.within <- rds %>% st_intersects(rb.shp) %>% lengths()
     rds       <- subset(rds, is.within==1)
     
@@ -53,6 +92,9 @@ for (r in r.iter) {
     for (g in grid.tiles[2:length(grid.tiles)]) {
       rds.fn  <- paste(c(base.path,paste(g,"RoadLink.shp",sep="_")), collapse="/")
       rds.shp <- st_read(rds.fn, quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
+      
+      # Remove functions we're not interested in
+      rds.shp  <- subset(rds.shp, rds.shp$function. %nin% c('Restricted Local Access Road', 'Secondary Access Road'))
       
       # Save the output of st_within and then 
       # convert that to a logical vector to
@@ -67,6 +109,22 @@ for (r in r.iter) {
     cat("   Done assembling roads data for region...","\n")
   }
   
+  #########################
+  # One option here would be to subset the roads
+  # by size and use different buffers with each. 
+  # It's tempting to think that highways would have
+  # large buffers, but very few people want to live
+  # right next to one, so it also seems like they 
+  # should have low weights. In contrast, small roads
+  # seem like they'd need small buffers with a fairly
+  # large weight in terms of attractiveness for 
+  # settlement. At this point, I'd guess that it makes
+  # more sense to split them out and record the values 
+  # separately before experimenting with different 
+  # weights. The downside here is that now we have 
+  # a much stronger temporal aspect: because what's 
+  # highway now wasn't alway highay...
+  #########################
   cat("   Buffering around roads.","\n")
   rds.buff <- st_buffer(st_simplify(rds, roads.simplify), roads.buffer)
   
