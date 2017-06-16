@@ -172,7 +172,7 @@ Currently, we only process polygon features from the OSM data files, so this exc
 
 ### Open Roads
 
-There _is_ road network data available from other sources: both the Ordnance Survey and OSNI produce open data products for roads. They tend not to go down to the driveway level, which is a shame as this would be particularly helpful in rural areas for locating households.
+There _is_ road network data available from other sources: both the Ordnance Survey and OSNI produce open data products for roads. They tend not to go down to the driveway level, which is a shame as this would be particularly helpful in rural areas for locating households, but they're pretty good overall save for the fact that they don't use the same file layout or classification.
 
 #### England & Wales
 
@@ -180,11 +180,39 @@ I have made use of the "OS Open Roads" data product (ca. 500MB) available from t
 
 * [OpenData Products](https://www.ordnancesurvey.co.uk/opendatadownload/products.html).
 
+Having reviewed the available data and the [Open Roads User Guide](https://www.ordnancesurvey.co.uk/docs/user-guides/os-open-roads-user-guide.pdf), I've opted to use the `function` attribute since this is more useful than the road classification. We make use of the following functions:
+
+* Motorway
+* A Road
+* B Road
+* Minor Road
+* Local Road
+* Local Access Road
+
+We do not keep:
+* Restricted Local Access Road (often industrial estates, farms, parks, cemeteries)
+* Secondary Access Road (typically back alleys and field access it seems)
+
 #### Northern Ireland
 
 I have made us of the "OSNI Open Data - 50k Transport Line" data set (ca. 3MB) available from:
 
 * [OSNI Open Data - 50k Transport Line](http://osni-spatial-ni.opendata.arcgis.com/datasets/f9b780573ecb446a8e7acf2235ed886e_2)
+
+OSNI doesn't not provide the same functional definition of the roads in Norther Ireland that the OS does for Great Britain so we need to deal with the `TEMA` field:
+* A_CLASS    (mapped to `A Class`)
+* B_CLASS    (mapped to `B Class`)
+* MOTORWAY   (mapped to `Motorway`)
+* DUAL_CARR  (mapped to `Motorway`)
+* <4M_TARRED (mapped to `Local Road`)
+* CL_MINOR   (mapped to `Minor Road`)
+
+We can drop:
+* CL_M_OVER  (could be mapped to `Minor Road` but dropped to prevent overcounting of road density)
+* <4M_T_OVER (could be mapped to `Local Road` but dropped to prevent overcounting of road density)
+* CL_RAIL    (Rail)
+* RL_TUNNEL  (Rail Tunnel)
+* UNSHOWN_RL (Unshown Rail [Rail Under Overpass, so not actually a tunnel])
 
 ---
 _**I have not done any work from here on to update the documentation**_
