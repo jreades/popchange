@@ -4,6 +4,7 @@
 # access.
 
 the.dir  = getwd()
+base.dir = 'no-sync'
 dirs     = c('OS','OSM','Voronoi','NSPL','Roads','grid','processed','tmp','final')
 
 dirs.iter <- c(paste(base.dir,dirs,sep="/"))
