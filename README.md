@@ -72,3 +72,7 @@ These are 'notes to self' on larger issues not yet fully addressed but which wou
 ## OSM-to-Bash Script
 
 Based on some issues I'm having with R/R-Studio with the `osm.R` file and long-running `system2` calls, my guess is that R has some kind of timeout on unix commands. A better long-term approach would, instead of having commands fired off from R, be to have R write a shell script that is fired at the end of the R file. That would be (oddly) more robust agains the timeouts *and* it would make auditing/re-running code a bit easier.
+
+## Road Classification
+
+One option here would be to subset the roads by size and use different buffers with each. It's tempting to think that highways would have large buffers, but very few people want to live right next to one, so it also seems like they should have low weights. In contrast, small roads seem like they'd need small buffers with a fairly large weight in terms of attractiveness for  settlement. At this point, I'd guess that it makes more sense to split them out and record the values separately before experimenting with different weights. The downside here is that now we have a much stronger temporal aspect: because what's highway now wasn't always highway...
