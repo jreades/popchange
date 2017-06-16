@@ -41,10 +41,6 @@ r.iter       <- c(paste(r.countries[1],r.regions),r.countries[2:length(r.countri
 r.buffer       <- 5000                       # Buffer to draw around region to filter (in metres)
 r.simplify     <- 500                        # Simplify the boundaries before drawing the buffer (for performance)
 
-########## Roads Buffer Configuration
-roads.buffer   <- 150                        # Buffer to draw around roads to filter (in metres)
-roads.simplify <- 100                        # Simplify the roads before drawing the buffer (for performance)
-
 ########## Grid Configuration
 # We need to work out xmin and ymin such that we get a fairly consistent
 # output no matter what the user specifies -- in other words, we don't 
@@ -102,6 +98,10 @@ osm.classes$amenity = c('hospice', 'nursing_home', 'retirement_home', 'student_a
 osm.classes$natural = unique(c(osm.classes$natural, osm.classes$landuse, osm.classes$leisure))
 osm.classes$landuse = osm.classes$natural
 osm.classes$leisure = osm.classes$natural
+
+########## Roads Configuration
+roads.buffer   <- 150                        # Buffer to draw around roads to filter (in metres)
+roads.simplify <- 100                        # Simplify the roads before drawing the buffer (for performance)
 
 ########## Sanity check -- we only need to run this once...
 if (! file.exists(paste(c(paths$os, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"))) {
