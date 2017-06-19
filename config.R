@@ -100,8 +100,10 @@ osm.classes$landuse = osm.classes$natural
 osm.classes$leisure = osm.classes$natural
 
 ########## Roads Configuration
-roads.buffer   <- 150                        # Buffer to draw around roads to filter (in metres)
-roads.simplify <- 100                        # Simplify the roads before drawing the buffer (for performance)
+roads.motorway.buffer   <- 1000              # Buffer to draw around roads to filter (in metres)
+roads.main.buffer       <-  500
+roads.local.buffer      <-  150 
+roads.simplify          <-  100              # Simplify the roads before drawing the buffer (for performance)
 
 ########## Sanity check -- we only need to run this once...
 if (! file.exists(paste(c(paths$os, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"))) {

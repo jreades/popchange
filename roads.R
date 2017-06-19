@@ -14,6 +14,13 @@ source('funcs.R')
 library(sf) # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
 library(Hmisc) # For %nin%
 
+# Notice that these match the targets below --
+# the buffer sizes are set in the config file.
+road.classes = c('Motorway','Main','Local') 
+
+# These map the OSNI and OS classes on to the
+# 'target' columns that we will use to create
+# the weights.
 openroads.map = new.env()
 openroads.map$motorway.src    = c("Motorway")
 openroads.map$motorway.target = 'Motorway'
@@ -131,21 +138,24 @@ for (r in r.iter) {
   # a much stronger temporal aspect: because what's 
   # highway now wasn't alway highay...
   #########################
-  cat("   Buffering around roads.","\n")
-  rds.buff <- st_buffer(st_simplify(rds, roads.simplify), roads.buffer)
-  
   cat("Loading grid with resolution",g.resolution,"m.\n")
-  grid.fn = paste(c(grid.out.path,paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")),collapse="/")
+  grid.fn = paste(c(paths$grid,paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")),collapse="/")
   
   grd <- st_read(grid.fn, quiet=TRUE)
   grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
   
-  cat("   Calculating intersection with grid.","\n")
-  cell.intersects <- grd %>% st_intersects(rds.buff) %>% lengths()
-  grd$nr_road = cell.intersects
+  cat("   Calculating intersections with grid.","\n")
+  for (r in road.classes) {
+    cat("     Buffering around",r,"classs roads.","\n")
+    rds.buff <- st_buffer(st_simplify(subset(rds, rds[[r]]), roads.simplify), eval(parse(text=paste("roads.",tolower(r),".buffer",sep=""))))
+    
+    cell.intersects <- grd %>% st_intersects(rds.buff) %>% lengths()
+    grd[tolower(r)] <- cell.intersects
+  }
+  cat("   Done.")
   
   cat("   Writing cell intersection values to shapefile.","\n")
-  roads.fn = paste( c(out.path, paste(params$file.nm,paste(g.resolution,'m',sep=""),'Roads','Grid.shp', sep="-")), collapse="/")
+  roads.fn = paste( c(paths$final, paste(params$file.nm,paste(g.resolution,'m',sep=""),'Roads','Grid.shp', sep="-")), collapse="/")
   st_write(grd, roads.fn, quiet=TRUE, delete_dsn=TRUE)
   rm(grd)
 }
