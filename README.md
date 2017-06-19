@@ -41,7 +41,7 @@ Under the `popchange` directory the `setup.R` script will create a set of data d
 
 ### Downloading the Open Data
 
-* The 100km OS shapefile tiles (so all five files) from [github.com/charlesroper](https://github.com/charlesroper/OSGB_Grids)
+* The 100km OS shapefile tiles (so all five files, but easiest to download the Zipfile) from [github.com/charlesroper](https://github.com/charlesroper/OSGB_Grids)
 * England OSM (> 700MB): [england-latest.osm.pbf](http://download.geofabrik.de/europe/great-britain/england-latest.osm.pbf)
 * Scotland OSM (> 100MB): [scotland-latest.osm.pbf](http://download.geofabrik.de/europe/great-britain/scotland-latest.osm.pbf)
 * Wales OSM (> 50MB): [wales-latest.osm.pbf](http://download.geofabrik.de/europe/great-britain/wales-latest.osm.pbf)

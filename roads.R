@@ -37,7 +37,7 @@ for (r in r.iter) {
   cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
   
   if (r == 'Northern Ireland') {
-    full.path = paste(c(roads.path,'OSNI_Open_Data__50k_Transport_Line','OSNI_Open_Data__50k_Transport_Line.shp'),collapse="/")
+    full.path = paste(c(paths$roads,'OSNI_Open_Data__50k_Transport_Line','OSNI_Open_Data__50k_Transport_Line.shp'),collapse="/")
     rds <- st_read(full.path, quiet=TRUE)
     rds <- rds%>% st_set_crs(NA) %>% st_set_crs(29901)
     rds <- st_transform(rds, 27700)
@@ -54,9 +54,8 @@ for (r in r.iter) {
     
     for (c in (grep("src", ls(osni.map), value=TRUE))) {
       cat(c,"\n")
-      t = sub(".src",".target",c,perl=TRUE)
-      #eval(parse(text=paste("rds$",osni.map$))
-      #rds$TEMA %in% osni.map$main.src
+      t = eval(parse(text=paste("osni.map$",sub(".src",".target",c,perl=TRUE),sep="")))
+      eval(parse(text=paste("rds$",t," = rds$TEMA %in% osni.map$",c,sep="")))
     }
     
   } else {
@@ -64,14 +63,14 @@ for (r in r.iter) {
     # do this by using the 100km reference downloaded
     # from GitHub. You can bin the rest.
     rb.shp    <- buffer.region(params)
-    osgb.grid <- st_read( paste(c(roads.path,'OSGB_Grid_100km.shp'), collapse="/"), quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
+    osgb.grid <- st_read( paste(c(paths$roads,'OSGB_Grid_100km.shp'), collapse="/"), quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
     
     grid.intersects <- osgb.grid %>% st_intersects(rb.shp) %>% lengths()
     grid.tiles      <- sort(osgb.grid$TILE_NAME[ which(grid.intersects==1) ])
     rm(osgb.grid, grid.intersects)
     cat("   Loading roads from tiles",grid.tiles,"\n")
     
-    base.path = c(roads.path,'oproad_essh_gb','data')
+    base.path = c(paths$roads,'oproad_essh_gb','data')
     
     # Get the first tile from the list and 
     # extract only the roads falling within
@@ -107,11 +106,18 @@ for (r in r.iter) {
       rm(rds.shp, is.within, rds.fn)
     }
     cat("   Done assembling roads data for region...","\n")
+    
+    for (c in (grep("src", ls(osni.map), value=TRUE))) {
+      cat(c,"\n")
+      t = eval(parse(text=paste("openroads.map$",sub(".src",".target",c,perl=TRUE),sep="")))
+      eval(parse(text=paste("rds$",t," = rds$function. %in% openroads.map$",c,sep="")))
+    }
   }
   
   #########################
-  # One option here would be to subset the roads
-  # by size and use different buffers with each. 
+  # We have the ability to subset the roads by size
+  # using the column names Motorway, Main and Local.
+  # We can then use different buffers with each. 
   # It's tempting to think that highways would have
   # large buffers, but very few people want to live
   # right next to one, so it also seems like they 
