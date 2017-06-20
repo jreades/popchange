@@ -294,6 +294,7 @@ for (r in r.iter) {
     # Now need to join postcodes back on to
     # the Voronoi polygons
     st_write(dt.v, region.v.fn, delete_layer=TRUE, quiet=TRUE)
+    rm(dt.v, dt.region, region.v.fn, region.y.fn, rb.poly, dt.multi)
   }
 }
 
