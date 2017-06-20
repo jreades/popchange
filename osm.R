@@ -296,6 +296,9 @@ rm(merge.sh)
 ######################################################
 cat("Starting integration with grid...","\n")
 library(Hmisc)
+
+script.sh = 'script.sh'
+file.remove(script.sh)
 for (r in r.iter) {
   
   params = set.params(r)
@@ -353,17 +356,15 @@ for (r in r.iter) {
   
   cmd = c()
   
-  cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",grid.fn,perl=TRUE),'";')
-  cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",grid.fn,perl=TRUE)), grid.path, ';')
+  cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",grid.fn,perl=TRUE),'";',"\n")
+  cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",grid.fn,perl=TRUE)), grid.path, ';',"\n")
   
-  cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",mrg.dev.fn,perl=TRUE),'";')
-  cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",mrg.dev.fn,perl=TRUE)), mrg.dev.path, ';')
+  cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",mrg.dev.fn,perl=TRUE),'";',"\n")
+  cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",mrg.dev.fn,perl=TRUE)), mrg.dev.path, ';',"\n")
   
-  cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";')
-  cmd = c(cmd, 'echo "     Writing to',get.path(paths$int,"Grid-Dev.vrt"),'";')
-  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"d_over\", (\"d_over\"/area(t1.geometry))*100 as \"d_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', dev.out.path, get.path(paths$int,"Grid-Dev.vrt") )
-  
-  write(paste(cmd, collapse=" "), file='script.sh')
+  cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";',"\n")
+  cmd = c(cmd, 'echo "     Writing to',get.path(paths$int,"Grid-Dev.vrt"),'";',"\n")
+  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"d_over\", (\"d_over\"/area(t1.geometry))*100 as \"d_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', dev.out.path, get.path(paths$int,"Grid-Dev.vrt"),';',"\n")
   
   ###############
   # Then non-developable ones (much larger)
@@ -396,20 +397,18 @@ for (r in r.iter) {
   
   ndev.out.path = get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-Non-Dev-Grid.shp"))
   
-  cmd = c()
-  
   # Already exists
   #cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",grid.fn,perl=TRUE),'";')
-  #cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",grid.fn,perl=TRUE)), grid.path, ';')
+  #cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",grid.fn,perl=TRUE)), grid.path, ';',"\n")
   
-  cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",mrg.ndev.fn,perl=TRUE),'";')
-  cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",mrg.ndev.fn,perl=TRUE)), mrg.ndev.path, ';')
+  cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",mrg.ndev.fn,perl=TRUE),'";',"\n")
+  cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",mrg.ndev.fn,perl=TRUE)), mrg.ndev.path, ';',"\n")
   
-  cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";')
-  cmd = c(cmd, 'echo "     Writing to',get.path(paths$int,"Grid-Non-Dev.vrt"),'";')
-  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"nd_over\", (\"nd_over\"/area(t1.geometry))*100 as \"nd_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', ndev.out.path, get.path(paths$int,"Grid-Non-Dev.vrt") )
+  cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";',"\n")
+  cmd = c(cmd, 'echo "     Writing to',get.path(paths$int,"Grid-Non-Dev.vrt"),'";',"\n")
+  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"nd_over\", (\"nd_over\"/area(t1.geometry))*100 as \"nd_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', ndev.out.path, get.path(paths$int,"Grid-Non-Dev.vrt"),';',"\n")
   
-  write(paste(cmd, collapse=" "), file='script.sh', append=TRUE)
+  write(paste(cmd, collapse=" "), file=script.sh, append=TRUE)
 }
 
 cat("Done linking OSM Data to grid.","\n")
