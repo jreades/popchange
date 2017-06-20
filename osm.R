@@ -69,7 +69,7 @@ for (r in r.iter) {
   }
   
   # Useful for auditing, not necessary in production
-  #st_write(rb.shp, dsn=paste(c(os.path,'filterregion.shp'), collapse="/"), layer='filterregion', delete_dsn=TRUE, quiet=TRUE)
+  #st_write(rb.shp, dsn=get.path(paths$tmp,'filterregion.shp'), layer='filterregion', delete_dsn=TRUE, quiet=TRUE)
   
   #########
   # Step 1a: Subset the OSM file for a region (usually only done with England)
@@ -85,8 +85,8 @@ for (r in r.iter) {
   e.st = st_transform(e, '+init=epsg:4326')
   
   # Work out the I/O path names
-  file.osm   = paste(c(paths$osm, gsub('{region}',params$osm,'{region}-latest.osm.pbf', perl=TRUE)), collapse="/")
-  file.clip  = paste(c(paths$osm, gsub('{region}',params$file.nm,'{region}-clip.shp', perl=TRUE)), collapse="/")
+  file.osm   = get.path(paths$osm, get.file(t="{osm}-lastest.osm.pbf"))
+  file.clip  = get.path(paths$osm, get.file(t="{file.nm}-clip.shp"))
   
   # And begin to build the clipping query to execute
   # using ogr2ogr.
@@ -97,7 +97,7 @@ for (r in r.iter) {
     ymin     = st_bbox(e.st)['ymin']
     ymax     = st_bbox(e.st)['ymax']
     osm.clip = c(osm.clip, paste(c('-clipsrc',xmin,ymin,xmax,ymax)))
-    cat(paste(c("Bounding Box:",xmin,xmax,ymin,ymax)))
+    cat("Bounding Box:",xmin,xmax,ymin,ymax,"\n")
   }
   osm.clip   = c(osm.clip, file.clip, file.osm, '-skipfailures', '-overwrite', '--config ogr_interleaved_reading yes')
   
@@ -115,7 +115,7 @@ for (r in r.iter) {
   if (!file.exists(file.clip)) {
     cat("Converting OSM multipolygon data to shapefile...","\n")
     cat("and clipping OSM data source where able","\n")
-    print(paste(c(ogr.lib, osm.clip),collapse=" "))
+    cat(ogr.lib, osm.clip,"\n")
     system2(ogr.lib, osm.clip, wait=TRUE)
   } else {
     cat(paste(replicate(45, "="), collapse = ""), "\n")
@@ -152,8 +152,8 @@ for (r in r.iter) {
     # going to sick with the "{...}" syntax instead
     # of just pasting it all together like a sane 
     # person.
-    file.step1 = paste(c(paths$tmp, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step1.shp', perl=TRUE), perl=TRUE)), collapse="/")
-    file.step2 = paste(c(paths$tmp, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step1 = get.path(paths$tmp, get.file(t="{file.nm}-*-step1.shp",k))
+    file.step2 = get.path(paths$tmp, get.file(t="{file.nm}-*-step2.shp",k))
     
     # And begin to compose both the extract and  
     # union queries.
@@ -190,7 +190,7 @@ for (r in r.iter) {
     if (!file.exists(file.step1)) {
       cat("    Extracting and reprojecting data from clip file...\n")
       cat("    This may take between 1-10 minutes.\n")
-      cat(paste(c(ogr.lib, cmd1), collapse=" "))
+      cat(ogr.lib, cmd1, "\n")
       system2(ogr.lib, cmd1, wait=TRUE)
     } else {
       cat("    ==== Step 1 file already exists. Skipping... ====\n")
@@ -199,7 +199,7 @@ for (r in r.iter) {
     if (!file.exists(file.step2)) {
       cat("    Simplifying and performing union on OSM classes...\n")
       cat("    This may take anywhere from 2-200 minutes.\n")
-      print(paste(c(ogr.lib, cmd2), collapse=" "))
+      cat(ogr.lib, cmd2, "\n")
       system2(ogr.lib, cmd2, wait=TRUE)
     } else {
       cat("    ==== Step 2 file already exists. Skipping... ====\n")
@@ -239,13 +239,13 @@ for (r in r.iter) {
   cat("\n","======================","\n","Setting up merge process for:",params$display.nm,"\n")
   
   
-  file.merge = paste(c(paths$osm, gsub('{region}',params$file.nm,'{region}-merge.shp', perl=TRUE)), collapse="/")
+  file.merge = get.path(paths$osm, get.file(t="{file.nm}-merge.shp"))
   cmd3 = c()
   i    = 0
   for (k in ls(osm.classes)) {
     cat("  Processing OSM class:",k,"\n")
     
-    file.step2 = paste(c(paths$tmp, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step2 = get.path(paths$tmp, get.file(t="{file.nm}-*-step2.shp",k))
     #if (!file.exists(file.merge)) {
     if (i==0) {
       cat("     Will copy first shapefile to create merge base...\n") # More reliable than doing this via OGR for some strange reason
@@ -261,7 +261,7 @@ for (r in r.iter) {
     }
   }
   # Useful debugging output
-  #print(paste(cmd3, collapse=" "))
+  #cat(cmd3, "\n")
   
   # Looks like this is best written to a 
   # shell script file and then executed 
@@ -303,12 +303,12 @@ for (r in r.iter) {
   cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
   
   #cat("  Loading grid with resolution",g.resolution,"m.","\n")
-  grid.fn   = paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")
-  grid.path = paste(c(paths$grid, grid.fn),collapse="/")
+  grid.fn   = get.file(t="{file.nm}-{g.resolution}m-Grid.shp")
+  grid.path = get.path(paths$grid, grid.fn)
   
   #cat("  Loading merged land use shapefile.","\n")
-  merged.fn   = gsub('{region}',params$file.nm,'{region}-merge.shp', perl=TRUE)
-  merged.path = paste(c(paths$osm, merged.fn), collapse="/")
+  merged.fn   = get.file(t="{file.nm}-merge.shp")
+  merged.path = get.path(paths$osm, merged.fn)
   
   mrg <- st_read(merged.path, quiet=TRUE)
   mrg <- mrg %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -323,8 +323,8 @@ for (r in r.iter) {
   
   ###############
   # Developable land use classes first
-  mrg.dev.fn   = gsub('{region}',params$file.nm,'{region}-merge-developable.shp', perl=TRUE)
-  mrg.dev.path = paste(c(paths$tmp,mrg.dev.fn), collapse="/")
+  mrg.dev.fn   = get.file(t="{file.nm}-*-developable.shp",'merge')
+  mrg.dev.path = get.path(paths$tmp,mrg.dev.fn)
   mrg.dev      = st_union(subset(mrg[mrg$UseClass %in% lu,]), by_feature=FALSE)
   st_write(mrg.dev, mrg.dev.path, quiet=TRUE, delete_dsn=TRUE)
   
@@ -346,17 +346,22 @@ for (r in r.iter) {
   mrg.dev.path,
   gsub('.shp','',mrg.dev.fn,perl=TRUE)
   )
-  write(vrt.text, file=( paste( c(paths$tmp,"Grid-Dev.vrt"), collapse="/")) )
+  write(vrt.text, file=get.path(paths$tmp,"Grid-Dev.vrt") )
+  
+  dev.out.path = get.path(paths$int, get.file(t="{file.nm}-{g.resolution}-Dev-Grid.shp"))
+  
   
   cmd = c()
+  
   cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",grid.fn,perl=TRUE),'";')
   cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",grid.fn,perl=TRUE)), grid.path, ';')
-  #ogrinfo -sql 'CREATE SPATIAL INDEX ON "Northern_Ireland-250m-Grid"' test/Northern_Ireland-250m-Grid.shp
+  
   cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",mrg.dev.fn,perl=TRUE),'";')
   cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",mrg.dev.fn,perl=TRUE)), mrg.dev.path, ';')
-  #ogrinfo -sql 'CREATE SPATIAL INDEX ON "Northern_Ireland-clip"' test/Northern_Ireland-clip.shp
+  
   cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";')
-  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"over\", (\"over\"/area(t1.geometry))*100 as \"pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', 'Overlap-Dev.shp', paste( c(paths$tmp,"Grid-Dev.vrt"), collapse="/"))
+  cmd = c(cmd, 'echo "     Writing to',get.path(paths$int,"Grid-Dev.vrt"),'";')
+  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"d_over\", (\"d_over\"/area(t1.geometry))*100 as \"d_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', dev.out.path, get.path(paths$int,"Grid-Dev.vrt") )
   
   write(paste(cmd, collapse=" "), file='script.sh')
   
@@ -365,7 +370,7 @@ for (r in r.iter) {
   mrg.non = subset(mrg[mrg$UseClass %nin% lu,])
   
   mrg.ndev.fn   = gsub('{region}',params$file.nm,'{region}-merge-nondevelopable.shp', perl=TRUE)
-  mrg.ndev.path = paste(c(paths$tmp,mrg.ndev.fn), collapse="/")
+  mrg.ndev.path = get.path(paths$tmp,mrg.ndev.fn)
   mrg.ndev      = st_union(subset(mrg[mrg$UseClass %nin% lu,]), by_feature=FALSE)
   st_write(mrg.ndev, mrg.ndev.path, quiet=TRUE, delete_dsn=TRUE)
   
@@ -387,18 +392,22 @@ for (r in r.iter) {
   mrg.ndev.path,
   gsub('.shp','',mrg.ndev.fn,perl=TRUE)
   )
-  write(vrt.text, file=( paste( c(paths$tmp,"Grid-Non-Dev.vrt"), collapse="/")) )
+  write(vrt.text, file=get.path(paths$tmp,"Grid-Non-Dev.vrt") )
+  
+  ndev.out.path = get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-Non-Dev-Grid.shp"))
   
   cmd = c()
+  
   # Already exists
   #cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",grid.fn,perl=TRUE),'";')
   #cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",grid.fn,perl=TRUE)), grid.path, ';')
-  #ogrinfo -sql 'CREATE SPATIAL INDEX ON "Northern_Ireland-250m-Grid"' test/Northern_Ireland-250m-Grid.shp
+  
   cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",mrg.ndev.fn,perl=TRUE),'";')
   cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",mrg.ndev.fn,perl=TRUE)), mrg.ndev.path, ';')
-  #ogrinfo -sql 'CREATE SPATIAL INDEX ON "Northern_Ireland-clip"' test/Northern_Ireland-clip.shp
+  
   cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";')
-  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"over\", (\"over\"/area(t1.geometry))*100 as \"pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', 'Overlap-Non-Dev.shp', paste( c(paths$tmp,"Grid-Non-Dev.vrt"), collapse="/"))
+  cmd = c(cmd, 'echo "     Writing to',get.path(paths$int,"Grid-Non-Dev.vrt"),'";')
+  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"nd_over\", (\"nd_over\"/area(t1.geometry))*100 as \"nd_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', ndev.out.path, get.path(paths$int,"Grid-Non-Dev.vrt") )
   
   write(paste(cmd, collapse=" "), file='script.sh', append=TRUE)
 }
