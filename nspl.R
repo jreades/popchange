@@ -33,7 +33,7 @@ raw.path  = c(paths$nspl,'NSPL_FEB_2017_UK','Data')
 
 # Load the data using fread from data.table package
 # (whichi is no longer explosed directly using dtplyr)
-dt = data.table::fread(paste(c(raw.path,raw.file), collapse="/"))
+dt = data.table::fread(get.path(raw.path,raw.file))
 
 cat(paste("NSPL file dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 
@@ -168,7 +168,7 @@ for (r in r.iter) {
   
   # Note: No viable data from 1971
   for (y in c(1981, 1991, 2001, 2011)) {
-    region.y.fn = paste(c(paths$nspl, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
+    region.y.fn = get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL.shp",y))
     if (!file.exists(region.y.fn) & overwrite==FALSE) {
       cat("    Skipping since output file already exists:","\n","        ",region.y.fn,"\n")
     } else {
@@ -244,8 +244,8 @@ for (r in r.iter) {
   
   for (y in c(1981, 1991, 2001, 2011)) {
     cat("    ","Reading shape data for year:", y,"\n")
-    region.y.fn   <- paste(c(paths$nspl, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
-    region.k.path <- paste(c(paths$nspl, paste(c(params$file.nm,y,"NSPL","Kriged.shp"),collapse="_")), collapse="/")
+    region.y.fn   <- get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL.shp",y))
+    region.k.path <- get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL_Kriged.shp",y))
     dt.region     <- st_read(region.y.fn, quiet=TRUE)
     
     # Extract postcode points from the sf object
@@ -274,8 +274,8 @@ for (r in r.iter) {
   
   for (y in c(1981, 1991, 2001, 2011)) {
     cat("    ","Reading shape data for year:", y,"\n")
-    region.y.fn <- paste(c(paths$nspl, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
-    region.v.fn <- paste(c(paths$voronoi, paste(c(params$file.nm,y,"NSPL","Voronoi.shp"),collapse="_")), collapse="/")
+    region.y.fn <- get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL.shp",y))
+    region.v.fn <- get.path(paths$voronoi, get.file(t="{file.nm}_*_NSPL_Voronoi.shp",y))
     dt.region     <- st_read(region.y.fn, quiet=TRUE)
     dt.region     <- dt.region %>% st_set_crs(NA) %>% st_set_crs(27700)
     

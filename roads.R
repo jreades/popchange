@@ -44,7 +44,7 @@ for (r in r.iter) {
   cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
   
   if (r == 'Northern Ireland') {
-    full.path = paste(c(paths$roads,'OSNI_Open_Data__50k_Transport_Line','OSNI_Open_Data__50k_Transport_Line.shp'),collapse="/")
+    full.path = get.path(paths$roads,'OSNI_Open_Data__50k_Transport_Line','OSNI_Open_Data__50k_Transport_Line.shp')
     rds <- st_read(full.path, quiet=TRUE)
     rds <- rds%>% st_set_crs(NA) %>% st_set_crs(29901)
     rds <- st_transform(rds, 27700)
@@ -70,7 +70,7 @@ for (r in r.iter) {
     # do this by using the 100km reference downloaded
     # from GitHub. You can bin the rest.
     rb.shp    <- buffer.region(params)
-    osgb.grid <- st_read( paste(c(paths$roads,'OSGB_Grid_100km.shp'), collapse="/"), quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
+    osgb.grid <- st_read( get.path(paths$roads,'OSGB_Grid_100km.shp'), quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
     
     grid.intersects <- osgb.grid %>% st_intersects(rb.shp) %>% lengths()
     grid.tiles      <- sort(osgb.grid$TILE_NAME[ which(grid.intersects==1) ])
@@ -82,7 +82,7 @@ for (r in r.iter) {
     # Get the first tile from the list and 
     # extract only the roads falling within
     # the regional buffer
-    rds.fn    <- paste(c(base.path,paste( grid.tiles[1],"RoadLink.shp",sep="_")), collapse="/")
+    rds.fn    <- get.path(base.path, get.file("*_RoadLink.shp",grid.tiles[1]))
     rds       <- st_read(rds.fn, quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
     
     # Remove functions we're not interested in
@@ -96,7 +96,7 @@ for (r in r.iter) {
     # extract only the roads falling within
     # the regional buffer
     for (g in grid.tiles[2:length(grid.tiles)]) {
-      rds.fn  <- paste(c(base.path,paste(g,"RoadLink.shp",sep="_")), collapse="/")
+      rds.fn  <- get.path(base.path, get.file("*_RoadLink.shp",g))
       rds.shp <- st_read(rds.fn, quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
       
       # Remove functions we're not interested in
@@ -139,7 +139,7 @@ for (r in r.iter) {
   # highway now wasn't alway highay...
   #########################
   cat("Loading grid with resolution",g.resolution,"m.\n")
-  grid.fn = paste(c(paths$grid,paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")),collapse="/")
+  grid.fn = get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp"))
   
   grd <- st_read(grid.fn, quiet=TRUE)
   grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -155,7 +155,7 @@ for (r in r.iter) {
   cat("   Done.")
   
   cat("   Writing cell intersection values to shapefile.","\n")
-  roads.fn = paste( c(paths$int, paste(params$file.nm,paste(g.resolution,'m',sep=""),'Roads','Grid.shp', sep="-")), collapse="/")
+  roads.fn = get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-Roads-Grid.shp"))
   st_write(grd, roads.fn, quiet=TRUE, delete_dsn=TRUE)
   rm(grd)
 }

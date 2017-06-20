@@ -35,7 +35,7 @@ for (r in r.iter) {
   grid.tiles      <- subset(ra.r, grid.intersects==1)
   
   # And write out the buffered grid ref
-  grid.fn = paste(c(paths$grid,paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")),collapse="/")
+  grid.fn = get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp"))
   cat("Writing grid file: ",grid.fn,"\n")
   
   st_write(grid.tiles, grid.fn, layer='bounds', delete_dsn=TRUE, quiet=TRUE)

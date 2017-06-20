@@ -116,7 +116,7 @@ roads.local.buffer      <-  150
 roads.simplify          <-  100              # Simplify the roads before drawing the buffer (for performance)
 
 ########## Sanity check -- we only need to run this once...
-if (! file.exists(paste(c(paths$os, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/"))) {
+if (! file.exists( get.path(paths$os, "CTRY_DEC_2011_UK_BGC.shp") )) {
   cat(paste(replicate(45, "="), collapse = ""), "\n")
   cat(paste(replicate(45, "="), collapse = ""), "\n")
   cat("Have you run the ni-preprocessing.R script yet?\n")
