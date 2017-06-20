@@ -295,23 +295,25 @@ rm(merge.sh)
 ######################################################
 ######################################################
 cat("Starting integration with grid...","\n")
+library(Hmisc)
 for (r in r.iter) {
   
   params = set.params(r)
   
   cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
   
-  cat("  Loading grid with resolution",g.resolution,"m.","\n")
-  grid.fn = paste(c(paths$grid,paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")),collapse="/")
+  #cat("  Loading grid with resolution",g.resolution,"m.","\n")
+  grid.fn   = paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")
+  grid.path = paste(c(paths$grid, grid.fn),collapse="/")
   
-  grd <- st_read(grid.fn, quiet=TRUE)
-  grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
+  #cat("  Loading merged land use shapefile.","\n")
+  merged.fn   = gsub('{region}',params$file.nm,'{region}-merge.shp', perl=TRUE)
+  merged.path = paste(c(paths$osm, merged.fn), collapse="/")
   
-  cat("  Loading merged land use shapefile.","\n")
-  merged.fn = paste(c(paths$osm, gsub('{region}',params$file.nm,'{region}-merge.shp', perl=TRUE)), collapse="/")
-  
-  mrg <- st_read(merged.fn, quiet=TRUE)
+  mrg <- st_read(merged.path, quiet=TRUE)
   mrg <- mrg %>% st_set_crs(NA) %>% st_set_crs(27700)
+  
+  rm(merged.fn, merged.path)
   
   # Now we need to process the land uses
   # separately based on whether they are
@@ -319,16 +321,86 @@ for (r in r.iter) {
   # or not (e.g. reservoir).
   lu  <- osm.classes.developable
   
+  ###############
   # Developable land use classes first
-  dev.area <- st_split(mrg, grd)
+  mrg.dev.fn   = gsub('{region}',params$file.nm,'{region}-merge-developable.shp', perl=TRUE)
+  mrg.dev.path = paste(c(paths$tmp,mrg.dev.fn), collapse="/")
+  mrg.dev      = st_union(subset(mrg[mrg$UseClass %in% lu,]), by_feature=FALSE)
+  st_write(mrg.dev, mrg.dev.path, quiet=TRUE, delete_dsn=TRUE)
   
+  # Create a VRT file so that we can effectively 
+  # refer to the layers that we need without needing
+  # really long/escaped layer names.
+  vrt.text <- sprintf('<OGRVRTDataSource>
+  <OGRVRTLayer name="grid">
+    <SrcDataSource>%s</SrcDataSource>
+    <SrcLayer>%s</SrcLayer>
+  </OGRVRTLayer>
+  <OGRVRTLayer name="osm">
+    <SrcDataSource>%s</SrcDataSource>
+    <SrcLayer>%s</SrcLayer>
+  </OGRVRTLayer>
+</OGRVRTDataSource>',
+  grid.path,
+  gsub(".shp","",grid.fn,perl=TRUE),
+  mrg.dev.path,
+  gsub('.shp','',mrg.dev.fn,perl=TRUE)
+  )
+  write(vrt.text, file=( paste( c(paths$tmp,"Grid-Dev.vrt"), collapse="/")) )
+  
+  cmd = c()
+  cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",grid.fn,perl=TRUE),'";')
+  cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",grid.fn,perl=TRUE)), grid.path, ';')
+  #ogrinfo -sql 'CREATE SPATIAL INDEX ON "Northern_Ireland-250m-Grid"' test/Northern_Ireland-250m-Grid.shp
+  cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",mrg.dev.fn,perl=TRUE),'";')
+  cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",mrg.dev.fn,perl=TRUE)), mrg.dev.path, ';')
+  #ogrinfo -sql 'CREATE SPATIAL INDEX ON "Northern_Ireland-clip"' test/Northern_Ireland-clip.shp
+  cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";')
+  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"over\", (\"over\"/area(t1.geometry))*100 as \"pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', 'Overlap-Dev.shp', paste( c(paths$tmp,"Grid-Dev.vrt"), collapse="/"))
+  
+  write(paste(cmd, collapse=" "), file='script.sh')
+  
+  ###############
   # Then non-developable ones (much larger)
+  mrg.non = subset(mrg[mrg$UseClass %nin% lu,])
   
+  mrg.ndev.fn   = gsub('{region}',params$file.nm,'{region}-merge-nondevelopable.shp', perl=TRUE)
+  mrg.ndev.path = paste(c(paths$tmp,mrg.ndev.fn), collapse="/")
+  mrg.ndev      = st_union(subset(mrg[mrg$UseClass %nin% lu,]), by_feature=FALSE)
+  st_write(mrg.ndev, mrg.ndev.path, quiet=TRUE, delete_dsn=TRUE)
   
-  cat("   Writing cell intersection values to shapefile.","\n")
-  osm.fn = paste( c(paths$int, paste(params$file.nm,paste(g.resolution,'m',sep=""),'OSM','Grid.shp', sep="-")), collapse="/")
-  st_write(grd, osm.fn, quiet=TRUE, delete_dsn=TRUE)
-  rm(grd)
+  # Create a VRT file so that we can effectively 
+  # refer to the layers that we need without needing
+  # really long/escaped layer names.
+  vrt.text <- sprintf('<OGRVRTDataSource>
+  <OGRVRTLayer name="grid">
+    <SrcDataSource>%s</SrcDataSource>
+    <SrcLayer>%s</SrcLayer>
+  </OGRVRTLayer>
+  <OGRVRTLayer name="osm">
+    <SrcDataSource>%s</SrcDataSource>
+    <SrcLayer>%s</SrcLayer>
+  </OGRVRTLayer>
+</OGRVRTDataSource>',
+  grid.path,
+  gsub(".shp","",grid.fn,perl=TRUE),
+  mrg.ndev.path,
+  gsub('.shp','',mrg.ndev.fn,perl=TRUE)
+  )
+  write(vrt.text, file=( paste( c(paths$tmp,"Grid-Non-Dev.vrt"), collapse="/")) )
+  
+  cmd = c()
+  # Already exists
+  #cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",grid.fn,perl=TRUE),'";')
+  #cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",grid.fn,perl=TRUE)), grid.path, ';')
+  #ogrinfo -sql 'CREATE SPATIAL INDEX ON "Northern_Ireland-250m-Grid"' test/Northern_Ireland-250m-Grid.shp
+  cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",mrg.ndev.fn,perl=TRUE),'";')
+  cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",mrg.ndev.fn,perl=TRUE)), mrg.ndev.path, ';')
+  #ogrinfo -sql 'CREATE SPATIAL INDEX ON "Northern_Ireland-clip"' test/Northern_Ireland-clip.shp
+  cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";')
+  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"over\", (\"over\"/area(t1.geometry))*100 as \"pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', 'Overlap-Non-Dev.shp', paste( c(paths$tmp,"Grid-Non-Dev.vrt"), collapse="/"))
+  
+  write(paste(cmd, collapse=" "), file='script.sh', append=TRUE)
 }
 
 cat("Done linking OSM Data to grid.","\n")
