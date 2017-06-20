@@ -54,13 +54,16 @@ g.anchor       <- 5000                       # Anchor grid min/max x and y at ne
 # working directory but in a no-sync directory since these
 # files are enormous.
 paths = new.env()
-paths$os      = c(getwd(),'no-sync','OS')
-paths$osm     = c(getwd(),'no-sync','OSM')
-paths$nspl    = c(getwd(),'no-sync','NSPL')
-paths$roads   = c(getwd(),'no-sync','Roads')
-paths$grid    = c(getwd(),'no-sync','grid')
-paths$osm.out = c(getwd(),'no-sync','tmp')
-paths$final   = c(getwd(),'no-sync','final')
+paths$root    = 'no-sync'
+paths$os      = c(getwd(),paths$root,'OS')
+paths$osm     = c(getwd(),paths$root,'OSM')
+paths$nspl    = c(getwd(),paths$root,'NSPL')
+paths$roads   = c(getwd(),paths$root,'Roads')
+paths$grid    = c(getwd(),paths$root,'grid')
+paths$tmp     = c(getwd(),paths$root,'tmp')
+paths$voronoi = c(getwd(),paths$root,'voronoi')
+paths$int     = c(getwd(),paths$root,'integration')
+paths$final   = c(getwd(),paths$root,'final')
 
 ########## OSM Configuration
 osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)
@@ -86,10 +89,17 @@ osm.classes$landuse = c('airfield', 'allotments', 'brownfield', 'cemetery', 'chu
 osm.classes$leisure = c('golf', 'golf_course', 'miniature_golf', 'marina', 'nature_reserve', 'park', 'pitch', 'quad_bikes', 'recreation_ground', 'sports_field', 'track', 'water_park') 
 # These are NOT NULL...
 osm.classes$not_null = c('aeroway') 
-# These are amenity IS NOT NULL and these are NOT IN... (i.e. all amenities except these ones are *included*)
+# These are amenity IS NOT NULL and 'x' NOT IN... (i.e. all amenities except those below are *included*)
 osm.classes$amenity = c('hospice', 'nursing_home', 'retirement_home', 'student_accomodation')
 
-# This *could* be useful in theory but doesn't seem to add much value in practice
+# I do want to distinguish between completely unbuildable and
+# 'low density' so this is used in Step 3 of the osm.R file but
+# the names need to match *exactly* to the classes above.
+osm.classes.developable = c('farmland','farmyard','brownfield','vineyard','marina')
+
+# This *could* be useful in theory but doesn't seem to add much 
+# value in practice. Plus you might pick up names of towns and 
+# such which wouldn't actually help that much.
 #osm.classes$other_tags = c('%Forest%', '%Common%', '%Heath%') # Based on the Other field: "designation"=>"Swinley Forest"
 
 # Merge all classes to deal with inconsistency in tagging

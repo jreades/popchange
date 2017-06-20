@@ -263,6 +263,7 @@ for (r in r.iter) {
 
 # Now create the Voronoi
 for (r in r.iter) {
+  
   params = set.params(r)
   
   cat("\n","======================\n","Creating Voronoi Polygons for:", params$display.nm,"\n")
@@ -274,7 +275,7 @@ for (r in r.iter) {
   for (y in c(1981, 1991, 2001, 2011)) {
     cat("    ","Reading shape data for year:", y,"\n")
     region.y.fn <- paste(c(paths$nspl, paste(c(params$file.nm,y,"NSPL.shp"),collapse="_")), collapse="/")
-    region.v.fn <- paste(c(paths$nspl, paste(c(params$file.nm,y,"NSPL","Voronoi.shp"),collapse="_")), collapse="/")
+    region.v.fn <- paste(c(paths$voronoi, paste(c(params$file.nm,y,"NSPL","Voronoi.shp"),collapse="_")), collapse="/")
     dt.region     <- st_read(region.y.fn, quiet=TRUE)
     dt.region     <- dt.region %>% st_set_crs(NA) %>% st_set_crs(27700)
     
@@ -292,7 +293,7 @@ for (r in r.iter) {
     dt.v          <- dt.v %>% st_set_crs(27700) %>% st_cast()
     # Now need to join postcodes back on to
     # the Voronoi polygons
-    st_write(t, region.v.fn, delete_layer=TRUE, quiet=TRUE)
+    st_write(dt.v, region.v.fn, delete_layer=TRUE, quiet=TRUE)
   }
 }
 

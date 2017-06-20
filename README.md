@@ -29,15 +29,17 @@ Clone or download the repo to somewhere easy to find.
 
 Under the `popchange` directory the `setup.R` script will create a set of data directories; these are not found in git because of the volumes associated with extracting and processing OSM, OS & NSPL features. The layout is:
 
-- `popchange/      # The repo`
-  - `no-sync/      # Don't manage content here with Git`
-    - `OS/         # For Ordnance Survey data`
-    - `OSM/        # For OSM data`
-    - `Roads/      # For Roads data`
-    - `NSPL/       # National Statistics postcode data`
-    - `Voronoi/    # National Statistics postcode data`
-    - `grid/       # Grid output for regions`
-    - `processed/  # Outputs from gridding process at national and regional levels`
+- `popchange/       # The repo`
+  - `no-sync/       # Don't manage content here with Git!`
+    - `OS/          # Source Ordnance Survey data`
+    - `OSM/         # Source OSM data`
+    - `Roads/       # Source Roads data`
+    - `NSPL/        # Source National Statistics Postcode Lookup data`
+    - `voronoi/     # Output voronoi polygons (if used)`
+    - `grid/        # Output gridded coverage of regions`
+    - `tmp/         # Output intermediate outputs from OSM processing`
+    - `integration/ # Output integration of grid with OSM, NSPL, and Roads data`
+    - `final/       # Final outputs for each region`
 
 ### Downloading the Open Data
 

@@ -155,7 +155,7 @@ for (r in r.iter) {
   cat("   Done.")
   
   cat("   Writing cell intersection values to shapefile.","\n")
-  roads.fn = paste( c(paths$final, paste(params$file.nm,paste(g.resolution,'m',sep=""),'Roads','Grid.shp', sep="-")), collapse="/")
+  roads.fn = paste( c(paths$int, paste(params$file.nm,paste(g.resolution,'m',sep=""),'Roads','Grid.shp', sep="-")), collapse="/")
   st_write(grd, roads.fn, quiet=TRUE, delete_dsn=TRUE)
   rm(grd)
 }

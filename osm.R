@@ -1,4 +1,5 @@
-#########################################
+######################################################
+######################################################
 # The idea is to try to make a fully replicable
 # process drawing solely on open data and a FOSS
 # stack. We work from the premise that certain 
@@ -20,7 +21,18 @@
 # 4. Combine this land use data into a single file that 
 #    suppresses areas from the later population distribution 
 #    function.
-########################################
+#
+# Note that this script is deliberately inefficient in
+# that it is built using 4 loops that could be easily 
+# collapsed into one monster. My feeling was that this 
+# makes running/re-running parts of the script easier 
+# in that you don't have to scroll through the loop 
+# looking for where the part you want to re-run starts
+# you can simply pick up from the stage in the process
+# where you want to start processing the data. 
+######################################################
+######################################################
+
 rm(list = ls()) # Clear the workspace
 
 source('config.R')
@@ -28,16 +40,27 @@ source('funcs.R')
 
 library(sf)      # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
 
-# Enables us to loop over all large regions
-# in the dataset without having to load each
-# individually
+######################################################
+######################################################
+# Step #1. This loop deals with loading, converting, 
+#          and clipping the raw OSM multipolygon data 
+#          from the PBF file. Outputs a shapefile clipped
+#          to the country or region and containing all
+#          multipolygons in the OSM data file (there
+#          in nothing in the polygons slot).
+######################################################
+######################################################
 for (r in r.iter) {
   
   params = set.params(r)
   
   cat("\n","======================\n","Processing OSM data for:",params$display.nm,"\n")
   
-  # Region-Buffered shape
+  # Retrieve the outline of the country or English
+  # region -- note that we buffer around English regions
+  # and NI (because both have useful data falling on the 
+  # 'other' side of the border) but not for Scotland or 
+  # Wales because the OSM file cuts off at that point.
   cat("  Retrieving regional boundaries.\n")
   if (params$country.nm %in% c('England','Northern Ireland')) {
     rb.shp <- buffer.region(params)
@@ -48,19 +71,25 @@ for (r in r.iter) {
   # Useful for auditing, not necessary in production
   #st_write(rb.shp, dsn=paste(c(os.path,'filterregion.shp'), collapse="/"), layer='filterregion', delete_dsn=TRUE, quiet=TRUE)
   
-  # What are the boundaries of the region?
+  #########
+  # Step 1a: Subset the OSM file for a region (usually only done with England)
+  
+  # Derive a bounding box for the boundaries 
+  # of the region? Note that these will be in
+  # EPSG:27700 format (including NI since the 
+  # ni-preprocessing step transforms that too).
   e = make.box(rb.shp)
   
   # Transform to EPSG:4326 so that we can work out 
   # the coordinates to use for clipping the OSM data
   e.st = st_transform(e, '+init=epsg:4326')
   
-  # For validation of bbox -- not needed in production
-  # st_write(e.st, paste(c(os.path,'filterbounds.shp'),collapse="/"), layer='filterbounds', delete_dsn=TRUE, quiet=TRUE)
-  
+  # Work out the I/O path names
   file.osm   = paste(c(paths$osm, gsub('{region}',params$osm,'{region}-latest.osm.pbf', perl=TRUE)), collapse="/")
   file.clip  = paste(c(paths$osm, gsub('{region}',params$file.nm,'{region}-clip.shp', perl=TRUE)), collapse="/")
   
+  # And begin to build the clipping query to execute
+  # using ogr2ogr.
   osm.clip   = c('-f "ESRI Shapefile"', '-sql "SELECT * FROM multipolygons"') 
   if (params$country.nm %in% c('England','Northern Ireland')) { 
     xmin     = st_bbox(e.st)['xmin']
@@ -77,26 +106,64 @@ for (r in r.iter) {
   cat("Clipping Destination file:",file.clip,"\n")
   cat("OGR Clipping Command:",osm.clip,"\n")
   
-  # Step 1: Subset the OSM file for a region (usually only done with England)
+  # Just to prevent needless time-wasting we try
+  # to avoid overwriting a file if it's already 
+  # there. This would be fairly common if, for 
+  # example, you were experimenting with different
+  # classifications of the OSM data or just blindly
+  # re-running the entire pipeline.
   if (!file.exists(file.clip)) {
     cat("Converting OSM multipolygon data to shapefile...","\n")
     cat("and clipping OSM data source where able","\n")
     print(paste(c(ogr.lib, osm.clip),collapse=" "))
     system2(ogr.lib, osm.clip, wait=TRUE)
   } else {
-    cat("Have already clipped OSM data to this region, skipping this operation...\n")
+    cat(paste(replicate(45, "="), collapse = ""), "\n")
+    cat(paste(replicate(45, "="), collapse = ""), "\n")
+    cat("Have already clipped OSM data for this region, skipping this operation...","\n")
+    cat(paste(replicate(45, "="), collapse = ""), "\n")
+    cat(paste(replicate(45, "="), collapse = ""), "\n")
   }
+  rm(e,e.st,file.osm,file.clip,osm.clip,xmax,xmin,ymax,ymin)
+}
+
+######################################################
+######################################################
+# Step 2: Select OSM classes and extract to reprojected shapefile
+#         Here we are extracting each of the use classes specified in the 
+#         config.R file and grouping them into separate shapefiles for the 
+#         time being. Everything will ultimately be merged back together 
+#         but this lowers the memory profile and also permits ease of auditing
+#         as well as dealing with the fact that each of these classes actually
+#         requires a different retrieval query from the shapefile.
+######################################################
+######################################################
+for (r in r.iter) {
   
-  # Step 2: Select OSM classes and extract to reprojected shapefile
+  params = set.params(r)
+  
+  cat("\n","======================\n","Processing clipped data for:",params$display.nm,"\n")
+  
   for (k in ls(osm.classes)) {
-    print(paste("Processing OSM class:", k))
+    cat("  Processing OSM class:",k,"\n")
     
-    file.step1 = paste(c(paths$osm.out, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step1.shp', perl=TRUE), perl=TRUE)), collapse="/")
-    file.step2 = paste(c(paths$osm.out, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    # Compose the I/O paths -- this could usefully
+    # be made into a function eventually if I am 
+    # going to sick with the "{...}" syntax instead
+    # of just pasting it all together like a sane 
+    # person.
+    file.step1 = paste(c(paths$tmp, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step1.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step2 = paste(c(paths$tmp, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
     
+    # And begin to compose both the extract and  
+    # union queries.
     osm.extract = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326')
     osm.union = c('-dialect sqlite')
     
+    # We look at the class to figure out which 
+    # query to use -- amenity and 'not null' 
+    # (which we use for airports) need a completely
+    # different approach.
     if (k == 'not_null') {
       val = paste(paste("(", osm.classes[[k]], " IS NOT NULL", ")", sep=""), collapse=" OR ")
       osm.extract = c(osm.extract, gsub('{val}',val,'-where "{val}"',perl=TRUE))
@@ -116,32 +183,55 @@ for (r in r.iter) {
     osm.extract = c(osm.extract, file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
     osm.union   = c(osm.union, file.step2, file.step1, '-overwrite', '--config ogr_interleaved_reading yes')
     
+    # And now compose the actual ogr2ogr commands
     cmd1 = gsub('{val}', val, gsub('{key}', k, gsub('{region}', params$file.nm, osm.extract, perl=TRUE), perl=TRUE), perl=TRUE)
     cmd2 = gsub('{val}', val, gsub('{key}', k, gsub('{region}', params$file.nm, osm.union, perl=TRUE), perl=TRUE), perl=TRUE)
     
     if (!file.exists(file.step1)) {
-      cat("     Extracting and reprojecting data from clip file...\n")
-      cat("     This may take between 1-10 minutes.\n")
+      cat("    Extracting and reprojecting data from clip file...\n")
+      cat("    This may take between 1-10 minutes.\n")
       cat(paste(c(ogr.lib, cmd1), collapse=" "))
       system2(ogr.lib, cmd1, wait=TRUE)
     } else {
-      cat("     Step 1 file already exists. Skipping.\n")
+      cat("    ==== Step 1 file already exists. Skipping... ====\n")
     }
     
     if (!file.exists(file.step2)) {
-      cat("     Simplifying and performing union on OSM classes...\n")
-      cat("     This may take anywhere from 2-200 minutes.\n")
+      cat("    Simplifying and performing union on OSM classes...\n")
+      cat("    This may take anywhere from 2-200 minutes.\n")
       print(paste(c(ogr.lib, cmd2), collapse=" "))
       system2(ogr.lib, cmd2, wait=TRUE)
     } else {
-      cat("     Step 2 file already exists. Skipping...\n")
+      cat("    ==== Step 2 file already exists. Skipping... ====\n")
     }
   }
+  rm(cmd1,cmd2,file.step1,file.step2,osm.extract,osm.union,val,k)
 }
 
-# Step 3: Merge them into a single shapefile 
-merge.sh = "merge.sh"
-file.remove(merge.sh)
+######################################################
+######################################################
+# Step 3: Merge the union-ed shapefiles into a single 
+#         shapefile. I found that this process takes so long
+#         that the R system2 function is assuming that the 
+#         process is dead or something because I would start 
+#         getting all sorts of errors. So, instead, what I've 
+#         done is to create a bash script that can be fired off
+#         by R (in case I'm wrong about this) or done manually
+#         (assuming that I am). I should also point out that 
+#         we create the foundation for the merge simply by 
+#         copying the first shapefile in the list to the new 
+#         location. I found that trying to create a brand new 
+#         shapefile by merging was a patchy proposition *and*
+#         slower to boot.
+######################################################
+######################################################
+
+merge.sh = "merge.sh" # Feel free to change if you need to
+file.remove(merge.sh) # If this isn't the first time
+
+# For each region -- we'll append to the merge.sh script
+# so that you can merge all of the data into region-specific
+# shapefiles in one (looooong) process.
 for (r in r.iter) {
   
   params = set.params(r)
@@ -155,19 +245,18 @@ for (r in r.iter) {
   for (k in ls(osm.classes)) {
     cat("  Processing OSM class:",k,"\n")
     
-    file.step2 = paste(c(paths$osm.out, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
+    file.step2 = paste(c(paths$tmp, gsub('{key}',k,gsub('{region}',params$file.nm,'{region}-{key}-step2.shp', perl=TRUE), perl=TRUE)), collapse="/")
     #if (!file.exists(file.merge)) {
     if (i==0) {
       cat("     Will copy first shapefile to create merge base...\n") # More reliable than doing this via OGR for some strange reason
+      cmd3 = c(cmd3, 'echo "   Copying base file:',k,'";')
       for (ext in c('.shp','.shx','.prj','.dbf')) {
-        #file.copy(gsub('.shp',ext,file.step2,perl=TRUE), gsub('.shp',ext,file.merge,perl=TRUE), overwrite=TRUE)
         cmd3 = c(cmd3, '/bin/cp', gsub('.shp',ext,file.step2,perl=TRUE), gsub('.shp',ext,file.merge,perl=TRUE), ';')
       }
       i=1
     } else {
-      cat("     Appending to 'merge shapefile' shell script.\n")
-      #print(paste(c(ogr.lib, file.merge, file.step2, '-append', '-update;'), collapse=" "))
-      #system2(ogr.lib, file.merge, file.step2, '-append', '-update', wait=TRUE)
+      cat("     Appending to shell script.\n")
+      cmd3 = c(cmd3, 'echo "   Appending layer:',k,'";')
       cmd3 = c(cmd3, ogr.lib, file.merge, file.step2, '-append', '-update',';')
     }
   }
@@ -181,39 +270,63 @@ for (r in r.iter) {
   if (! file.exists(merge.sh)) {
     write("#!/bin/bash", file=merge.sh)
   }
-  write(paste('echo "Starting merging: ',params$display.nm,'"',sep=""), file=merge.sh, append=TRUE)
+  write(paste('echo "Starting merge: ',params$display.nm,'"',sep=""), file=merge.sh, append=TRUE)
   write(paste(cmd3, collapse=" "), file=merge.sh, append=TRUE)
-  write(paste('echo "Done merging: ',params$display.nm,'"',sep=""), file=merge.sh, append=TRUE)
+  write(paste('echo "Merge complete: ',params$display.nm,'"',sep=""), file=merge.sh, append=TRUE)
+  rm(cmd3,ext,file.merge,file.step2,i,k)
 }
 
-# Step 4: Do the merge using a shell script to 
-# prevent race and timeout conditions... seems 
-# to be a weakness in RStudio/R in terms of
-# impatience with system calls.
-cat("Merge data script in",merge.sh,"\n")
-cat(paste(c('/bin/sh',merge.sh), collapse=" "),"\n")
-system2('/bin/sh', merge.sh, wait=TRUE)
-cat("Merge complete","\n")
+cat(paste(replicate(45, "="), collapse = ""), "\n")
+cat(paste(replicate(45, "="), collapse = ""), "\n")
+cat("You now need to run this in the Terminal:\n>\t",'/bin/sh',merge.sh,"\n")
+#system2('/bin/sh', merge.sh, wait=TRUE)
+#cat("Merge complete","\n")
+cat(paste(replicate(45, "="), collapse = ""), "\n")
+cat(paste(replicate(45, "="), collapse = ""), "\n")
 
-# Step 5: Aggregate land uses into a couple of 
+rm(merge.sh)
+
+######################################################
+######################################################
+# Step 4: Aggregate land uses into a couple of 
 #         major categories and then intersect 
-#         with the grid
-cat("Starting integration with grid","\n")
+#         with the grid to calculate the usable
+#         area within each.
+######################################################
+######################################################
+cat("Starting integration with grid...","\n")
 for (r in r.iter) {
   
   params = set.params(r)
   
   cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
   
-  cat("Loading grid with resolution",g.resolution,"m.\n")
+  cat("  Loading grid with resolution",g.resolution,"m.","\n")
   grid.fn = paste(c(paths$grid,paste(params$file.nm,paste(g.resolution,"m",sep=""),'Grid.shp',sep="-")),collapse="/")
   
   grd <- st_read(grid.fn, quiet=TRUE)
   grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
   
+  cat("  Loading merged land use shapefile.","\n")
+  merged.fn = paste(c(paths$osm, gsub('{region}',params$file.nm,'{region}-merge.shp', perl=TRUE)), collapse="/")
+  
+  mrg <- st_read(merged.fn, quiet=TRUE)
+  mrg <- mrg %>% st_set_crs(NA) %>% st_set_crs(27700)
+  
+  # Now we need to process the land uses
+  # separately based on whether they are
+  # conceivably 'developlable' (e.g. farmyard)
+  # or not (e.g. reservoir).
+  lu  <- osm.classes.developable
+  
+  # Developable land use classes first
+  dev.area <- st_split(mrg, grd)
+  
+  # Then non-developable ones (much larger)
+  
   
   cat("   Writing cell intersection values to shapefile.","\n")
-  osm.fn = paste( c(paths$osm.out, paste(params$file.nm,paste(g.resolution,'m',sep=""),'OSM','Grid.shp', sep="-")), collapse="/")
+  osm.fn = paste( c(paths$int, paste(params$file.nm,paste(g.resolution,'m',sep=""),'OSM','Grid.shp', sep="-")), collapse="/")
   st_write(grd, osm.fn, quiet=TRUE, delete_dsn=TRUE)
   rm(grd)
 }

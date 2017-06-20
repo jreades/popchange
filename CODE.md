@@ -4,25 +4,26 @@
 
 On my Mac I've intalled GDAL and GEOS using the libraries provided by [KyngChaos](http://www.kyngchaos.com/software/frameworks). These put the necessary external resources (GDAL, GEOS, PROJ) under `/Library/Frameworks/...`
 
-To install a version of `sf` that enables `st_voronoi` functionality you **_must_** link to a version of `GEOS` > 3.5. Installing `rgeos` and `sf` via RStudio repeatedly linked to older versions for me (even when I tried to install using `type='source'`) so I eventually tried downloading the tarball from CRAN, `gunzip`-ing it, and installing from the Terminal:
+To install a version of `sf` that enables `st_voronoi` functionality, however, you **_must_** link to a version of `GEOS` > 3.5. Installing `rgeos` and `sf` via RStudio repeatedly linked to older compiled versions from CRAN for me (even when I tried to install using `type='source'`) so I eventually tried downloading the tarball from CRAN, `gunzip`-ing it, and installing from the Terminal:
 ```
 R CMD INSTALL rgeos_0.3-23.tar.gz --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config'
 R CMD INSTALL sf_0.4-3.tar --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config --with-proj-include=/Library/Frameworks/PROJ.framework/Headers --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
 ```
 
-This **_should have worked_** but did not. In retrospect, I think that this might have been because I'd missed an old compiler flag in my `.bash_profile` that was pointing to GDAL 1.11 (which no longer existed). The correct flag would have been:
+This **_should have worked_** but did not. In retrospect, I think that this might have been because I'd missed an old compiler flag in my `.bash_profile` that was pointing to GDAL 1.11 (which no longer existed). The correct bash parameter would have been:
 ```
 export CFLAGS=Library/Frameworks/GDAL.framework/unix/bin/gdal-config
 ```
 
-However, I finally resorted to Homebrew (which I had already installed and which probably didn't help with compiling `sf`):
+But there is an _additional_ issue lurking in the background, and that the need to link to `liblwgeom` in order to access `st_split` and `st_make_valid`. Conequently, I finally resorted to Homebrew (which I had already installed and which probably didn't help with compiling `sf`) and did thing in the following order:
 ```
-brew doctor
+brew doctor # And deal with any major issues (e.g. alert about Anaconda, see below)
 brew prune
 brew update
+brew install postgis --build-from-source # To get liblwgeom links sorted
 brew install homebrew/science/netcdf
 brew install jasper
-brew install gdal2 --with-armadillo --with-complete --with-libkml --with-unsupported
+brew install gdal2 --with-armadillo --with-complete --with-libkml --with-unsupported --with-postgresql
 brew link --force gdal2
 cp /usr/local/opt/gdal2/lib/libgdal.20.dylib /usr/local/opt/gdal2/lib/libgdal.20.dylib.orig
 chmod +w /usr/local/opt/gdal2/lib/libgdal.20.dylib
@@ -32,7 +33,11 @@ install_name_tool -change @rpath/libjasper.4.dylib /usr/local/opt/jasper/lib/lib
 ### Important Note
 Since I had Anaconda Python installed I also ended up mucking about with my `.bash_profile` before doing the Homebrew work, and it ended up looking like this:
 ```
-export PATH="/usr/local/opt/gdal2/bin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/cairo/Programs:/Applications/QGIS.app/Contents/MacOS/bin:/usr/local/mysql/bin:/Library/Frameworks/GDAL.framework/Programs:$PATH"
+export PATH="/usr/local/opt/gdal2/bin:$PATH"
+export CFLAGS=/usr/local/opt/gdal2/bin/gdal-config
+export CPPFLAGS=/usr/local/opt/gdal2/bin/gdal-config
+export LD_LIBRARY_PATH=/usr/local/opt/gdal2/lib:$LD_LIBRARY_PATH
+
 #export PATH="/Applications/anaconda/bin:$PATH"
 ```
 
