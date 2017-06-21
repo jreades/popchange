@@ -38,8 +38,6 @@ rm(list = ls()) # Clear the workspace
 source('config.R')
 source('funcs.R')
 
-library(sf)      # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
-
 ######################################################
 ######################################################
 # Step #1. This loop deals with loading, converting, 
@@ -180,8 +178,8 @@ for (r in r.iter) {
       osm.union   = c(osm.union, gsub('{buffer}',osm.buffer,gsub('{simplify}',osm.simplify,'-sql "SELECT {key} AS UseClass, ST_Union(ST_Buffer(ST_Simplify(geometry,{simplify}),{buffer})) FROM \'{region}-{key}-step1\' GROUP BY {key}"',perl=TRUE),perl=TRUE))
     }
     
-    osm.extract = c(osm.extract, file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
-    osm.union   = c(osm.union, file.step2, file.step1, '-overwrite', '--config ogr_interleaved_reading yes')
+    osm.extract = c(osm.extract, file.step1, file.clip, '-overwrite', '-progress', '--config ogr_interleaved_reading yes')
+    osm.union   = c(osm.union, file.step2, file.step1, '-overwrite', '-progress', '--config ogr_interleaved_reading yes')
     
     # And now compose the actual ogr2ogr commands
     cmd1 = gsub('{val}', val, gsub('{key}', k, gsub('{region}', params$file.nm, osm.extract, perl=TRUE), perl=TRUE), perl=TRUE)
@@ -364,7 +362,7 @@ for (r in r.iter) {
   
   cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";',"\n")
   cmd = c(cmd, 'echo "     Writing to', dev.out.path,'";',"\n")
-  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"d_over\", (\"d_over\"/area(t1.geometry))*100 as \"d_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', '--config ogr_interleaved_reading yes', dev.out.path, get.path(paths$tmp,"Grid-Dev.vrt"),';',"\n")
+  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"d_over\", (\"d_over\"/area(t1.geometry))*100 as \"d_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', '-progress', '--config ogr_interleaved_reading yes', dev.out.path, get.path(paths$tmp,"Grid-Dev.vrt"),';',"\n")
   
   ###############
   # Then non-developable ones (much larger)
@@ -406,7 +404,7 @@ for (r in r.iter) {
   
   cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";',"\n")
   cmd = c(cmd, 'echo "     Writing to', ndev.out.path,'";',"\n")
-  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"nd_over\", (\"nd_over\"/area(t1.geometry))*100 as \"nd_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', '--config ogr_interleaved_reading yes', ndev.out.path, get.path(paths$tmp,"Grid-Non-Dev.vrt"),';',"\n")
+  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"nd_over\", (\"nd_over\"/area(t1.geometry))*100 as \"nd_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', '-progress', '--config ogr_interleaved_reading yes', ndev.out.path, get.path(paths$tmp,"Grid-Non-Dev.vrt"),';',"\n")
   
   write(paste(cmd, collapse=" "), file=script.sh, append=TRUE)
 }

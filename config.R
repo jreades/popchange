@@ -1,15 +1,7 @@
-# SETUP: the scripts expect the following dir
-# structure -- the data directories are not 
-# found in git because of the data volumes 
-# associated with extracting and processing 
-# OSM features.
-#
-# popchange/
-#   no-sync/ # Don't manage content here with Git
-#      OS/   # For Ordnance Survey data
-#      OSM/  # For OSM data
-#      land-polygons/ # Also OSM, but from different source
-#      processed/     # Outputs from gridding process at national and regional levels
+# SETUP: the setup script should be run to create the
+# directory structure set out below -- the data directories 
+# are not found in git because of the volumes associated
+# with extracting and processing OSM features.
 
 ########## Software Configuration
 # Where to find ogr2ogr -- this is the OSX location when installed
@@ -18,6 +10,10 @@ ogr.lib  = '/Library/Frameworks/GDAL.framework/Programs/ogr2ogr'
 ogr.info = '/Library/Frameworks/GDAL.framework/Programs/ogrinfo'
 
 ########## Regions Configuration
+# The source shapefiles taken from the Ordnance Survey:
+r.shp.countries = "CTRY_DEC_2011_UK_BGC.shp"
+r.shp.regions   = "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"
+
 # The strings here should match the Geofabrik OSM file name 
 # (allowing for %>% ucfirst these are England, Scotland, Wales).
 r.countries  <- c('England', 'Scotland', 'Wales', 'Northern Ireland')
@@ -114,13 +110,3 @@ roads.motorway.buffer   <- 1000              # Buffer to draw around roads to fi
 roads.main.buffer       <-  500
 roads.local.buffer      <-  150 
 roads.simplify          <-  100              # Simplify the roads before drawing the buffer (for performance)
-
-########## Sanity check -- we only need to run this once...
-if (! file.exists( get.path(paths$os, "CTRY_DEC_2011_UK_BGC.shp") )) {
-  cat(paste(replicate(45, "="), collapse = ""), "\n")
-  cat(paste(replicate(45, "="), collapse = ""), "\n")
-  cat("Have you run the ni-preprocessing.R script yet?\n")
-  cat("This is critical to the remaining processes!\n")
-  cat(paste(replicate(45, "="), collapse = ""), "\n")
-  cat(paste(replicate(45, "="), collapse = ""), "\n")
-}

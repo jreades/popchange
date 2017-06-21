@@ -17,9 +17,7 @@ source('funcs.R')
 overwrite=TRUE
 
 library(dtplyr)
-library(ggplot2)
 library(zoo)
-library(DBI)
 library(spatstat) # Required for owin
 library(sp)       # Required for KDE process
 require(rgdal)    # Required for readOGR to get around issue with sf and running KDE

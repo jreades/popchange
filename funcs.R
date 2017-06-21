@@ -1,11 +1,17 @@
+library(sf) # Required in order to use functions below
+
 .simpleCap <- function(x) {
   s <- strsplit(tolower(x), "[_ ]")[[1]]
   paste(toupper(substring(s, 1, 1)), substring(s, 2),
         sep = "", collapse = "_")
 }
 
+#' Utility function to delete a shapefile since 
+#' they are actually composed of up to six separate
+#' files (QIX are used as spatial indexes by OGR).
+#' @param s Full path to shapefile (.shp) to be deleted
 delete.shp <- function(s) {
-  for (ext in c('shp','sbx','dbf','prj','shx')) {
+  for (ext in c('shp','sbx','dbf','prj','shx','qix')) {
     fn = sub('shp$',ext,s)
     if (file.exists(fn)) {
       file.remove(fn)
@@ -13,27 +19,41 @@ delete.shp <- function(s) {
   }
 }
 
-make.box <- function(s) {
+#' Create a bounding box from a shapefile that rounds 
+#' down on xmin/ymin and up on xmax/ymax according to a 
+#' specified amount.
+#' @param s Source shapefile from which to create a bounding box
+#' @param proj Optional: projection (defaults to 27700 BNG)
+#' @param a Optional: anchor to specifying rounding amount (defaults to g.anchor from config file)
+#' @return a bounding box sf object
+make.box <- function(s, proj=27700, a=g.anchor) {
   r.ext = st_bbox(s)
-  x.min = floor(r.ext['xmin']/g.anchor)*g.anchor
-  y.min = floor(r.ext['ymin']/g.anchor)*g.anchor
-  x.max = ceiling(r.ext['xmax']/g.anchor)*g.anchor
-  y.max = ceiling(r.ext['ymax']/g.anchor)*g.anchor
+  x.min = floor(r.ext['xmin']/a)*a
+  y.min = floor(r.ext['ymin']/a)*a
+  x.max = ceiling(r.ext['xmax']/a)*a
+  y.max = ceiling(r.ext['ymax']/a)*a
   
   # Create a box for this
   box <- st_polygon(list(rbind(c(x.min,y.min),c(x.max,y.min),c(x.max,y.max),c(x.min,y.max),c(x.min,y.min))))
-  box <- st_sfc(box) %>% st_set_crs(NA) %>% st_set_crs(27700)
+  box <- st_sfc(box) %>% st_set_crs(NA) %>% st_set_crs(proj)
   box
 }
 
-buffer.region <- function(p) {
+#' Retrieve the buffered boundary for a region from the appropriate
+#' shapefile -- for NI, Scotland and Wales this will be the
+#' UK file, for England this will be Regions file.
+#' @param r Region name (e.g. 'Northern Ireland', 'England South West', 'Scotland')
+#' @param simplify Threshold for simplifying prior to buffering (defaults to r.simplify from config file)
+#' @param buffer Amount by which to buffer area polygon (defaults to r.buffer)
+#' @return sfc object containing simplified, buffered regional outline
+buffer.region <- function(p, simplify=r.simplify, buffer=r.buffer) {
   
   params = p
   
   if (params$country.nm %in% c('Northern Ireland','Wales','Scotland')) { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
-    shp <- st_read(get.path(paths$os, "CTRY_DEC_2011_UK_BGC.shp"), stringsAsFactors=TRUE, quiet=TRUE)
+    shp <- st_read(get.path(paths$os, r.shp.countries), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection (issues with reading in even properly projected files)
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -45,7 +65,7 @@ buffer.region <- function(p) {
   } else { # Filtering for regions
     cat("  Processing internal GoR region:", params$region.nm,"\n") 
     
-    shp <- st_read(get.path(paths$os, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), stringsAsFactors=TRUE, quiet=TRUE)
+    shp <- st_read(get.path(paths$os, r.shp.regions), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -59,10 +79,15 @@ buffer.region <- function(p) {
   
   # Region-Buffered shape
   cat("  Simplifying and buffering region to control for edge effects.")
-  r.buff = st_buffer(st_simplify(r.shp, r.simplify), r.buffer)
+  r.buff = st_buffer(st_simplify(r.shp, simplify), buffer)
   r.buff
 }
 
+#' Retrieve the boundary for a region from the appropriate
+#' shapefile -- for NI, Scotland and Wales this will be the
+#' UK file, for England this will be Regions file.
+#' @param r Region name (e.g. 'Northern Ireland', 'England South West', 'Scotland')
+#' @return sfc object containg outline of region
 get.region <- function(p) {
   
   params = p
@@ -70,7 +95,7 @@ get.region <- function(p) {
   if (params$country.nm %in% c('Northern Ireland','Wales','Scotland')) { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
-    shp <- st_read(get.path(paths$os, "CTRY_DEC_2011_UK_BGC.shp"), stringsAsFactors=TRUE, quiet=TRUE)
+    shp <- st_read(get.path(paths$os, r.shp.countries), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection (issues with reading in even properly projected files)
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -82,7 +107,7 @@ get.region <- function(p) {
   } else { # Filtering for regions
     cat("  Processing internal GoR region:", params$region.nm,"\n") 
     
-    shp <- st_read(get.path(paths$os, "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"), stringsAsFactors=TRUE, quiet=TRUE)
+    shp <- st_read(get.path(paths$os, r.shp.regions), stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -97,6 +122,11 @@ get.region <- function(p) {
   r.shp
 }
 
+#' Simple utility function to set up the parameter environment
+#' used across the whole set of scripts -- this helps to ensure
+#' that files are read/written to the same place, and that we can 
+#' pick the data we need out of the source shapefiles.
+#' @param r Region name (e.g. 'Northern Ireland', 'England South West', 'Scotland')
 set.params <- function(r) {
   the.country <- strsplit(r, " ")[[1]][1]
   the.region  <- paste(strsplit(r, " ")[[1]][-1], collapse=" ")
@@ -118,16 +148,50 @@ set.params <- function(r) {
   params
 }
 
-get.path <- function(p, fn) {
-  paste( c(p,fn), collapse="/")
+#' Simple utility function to return a full file path
+#' from a list of path elements and a filename.
+#' @param p The path (as list)
+#' @param fn The file name (as a string, preferrably)
+#' @param c Optional: the concatentation var to use (defaults to auto-detecting platform)
+get.path <- function(p, fn, c=NULL) {
+  if (Sys.info()[['sysname']] == 'Windows') {
+    c="\\"
+  } else {
+    c="/"
+  }
+  paste( c(p,fn), collapse=c)
 }
 
-# This need sanitising -- it might be possible to pass
-# in arbitrary code...
-get.file <- function(..., t=NULL, p=params) {
+#' Generate a file name using a mix of a template (t) and 
+#' any other parameters passed to the function.
+#'
+#' In order to ensure that file outputs and inputs are named
+#' in a predictable way, and to improve legibility of
+#' the code, this function takes a template string and 
+#' interpolates a number of environment and local variables
+#' into the template. If no template string is passed then
+#' the parameters are simply concatenated and returned.
+#' 
+#' Templates are of the form "{env1}-{var2}-Grid-*.shp". In this
+#' case env1 is a key from the params environment (by default the
+#' one used in this set of scripts, but can be overridden by passing
+#' in a parameter p) and var2 is simply a variable accessible by the
+#' function. * is where any other strings passed to the function 
+#' would be interpolated using the concatenation parameter c (which
+#' defaults to '_' as being the most system-friendly option).
+#' 
+#' This need sanitising -- it might be possible to pass
+#' in arbitrary code and this currently uses eval() as I can't 
+#' figure out how the quote() approach works.
+#' @param t The template string to be used (if any)
+#' @param p Optional: the environment from which to extract key/value pairs
+#' @param c Optional: the concatentation character to use
+#' @param ... Optional: any other values to be interpolated where there is a '*' in the string
+#' @return A string suitable for using as a file name
+get.file <- function(..., t=NULL, p=params, c="_") {
   
   if (is.null(t)) { # If no template then just collapse using least problematic char
-    rt = paste( list(...), collapse="_")
+    rt = paste( list(...), collapse=c)
   
   } else { # Template that needs interpolation
     
@@ -142,8 +206,8 @@ get.file <- function(..., t=NULL, p=params) {
     for (hit in unlist(v)) {
       
       # Is it in the params environment?
-      if (sum(grepl(hit, ls(params))) > 0) {
-        rt = gsub(paste("\\{",hit,"\\}",sep=""), eval(parse(text=paste("params$",hit,sep=""))), rt, perl=TRUE)
+      if (sum(grepl(hit, ls(p))) > 0) {
+        rt = gsub(paste("\\{",hit,"\\}",sep=""), eval(parse(text=paste("p$",hit,sep=""))), rt, perl=TRUE)
       
       # Raw variable name?
       } else {
@@ -152,8 +216,18 @@ get.file <- function(..., t=NULL, p=params) {
     }
     
     # Interpolate anything else if there's a '*'
-    rest = paste( list(...), collapse="_")
+    rest = paste( list(...), collapse=c)
     rt = gsub("\\*",rest,rt)
   }
   rt
+}
+
+########## Sanity check -- we only need to run this on startup...
+if (! file.exists( get.path(paths$os, "CTRY_DEC_2011_UK_BGC.shp") )) {
+  cat(paste(replicate(45, "="), collapse = ""), "\n")
+  cat(paste(replicate(45, "="), collapse = ""), "\n")
+  cat("Have you run the ni-preprocessing.R script yet?\n")
+  cat("This is critical to the remaining processes!\n")
+  cat(paste(replicate(45, "="), collapse = ""), "\n")
+  cat(paste(replicate(45, "="), collapse = ""), "\n")
 }

@@ -155,7 +155,7 @@ for (r in r.iter) {
   cat("   Done.")
   
   cat("   Writing cell intersection values to shapefile.","\n")
-  roads.fn = get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-Roads-Grid.shp"))
+  roads.fn = get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-Road-Grid.shp"))
   st_write(grd, roads.fn, quiet=TRUE, delete_dsn=TRUE)
   rm(grd)
 }
