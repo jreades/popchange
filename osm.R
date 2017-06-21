@@ -297,6 +297,11 @@ library(Hmisc)
 
 script.sh = 'script.sh'
 file.remove(script.sh)
+
+write('#!/bin/bash', file=script.sh, append=TRUE)
+write('now=`date "+%Y-%m-%d %H:%M:%S"`;', file=script.sh, append=TRUE)
+write("echo 'Starting '$now;", file=script.sh, append=TRUE)
+
 for (r in r.iter) {
   
   params = set.params(r)
@@ -361,8 +366,12 @@ for (r in r.iter) {
   cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",mrg.dev.fn,perl=TRUE)), mrg.dev.path, ';',"\n")
   
   cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";',"\n")
-  cmd = c(cmd, 'echo "     Writing to', dev.out.path,'";',"\n")
+  cmd = c(cmd, 'echo "      Writing to', dev.out.path,'";',"\n")
+  cmd = c(cmd, 'now=`date "+%Y-%m-%d %H:%M:%S"`;',"\n")
+  cmd = c(cmd, "echo '      Starting calculations '$now;","\n")
   cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"d_over\", (\"d_over\"/area(t1.geometry))*100 as \"d_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', '-progress', '--config ogr_interleaved_reading yes', dev.out.path, get.path(paths$tmp,"Grid-Dev.vrt"),';',"\n")
+  cmd = c(cmd, 'now=`date "+%Y-%m-%d %H:%M:%S"`;',"\n")
+  cmd = c(cmd, "echo '      Done calculating: '$now;","\n\n")
   
   ###############
   # Then non-developable ones (much larger)
@@ -404,7 +413,11 @@ for (r in r.iter) {
   
   cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";',"\n")
   cmd = c(cmd, 'echo "     Writing to', ndev.out.path,'";',"\n")
+  cmd = c(cmd, 'now=`date "+%Y-%m-%d %H:%M:%S"`;',"\n")
+  cmd = c(cmd, "echo '      Starting calculations '$now;","\n")
   cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"nd_over\", (\"nd_over\"/area(t1.geometry))*100 as \"nd_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', '-progress', '--config ogr_interleaved_reading yes', ndev.out.path, get.path(paths$tmp,"Grid-Non-Dev.vrt"),';',"\n")
+  cmd = c(cmd, 'now=`date "+%Y-%m-%d %H:%M:%S"`;',"\n")
+  cmd = c(cmd, "echo '      Done calculating: '$now;","\n")
   
   write(paste(cmd, collapse=" "), file=script.sh, append=TRUE)
 }
