@@ -148,6 +148,7 @@ for (r in r.iter) {
     # going to sick with the "{...}" syntax instead
     # of just pasting it all together like a sane 
     # person.
+    file.clip  = get.path(paths$osm, get.file(t="{file.nm}-clip.shp"))
     file.step1 = get.path(paths$tmp, get.file(t="{file.nm}-*-step1.shp",k))
     file.step2 = get.path(paths$tmp, get.file(t="{file.nm}-*-step2.shp",k))
     
