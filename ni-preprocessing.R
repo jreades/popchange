@@ -32,6 +32,13 @@ for (ext in c('shp','dbf','shx','sbn','sbx','prj')) {
   file.copy(gsub('shp$',ext,os.source), gsub('shp$',ext,merge.target)) 
 }
 
+# Copy the regions file to the right place
+regions.src  = get.path(paths$os.src,c("Regions_December_2016_Generalised_Clipped_Boundaries_in_England","Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"))
+regions.dest = get.path(paths$os,"Regions_England.shp")
+for (ext in c('shp','dbf','shx','sbn','sbx','prj')) {
+  file.copy(gsub('shp$',ext,regions.src), gsub('shp$',ext,regions.dest)) 
+}
+
 # Reproject the NI data
 cmd1 = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:29901', merge.source, raw.source, '-overwrite', '--config ogr_interleaved_reading yes',';')
 cat(ogr.lib, cmd1,"\n")

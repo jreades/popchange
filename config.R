@@ -33,8 +33,8 @@ paths$grid.src  = c(getwd(),paths$root,'src','OSGB-Grids')
 
 ########## Regions Configuration
 # The source shapefiles taken from the Ordnance Survey:
-r.shp.countries = get.path(paths$os,"Countries-UK.shp")
-r.shp.regions   = get.path(paths$os,"Regions-England.shp")
+r.shp.countries = get.path(paths$os,"Countries_UK.shp")
+r.shp.regions   = get.path(paths$os,"Regions_England.shp")
 
 # The strings here should match the Geofabrik OSM file name 
 # (allowing for %>% ucfirst these are England, Scotland, Wales).
