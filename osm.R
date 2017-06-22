@@ -275,7 +275,8 @@ for (r in r.iter) {
 
 cat(paste(replicate(45, "="), collapse = ""), "\n")
 cat(paste(replicate(45, "="), collapse = ""), "\n")
-cat("You now need to run this in the Terminal:\n>\t",'/bin/sh',merge.sh,"\n")
+cat("You now need to run this in the Terminal:\n>")
+cat("\t",'/bin/sh',merge.sh,"\n")
 #system2('/bin/sh', merge.sh, wait=TRUE)
 #cat("Merge complete","\n")
 cat(paste(replicate(45, "="), collapse = ""), "\n")

@@ -20,6 +20,7 @@ But there is an _additional_ issue lurking in the background, and that the need 
 brew doctor # And deal with any major issues (e.g. alert about Anaconda, see below)
 brew prune
 brew update
+brew tap osgeo/osgeo4mac && brew tap --repair
 brew install postgis --build-from-source # To get liblwgeom links sorted
 brew install homebrew/science/netcdf
 brew install jasper
@@ -43,11 +44,19 @@ export LD_LIBRARY_PATH=/usr/local/opt/gdal2/lib:$LD_LIBRARY_PATH
 
 Note the commenting out of the anaconda path _while installing and configuring gdal via brew_.
 
-Finally, I had to reinstall `rgeos` and `rgdal` (and added `sp` for good measure) as well as `sf` to get everything working. When these libraries are imported you should see a version of GEOS >= 3.5 and GDAL > 2.0 being used. I am no longer 100% certain, but think that I might have had to install `sf` via:
+Finally, I had to reinstall `rgeos` and `rgdal` (and added `sp` for good measure) to get everything working. 
+```
+install.packages('rgdal')
+install.packages('rgeos')
+install.packages('sp')
+```
+
+When these libraries are imported you can install `sf` via:
 ```
 library(devtools)
 devtools::install_github('edzer/sfr')
 ```
+You should see a version of GEOS >= 3.5 and GDAL > 2.0 being used when `sf` is imported.
 
 **_If you are starting this with a clean system I'd appreciate an update on which approach worked for you!_**
 
