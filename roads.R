@@ -81,7 +81,7 @@ for (r in r.iter) {
     # Get the first tile from the list and 
     # extract only the roads falling within
     # the regional buffer
-    rds.fn    <- get.path(base.path, get.file("*_RoadLink.shp",grid.tiles[1]))
+    rds.fn    <- get.path(base.path, get.file(t="*_RoadLink.shp",grid.tiles[1]))
     rds       <- st_read(rds.fn, quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
     
     # Remove functions we're not interested in
@@ -95,29 +95,33 @@ for (r in r.iter) {
     # extract only the roads falling within
     # the regional buffer
     for (g in grid.tiles[2:length(grid.tiles)]) {
-      rds.fn  <- get.path(base.path, get.file("*_RoadLink.shp",g))
-      rds.shp <- st_read(rds.fn, quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
+      rds.fn  <- get.path(base.path, get.file(t="*_RoadLink.shp",g))
       
-      # Remove functions we're not interested in
-      rds.shp  <- subset(rds.shp, rds.shp$function. %nin% c('Restricted Local Access Road', 'Secondary Access Road'))
-      
-      # Save the output of st_within and then 
-      # convert that to a logical vector to
-      # subset
-      cat("  Selecting roads in",g,"falling within regional buffer.","\n")
-      is.within <- rds.shp %>% st_intersects(rb.shp) %>% lengths()
-      rds.shp   <- subset(rds.shp, is.within==1)
-      
-      rds <- rbind(rds, rds.shp)
-      rm(rds.shp, is.within, rds.fn)
+      if (file.exists(rds.fn)) {
+        rds.shp <- st_read(rds.fn, quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
+        
+        # Remove functions we're not interested in
+        rds.shp  <- subset(rds.shp, rds.shp$function. %nin% c('Restricted Local Access Road', 'Secondary Access Road'))
+        
+        # Save the output of st_within and then 
+        # convert that to a logical vector to
+        # subset
+        cat("  Selecting roads in",g,"falling within regional buffer.","\n")
+        is.within <- rds.shp %>% st_intersects(rb.shp) %>% lengths()
+        rds.shp   <- subset(rds.shp, is.within==1)
+        
+        rds <- rbind(rds, rds.shp)
+        rm(rds.shp, is.within)
+      }
+      rm(rds.fn)
     }
     cat("   Done assembling roads data for region...","\n")
     
     for (c in (grep("src", ls(osni.map), value=TRUE))) {
-      cat(c,"\n")
       t = eval(parse(text=paste("openroads.map$",sub(".src",".target",c,perl=TRUE),sep="")))
       eval(parse(text=paste("rds$",t," = rds$function. %in% openroads.map$",c,sep="")))
     }
+    cat("   Done mapping functions on to classes.","\n")
   }
   
   #########################
@@ -145,7 +149,7 @@ for (r in r.iter) {
   
   cat("   Calculating intersections with grid.","\n")
   for (r in road.classes) {
-    cat("     Buffering around",r,"classs roads.","\n")
+    cat("     Buffering around",r,"classs roads (",eval(parse(text=paste("roads.",tolower(r),".buffer",sep=""))),"m).","\n")
     rds.buff <- st_buffer(st_simplify(subset(rds, rds[[r]]), roads.simplify), eval(parse(text=paste("roads.",tolower(r),".buffer",sep=""))))
     
     cell.intersects <- grd %>% st_intersects(rds.buff) %>% lengths()

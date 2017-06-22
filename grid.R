@@ -7,8 +7,6 @@ rm(list = ls())
 source('funcs.R')
 source('config.R')
 
-library(sf)      # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
-
 for (r in r.iter) {
   
   params = set.params(r)
