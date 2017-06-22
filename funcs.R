@@ -53,19 +53,19 @@ buffer.region <- function(p, simplify=r.simplify, buffer=r.buffer) {
   if (params$country.nm %in% c('Northern Ireland','Wales','Scotland')) { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
-    shp <- st_read(get.path(paths$os, r.shp.countries), stringsAsFactors=TRUE, quiet=TRUE)
+    shp <- st_read(r.shp.countries, stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection (issues with reading in even properly projected files)
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
     #print(st_crs(shp)) # Check reprojection
     
     # Extract country from shapefile
-    r.shp <- shp[shp$CTRY11NM==params$country.nm,]
+    r.shp <- shp[shp$ctry16nm==params$country.nm,]
     
   } else { # Filtering for regions
     cat("  Processing internal GoR region:", params$region.nm,"\n") 
     
-    shp <- st_read(get.path(paths$os, r.shp.regions), stringsAsFactors=TRUE, quiet=TRUE)
+    shp <- st_read(r.shp.regions, stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -95,19 +95,19 @@ get.region <- function(p) {
   if (params$country.nm %in% c('Northern Ireland','Wales','Scotland')) { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
-    shp <- st_read(get.path(paths$os, r.shp.countries), stringsAsFactors=TRUE, quiet=TRUE)
+    shp <- st_read(r.shp.countries, stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection (issues with reading in even properly projected files)
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
     #print(st_crs(shp)) # Check reprojection
     
     # Extract country from shapefile
-    r.shp <- shp[shp$CTRY11NM==params$country.nm,]
+    r.shp <- shp[shp$ctry16nm==params$country.nm,]
     
   } else { # Filtering for regions
     cat("  Processing internal GoR region:", params$region.nm,"\n") 
     
-    shp <- st_read(get.path(paths$os, r.shp.regions), stringsAsFactors=TRUE, quiet=TRUE)
+    shp <- st_read(r.shp.regions, stringsAsFactors=TRUE, quiet=TRUE)
     
     # Set projection
     shp <- shp %>% st_set_crs(NA) %>% st_set_crs(27700)
@@ -220,14 +220,4 @@ get.file <- function(..., t=NULL, p=params, c="_") {
     rt = gsub("\\*",rest,rt)
   }
   rt
-}
-
-########## Sanity check -- we only need to run this on startup...
-if (! file.exists( get.path(paths$os, "CTRY_DEC_2011_UK_BGC.shp") )) {
-  cat(paste(replicate(45, "="), collapse = ""), "\n")
-  cat(paste(replicate(45, "="), collapse = ""), "\n")
-  cat("Have you run the ni-preprocessing.R script yet?\n")
-  cat("This is critical to the remaining processes!\n")
-  cat(paste(replicate(45, "="), collapse = ""), "\n")
-  cat(paste(replicate(45, "="), collapse = ""), "\n")
 }

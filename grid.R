@@ -4,9 +4,8 @@
 # of England.
 ########################################
 rm(list = ls())
-
-source('config.R')
 source('funcs.R')
+source('config.R')
 
 library(sf)      # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
 

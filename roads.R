@@ -1,4 +1,3 @@
-rm(list = ls())
 #########################################
 # Sets an attribute on the appropriate regional 
 # grid to indicate whether a cell falls within 
@@ -8,10 +7,10 @@ rm(list = ls())
 # https://github.com/charlesroper/OSGB_Grids.
 # You should save the 100km grid to the Roads directory.
 ########################################
-source('config.R')
+rm(list = ls())
 source('funcs.R')
+source('config.R')
 
-library(sf) # Replaces sp and does away with need for several older libs (sfr == dev; sf == production)
 library(Hmisc) # For %nin%
 
 # Notice that these match the targets below --
@@ -44,7 +43,7 @@ for (r in r.iter) {
   cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
   
   if (r == 'Northern Ireland') {
-    full.path = get.path(paths$roads,'OSNI_Open_Data__50k_Transport_Line','OSNI_Open_Data__50k_Transport_Line.shp')
+    full.path = get.path(paths$osni.src,'OSNI_Open_Data__50k_Transport_Line','OSNI_Open_Data__50k_Transport_Line.shp')
     rds <- st_read(full.path, quiet=TRUE)
     rds <- rds%>% st_set_crs(NA) %>% st_set_crs(29901)
     rds <- st_transform(rds, 27700)
@@ -70,14 +69,14 @@ for (r in r.iter) {
     # do this by using the 100km reference downloaded
     # from GitHub. You can bin the rest.
     rb.shp    <- buffer.region(params)
-    osgb.grid <- st_read( get.path(paths$roads,'OSGB_Grid_100km.shp'), quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
+    osgb.grid <- st_read( get.path(paths$grid.src,c('OSGB_Grids-master','Shapefile','OSGB_Grid_100km.shp')), quiet=TRUE, stringsAsFactors=FALSE) %>% st_set_crs(NA) %>% st_set_crs(27700)
     
     grid.intersects <- osgb.grid %>% st_intersects(rb.shp) %>% lengths()
     grid.tiles      <- sort(osgb.grid$TILE_NAME[ which(grid.intersects==1) ])
     rm(osgb.grid, grid.intersects)
     cat("   Loading roads from tiles",grid.tiles,"\n")
     
-    base.path = c(paths$roads,'oproad_essh_gb','data')
+    base.path = c(paths$os.src,'oproad_essh_gb','data')
     
     # Get the first tile from the list and 
     # extract only the roads falling within

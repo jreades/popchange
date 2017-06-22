@@ -32,11 +32,9 @@
 # where you want to start processing the data. 
 ######################################################
 ######################################################
-
 rm(list = ls()) # Clear the workspace
-
-source('config.R')
 source('funcs.R')
+source('config.R')
 
 ######################################################
 ######################################################
@@ -83,7 +81,7 @@ for (r in r.iter) {
   e.st = st_transform(e, '+init=epsg:4326')
   
   # Work out the I/O path names
-  file.osm   = get.path(paths$osm, get.file(t="{osm}-lastest.osm.pbf"))
+  file.osm   = get.path(paths$osm.src, get.file(t="{osm}-lastest.osm.pbf"))
   file.clip  = get.path(paths$osm, get.file(t="{file.nm}-clip.shp"))
   
   # And begin to build the clipping query to execute
@@ -352,9 +350,9 @@ for (r in r.iter) {
   mrg.dev.path,
   gsub('.shp','',mrg.dev.fn,perl=TRUE)
   )
-  write(vrt.text, file=get.path(paths$tmp,"Grid-Dev.vrt") )
+  write(vrt.text, file=get.path(paths$osm,get.file(t="{file.nm}-{g.resolution}-Dev-Grid.vrt")))
   
-  dev.out.path = get.path(paths$int, get.file(t="{file.nm}-{g.resolution}-Dev-Grid.shp"))
+  dev.out.path = get.path(paths$int,get.file(t="{file.nm}-{g.resolution}-Dev-Grid.shp"))
   
   
   cmd = c()
@@ -377,7 +375,7 @@ for (r in r.iter) {
   # Then non-developable ones (much larger)
   mrg.non = subset(mrg[mrg$UseClass %nin% lu,])
   
-  mrg.ndev.fn   = gsub('{region}',params$file.nm,'{region}-merge-nondevelopable.shp', perl=TRUE)
+  mrg.ndev.fn   = get.file(t="{file.nm}-*-nondevelopable.shp",'merge')
   mrg.ndev.path = get.path(paths$tmp,mrg.ndev.fn)
   mrg.ndev      = st_union(subset(mrg[mrg$UseClass %nin% lu,]), by_feature=FALSE)
   st_write(mrg.ndev, mrg.ndev.path, quiet=TRUE, delete_dsn=TRUE)
@@ -400,9 +398,9 @@ for (r in r.iter) {
   mrg.ndev.path,
   gsub('.shp','',mrg.ndev.fn,perl=TRUE)
   )
-  write(vrt.text, file=get.path(paths$tmp,"Grid-Non-Dev.vrt") )
+  write(vrt.text, file=get.path(paths$osm,get.file(t="{file.nm}-{g.resolution}-Non-Dev-Grid.vrt")))
   
-  ndev.out.path = get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-Non-Dev-Grid.shp"))
+  ndev.out.path = get.path(paths$int,get.file(t="{file.nm}-{g.resolution}m-Non-Dev-Grid.shp"))
   
   # Already exists
   #cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",grid.fn,perl=TRUE),'";')

@@ -9,10 +9,32 @@
 ogr.lib  = '/Library/Frameworks/GDAL.framework/Programs/ogr2ogr'
 ogr.info = '/Library/Frameworks/GDAL.framework/Programs/ogrinfo'
 
+########## Data Storage Configuration
+# We assume that spatial data is stored under the current 
+# working directory but in a no-sync directory since these
+# files are enormous.
+paths = new.env()
+paths$root      = 'no-sync'
+paths$os        = c(getwd(),paths$root,'os')
+paths$osm       = c(getwd(),paths$root,'osm')
+paths$osni      = c(getwd(),paths$root,'osni')
+paths$nspl      = c(getwd(),paths$root,'nspl')
+paths$roads     = c(getwd(),paths$root,'roads')
+paths$grid      = c(getwd(),paths$root,'grid')
+paths$tmp       = c(getwd(),paths$root,'tmp')
+paths$voronoi   = c(getwd(),paths$root,'voronoi')
+paths$int       = c(getwd(),paths$root,'integration')
+paths$final     = c(getwd(),paths$root,'final')
+paths$os.src    = c(getwd(),paths$root,'src','OS')
+paths$osm.src   = c(getwd(),paths$root,'src','OSM')
+paths$nspl.src  = c(getwd(),paths$root,'src','NSPL')
+paths$osni.src  = c(getwd(),paths$root,'src','OSNI')
+paths$grid.src  = c(getwd(),paths$root,'src','OSGB-Grids')
+
 ########## Regions Configuration
 # The source shapefiles taken from the Ordnance Survey:
-r.shp.countries = "CTRY_DEC_2011_UK_BGC.shp"
-r.shp.regions   = "Regions_December_2016_Generalised_Clipped_Boundaries_in_England.shp"
+r.shp.countries = get.path(paths$os,"Countries-UK.shp")
+r.shp.regions   = get.path(paths$os,"Regions-England.shp")
 
 # The strings here should match the Geofabrik OSM file name 
 # (allowing for %>% ucfirst these are England, Scotland, Wales).
@@ -44,22 +66,6 @@ r.simplify     <- 500                        # Simplify the boundaries before dr
 # the bounding box for the region to the nearest... 'x' km?
 g.resolution   <- 250                        # Grid resolution (in metres)
 g.anchor       <- 5000                       # Anchor grid min/max x and y at nearest... (in metres)
-
-########## Data Storage Configuration
-# We assume that spatial data is stored under the current 
-# working directory but in a no-sync directory since these
-# files are enormous.
-paths = new.env()
-paths$root    = 'no-sync'
-paths$os      = c(getwd(),paths$root,'OS')
-paths$osm     = c(getwd(),paths$root,'OSM')
-paths$nspl    = c(getwd(),paths$root,'NSPL')
-paths$roads   = c(getwd(),paths$root,'Roads')
-paths$grid    = c(getwd(),paths$root,'grid')
-paths$tmp     = c(getwd(),paths$root,'tmp')
-paths$voronoi = c(getwd(),paths$root,'voronoi')
-paths$int     = c(getwd(),paths$root,'integration')
-paths$final   = c(getwd(),paths$root,'final')
 
 ########## OSM Configuration
 osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)
@@ -110,3 +116,13 @@ roads.motorway.buffer   <- 1000              # Buffer to draw around roads to fi
 roads.main.buffer       <-  500
 roads.local.buffer      <-  150 
 roads.simplify          <-  100              # Simplify the roads before drawing the buffer (for performance)
+
+########## Sanity check -- we only need to run this on startup...
+if (! file.exists( r.shp.countries )) {
+  cat(paste(replicate(45, "="), collapse = ""), "\n")
+  cat(paste(replicate(45, "="), collapse = ""), "\n")
+  cat("Have you run the ni-preprocessing.R script yet?\n")
+  cat("This is critical to the remaining processes!\n")
+  cat(paste(replicate(45, "="), collapse = ""), "\n")
+  cat(paste(replicate(45, "="), collapse = ""), "\n")
+}

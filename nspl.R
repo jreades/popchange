@@ -1,4 +1,3 @@
-rm(list = ls())
 #########################################
 # Process the NSPL (National Statistics Postcode
 # Lookup) data into several outputs that can be
@@ -11,8 +10,9 @@ rm(list = ls())
 # available testing and research.
 #
 ########################################
-source('config.R')
+rm(list = ls())
 source('funcs.R')
+source('config.R')
 
 overwrite=TRUE
 
@@ -27,7 +27,7 @@ library(sf)       # Replaces sp (usually) and does away with need for several ol
 # working directory but in a no-sync directory since these
 # files are enormous.
 raw.file  = 'NSPL_FEB_2017_UK.csv'
-raw.path  = c(paths$nspl,'NSPL_FEB_2017_UK','Data')
+raw.path  = c(paths$nspl.src,'NSPL_FEB_2017_UK','Data')
 
 # Load the data using fread from data.table package
 # (whichi is no longer explosed directly using dtplyr)

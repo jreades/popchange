@@ -2,27 +2,27 @@ rm(list = ls())
 # Merge the NI data into the OSGB data set to simplify
 # the processing of the UK data stack.
 
-source('config.R')
 source('funcs.R')
+source('config.R')
 
 params = set.params("Northern Ireland")
 
 # Create raster grid of arbitrary size:
 # https://gis.stackexchange.com/questions/154537/generating-grid-shapefile-in-r
 
-raw.source   = paste(c(os.path, "OSNI_Open_Data_Largescale_Boundaries__NI_Outline.shp"), collapse="/")
-merge.source = paste(c(os.path, "OSNI_Open_Data_Largescale_Boundaries__NI_Outline-reprojected.shp"), collapse="/")
-os.source    = paste(c(os.path, "CTRY_DEC_2011_GB_BGC.shp"), collapse="/")
-merge.target = paste(c(os.path, "CTRY_DEC_2011_UK_BGC.shp"), collapse="/")
-sql.update   = "UPDATE CTRY_DEC_2011_UK_BGC SET CTRY11NM='Northern Ireland' WHERE CTRY11NM IS NULL"
+raw.source   = get.path(paths$osni.src, c('OSNI_Open_Data_Largescale_Boundaries__NI_Outline',"OSNI_Open_Data_Largescale_Boundaries__NI_Outline.shp"))
+merge.source = get.path(paths$osni, "OSNI_Boundaries-reprojected.shp")
+os.source    = get.path(paths$os.src, c("Countries_December_2016_Generalised_Clipped_Boundaries_in_Great_Britain","Countries_December_2016_Generalised_Clipped_Boundaries_in_Great_Britain.shp"))
+merge.target = get.path(paths$os, "Countries_UK.shp")
+sql.update   = "UPDATE Countries_UK SET ctry16nm='Northern Ireland', objectid=4, ctry16cd='N92000005' WHERE ctry16nm IS NULL"
 
 ########### OSM Data
 # Copy the OSM file so that we can work with 
 # it more easily using the same approach as for
 # the rest of Great Britain
 file.copy(
-  paste(c(osm.path, "ireland-and-northern-ireland-latest.osm.pbf"), collapse="/"), 
-  paste(c(osm.path, paste(params$osm,"latest.osm.pbf",sep="-")), collapse="/")
+  paste(c(paths$osm.src, "ireland-and-northern-ireland-latest.osm.pbf"), collapse="/"), 
+  paste(c(paths$osm.src, paste(params$osm,"latest.osm.pbf",sep="-")), collapse="/")
 )
 
 ########### OS Data

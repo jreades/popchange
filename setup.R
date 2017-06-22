@@ -3,6 +3,7 @@
 # data that we want where it's easy to 
 # access.
 
+source('funcs.R')
 source('config.R')
 
 for (p in ls(paths)) {
