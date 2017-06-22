@@ -177,8 +177,8 @@ for (r in r.iter) {
       osm.union   = c(osm.union, gsub('{buffer}',osm.buffer,gsub('{simplify}',osm.simplify,'-sql "SELECT {key} AS UseClass, ST_Union(ST_Buffer(ST_Simplify(geometry,{simplify}),{buffer})) FROM \'{region}-{key}-step1\' GROUP BY {key}"',perl=TRUE),perl=TRUE))
     }
     
-    osm.extract = c(osm.extract, file.step1, file.clip, '-overwrite', '-progress', '--config ogr_interleaved_reading yes')
-    osm.union   = c(osm.union, file.step2, file.step1, '-overwrite', '-progress', '--config ogr_interleaved_reading yes')
+    osm.extract = c(osm.extract, file.step1, file.clip, '-overwrite', '--config ogr_interleaved_reading yes')
+    osm.union   = c(osm.union, file.step2, file.step1, '-overwrite', '--config ogr_interleaved_reading yes')
     
     # And now compose the actual ogr2ogr commands
     cmd1 = gsub('{val}', val, gsub('{key}', k, gsub('{region}', params$file.nm, osm.extract, perl=TRUE), perl=TRUE), perl=TRUE)
@@ -186,7 +186,7 @@ for (r in r.iter) {
     
     if (!file.exists(file.step1)) {
       cat("    Extracting and reprojecting data from clip file...\n")
-      cat("    This may take between 1-10 minutes.\n")
+      cat("    This may take between 1-5 minutes.\n")
       cat(ogr.lib, cmd1, "\n")
       system2(ogr.lib, cmd1, wait=TRUE)
     } else {
@@ -195,7 +195,7 @@ for (r in r.iter) {
     
     if (!file.exists(file.step2)) {
       cat("    Simplifying and performing union on OSM classes...\n")
-      cat("    This may take anywhere from 2-200 minutes.\n")
+      cat("    This may take anywhere from 2-20 minutes.\n")
       cat(ogr.lib, cmd2, "\n")
       system2(ogr.lib, cmd2, wait=TRUE)
     } else {
@@ -214,7 +214,7 @@ for (r in r.iter) {
 #         getting all sorts of errors. So, instead, what I've 
 #         done is to create a bash script that can be fired off
 #         by R (in case I'm wrong about this) or done manually
-#         (assuming that I am). I should also point out that 
+#         (assuming that I am not). I should also point out that 
 #         we create the foundation for the merge simply by 
 #         copying the first shapefile in the list to the new 
 #         location. I found that trying to create a brand new 
@@ -368,7 +368,7 @@ for (r in r.iter) {
   cmd = c(cmd, 'echo "      Writing to', dev.out.path,'";',"\n")
   cmd = c(cmd, 'now=`date "+%Y-%m-%d %H:%M:%S"`;',"\n")
   cmd = c(cmd, "echo '      Starting calculations '$now;","\n")
-  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"d_over\", (\"d_over\"/area(t1.geometry))*100 as \"d_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', '-progress', '--config ogr_interleaved_reading yes', dev.out.path, get.path(paths$tmp,"Grid-Dev.vrt"),';',"\n")
+  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"d_over\", (\"d_over\"/area(t1.geometry))*100 as \"d_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', '--config ogr_interleaved_reading yes', dev.out.path, get.path(paths$tmp,"Grid-Dev.vrt"),';',"\n")
   cmd = c(cmd, 'now=`date "+%Y-%m-%d %H:%M:%S"`;',"\n")
   cmd = c(cmd, "echo '      Done calculating: '$now;","\n\n")
   
@@ -414,7 +414,7 @@ for (r in r.iter) {
   cmd = c(cmd, 'echo "     Writing to', ndev.out.path,'";',"\n")
   cmd = c(cmd, 'now=`date "+%Y-%m-%d %H:%M:%S"`;',"\n")
   cmd = c(cmd, "echo '      Starting calculations '$now;","\n")
-  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"nd_over\", (\"nd_over\"/area(t1.geometry))*100 as \"nd_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', '-progress', '--config ogr_interleaved_reading yes', ndev.out.path, get.path(paths$tmp,"Grid-Non-Dev.vrt"),';',"\n")
+  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"nd_over\", (\"nd_over\"/area(t1.geometry))*100 as \"nd_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', '--config ogr_interleaved_reading yes', ndev.out.path, get.path(paths$tmp,"Grid-Non-Dev.vrt"),';',"\n")
   cmd = c(cmd, 'now=`date "+%Y-%m-%d %H:%M:%S"`;',"\n")
   cmd = c(cmd, "echo '      Done calculating: '$now;","\n")
   

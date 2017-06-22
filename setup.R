@@ -18,3 +18,4 @@ for (p in ls(paths)) {
 }
 
 # Would be nice to add code to download all of the requisite data as well... one day
+# download.file(url, destfile, method, quiet = FALSE, mode = "w"
