@@ -164,13 +164,18 @@ set.params <- function(r) {
 #' @param p The path (as list)
 #' @param fn The file name (as a string, preferrably)
 #' @param c Optional: the concatentation var to use (defaults to auto-detecting platform)
-get.path <- function(p, fn, c=NULL) {
+get.path <- function(p, fn=NULL, c=NULL) {
   if (Sys.info()[['sysname']] == 'Windows') {
     c="\\"
   } else {
     c="/"
   }
-  paste( c(p,fn), collapse=c)
+  if (is.null(fn)) {
+    path = paste( p, collapse=c)
+  } else {
+    path = paste( c(p,fn), collapse=c) 
+  }
+  path
 }
 
 #' Generate a file name using a mix of a template (t) and 
