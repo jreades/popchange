@@ -286,150 +286,20 @@ rm(merge.sh)
 
 ######################################################
 ######################################################
-# Step 4: Aggregate land uses into a couple of 
-#         major categories and then intersect 
-#         with the grid to calculate the usable
-#         area within each.
+# Step 4: Intersect the land uses taken from OSM
+#         with the grid and calculate the usable
+#         area taken up by each within each cell.
 ######################################################
 ######################################################
 cat("Starting integration with grid...","\n")
-library(Hmisc)
-
-script.sh = 'script.sh'
-file.remove(script.sh)
-
-write('#!/bin/bash', file=script.sh, append=TRUE)
-write('now=`date "+%Y-%m-%d %H:%M:%S"`;', file=script.sh, append=TRUE)
-write("echo 'Starting '$now;", file=script.sh, append=TRUE)
-
-for (r in r.iter) {
-  
-  params = set.params(r)
-  
-  cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
-  
-  #cat("  Loading grid with resolution",g.resolution,"m.","\n")
-  grid.fn   = get.file(t="{file.nm}-{g.resolution}m-Grid.shp")
-  grid.path = get.path(paths$grid, grid.fn)
-  
-  #cat("  Loading merged land use shapefile.","\n")
-  merged.fn   = get.file(t="{file.nm}-merge.shp")
-  merged.path = get.path(paths$osm, merged.fn)
-  
-  mrg <- st_read(merged.path, quiet=TRUE)
-  mrg <- mrg %>% st_set_crs(NA) %>% st_set_crs(27700)
-  
-  rm(merged.fn, merged.path)
-  
-  # Now we need to process the land uses
-  # separately based on whether they are
-  # conceivably 'developlable' (e.g. farmyard)
-  # or not (e.g. reservoir).
-  lu  <- osm.classes.developable
-  
-  ###############
-  # Developable land use classes first
-  mrg.dev.fn   = get.file(t="{file.nm}-*-developable.shp",'merge')
-  mrg.dev.path = get.path(paths$tmp,mrg.dev.fn)
-  mrg.dev      = st_union(subset(mrg[mrg$UseClass %in% lu,]), by_feature=FALSE)
-  st_write(mrg.dev, mrg.dev.path, quiet=TRUE, delete_dsn=TRUE)
-  
-  # Create a VRT file so that we can effectively 
-  # refer to the layers that we need without needing
-  # really long/escaped layer names.
-  vrt.text <- sprintf('<OGRVRTDataSource>
-  <OGRVRTLayer name="grid">
-    <SrcDataSource>%s</SrcDataSource>
-    <SrcLayer>%s</SrcLayer>
-  </OGRVRTLayer>
-  <OGRVRTLayer name="osm">
-    <SrcDataSource>%s</SrcDataSource>
-    <SrcLayer>%s</SrcLayer>
-  </OGRVRTLayer>
-</OGRVRTDataSource>',
-  grid.path,
-  gsub(".shp","",grid.fn,perl=TRUE),
-  mrg.dev.path,
-  gsub('.shp','',mrg.dev.fn,perl=TRUE)
-  )
-  write(vrt.text, file=get.path(paths$osm,get.file(t="{file.nm}-{g.resolution}-Dev-Grid.vrt")))
-  
-  dev.out.path = get.path(paths$int,get.file(t="{file.nm}-{g.resolution}-Dev-Grid.shp"))
-  
-  
-  cmd = c()
-  
-  cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",grid.fn,perl=TRUE),'";',"\n")
-  cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",grid.fn,perl=TRUE)), grid.path, ';',"\n")
-  
-  cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",mrg.dev.fn,perl=TRUE),'";',"\n")
-  cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",mrg.dev.fn,perl=TRUE)), mrg.dev.path, ';',"\n")
-  
-  cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";',"\n")
-  cmd = c(cmd, 'echo "      Writing to', dev.out.path,'";',"\n")
-  cmd = c(cmd, 'now=`date "+%Y-%m-%d %H:%M:%S"`;',"\n")
-  cmd = c(cmd, "echo '      Starting calculations '$now;","\n")
-  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"d_over\", (\"d_over\"/area(t1.geometry))*100 as \"d_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', '--config ogr_interleaved_reading yes', dev.out.path, get.path(paths$tmp,"Grid-Dev.vrt"),';',"\n")
-  cmd = c(cmd, 'now=`date "+%Y-%m-%d %H:%M:%S"`;',"\n")
-  cmd = c(cmd, "echo '      Done calculating: '$now;","\n\n")
-  
-  ###############
-  # Then non-developable ones (much larger)
-  mrg.non = subset(mrg[mrg$UseClass %nin% lu,])
-  
-  mrg.ndev.fn   = get.file(t="{file.nm}-*-nondevelopable.shp",'merge')
-  mrg.ndev.path = get.path(paths$tmp,mrg.ndev.fn)
-  mrg.ndev      = st_union(subset(mrg[mrg$UseClass %nin% lu,]), by_feature=FALSE)
-  st_write(mrg.ndev, mrg.ndev.path, quiet=TRUE, delete_dsn=TRUE)
-  
-  # Create a VRT file so that we can effectively 
-  # refer to the layers that we need without needing
-  # really long/escaped layer names.
-  vrt.text <- sprintf('<OGRVRTDataSource>
-  <OGRVRTLayer name="grid">
-    <SrcDataSource>%s</SrcDataSource>
-    <SrcLayer>%s</SrcLayer>
-  </OGRVRTLayer>
-  <OGRVRTLayer name="osm">
-    <SrcDataSource>%s</SrcDataSource>
-    <SrcLayer>%s</SrcLayer>
-  </OGRVRTLayer>
-</OGRVRTDataSource>',
-  grid.path,
-  gsub(".shp","",grid.fn,perl=TRUE),
-  mrg.ndev.path,
-  gsub('.shp','',mrg.ndev.fn,perl=TRUE)
-  )
-  write(vrt.text, file=get.path(paths$osm,get.file(t="{file.nm}-{g.resolution}-Non-Dev-Grid.vrt")))
-  
-  ndev.out.path = get.path(paths$int,get.file(t="{file.nm}-{g.resolution}m-Non-Dev-Grid.shp"))
-  
-  # Already exists
-  #cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",grid.fn,perl=TRUE),'";')
-  #cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",grid.fn,perl=TRUE)), grid.path, ';',"\n")
-  
-  cmd = c(cmd, 'echo "   Creating spatial index:',gsub(".shp","",mrg.ndev.fn,perl=TRUE),'";',"\n")
-  cmd = c(cmd, ogr.info, sprintf("-sql 'CREATE SPATIAL INDEX ON \"%s\"'",gsub(".shp","",mrg.ndev.fn,perl=TRUE)), mrg.ndev.path, ';',"\n")
-  
-  cmd = c(cmd, 'echo "   Creating intersection and calculating overlapping area...";',"\n")
-  cmd = c(cmd, 'echo "     Writing to', ndev.out.path,'";',"\n")
-  cmd = c(cmd, 'now=`date "+%Y-%m-%d %H:%M:%S"`;',"\n")
-  cmd = c(cmd, "echo '      Starting calculations '$now;","\n")
-  cmd = c(cmd, ogr.lib, '-dialect sqlite', "-sql 'SELECT t1.id, t1.geometry, area(st_intersection(t1.geometry,t2.geometry)) as \"nd_over\", (\"nd_over\"/area(t1.geometry))*100 as \"nd_pct_over\" FROM grid t1, osm t2 WHERE st_intersects(t1.geometry,t2.geometry)'", '-f "ESRI Shapefile"', '-overwrite', '--config ogr_interleaved_reading yes', ndev.out.path, get.path(paths$tmp,"Grid-Non-Dev.vrt"),';',"\n")
-  cmd = c(cmd, 'now=`date "+%Y-%m-%d %H:%M:%S"`;',"\n")
-  cmd = c(cmd, "echo '      Done calculating: '$now;","\n")
-  
-  write(paste(cmd, collapse=" "), file=script.sh, append=TRUE)
-}
-
-######################################################
-# Trying a gridded approach to processing as well...
-######################################################
-library(plyr)
-library(dplyr)
+library(plyr)     # for rbind.fill
+library(dplyr)    # for mutate
 library(reshape2)
 
-cells.per.iter = 100
+# Governs how big the area extracted on each pass is -- 
+# for larger cell sizes you might want to use a smaller
+# rate of cells.per.iteration.
+cells.per.iter = 100 
 
 for (r in r.iter) {
   
