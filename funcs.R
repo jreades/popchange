@@ -34,6 +34,17 @@ make.box <- function(s, proj=27700, a=g.anchor) {
   y.max = ceiling(r.ext['ymax']/a)*a
   
   # Create a box for this
+  create.box(x.min, x.max, y.min, y.max, proj)
+}
+
+#' Create a box directly from a set of four coordinates
+#' passed to the function.
+#' @param x.min The minimum x-coordinate
+#' @param x.max The maximum x-coordinate
+#' @param y.min The minimum y-coordinate
+#' @param y.max The maximum y-coordinate
+#' @param proj Optional: the projection (defaults to EPSG:27700)
+create.box <- function(x.min, x.max, y.min, y.max, proj=27700) {
   box <- st_polygon(list(rbind(c(x.min,y.min),c(x.max,y.min),c(x.max,y.max),c(x.min,y.max),c(x.min,y.min))))
   box <- st_sfc(box) %>% st_set_crs(NA) %>% st_set_crs(proj)
   box
