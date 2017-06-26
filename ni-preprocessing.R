@@ -10,20 +10,25 @@ params = set.params("Northern Ireland")
 # Create raster grid of arbitrary size:
 # https://gis.stackexchange.com/questions/154537/generating-grid-shapefile-in-r
 
-raw.source   = get.path(paths$osni.src, c('OSNI_Open_Data_Largescale_Boundaries__NI_Outline',"OSNI_Open_Data_Largescale_Boundaries__NI_Outline.shp"))
+raw.source   = get.path(paths$osni.src, "OSNI_Open_Data_Largescale_Boundaries__NI_Outline.shp")
 merge.source = get.path(paths$osni, "OSNI_Boundaries-reprojected.shp")
-os.source    = get.path(paths$os.src, c("Countries_December_2016_Generalised_Clipped_Boundaries_in_Great_Britain","Countries_December_2016_Generalised_Clipped_Boundaries_in_Great_Britain.shp"))
+os.source    = get.path(paths$os.src, "Countries_December_2016_Generalised_Clipped_Boundaries_in_Great_Britain.shp")
 merge.target = get.path(paths$os, "Countries_UK.shp")
 sql.update   = "UPDATE Countries_UK SET ctry16nm='Northern Ireland', objectid=4, ctry16cd='N92000005' WHERE ctry16nm IS NULL"
 
 ########### OSM Data
 # Copy the OSM file so that we can work with 
 # it more easily using the same approach as for
-# the rest of Great Britain
-file.copy(
-  paste(c(paths$osm.src, "ireland-and-northern-ireland-latest.osm.pbf"), collapse="/"), 
-  paste(c(paths$osm.src, paste(params$osm,"latest.osm.pbf",sep="-")), collapse="/")
-)
+# the rest of Great Britain. If setup.R has been
+# run properly then this should be unnecssary, 
+# but this is a handy check.
+dfile = get.path(paths$osm.src, paste(params$osm,"latest.osm.pbf",sep="-"))
+if (! file.exists(dfile)) {
+  file.copy(
+    get.path(paths$osm.src, "ireland-and-northern-ireland-latest.osm.pbf"),
+    dfile
+  ) 
+}
 
 ########### OS Data
 # Copy the source GB file to UK since we're 
