@@ -422,4 +422,91 @@ for (r in r.iter) {
   write(paste(cmd, collapse=" "), file=script.sh, append=TRUE)
 }
 
+######################################################
+# Trying a gridded approach to processing as well...
+######################################################
+library(plyr)
+library(dplyr)
+library(reshape2)
+
+cells.per.iter = 100
+
+for (r in r.iter) {
+  
+  params = set.params(r)
+  
+  cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
+  
+  #cat("  Loading grid with resolution",g.resolution,"m.","\n")
+  grid.fn   = get.file(t="{file.nm}-{g.resolution}m-Grid.shp")
+  grid.path = get.path(paths$grid, grid.fn)
+  grd <- st_read(grid.path, quiet=TRUE)
+  grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
+  rm(grid.fn, grid.path)
+  
+  #cat("  Loading merged land use shapefile.","\n")
+  merged.fn   = get.file(t="{file.nm}-merge.shp")
+  merged.path = get.path(paths$osm, merged.fn)
+  mrg <- st_read(merged.path, quiet=TRUE, stringsAsFactors=FALSE)
+  mrg <- mrg %>% st_set_crs(NA) %>% st_set_crs(27700)
+  rm(merged.fn, merged.path)
+  
+  # Create a box from the merged file that we can 
+  # subdivide into large-ish areas over which we 
+  # can iterate much more quickly that trying to 
+  # do the entire thing in one go...
+  bb = st_bbox(make.box(grd))
+  
+  xseq = seq(bb['xmin'],bb['xmax'],g.resolution*cells.per.iter)
+  yseq = seq(bb['ymin'],bb['ymax'],g.resolution*cells.per.iter)
+  
+  clip.grid <- list()
+  for (x in seq(1,length(xseq)-1)) {
+    for (y in seq(1,length(yseq)-1)) {
+      clip.grid[[length(clip.grid)+1]] = create.box(xseq[x], xseq[x+1], yseq[y], yseq[y+1])
+    }
+  }
+  
+  cat(" Have divided region into",length(clip.grid),"zones;","\n")
+  cat(" This reduces memory footprint and increases performance\n")
+  rs = data.frame(id=integer()) 
+  for (k in unique(mrg$UseClass)) rs[[k]]<-as.numeric()
+  
+  iter = 1
+  for (z in clip.grid) {
+    cat("Zone",iter,"of",length(clip.grid)," (",100*round(iter/length(clip.grid), 2),"%)","\n")
+    
+    i      <- st_intersection(mrg, z)
+    
+    is.within <- st_within(grd, z) %>% lengths()
+    j <- subset(grd, is.within==1)
+    
+    if (nrow(i) > 0 & nrow(j) > 0) {
+      
+      # Useful sanity check
+      #plot(j, col='white', axes=TRUE)
+      #plot(i, add=TRUE)
+      
+      # With dplyr to filter for specific types of geometries
+      s.join <- dplyr::filter(st_intersection(j, i), st_is(geometry, c("POLYGON","MULTIPOLYGON"))) %>% st_cast("MULTIPOLYGON")
+      
+      if (nrow(s.join) > 0) {
+        # add in areas in m2 (convert to numeric)
+        s.join <- s.join %>% mutate(area = st_area(.) %>% as.numeric())
+        
+        # for each field, get area per soil type
+        rs <- rbind.fill(rs, dcast(s.join, id ~ UseClass, value.var='area')) 
+      }
+    }
+    iter = iter + 1
+  }
+  
+  rs[is.na(rs)] <- 0.0
+  
+  # cell area from random grid cell
+  base.area <- st_area(sample_n(grd, 1)) %>% as.numeric()
+  
+  write.csv(rs, file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-Grid-*.csv",'Use_Classes')), row.names=FALSE)
+}
+
 cat("Done linking OSM Data to grid.","\n")
