@@ -2,6 +2,11 @@
 # user and attempt to download the open
 # data that we want where it's easy to 
 # access.
+cat(paste(replicate(45, "="), collapse = ""), "\n")
+cat(paste(replicate(45, "="), collapse = ""), "\n")
+cat("Do *not* run this script on a mobile or low-bandwidth\nconnection! You are about to download about 2GB of data!\n")
+cat(paste(replicate(45, "="), collapse = ""), "\n")
+cat(paste(replicate(45, "="), collapse = ""), "\n")
 
 source('funcs.R')
 source('config.R')
@@ -37,6 +42,9 @@ unzip(get.path(paths$os.src,'Regions_December_2016_Generalised_Clipped_Boundarie
 download.file('https://opendata.arcgis.com/datasets/37bcb9c9e788497ea4f80543fd14c0a7_2.zip?outSR=%7B%22wkid%22%3A27700%2C%22latestWkid%22%3A27700%7D', get.path(paths$os.src,'Countries_December_2016_Generalised_Clipped_Boundaries_in_Great_Britain.zip'))
 unzip(get.path(paths$os.src,'Countries_December_2016_Generalised_Clipped_Boundaries_in_Great_Britain.zip'), exdir=get.path(paths$os.src))
 
+# Note -- this is a _big_ file!
+download.file('http://geoportal.statistics.gov.uk/datasets/055c2d8135ca4297a85d624bb68aefdb_0.csv', get.path(paths$ons.src,'NSPL_MAY_2017_UK.csv'))
+
 download.file('http://osni-spatial-ni.opendata.arcgis.com/datasets/d9dfdaf77847401e81efc9471dcd09e1_0.zip', get.path(paths$osni.src,'OSNI_Open_Data_Largescale_Boundaries__NI_Outline.zip'))
 unzip(get.path(paths$osni.src,'OSNI_Open_Data_Largescale_Boundaries__NI_Outline.zip'), exdir=get.path(paths$osni.src))
 
@@ -45,4 +53,4 @@ unzip(get.path(paths$osni.src,'OSNI_Open_Data__50k_Transport_Line.zip'), exdir=g
 
 cat("Done with directly accessible files.\n")
 cat("You must download OS OpenRoads using an email address\n")
-cat("And then run ni-processing.R\n")
+cat("And then run 01_processing.R\n")

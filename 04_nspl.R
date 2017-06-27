@@ -23,15 +23,9 @@ library(sp)       # Required for KDE process
 require(rgdal)    # Required for readOGR to get around issue with sf and running KDE
 library(sf)       # Replaces sp (usually) and does away with need for several older libs (sf == production)
 
-# We assume that spatial data is stored under the current 
-# working directory but in a no-sync directory since these
-# files are enormous.
-raw.file  = 'NSPL_FEB_2017_UK.csv'
-raw.path  = c(paths$nspl.src,'NSPL_FEB_2017_UK','Data')
-
 # Load the data using fread from data.table package
 # (whichi is no longer explosed directly using dtplyr)
-dt = data.table::fread(get.path(raw.path,raw.file))
+dt = data.table::fread(get.path(paths$ons.src,'NSPL_MAY_2017_UK.csv'))
 
 cat(paste("NSPL file dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 

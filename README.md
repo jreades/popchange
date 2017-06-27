@@ -27,19 +27,7 @@ Clone or download the repo to somewhere easy to find.
 
 ### Create the Directory Structure 
 
-Under the `popchange` directory the `setup.R` script will create a set of data directories; these are not found in git because of the volumes associated with extracting and processing OSM, OS & NSPL features. The layout is:
-
-- `popchange/       # The repo`
-  - `no-sync/       # Don't manage content here with Git!`
-    - `OS/          # Source Ordnance Survey data`
-    - `OSM/         # Source OSM data`
-    - `Roads/       # Source Roads data`
-    - `NSPL/        # Source National Statistics Postcode Lookup data`
-    - `voronoi/     # Output voronoi polygons (if used)`
-    - `grid/        # Output gridded coverage of regions`
-    - `tmp/         # Output intermediate outputs from OSM processing`
-    - `integration/ # Output integration of grid with OSM, NSPL, and Roads data`
-    - `final/       # Final outputs for each region`
+Under the `popchange` directory the `setup.R` script will create a set of data directories; these are not found in git because of the volumes associated with extracting and processing OSM, OS & NSPL features.
 
 ### Downloading the Open Data
 
@@ -53,6 +41,7 @@ The sources (in case the direct URL changes) are:
 * Northern Ireland / Ireland OSM (> 125MB): [ireland-and-northern-ireland-latest.pbf](http://download.geofabrik.de/europe/ireland-and-northern-ireland-latest.osm.pbf)
 * Admin boundaries: [Regions 2016 Generalised Clipped Boundaries in England](http://geoportal.statistics.gov.uk/datasets/regions-december-2016-generalised-clipped-boundaries-in-england)
 * Country boundaries: [Countries 2016 Generalised Clipped Boundaries in Great Britain](http://geoportal.statistics.gov.uk/datasets/countries-december-2016-generalised-clipped-boundaries-in-great-britain)
+* NSPL data: [National Statistics Postcode Lookup (May 2017)](http://ons.maps.arcgis.com/home/item.html?id=56a02541d9ab42fc88f18bfb8543765e) (Will need to be updated periodically, though not perhaps before the 2021 Census...)
 * NI boundaries: [OSNI Open Data Largescale Boundaries - NI Outline](http://osni-spatial-ni.opendata.arcgis.com/datasets/d9dfdaf77847401e81efc9471dcd09e1_0) (subject to change, I'd expect)
 * OSNI Roads: [OSNI Open Data - 50k Transport Line](http://osni-spatial-ni.opendata.arcgis.com/datasets/f9b780573ecb446a8e7acf2235ed886e_2) (subject to change, I'd expect)
 * OS OpenRoads: [OS OpenData Products](https://www.ordnancesurvey.co.uk/opendatadownload/products.html)
@@ -61,12 +50,12 @@ The sources (in case the direct URL changes) are:
 
 Run the scripts in the following order to set up all of the data needed to actually do population allocations:
 
-1. `setup.R` (to set up the data directories)
-2. `ni-preprocessing.R`
-3. `grid.R`
-4. `osm.R`
-5. `roads.R`
-6. `nspl.R`
+1. `00_setup.R` (to set up the data directories)
+2. `01_preprocessing.R`
+3. `02_grid.R`
+4. `03_roads.R`
+5. `04_nspl.R`
+6. `05_osm.R`
 7. `assemble.R`
 8. `allocate.R`
   
@@ -78,6 +67,6 @@ These are 'notes to self' on larger issues not yet fully addressed but which wou
 
 Based on some issues I'm having with R/R-Studio with the `osm.R` file and long-running `system2` calls, my guess is that R has some kind of timeout on unix commands. A better long-term approach would, instead of having commands fired off from R, be to have R write a shell script that is fired at the end of the R file. That would be (oddly) more robust agains the timeouts *and* it would make auditing/re-running code a bit easier.
 
-## Road Classification
+## Parallelisation
 
-One option here would be to subset the roads by size and use different buffers with each. It's tempting to think that highways would have large buffers, but very few people want to live right next to one, so it also seems like they should have low weights. In contrast, small roads seem like they'd need small buffers with a fairly large weight in terms of attractiveness for  settlement. At this point, I'd guess that it makes more sense to split them out and record the values separately before experimenting with different weights. The downside here is that now we have a much stronger temporal aspect: because what's highway now wasn't always highway...
+This whole thing is ripe for parallelisation: it's possible to break up the work by region (i.e. Scotland, Wales, NI, London, Southeast of England, etc.), and each of these can then be broken down (the road processing can happen at the same time as the NSPL processing), and some of _these_ are further broken down using the grid. In particular, the only effective way to handle joining the OSM data to the grid was to take about 100^2 cells at a time (with a 250m cell size) and chop out the matching part of the merged OSM file. Trying to do it as one big join hadn't returned after 8 hours of processing time!

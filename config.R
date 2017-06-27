@@ -26,8 +26,8 @@ paths$voronoi   = c(getwd(),paths$root,'voronoi')
 paths$int       = c(getwd(),paths$root,'integration')
 paths$final     = c(getwd(),paths$root,'final')
 paths$os.src    = c(getwd(),paths$root,'src','OS')
+paths$ons.src   = c(getwd(),paths$root,'src','ONS')
 paths$osm.src   = c(getwd(),paths$root,'src','OSM')
-paths$nspl.src  = c(getwd(),paths$root,'src','NSPL')
 paths$osni.src  = c(getwd(),paths$root,'src','OSNI')
 paths$grid.src  = c(getwd(),paths$root,'src','OSGB-Grids')
 
@@ -121,7 +121,7 @@ roads.simplify          <-  100              # Simplify the roads before drawing
 if (! file.exists( r.shp.countries )) {
   cat(paste(replicate(45, "="), collapse = ""), "\n")
   cat(paste(replicate(45, "="), collapse = ""), "\n")
-  cat("Have you run the ni-preprocessing.R script yet?\n")
+  cat("Have you run the 01_preprocessing.R script yet?\n")
   cat("This is critical to the remaining processes!\n")
   cat(paste(replicate(45, "="), collapse = ""), "\n")
   cat(paste(replicate(45, "="), collapse = ""), "\n")

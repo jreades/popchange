@@ -43,7 +43,7 @@ for (r in r.iter) {
   cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
   
   if (r == 'Northern Ireland') {
-    full.path = get.path(paths$osni.src,'OSNI_Open_Data__50k_Transport_Line','OSNI_Open_Data__50k_Transport_Line.shp')
+    full.path = get.path(paths$osni.src,'OSNI_Open_Data__50k_Transport_Line.shp')
     rds <- st_read(full.path, quiet=TRUE)
     rds <- rds%>% st_set_crs(NA) %>% st_set_crs(29901)
     rds <- st_transform(rds, 27700)
