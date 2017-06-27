@@ -16,11 +16,12 @@ source('config.R')
 
 overwrite=TRUE
 
+library(Hmisc)
 library(dtplyr)
 library(zoo)
-library(spatstat) # Required for owin
-library(sp)       # Required for KDE process
-require(rgdal)    # Required for readOGR to get around issue with sf and running KDE
+#library(spatstat) # Required for owin
+#library(sp)       # Required for KDE process
+#require(rgdal)    # Required for readOGR to get around issue with sf and running KDE
 library(sf)       # Replaces sp (usually) and does away with need for several older libs (sf == production)
 
 # Load the data using fread from data.table package
@@ -74,9 +75,10 @@ cat(paste("NSPL file dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 to.drop = c('pcd','pcd2','cty','laua','ward','hlthau','hro','pcon','eer','teclec','ttwa','pct','nuts','lsoa11','msoa11','wz11','ccg','bua11','buasd11','lep1','lep2','pfa','imd')
 dt[,c(to.drop):=NULL]
 
-# Convert introduction/termination to date class
-dt$dointr <- as.Date(as.yearmon(dt$dointr,'%Y%m'))
-dt$doterm <- as.Date(as.yearmon(dt$doterm,'%Y%m'))
+# Stick fake day-of-month on end of dates to avoid
+# issues with as.yearmon (which I couldn't parse)
+dt$introduced <- as.Date(paste(dt$dointr,'01',sep=""), format="%Y%m%d")
+dt$terminated <- as.Date(paste(dt$doterm,'01',sep=""), format="%Y%m%d")
 
 # Convert usertype to factor
 dt$usertype <- factor(dt$usertype, labels=c('Small','Large'))
@@ -87,8 +89,8 @@ dt$osnrth1m <- as.numeric(dt$osnrth1m)
 dt$osgrdind <- as.numeric(dt$osgrdind)
 
 # Convert country, GoR and Park to factor
-dt$ctry <- factor(dt$ctry, levels=c('E92000001','L93000001','M83000003','N92000002','S92000003','W92000004'), labels=c('England','Channel Islands','Isle of Man','Northern Ireland','Scotland','Wales'), exclude=c(""))
-dt$gor  <- factor(dt$gor, levels=c('E12000001','E12000002','E12000003','E12000004','E12000005','E12000006','E12000007','E12000008','E12000009','L99999999','M99999999','N99999999','S99999999','W99999999'), labels=c('North East','North West','Yorkshire and The Humber','East Midlands','West Midlands','East of England','London','South East','South est','Channel Islands','Isle of Man','Northern Ireland','Scotland','Wales'), exclude=c(""))
+dt$country <- factor(dt$ctry, levels=c('E92000001','L93000001','M83000003','N92000002','S92000003','W92000004'), labels=c('England','Channel Islands','Isle of Man','Northern Ireland','Scotland','Wales'), exclude=c(""))
+dt$region  <- factor(dt$gor, levels=c('E12000001','E12000002','E12000003','E12000004','E12000005','E12000006','E12000007','E12000008','E12000009','L99999999','M99999999','N99999999','S99999999','W99999999'), labels=c('North East','North West','Yorkshire and The Humber','East Midlands','West Midlands','East of England','London','South East','South est','Channel Islands','Isle of Man','Northern Ireland','Scotland','Wales'), exclude=c(""))
 dt$park <- factor(dt$park, exclude=c(""))
 
 # Convert Rural/Urban indicator to factor
@@ -111,7 +113,7 @@ dt$ru11ind <- factor(dt$ru11ind, exclude=c(""))
 
 # We currently only process data for the UK
 # and drop it for Channel Islands & Isle of Man
-dt <- dt[ !dt$ctry %in% c('Channel Islands','Isle of Man'), ]
+dt <- dt[ dt$country %nin% c('Channel Islands','Isle of Man') & ! is.na(dt$country), ]
 # These ones don't have a useable location
 dt <- dt[ !dt$osgrdind==9, ]
 # And these ones are 'large' users of postcodes so
@@ -122,8 +124,8 @@ cat(paste("NSPL final dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 
 # Need to reproject NI (it's in EPSG:29901)
 # into EPSG:27700
-dt.ni    <- subset(dt, ctry=='Northern Ireland')
-dt.ni.sf <- st_as_sf(dt.ni, coords=c("oseast1m","osnrth1m"), crs=29901, agr = "constant")
+dt.ni    <- subset(dt, country=='Northern Ireland')
+dt.ni.sf <- st_as_sf(dt.ni, coords=c("oseast1m","osnrth1m"), crs=29901, agr="constant")
 t <- st_coordinates(st_transform(dt.ni.sf, 27700))
 dt.ni$oseast1m = t[,1]
 dt.ni$osnrth1m = t[,2]
@@ -137,7 +139,8 @@ rm(t,dt.ni,dt.ni.sf)
 
 # Use the region-buffered shape to select postcodes falling 
 # within the buffered boundary at each time-step for our
-# analysis
+# analysis, and begin by create a sf data frame from the 
+# Easting & Northing coordinates
 dt.sf = st_as_sf(dt, coords=c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
 
 # Now process the sub-regions
@@ -155,50 +158,54 @@ for (r in r.iter) {
   # convert that to a logical vector using
   # sapply and the .flatten function
   cat("  Selecting postcodes falling within regional buffer.\n")
-  is.within <- st_within(dt.df, rb.shp) %>% lengths()
+  is.within <- st_within(dt.sf, rb.shp) %>% lengths()
   dt.region <- subset(dt, is.within==1)
   
   # Note: No viable data from 1971
   for (y in c(1981, 1991, 2001, 2011)) {
     region.y.fn = get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL.shp",y))
-    if (!file.exists(region.y.fn) & overwrite==FALSE) {
+    if (file.exists(region.y.fn) & overwrite==FALSE) {
       cat("    Skipping since output file already exists:","\n","        ",region.y.fn,"\n")
     } else {
       # Census Day is normally late-March or early-April
       y.as_date = as.Date(paste(c(y,'03','15'),collapse="-"))
       # We could do this in one go, but it's more legible not to
-      dt.region.y <- subset(dt.region, dt.region$dointr <= y.as_date)
-      dt.region.y <- subset(dt.region.y, (is.na(dt.region.y$doterm) | dt.region.y$doterm > y.as_date))
+      dt.region.y <- subset(dt.region, dt.region$introduced <= y.as_date)
+      dt.region.y <- subset(dt.region.y, (is.na(dt.region.y$terminated) | dt.region.y$terminated > y.as_date))
       
-      ########
-      # Useful diagnostics about active postcodes at
-      # same northing and easting
-      
-      # Can't use signif since we have numbers ranging
-      # from 100s to 100,000s. 
-      dt.region.y$oseast10m = round(dt.region.y$oseast1m/10)*10
-      dt.region.y$osnrth10m = round(dt.region.y$osnrth1m/10)*10
-      
-      # How many are exact matches
-      test = dt.region.y %>% 
-        dplyr::group_by_(.dots=c("oseast1m","osnrth1m")) %>% 
-        dplyr::summarize(n=n())
-      test = test[test$n > 1, ]
-      
-      # How many are near matches
-      test2 = dt.region.y %>% 
-        dplyr::group_by_(.dots=c("oseast10m","osnrth10m")) %>% 
-        dplyr::summarize(n=n())
-      test2 = test2[test2$n > 1, ]
-      
-      cat("Diagnostics for:",r,"in year",y,"\n")
-      cat("    Total active postcodes:",dim(dt.region.y)[1],"\n")
-      cat("    Postcodes at same location:",sum(test$n),"(1m resolution)\n")
-      cat("    Postcodes at same location:",sum(test2$n),"(10m resolution)\n")
-      
-      dt.region.y.sf <- st_as_sf(dt.region.y, coords = c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
-      st_write(dt.region.y.sf, region.y.fn, delete_layer=TRUE, quiet=TRUE)
-      #plot(dt.region.sf)
+      if (nrow(dt.region.y) > 0) {
+        
+        ########
+        # Useful diagnostics about active postcodes at
+        # same northing and easting
+        
+        # Can't use signif since we have numbers ranging
+        # from 100s to 100,000s. 
+        dt.region.y$oseast10m = round(dt.region.y$oseast1m/10)*10
+        dt.region.y$osnrth10m = round(dt.region.y$osnrth1m/10)*10
+        
+        # How many are exact matches
+        test = dt.region.y %>% 
+          dplyr::group_by_(.dots=c("oseast1m","osnrth1m")) %>% 
+          dplyr::summarize(n=n())
+        test = test[test$n > 1, ]
+        
+        # How many are near matches
+        test2 = dt.region.y %>% 
+          dplyr::group_by_(.dots=c("oseast10m","osnrth10m")) %>% 
+          dplyr::summarize(n=n())
+        test2 = test2[test2$n > 1, ]
+        
+        cat("Diagnostics for:",r,"in year",y,"\n")
+        cat("    Total active postcodes:",dim(dt.region.y)[1],"\n")
+        cat("    Postcodes at same location:",sum(test$n),"(1m resolution)\n")
+        cat("    Postcodes at same location:",sum(test2$n),"(10m resolution)\n")
+        
+        dt.region.y.sf <- st_as_sf(subset(dt.region.y, select=c('objectid','pcds','oseast1m','osnrth1m','ru11ind','oac11','introduced','terminated','country','region','oseast10m','osnrth10m')), coords=c("oseast1m","osnrth1m"), crs=27700, agr="constant")
+        
+        st_write(dt.region.y.sf, region.y.fn, delete_dsn=TRUE, quiet=TRUE)
+        #plot(dt.region.sf)
+      }
     }
   }
 }
