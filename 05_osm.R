@@ -368,7 +368,7 @@ for (r in r.iter) {
         s.join <- s.join %>% mutate(area = st_area(.) %>% as.numeric())
         
         # for each field, get area per soil type
-        rs <- rbind.fill(rs, dcast(s.join, id ~ UseClass, value.var='area')) 
+        rs <- rbind.fill(rs, dcast(s.join, id ~ UseClass, value.var='area', fun.aggregate=sum)) 
       }
     }
     iter = iter + 1
