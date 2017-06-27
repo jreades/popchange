@@ -327,9 +327,12 @@ for (r in r.iter) {
   # do the entire thing in one go...
   bb = st_bbox(make.box(grd))
   
+  # Create a sequence of coordinates to use for 
+  # defining bounding boxes
   xseq = seq(bb['xmin'],bb['xmax'],g.resolution*cells.per.iter)
   yseq = seq(bb['ymin'],bb['ymax'],g.resolution*cells.per.iter)
   
+  # And turn those into a set of bounding boxes
   clip.grid <- list()
   for (x in seq(1,length(xseq)-1)) {
     for (y in seq(1,length(yseq)-1)) {
@@ -376,7 +379,7 @@ for (r in r.iter) {
   # cell area from random grid cell
   base.area <- st_area(sample_n(grd, 1)) %>% as.numeric()
   
-  write.csv(rs, file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-Grid-*.csv",'Use_Classes')), row.names=FALSE)
+  write.csv(rs, file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Grid.csv",'Use_Classes')), row.names=FALSE)
 }
 
 cat("Done linking OSM Data to grid.","\n")
