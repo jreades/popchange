@@ -35,10 +35,11 @@ install_name_tool -change @rpath/libjasper.4.dylib /usr/local/opt/jasper/lib/lib
 Since I had Anaconda Python installed I also ended up mucking about with my `.bash_profile` before doing the Homebrew work, and it ended up looking like this:
 ```
 export PATH="/usr/local/opt/gdal2/bin:$PATH"
-export CFLAGS=/usr/local/opt/gdal2/bin/gdal-config
-export CPPFLAGS=/usr/local/opt/gdal2/bin/gdal-config
-export LD_LIBRARY_PATH=/usr/local/opt/gdal2/lib:$LD_LIBRARY_PATH
+export CFLAGS="/usr/local/opt/gdal2/bin/gdal-config"
+export CPPFLAGS="/usr/local/opt/gdal2/bin/gdal-config"
+export LD_LIBRARY_PATH="/usr/local/opt/gdal2/lib:$LD_LIBRARY_PATH"
 
+# This doesn't coexist happily with gdal2 installed via homebrew
 #export PATH="/Applications/anaconda/bin:$PATH"
 ```
 
