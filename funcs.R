@@ -34,6 +34,17 @@ make.box <- function(s, proj=27700, a=g.anchor) {
   y.max = ceiling(r.ext['ymax']/a)*a
   
   # Create a box for this
+  create.box(x.min, x.max, y.min, y.max, proj)
+}
+
+#' Create a box directly from a set of four coordinates
+#' passed to the function.
+#' @param x.min The minimum x-coordinate
+#' @param x.max The maximum x-coordinate
+#' @param y.min The minimum y-coordinate
+#' @param y.max The maximum y-coordinate
+#' @param proj Optional: the projection (defaults to EPSG:27700)
+create.box <- function(x.min, x.max, y.min, y.max, proj=27700) {
   box <- st_polygon(list(rbind(c(x.min,y.min),c(x.max,y.min),c(x.max,y.max),c(x.min,y.max),c(x.min,y.min))))
   box <- st_sfc(box) %>% st_set_crs(NA) %>% st_set_crs(proj)
   box
@@ -153,13 +164,18 @@ set.params <- function(r) {
 #' @param p The path (as list)
 #' @param fn The file name (as a string, preferrably)
 #' @param c Optional: the concatentation var to use (defaults to auto-detecting platform)
-get.path <- function(p, fn, c=NULL) {
+get.path <- function(p, fn=NULL, c=NULL) {
   if (Sys.info()[['sysname']] == 'Windows') {
     c="\\"
   } else {
     c="/"
   }
-  paste( c(p,fn), collapse=c)
+  if (is.null(fn)) {
+    path = paste( p, collapse=c)
+  } else {
+    path = paste( c(p,fn), collapse=c) 
+  }
+  path
 }
 
 #' Generate a file name using a mix of a template (t) and 

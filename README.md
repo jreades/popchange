@@ -43,6 +43,9 @@ Under the `popchange` directory the `setup.R` script will create a set of data d
 
 ### Downloading the Open Data
 
+All of these except OS OpenRoads _should_ be downloadable via the `setup.R` script. After that you will need to run `ni-preprocessing.R` _once_ to set up the country file correctly to include Northern Ireland as an iterable option.
+
+The sources (in case the direct URL changes) are:
 * The 100km OS shapefile tiles (so all five files, but easiest to download the Zipfile) from [github.com/charlesroper](https://github.com/charlesroper/OSGB_Grids)
 * England OSM (> 700MB): [england-latest.osm.pbf](http://download.geofabrik.de/europe/great-britain/england-latest.osm.pbf)
 * Scotland OSM (> 100MB): [scotland-latest.osm.pbf](http://download.geofabrik.de/europe/great-britain/scotland-latest.osm.pbf)
@@ -51,8 +54,8 @@ Under the `popchange` directory the `setup.R` script will create a set of data d
 * Admin boundaries: [Regions 2016 Generalised Clipped Boundaries in England](http://geoportal.statistics.gov.uk/datasets/regions-december-2016-generalised-clipped-boundaries-in-england)
 * Country boundaries: [Countries 2016 Generalised Clipped Boundaries in Great Britain](http://geoportal.statistics.gov.uk/datasets/countries-december-2016-generalised-clipped-boundaries-in-great-britain)
 * NI boundaries: [OSNI Open Data Largescale Boundaries - NI Outline](http://osni-spatial-ni.opendata.arcgis.com/datasets/d9dfdaf77847401e81efc9471dcd09e1_0) (subject to change, I'd expect)
-* OS OpenRoads: [OS OpenData Products](https://www.ordnancesurvey.co.uk/opendatadownload/products.html)
 * OSNI Roads: [OSNI Open Data - 50k Transport Line](http://osni-spatial-ni.opendata.arcgis.com/datasets/f9b780573ecb446a8e7acf2235ed886e_2) (subject to change, I'd expect)
+* OS OpenRoads: [OS OpenData Products](https://www.ordnancesurvey.co.uk/opendatadownload/products.html)
 
 ### Running the Code to Enable Population Gridding
 
