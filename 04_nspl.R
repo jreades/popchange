@@ -22,7 +22,6 @@ library(zoo)
 #library(spatstat) # Required for owin
 #library(sp)       # Required for KDE process
 #require(rgdal)    # Required for readOGR to get around issue with sf and running KDE
-library(sf)       # Replaces sp (usually) and does away with need for several older libs (sf == production)
 
 # Load the data using fread from data.table package
 # (whichi is no longer explosed directly using dtplyr)
@@ -30,7 +29,15 @@ dt = data.table::fread(get.path(paths$ons.src,'NSPL_MAY_2017_UK.csv'))
 
 cat(paste("NSPL file dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 
+######################################################
+######################################################
+# Step 1: Clean and process the raw NSPL data file
+#         so that we have something a little more
+#         manageable.
+######################################################
+######################################################
 # Columns we don't need:
+# =====================
 # - pcd: 7 character version of postcode (3rd and 4th chars may be blank as inward code is right-aligned)
 # - pcd2: 8 character version of postcode (3rd and 4th chars may be blank as inward-code is right-aligned and 5th character always blank)
 # - cty: county 
@@ -54,7 +61,8 @@ cat(paste("NSPL file dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 # - pfa: police force area
 # - imd: index of multiple deprivation
 #
-# Fields that we want to keep and rationale for keeping them:
+# Fields that we want to keep:
+# ===========================
 # - pcds: variable length postcode version (always one space between outward [first half] and inward [second half] of postcode)
 # - dointr: date of introduction in yyyymm format (filter out postcodes that didn't yet exist at time of Census)
 # - doterm: date of termination in yyyymm format (filter out postcodes that no longer existed at time of Census)
@@ -141,9 +149,15 @@ rm(t,dt.ni,dt.ni.sf)
 # within the buffered boundary at each time-step for our
 # analysis, and begin by create a sf data frame from the 
 # Easting & Northing coordinates
-dt.sf = st_as_sf(dt, coords=c("oseast1m","osnrth1m"), crs=27700, agr = "constant")
+dt.sf = st_as_sf(dt, coords=c("oseast1m","osnrth1m"), crs=27700, agr="constant")
 
-# Now process the sub-regions
+######################################################
+######################################################
+# Step 2: Create CSV files for each Census time period
+#         and each region so that we can load only what
+#         we need in subsequent processing.
+######################################################
+######################################################
 for (r in r.iter) {
   
   params = set.params(r)
@@ -151,7 +165,6 @@ for (r in r.iter) {
   cat(paste("\n","======================\n","Processing data for:", params$display.nm,"\n"))
   
   # Region-Buffered shape
-  cat("  Simplifying and buffering region to control for edge effects.")
   rb.shp <- buffer.region(params)
   
   # Save the output of st_within and then 
@@ -184,31 +197,50 @@ for (r in r.iter) {
         dt.region.y$oseast10m = round(dt.region.y$oseast1m/10)*10
         dt.region.y$osnrth10m = round(dt.region.y$osnrth1m/10)*10
         
-        # How many are exact matches
-        test = dt.region.y %>% 
-          dplyr::group_by_(.dots=c("oseast1m","osnrth1m")) %>% 
-          dplyr::summarize(n=n())
-        test = test[test$n > 1, ]
-        
-        # How many are near matches
-        test2 = dt.region.y %>% 
-          dplyr::group_by_(.dots=c("oseast10m","osnrth10m")) %>% 
-          dplyr::summarize(n=n())
-        test2 = test2[test2$n > 1, ]
-        
-        cat("Diagnostics for:",r,"in year",y,"\n")
-        cat("    Total active postcodes:",dim(dt.region.y)[1],"\n")
-        cat("    Postcodes at same location:",sum(test$n),"(1m resolution)\n")
-        cat("    Postcodes at same location:",sum(test2$n),"(10m resolution)\n")
-        
-        dt.region.y.sf <- st_as_sf(subset(dt.region.y, select=c('objectid','pcds','oseast1m','osnrth1m','ru11ind','oac11','introduced','terminated','country','region','oseast10m','osnrth10m')), coords=c("oseast1m","osnrth1m"), crs=27700, agr="constant")
-        
-        st_write(dt.region.y.sf, region.y.fn, delete_dsn=TRUE, quiet=TRUE)
-        #plot(dt.region.sf)
+        write.csv(subset(dt.region.y, select=c('pcds','oseast1m','osnrth1m','oseast10m','osnrth10m','osgrdind','oa11','ru11ind','oac11','introduced','terminated','country','region')), file=get.path(paths$nspl, get.file(t="{file.nm}-NSPL-*.csv",y)), row.names=FALSE)
       }
     }
   }
 }
+
+######################################################
+######################################################
+# Step 3: Now link to the grid and aggregate into 
+#         columns for hi- and lo-rise development
+#         based on the precision of the coordinate
+#         overlaps.
+######################################################
+######################################################
+# How many are exact matches
+dt2 = data.table::fread(get.path(paths$nspl, get.file(t="{file.nm}-NSPL-*.csv",y)))
+
+test = dt.region.y %>% 
+  dplyr::filter(osgrdind <= 4) %>%
+  dplyr::group_by_(.dots=c("oseast1m","osnrth1m")) %>% 
+  dplyr::summarize(n=n())
+test = test[test$n > 1, ]
+
+# How many are near matches
+test2 = dt.region.y %>% 
+  dplyr::filter(osgrdind <= 4) %>%
+  dplyr::group_by_(.dots=c("oseast10m","osnrth10m")) %>% 
+  dplyr::summarize(n=n())
+test2 = test2[test2$n > 1, ]
+
+cat("Diagnostics for:",r,"in year",y,"\n")
+cat("    Total active postcodes:",dim(dt.region.y)[1],"\n")
+cat("    Postcodes at same location:",sum(test$n),"(1m resolution)\n")
+cat("    Postcodes at same location:",sum(test2$n),"(10m resolution)\n")
+
+dt.region.y$hi_rise = 0
+dt.region.y$lo_rise = 0
+
+
+#dt.region.y.sf <- st_as_sf(subset(dt.region.y, select=c('objectid','pcds','oseast1m','osnrth1m','ru11ind','oac11','introduced','terminated','country','region','oseast10m','osnrth10m')), coords=c("oseast1m","osnrth1m"), crs=27700, agr="constant")
+#st_write(dt.region.y.sf, region.y.fn, delete_dsn=TRUE, quiet=TRUE)
+#plot(dt.region.sf)
+
+write.csv(dt.region.y, file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Grid.csv",'Use_Classes')), row.names=FALSE)
 
 r = 'Wales'
 y = 1991
