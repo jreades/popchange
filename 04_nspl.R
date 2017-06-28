@@ -17,11 +17,17 @@ source('config.R')
 overwrite=TRUE
 
 library(Hmisc)
+library(data.table)
 library(dtplyr)
 library(zoo)
 #library(spatstat) # Required for owin
 #library(sp)       # Required for KDE process
 #require(rgdal)    # Required for readOGR to get around issue with sf and running KDE
+
+# What years are available for the NSPL
+# -- though this doesn't work for some
+# areas since the earliest data is post-1981.
+census.years = c(1981, 1991, 2001, 2011)
 
 # Load the data using fread from data.table package
 # (whichi is no longer explosed directly using dtplyr)
@@ -82,6 +88,7 @@ cat(paste("NSPL file dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 ###################
 to.drop = c('pcd','pcd2','cty','laua','ward','hlthau','hro','pcon','eer','teclec','ttwa','pct','nuts','lsoa11','msoa11','wz11','ccg','bua11','buasd11','lep1','lep2','pfa','imd')
 dt[,c(to.drop):=NULL]
+rm(to.drop)
 
 # Stick fake day-of-month on end of dates to avoid
 # issues with as.yearmon (which I couldn't parse)
@@ -173,9 +180,10 @@ for (r in r.iter) {
   cat("  Selecting postcodes falling within regional buffer.\n")
   is.within <- st_within(dt.sf, rb.shp) %>% lengths()
   dt.region <- subset(dt, is.within==1)
+  rm(is.within)
   
   # Note: No viable data from 1971
-  for (y in c(1981, 1991, 2001, 2011)) {
+  for (y in census.years) {
     region.y.fn = get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL.shp",y))
     if (file.exists(region.y.fn) & overwrite==FALSE) {
       cat("    Skipping since output file already exists:","\n","        ",region.y.fn,"\n")
@@ -199,9 +207,12 @@ for (r in r.iter) {
         
         write.csv(subset(dt.region.y, select=c('pcds','oseast1m','osnrth1m','oseast10m','osnrth10m','osgrdind','oa11','ru11ind','oac11','introduced','terminated','country','region')), file=get.path(paths$nspl, get.file(t="{file.nm}-NSPL-*.csv",y)), row.names=FALSE)
       }
+      rm(y.as_date)
     }
   }
+  rm(y,region.y.fn,dt.region.y,dt.region)
 }
+rm(dt,dt.sf)
 
 ######################################################
 ######################################################
@@ -211,36 +222,67 @@ for (r in r.iter) {
 #         overlaps.
 ######################################################
 ######################################################
-# How many are exact matches
-dt2 = data.table::fread(get.path(paths$nspl, get.file(t="{file.nm}-NSPL-*.csv",y)))
-
-test = dt.region.y %>% 
-  dplyr::filter(osgrdind <= 4) %>%
-  dplyr::group_by_(.dots=c("oseast1m","osnrth1m")) %>% 
-  dplyr::summarize(n=n())
-test = test[test$n > 1, ]
-
-# How many are near matches
-test2 = dt.region.y %>% 
-  dplyr::filter(osgrdind <= 4) %>%
-  dplyr::group_by_(.dots=c("oseast10m","osnrth10m")) %>% 
-  dplyr::summarize(n=n())
-test2 = test2[test2$n > 1, ]
-
-cat("Diagnostics for:",r,"in year",y,"\n")
-cat("    Total active postcodes:",dim(dt.region.y)[1],"\n")
-cat("    Postcodes at same location:",sum(test$n),"(1m resolution)\n")
-cat("    Postcodes at same location:",sum(test2$n),"(10m resolution)\n")
-
-dt.region.y$hi_rise = 0
-dt.region.y$lo_rise = 0
-
-
-#dt.region.y.sf <- st_as_sf(subset(dt.region.y, select=c('objectid','pcds','oseast1m','osnrth1m','ru11ind','oac11','introduced','terminated','country','region','oseast10m','osnrth10m')), coords=c("oseast1m","osnrth1m"), crs=27700, agr="constant")
-#st_write(dt.region.y.sf, region.y.fn, delete_dsn=TRUE, quiet=TRUE)
-#plot(dt.region.sf)
-
-write.csv(dt.region.y, file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Grid.csv",'Use_Classes')), row.names=FALSE)
+for (r in r.iter) {
+  
+  params = set.params(r)
+  
+  for (y in census.years) {
+    
+    if (file.exists(get.path(paths$nspl, get.file(t="{file.nm}-NSPL-*.csv",y)))) {
+      
+      dt = data.table::fread(get.path(paths$nspl, get.file(t="{file.nm}-NSPL-*.csv",y)))
+      
+      # Note cast to data frame -- seems to be triggered
+      # by this bug: https://github.com/hadley/dtplyr/issues/51
+      dt = as.data.frame(dt) %>% 
+        dplyr::mutate_at(c("oseast1m", "osnrth1m"), funs(round(.,0)))
+      
+      dupes1m = dt %>% 
+        dplyr::filter(osgrdind <= 4) %>%
+        dplyr::group_by_(.dots=c("oseast1m","osnrth1m")) %>% 
+        dplyr::summarize(n=n())
+      dupes1m = dupes1m %>% filter(n > 1) %>% mutate(hi_rise=1)
+      
+      # How many are near matches
+      dupes10m = dt %>% 
+        dplyr::filter(osgrdind <= 4) %>%
+        dplyr::group_by_(.dots=c("oseast10m","osnrth10m")) %>% 
+        dplyr::summarize(n=n())
+      dupes10m = dupes10m %>% filter(n > 1) %>% mutate(hi_rise=1)
+      
+      # Now set a flag that we can use
+      # when joining to the grid
+      dt.categorised = dt %>% 
+        left_join(dupes1m, by=c('oseast1m','osnrth1m')) %>%
+        select( -n ) %>% 
+        mutate( lo_rise = ifelse( is.na(hi_rise), 1, 0) ) %>% 
+        mutate( hi_rise = ifelse( is.na(hi_rise), 0, 1))
+      
+      cat("Diagnostics for:",params$display.nm,"in year",y,"\n")
+      cat("    Have filtered for GridLink indicator <= 4","\n")
+      cat("    Total active postcodes:",nrow(dt),"\n")
+      cat("    Postcodes at same location:",sum(dupes1m$n),"(1m resolution)\n")
+      cat("    Postcodes at same location:",sum(dupes10m$n),"(10m resolution)\n")
+      
+      write.csv(dt.categorised, file=get.path(paths$nspl, get.file(t="{file.nm}-NSPL-*-categorised.csv",y)), row.names=FALSE)
+      
+      cat("  Loading grid with resolution",g.resolution,"m.","\n")
+      grd <- st_read(get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp")), quiet=TRUE)
+      grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
+      
+      dt.categorised.sf <- st_as_sf(dt.categorised, coords=c("oseast1m","osnrth1m"), crs=27700, agr='identity')
+      
+      # We can drop non-matching rows as we're going to 
+      # output a CSV file to join back on to the grid
+      # later.
+      tmp = grd %>% st_join(dt.categorised.sf, left=FALSE) %>% group_by(id) %>% summarise(hi_rise=sum(hi_rise), lo_rise=sum(lo_rise))
+      
+      write.csv(st_set_geometry(tmp, NULL), file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Grid.csv",'NSPL',y)), row.names=FALSE)
+    } else {
+      cat("Skipping grid-linking for",params$display.nm,"as no data for year",y)
+    }
+  }
+}
 
 r = 'Wales'
 y = 1991
