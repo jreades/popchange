@@ -18,6 +18,7 @@ overwrite=TRUE
 
 library(Hmisc)
 library(data.table)
+library(dplyr)
 library(dtplyr)
 library(zoo)
 #library(spatstat) # Required for owin
@@ -39,7 +40,11 @@ cat(paste("NSPL file dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 ######################################################
 # Step 1: Clean and process the raw NSPL data file
 #         so that we have something a little more
-#         manageable.
+#         manageable. We are also going to try to 
+#         infer some information about the area from
+#         the various indicators provided for each 
+#         postcode (RU11 and OAC11; BUA11 might be
+#         useful too, but is harder to use).
 ######################################################
 ######################################################
 # Columns we don't need:
@@ -184,7 +189,7 @@ for (r in r.iter) {
   
   # Note: No viable data from 1971
   for (y in census.years) {
-    region.y.fn = get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL.shp",y))
+    region.y.fn = get.path(paths$nspl, get.file(t="{file.nm}-NSPL-*.csv",y))
     if (file.exists(region.y.fn) & overwrite==FALSE) {
       cat("    Skipping since output file already exists:","\n","        ",region.y.fn,"\n")
     } else {
@@ -205,12 +210,22 @@ for (r in r.iter) {
         dt.region.y$oseast10m = round(dt.region.y$oseast1m/10)*10
         dt.region.y$osnrth10m = round(dt.region.y$osnrth1m/10)*10
         
-        write.csv(subset(dt.region.y, select=c('pcds','oseast1m','osnrth1m','oseast10m','osnrth10m','osgrdind','oa11','ru11ind','oac11','introduced','terminated','country','region')), file=get.path(paths$nspl, get.file(t="{file.nm}-NSPL-*.csv",y)), row.names=FALSE)
+        # There are 2011 Rural/Urban indicators
+        if (sum(is.na(dt.region.y$ru11ind))/nrow(dt.region.y) < 1.0) {
+          dt.region.y <- dt.region.y %>% 
+            mutate( urban = ifelse( ru11ind %in% c('A1','B1','C1','1','2'), 1, 0) )
+        # Otherwise fall back on OAC 2011
+        } else {
+          dt.region.y <- dt.region.y %>% 
+            mutate( urban = ifelse( grepl('^[23457][A-Z]', oac11, perl=TRUE), 1, 0))
+        }
+        
+        write.csv(subset(dt.region.y, select=c('pcds','oseast1m','osnrth1m','oseast10m','osnrth10m','osgrdind','oa11','ru11ind','oac11','urban','introduced','terminated','country','region')), file=region.y.fn, row.names=FALSE)
       }
       rm(y.as_date)
     }
   }
-  rm(y,region.y.fn,dt.region.y,dt.region)
+  rm(y,region.y.fn,dt.region.y,dt.region,rb.shp)
 }
 rm(dt,dt.sf)
 
@@ -239,32 +254,34 @@ for (r in r.iter) {
       
       dupes1m = dt %>% 
         dplyr::filter(osgrdind <= 4) %>%
+        dplyr::filter(urban == 1) %>%
         dplyr::group_by_(.dots=c("oseast1m","osnrth1m")) %>% 
         dplyr::summarize(n=n())
-      dupes1m = dupes1m %>% filter(n > 1) %>% mutate(hi_rise=1)
+      dupes1m = dupes1m %>% filter(n > 1) %>% mutate(hi_dense=1)
       
       # How many are near matches
       dupes10m = dt %>% 
         dplyr::filter(osgrdind <= 4) %>%
+        dplyr::filter(urban == 1) %>% 
         dplyr::group_by_(.dots=c("oseast10m","osnrth10m")) %>% 
         dplyr::summarize(n=n())
-      dupes10m = dupes10m %>% filter(n > 1) %>% mutate(hi_rise=1)
+      dupes10m = dupes10m %>% filter(n > 1) %>% mutate(hi_dense=1)
       
       # Now set a flag that we can use
       # when joining to the grid
       dt.categorised = dt %>% 
         left_join(dupes1m, by=c('oseast1m','osnrth1m')) %>%
         select( -n ) %>% 
-        mutate( lo_rise = ifelse( is.na(hi_rise), 1, 0) ) %>% 
-        mutate( hi_rise = ifelse( is.na(hi_rise), 0, 1))
+        mutate( hi_dense = ifelse( is.na(hi_dense), 0, 1) )
       
       cat("Diagnostics for:",params$display.nm,"in year",y,"\n")
       cat("    Have filtered for GridLink indicator <= 4","\n")
       cat("    Total active postcodes:",nrow(dt),"\n")
       cat("    Postcodes at same location:",sum(dupes1m$n),"(1m resolution)\n")
       cat("    Postcodes at same location:",sum(dupes10m$n),"(10m resolution)\n")
+      cat("    Postcodes flagged as possible hi-rises:",sum(dt.categorised$hi_dense==1),"(1m resolution)\n")
       
-      write.csv(dt.categorised, file=get.path(paths$nspl, get.file(t="{file.nm}-NSPL-*-categorised.csv",y)), row.names=FALSE)
+      write.csv(dt.categorised, file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Points.csv",'NSPL',y)), row.names=FALSE)
       
       cat("  Loading grid with resolution",g.resolution,"m.","\n")
       grd <- st_read(get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp")), quiet=TRUE)
@@ -275,17 +292,16 @@ for (r in r.iter) {
       # We can drop non-matching rows as we're going to 
       # output a CSV file to join back on to the grid
       # later.
-      tmp = grd %>% st_join(dt.categorised.sf, left=FALSE) %>% group_by(id) %>% summarise(hi_rise=sum(hi_rise), lo_rise=sum(lo_rise))
+      grid.join = grd %>% st_join(dt.categorised.sf, left=FALSE) %>% group_by(id) %>% summarise(hi_density=sum(hi_dense))
       
-      write.csv(st_set_geometry(tmp, NULL), file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Grid.csv",'NSPL',y)), row.names=FALSE)
+      write.csv(st_set_geometry(grid.join, NULL), file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Grid.csv",'NSPL',y)), row.names=FALSE)
+      rm(grid.join)
     } else {
       cat("Skipping grid-linking for",params$display.nm,"as no data for year",y)
     }
   }
 }
 
-r = 'Wales'
-y = 1991
 # Kriging and KDE
 for (r in r.iter) {
   params = set.params(r)
