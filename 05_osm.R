@@ -308,9 +308,7 @@ for (r in r.iter) {
   cat("\n","======================\n","Processing data for:", params$display.nm,"\n")
   
   #cat("  Loading grid with resolution",g.resolution,"m.","\n")
-  grid.fn   = get.file(t="{file.nm}-{g.resolution}m-Grid.shp")
-  grid.path = get.path(paths$grid, grid.fn)
-  grd <- st_read(grid.path, quiet=TRUE)
+  grd <- st_read(get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp")), quiet=TRUE)
   grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
   rm(grid.fn, grid.path)
   
