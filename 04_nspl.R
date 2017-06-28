@@ -279,7 +279,7 @@ for (r in r.iter) {
       cat("    Total active postcodes:",nrow(dt),"\n")
       cat("    Postcodes at same location:",sum(dupes1m$n),"(1m resolution)\n")
       cat("    Postcodes at same location:",sum(dupes10m$n),"(10m resolution)\n")
-      cat("    Postcodes flagged as possible hi-rises:",sum(dt.categorised$hi_dense==1),"(1m resolution)\n")
+      cat("    Postcodes flagged as high-density:",sum(dt.categorised$hi_dense==1),"(1m resolution)\n")
       
       write.csv(dt.categorised, file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Points.csv",'NSPL',y)), row.names=FALSE)
       
@@ -297,7 +297,7 @@ for (r in r.iter) {
       write.csv(st_set_geometry(grid.join, NULL), file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Grid.csv",'NSPL',y)), row.names=FALSE)
       rm(grid.join)
     } else {
-      cat("Skipping grid-linking for",params$display.nm,"as no data for year",y)
+      cat("Skipping grid-linking for",params$display.nm,"as no data for year",y,"\n")
     }
   }
 }
