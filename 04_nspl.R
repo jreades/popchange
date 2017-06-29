@@ -292,7 +292,8 @@ for (r in r.iter) {
       # We can drop non-matching rows as we're going to 
       # output a CSV file to join back on to the grid
       # later.
-      grid.join = grd %>% st_join(dt.categorised.sf, left=FALSE) %>% group_by(id) %>% summarise(hi_density=sum(hi_dense))
+      grid.join = grd %>% st_join(dt.categorised.sf, left=FALSE) %>% group_by(id) %>% summarise(hi_density=sum(hi_dense), total=n())
+      grid.join$lo_density = grid.join$total - grid.join$hi_density
       
       write.csv(st_set_geometry(grid.join, NULL), file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Grid.csv",'NSPL',y)), row.names=FALSE)
       rm(grid.join)
