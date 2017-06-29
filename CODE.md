@@ -10,7 +10,7 @@ R CMD INSTALL rgeos_0.3-23.tar.gz --configure-args='--with-geos-config=/Library/
 R CMD INSTALL sf_0.4-3.tar --configure-args='--with-geos-config=/Library/Frameworks/GEOS.framework/unix/bin/geos-config --with-proj-include=/Library/Frameworks/PROJ.framework/Headers --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
 ```
 
-This **_should have worked_** but did not. In retrospect, I think that this might have been because I'd missed an old compiler flag in my `.bash_profile` that was pointing to GDAL 1.11 (which no longer existed). The correct bash parameter would have been:
+This **_should have worked_** but did not. In retrospect, I think that this might have been because I'd missed an old compiler flag in my `.bash_profile` that was pointing to GDAL 1.11 (which no longer existed). The correct bash parameter (if using KyngChaos binaries, not the Homebrew configuration below) would have been:
 ```
 export CFLAGS=Library/Frameworks/GDAL.framework/unix/bin/gdal-config
 ```
@@ -36,7 +36,8 @@ Since I had Anaconda Python installed I also ended up mucking about with my `.ba
 ```
 export PATH="/usr/local/opt/gdal2/bin:$PATH"
 export CFLAGS="/usr/local/opt/gdal2/bin/gdal-config"
-export CPPFLAGS="/usr/local/opt/gdal2/bin/gdal-config"
+export LDFLAGS=/usr/local/opt/gdal2/lib
+export CPPFLAGS=/usr/local/opt/gdal2/include
 export LD_LIBRARY_PATH="/usr/local/opt/gdal2/lib:$LD_LIBRARY_PATH"
 
 # This doesn't coexist happily with gdal2 installed via homebrew

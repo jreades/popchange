@@ -59,7 +59,7 @@ for (r in r.iter) {
     cat("   Done loading roads for",r,"\n")
     
     for (c in (grep("src", ls(osni.map), value=TRUE))) {
-      cat(c,"\n")
+      #cat(c,"\n")
       t = eval(parse(text=paste("osni.map$",sub(".src",".target",c,perl=TRUE),sep="")))
       eval(parse(text=paste("rds$",t," = rds$TEMA %in% osni.map$",c,sep="")))
     }
@@ -117,7 +117,7 @@ for (r in r.iter) {
     }
     cat("   Done assembling roads data for region...","\n")
     
-    for (c in (grep("src", ls(osni.map), value=TRUE))) {
+    for (c in (grep("src", ls(openroads.map), value=TRUE))) {
       t = eval(parse(text=paste("openroads.map$",sub(".src",".target",c,perl=TRUE),sep="")))
       eval(parse(text=paste("rds$",t," = rds$function. %in% openroads.map$",c,sep="")))
     }
@@ -139,28 +139,29 @@ for (r in r.iter) {
   # separately before experimenting with different 
   # weights. The downside here is that now we have 
   # a much stronger temporal aspect: because what's 
-  # highway now wasn't alway highay...
+  # highway now wasn't always highway...
   #########################
   cat("Loading grid with resolution",g.resolution,"m.\n")
   grid.fn = get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp"))
-  
   grd <- st_read(grid.fn, quiet=TRUE)
   grd <- grd %>% st_set_crs(NA) %>% st_set_crs(27700)
   
   cat("   Calculating intersections with grid.","\n")
-  for (r in road.classes) {
-    cat("     Buffering around",r,"classs roads (",eval(parse(text=paste("roads.",tolower(r),".buffer",sep=""))),"m).","\n")
-    rds.buff <- st_buffer(st_simplify(subset(rds, rds[[r]]), roads.simplify), eval(parse(text=paste("roads.",tolower(r),".buffer",sep=""))))
+  for (rd in road.classes) {
+    cat("     Buffering around",rd,"classs roads (",eval(parse(text=paste("roads.",tolower(rd),".buffer",sep=""))),"m).","\n")
+    rds.buff <- st_buffer(st_simplify(subset(rds, rds[[rd]]), roads.simplify), eval(parse(text=paste("roads.",tolower(rd),".buffer",sep=""))))
     
     cell.intersects <- grd %>% st_intersects(rds.buff) %>% lengths()
-    grd[tolower(r)] <- cell.intersects
+    grd[tolower(rd)] <- cell.intersects
   }
+  rm(rds.buff, rd)
   cat("   Done.")
   
   cat("   Writing cell intersection values to shapefile.","\n")
-  roads.fn = get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-Road-Grid.shp"))
-  st_write(grd, roads.fn, quiet=TRUE, delete_dsn=TRUE)
-  rm(grd)
+  roads.fn = get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Grid.csv",'Road'))
+  #st_write(grd, roads.fn, quiet=TRUE, delete_dsn=TRUE)
+  write.csv(st_set_geometry(grd, NULL), file=roads.fn, row.names=FALSE)
+  rm(grd, roads.fn)
 }
 
 cat("Done linking buffered roads to grid.","\n")
