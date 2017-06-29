@@ -9,6 +9,11 @@
 ogr.lib  = '/Library/Frameworks/GDAL.framework/Programs/ogr2ogr'
 ogr.info = '/Library/Frameworks/GDAL.framework/Programs/ogrinfo'
 
+crs.gb      = 27700
+crs.osm     = 4326
+crs.ni      = 4326
+crs.ni.nspl = 29901
+
 ########## Data Storage Configuration
 # We assume that spatial data is stored under the current 
 # working directory but in a no-sync directory since these

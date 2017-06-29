@@ -45,7 +45,7 @@ for (ext in c('shp','dbf','shx','sbn','sbx','prj')) {
 }
 
 # Reproject the NI data (though it was EPSG:29901 but apparently not)
-cmd1 = c('-f "ESRI Shapefile"', '-t_srs EPSG:27700', '-s_srs EPSG:4326', merge.source, raw.source, '-overwrite', '--config ogr_interleaved_reading yes',';')
+cmd1 = c('-f "ESRI Shapefile"', paste('-t_srs EPSG',crs.gb,sep=":"), paste('-s_srs EPSG',crs.ni,sep=":"), merge.source, raw.source, '-overwrite', '--config ogr_interleaved_reading yes',';')
 cat(ogr.lib, cmd1,"\n")
 system2(ogr.lib, cmd1, wait=TRUE)
 

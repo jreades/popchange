@@ -89,7 +89,7 @@ buffer.region <- function(p, simplify=r.simplify, buffer=r.buffer) {
   }
   
   # Region-Buffered shape
-  cat("  Simplifying and buffering region to control for edge effects.")
+  cat("  Simplifying and buffering region to control for edge effects.\n")
   r.buff = st_buffer(st_simplify(r.shp, simplify), buffer)
   r.buff
 }
