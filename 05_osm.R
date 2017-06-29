@@ -279,9 +279,6 @@ rm(merge.sh)
 ######################################################
 ######################################################
 cat("Starting integration with grid...","\n")
-library(plyr)     # for rbind.fill
-library(dplyr)    # for mutate
-library(reshape2)
 
 # Governs how big the area extracted on each pass is -- 
 # for larger cell sizes you might want to use a smaller
@@ -292,7 +289,6 @@ cat("Chunking OSM data into multiples of base grid of",cells.per.iter,"\n")
 #cat("  Loading grid with resolution",g.resolution,"m.","\n")
 grd <- st_read(get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp")), quiet=TRUE)
 grd <- grd %>% st_set_crs(NA) %>% st_set_crs(crs.gb)
-rm(grid.fn, grid.path)
 
 #cat("  Loading merged land use shapefile.","\n")
 merged.fn   = get.file(t="{file.nm}-merge.shp")

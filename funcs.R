@@ -1,4 +1,13 @@
-library(sf) # Required in order to use functions below
+library(Hmisc)
+library(zoo)
+library(reshape2)
+library(plyr)     # for rbind.fill
+library(dtplyr)
+library(sf)
+
+#library(spatstat) # Required for owin
+#library(sp)       # Required for KDE process
+#require(rgdal)    # Required for readOGR to get around issue with sf and running KDE
 
 .simpleCap <- function(x) {
   s <- strsplit(tolower(x), "[_ ]")[[1]]

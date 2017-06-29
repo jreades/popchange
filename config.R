@@ -14,6 +14,12 @@ crs.osm     = 4326
 crs.ni      = 4326
 crs.ni.nspl = 29901
 
+########## Useful NSPL/Census info
+# What years are available for the NSPL
+# -- though this doesn't work for some
+# areas since the earliest data is post-1981.
+census.years = c(1981, 1991, 2001, 2011)
+
 ########## Data Storage Configuration
 # We assume that spatial data is stored under the current 
 # working directory but in a no-sync directory since these

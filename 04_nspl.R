@@ -16,22 +16,8 @@ source('config.R')
 
 overwrite=TRUE
 
-library(Hmisc)
-library(data.table)
-library(dplyr)
-library(dtplyr)
-library(zoo)
-#library(spatstat) # Required for owin
-#library(sp)       # Required for KDE process
-#require(rgdal)    # Required for readOGR to get around issue with sf and running KDE
-
 params = set.params(r)
 cat("\n","======================\n","04:NSPL (", params$display.nm,")\n")
-
-# What years are available for the NSPL
-# -- though this doesn't work for some
-# areas since the earliest data is post-1981.
-census.years = c(1981, 1991, 2001, 2011)
 
 # Load the data using fread from data.table package
 # (whichi is no longer explosed directly using dtplyr)

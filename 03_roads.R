@@ -11,8 +11,6 @@ rm(list = ls())
 source('funcs.R')
 source('config.R')
 
-library(Hmisc) # For %nin%
-
 # Notice that these match the targets below --
 # the buffer sizes are set in the config file.
 road.classes = c('Motorway','Main','Local') 
