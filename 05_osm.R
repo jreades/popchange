@@ -32,7 +32,7 @@
 # where you want to start processing the data. 
 ######################################################
 ######################################################
-rm(list = ls()) # Clear the workspace
+#rm(list = ls()) # Clear the workspace
 source('funcs.R')
 source('config.R')
 
@@ -285,10 +285,6 @@ cat("Starting integration with grid...","\n")
 # rate of cells.per.iteration.
 cells.per.iter = 100 
 cat("Chunking OSM data into multiples of base grid of",cells.per.iter,"\n")
-  
-#cat("  Loading grid with resolution",g.resolution,"m.","\n")
-grd <- st_read(get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp")), quiet=TRUE)
-grd <- grd %>% st_set_crs(NA) %>% st_set_crs(crs.gb)
 
 #cat("  Loading merged land use shapefile.","\n")
 merged.fn   = get.file(t="{file.nm}-merge.shp")
@@ -296,6 +292,10 @@ merged.path = get.path(paths$osm, merged.fn)
 mrg <- st_read(merged.path, quiet=TRUE, stringsAsFactors=FALSE)
 mrg <- mrg %>% st_set_crs(NA) %>% st_set_crs(crs.gb)
 rm(merged.fn, merged.path)
+
+#cat("  Loading grid with resolution",g.resolution,"m.","\n")
+grd <- st_read(get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp")), quiet=TRUE)
+grd <- grd %>% st_set_crs(NA) %>% st_set_crs(crs.gb)
 
 # Create a box from the merged file that we can 
 # subdivide into large-ish areas over which we 
@@ -353,7 +353,7 @@ for (z in clip.grid) {
 rs[is.na(rs)] <- 0.0
 
 # cell area from random grid cell
-base.area <- st_area(sample_n(grd, 1)) %>% as.numeric()
+base.area <- st_area(dplyr::sample_n(grd, 1)) %>% as.numeric()
 cat("Each grid cell has an area of",base.area,"\n")
 
 write.csv(rs, file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Grid.csv",'Use_Classes')), row.names=FALSE)
