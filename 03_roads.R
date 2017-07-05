@@ -11,6 +11,9 @@
 source('funcs.R')
 source('config.R')
 
+params = set.params(r)
+cat("\n","======================\n","03:Roads (", params$display.nm,")\n")
+
 # Notice that these match the targets below --
 # the buffer sizes are set in the config file.
 road.classes = c('Motorway','Main','Local') 
@@ -33,10 +36,6 @@ osni.map$main.src             = c("A_CLASS", "B_CLASS")
 osni.map$main.target          = 'Main'
 osni.map$local.src            = c("<4M_TARRED", "CL_MINOR")
 osni.map$local.target         = 'Local'
-
-params = set.params(r)
-
-cat("\n","======================\n","03:Roads (", params$display.nm,")\n")
 
 if (r == 'Northern Ireland') {
   full.path = get.path(paths$osni.src,'OSNI_Open_Data__50k_Transport_Line.shp')
