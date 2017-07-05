@@ -7,7 +7,7 @@
 # to tweak the weights!).
 ######################################################
 ######################################################
-rm(list = ls()) # Clear the workspace
+#rm(list = ls()) # Clear the workspace
 source('funcs.R')
 source('config.R')
 

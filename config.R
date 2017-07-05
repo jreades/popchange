@@ -75,8 +75,8 @@ r.simplify     <- 500                        # Simplify the boundaries before dr
 # output no matter what the user specifies -- in other words, we don't 
 # want grids starting at an Easting of 519 or 728 so it makes sense to round
 # the bounding box for the region to the nearest... 'x' km?
-g.resolution   <- 250                        # Grid resolution (in metres)
-g.anchor       <- 5000                       # Anchor grid min/max x and y at nearest... (in metres)
+g.resolution   <- 100                        # Grid resolution (in metres)
+g.anchor       <- 2000                       # Anchor grid min/max x and y at nearest... (in metres)
 
 ########## OSM Configuration
 osm.buffer   <- 5.0                        # Buffer to use around OSM features to help avoid splinters and holes (in metres)

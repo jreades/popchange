@@ -14,8 +14,6 @@ rm(list = ls())
 source('funcs.R')
 source('config.R')
 
-overwrite=TRUE
-
 params = set.params(r)
 cat("\n","======================\n","04:NSPL (", params$display.nm,")\n")
 
@@ -129,6 +127,7 @@ dt <- dt[ !dt$osgrdind==9, ]
 # presumably not residential
 dt <- dt[ !dt$usertype=='Large', ]
 
+# Should be on the order of 1.88 million rows and 22 columns
 cat(paste("NSPL final dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 
 # Need to reproject NI (it's in EPSG:29901)
@@ -165,16 +164,17 @@ rb.shp <- buffer.region(params)
 
 # Save the output of st_within and then 
 # convert that to a logical vector using
-# sapply and the .flatten function
+# lengths()
 cat("  Selecting postcodes falling within regional buffer.\n")
 is.within <- st_within(dt.sf, rb.shp) %>% lengths()
 dt.region <- subset(dt, is.within==1)
 rm(is.within)
 
 # Note: No viable data from 1971
+#       No viable NI data from 1981
 for (y in census.years) {
   region.y.fn = get.path(paths$nspl, get.file(t="{file.nm}-NSPL-*.csv",y))
-  if (file.exists(region.y.fn) & overwrite==FALSE) {
+  if (file.exists(region.y.fn)) {
     cat("    Skipping since output file already exists:","\n","        ",region.y.fn,"\n")
   } else {
     # Census Day is normally late-March or early-April

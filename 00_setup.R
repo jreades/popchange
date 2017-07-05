@@ -4,7 +4,8 @@
 # access.
 cat(paste(replicate(45, "="), collapse = ""), "\n")
 cat(paste(replicate(45, "="), collapse = ""), "\n")
-cat("Do *not* run this script on a mobile or low-bandwidth\nconnection! You are about to download about 2GB of data!\n")
+cat("Do *not* run this script on a mobile or low-bandwidth connection!","\n")
+cat("You are about to download about 2GB of data!\n")
 cat(paste(replicate(45, "="), collapse = ""), "\n")
 cat(paste(replicate(45, "="), collapse = ""), "\n")
 

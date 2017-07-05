@@ -134,7 +134,7 @@ rm(e,e.st,file.osm,file.clip,osm.clip,xmax,xmin,ymax,ymin)
 cat("\n","======================\n","Processing clipped data for:",params$display.nm,"\n")
 
 for (k in ls(osm.classes)) {
-  cat("  Processing OSM class:",k,"\n")
+  cat("  ==== Processing OSM class:",k,"\n")
   
   # Compose the I/O paths -- this could usefully
   # be made into a function eventually if I am 
@@ -159,7 +159,7 @@ for (k in ls(osm.classes)) {
     osm.extract = c(osm.extract, gsub('{val}',val,'-where "{val}"',perl=TRUE))
     osm.union   = c(osm.union, gsub('{buffer}',osm.buffer,gsub('{simplify}',osm.simplify,'-sql "SELECT \'not null\' AS UseClass, ST_Union(ST_Buffer(ST_Simplify(geometry,{simplify}),{buffer})) FROM \'{region}-{key}-step1\'"',perl=TRUE),perl=TRUE))
     
-  } else if (k == 'amenity') {
+  } else if (k == 'amenity') { # This *could* be done with a GROUP_BY as well, but the results are much less useful
     val = paste("'", paste(osm.classes[[k]], collapse="', '", sep=""), "'", collapse="", sep="")
     osm.extract = c(osm.extract, gsub('{val}',val,'-where "{key} IS NOT NULL AND {key} NOT IN ({val})"',perl=TRUE))
     osm.union   = c(osm.union, gsub('{buffer}',osm.buffer,gsub('{simplify}',osm.simplify,'-sql "SELECT \'amenity\' AS UseClass, ST_Union(ST_Buffer(ST_Simplify(geometry,{simplify}),{buffer})) FROM \'{region}-{key}-step1\'"',perl=TRUE),perl=TRUE))
@@ -269,7 +269,7 @@ cat("\t",'/bin/sh',merge.sh,"\n")
 cat(paste(replicate(45, "="), collapse = ""), "\n")
 cat(paste(replicate(45, "="), collapse = ""), "\n")
 
-rm(merge.sh)
+#rm(merge.sh)
 
 ######################################################
 ######################################################
