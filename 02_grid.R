@@ -3,7 +3,7 @@
 # for Scotland, Wales, and the GoR regions
 # of England.
 ########################################
-rm(list = ls())
+#rm(list = ls())
 source('funcs.R')
 source('config.R')
   

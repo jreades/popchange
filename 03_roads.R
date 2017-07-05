@@ -7,7 +7,7 @@
 # https://github.com/charlesroper/OSGB_Grids.
 # You should save the 100km grid to the Roads directory.
 ########################################
-rm(list = ls())
+#rm(list = ls())
 source('funcs.R')
 source('config.R')
 

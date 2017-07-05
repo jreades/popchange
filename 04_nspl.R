@@ -10,7 +10,7 @@
 # available testing and research.
 #
 ########################################
-rm(list = ls())
+#rm(list = ls())
 source('funcs.R')
 source('config.R')
 
