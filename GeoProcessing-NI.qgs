@@ -5,16 +5,22 @@
   <evaluateDefaultValues active="0"/>
   <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
     <customproperties/>
-    <layer-tree-layer expanded="1" providerKey="delimitedtext" checked="Qt::Checked" id="Northern_Ireland_100m_Road_Grid20170705111010993" source="file:///Users/jreades/Documents/GitHub/popchange/no-sync/integration/Northern_Ireland-100m-Road-Grid.csv?type=csv&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no" name="Northern_Ireland-100m-Road-Grid">
+    <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="OSNI_Boundaries_2990120170717103512545" source="/Users/jreades/Documents/github/popchange/no-sync/osni/OSNI_Boundaries-29901.shp" name="OSNI_Boundaries-29901">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Unchecked" id="Northern_Ireland_100m_Grid20170705110422704" source="/Users/jreades/Documents/GitHub/popchange/no-sync/grid/Northern_Ireland-100m-Grid.shp" name="Northern_Ireland-100m-Grid">
+    <layer-tree-layer expanded="1" providerKey="delimitedtext" checked="Qt::Checked" id="Northern_Ireland_100m_Road_Grid20170717113918304" source="file:///Users/jreades/Documents/github/popchange/no-sync/integration/Northern_Ireland-100m-Road-Grid.csv?type=csv&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no" name="Northern_Ireland-100m-Road-Grid">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" providerKey="delimitedtext" checked="Qt::Checked" id="Northern_Ireland_100m_Use_Classes_Grid20170705140456059" source="file:///Users/jreades/Documents/GitHub/popchange/no-sync/integration/Northern_Ireland-100m-Use_Classes-Grid.csv?type=csv&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no" name="Northern_Ireland-100m-Use_Classes-Grid">
+    <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Unchecked" id="Northern_Ireland_100m_Grid20170717111200914" source="/Users/jreades/Documents/github/popchange/no-sync/grid/Northern_Ireland-100m-Grid.shp" name="Northern_Ireland-100m-Grid">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="Northern_Ireland_100m_Grid_201120170705151122925" source="/Users/jreades/Documents/github/popchange/no-sync/final/Northern_Ireland-100m-Grid-2011.shp" name="Northern_Ireland-100m-Grid-2011">
+    <layer-tree-layer expanded="1" providerKey="delimitedtext" checked="Qt::Checked" id="Northern_Ireland_100m_NSPL_2001_Grid20170717134254316" source="file:///Users/jreades/Documents/github/popchange/no-sync/integration/Northern_Ireland-100m-NSPL_2001-Grid.csv?type=csv&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no" name="Northern_Ireland-100m-NSPL_2001-Grid">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="0" providerKey="ogr" checked="Qt::Unchecked" id="Northern_Ireland_100m_Grid_copy20170717113933954" source="/Users/jreades/Documents/github/popchange/no-sync/grid/Northern_Ireland-100m-Grid.shp" name="Northern_Ireland-100m-Roads">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="0" providerKey="ogr" checked="Qt::Unchecked" id="Northern_Ireland_100m_Grid20170717132457721" source="/Users/jreades/Documents/github/popchange/no-sync/grid/Northern_Ireland-100m-Grid.shp" name="Northern_Ireland-100m-Grid">
       <customproperties/>
     </layer-tree-layer>
     <layer-tree-layer expanded="0" providerKey="ogr" checked="Qt::Unchecked" id="Northern_Ireland_100m_Grid_copy20170705140418426" source="/Users/jreades/Documents/GitHub/popchange/no-sync/grid/Northern_Ireland-100m-Grid.shp" name="Northern_Ireland-100m-Grid copy">
@@ -29,7 +35,7 @@
     <layer-tree-layer expanded="0" providerKey="ogr" checked="Qt::Unchecked" id="Northern_Ireland_100m_Grid_copy20170705111022534" source="/Users/jreades/Documents/GitHub/popchange/no-sync/grid/Northern_Ireland-100m-Grid.shp" name="Northern_Ireland-100m-Grid copy">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" providerKey="" checked="Qt::Checked" id="OSM_Standard20170525102302887" source="/Users/jreades/Documents/github/popchange" name="OSM Standard">
+    <layer-tree-layer expanded="1" providerKey="" checked="Qt::Unchecked" id="OSM_Standard20170525102302887" source="/Users/jreades/Documents/github/popchange" name="OSM Standard">
       <customproperties/>
     </layer-tree-layer>
   </layer-tree-group>
@@ -37,20 +43,20 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>143532.21668227281770669</xmin>
-      <ymin>524048.21747109235730022</ymin>
-      <xmax>153655.27722649081260897</xmax>
-      <ymax>532767.98568365478422493</ymax>
+      <xmin>315194.0368068833486177</xmin>
+      <ymin>364218.10169694072101265</ymin>
+      <xmax>339212.7868068833486177</xmax>
+      <ymax>383511.85169694072101265</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
     <destinationsrs>
       <spatialrefsys>
-        <proj4>+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=375,-111,431,0,0,0,0 +units=m +no_defs</proj4>
-        <srsid>2437</srsid>
-        <srid>27700</srid>
-        <authid>EPSG:27700</authid>
-        <description>OSGB 1936 / British National Grid</description>
+        <proj4>+proj=tmerc +lat_0=53.5 +lon_0=-8 +k=1 +x_0=200000 +y_0=250000 +ellps=airy +towgs84=482.5,-130.6,564.6,-1.042,-0.214,-0.631,8.15 +units=m +no_defs</proj4>
+        <srsid>2563</srsid>
+        <srid>29901</srid>
+        <authid>EPSG:29901</authid>
+        <description>OSNI 1952 / Irish National Grid</description>
         <projectionacronym>tmerc</projectionacronym>
         <ellipsoidacronym>airy</ellipsoidacronym>
         <geographicflag>false</geographicflag>
@@ -58,115 +64,60 @@
     </destinationsrs>
     <rendermaptile>0</rendermaptile>
     <layer_coordinate_transform_info>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_natural20170511113151977"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="Dissolved_OSM20170510161635415"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_natural_220170511144935748"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Scotland_merge20170525085311041"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="UK_and_Ireland_Full_EPSG4326_5m20170508144742480"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_natural20170511113747407"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="England_East_Midlands_merge20170525100010309"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_natural20170511090856464"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse_220170511121010279"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse20170511114732466"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse20170511120226838"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_natural20170508144858404"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_amenity_step120170705114206968"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_all20170511172409311"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="England_North_East_merge20170525085350949"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse20170511120146712"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="UK_and_Ireland_Full20170508144843602"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="memory_20170508150346931"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_natural_220170511164246777"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_amenity_step220170705114141007"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:3857" srcDatumTransform="-1" destDatumTransform="-1" layerid="OSM_Standard20170510100037442"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="NI_Forest20170705141205476"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="England_Yorkshire_And_The_Humber_merge20170525085432672"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse20170511115425675"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="England_South_East_2011_NSPL20170525100036457"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_merge20170705115013533"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="England_West_Midlands_merge20170525100010320"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse20170511114144443"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="Wales___Clipped_Natural_Regions20170509134320048"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse20170508144858384"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="Selected_Districts20170510161635417"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="Selected_Districts20170509140616424"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_clip20170705141045274"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="Selectedc20170508150203505"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_natural20170511123101777"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_amenity_step220170705114701373"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_landuse_step220170705114445908"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_amenity_step220170705114908614"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="England_East_Of_England_merge20170525085501887"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="bounds20170525105532989"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="Wales___Clipped_Landuse_Regions20170509134320045"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="England_London_merge20170525085144860"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_100m_Grid_201120170705151122925"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse20170511115606767"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse20170511114850366"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_tags20170508144858451"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="district_borough_unitary_region_25m20170508144721156"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="Clipped_Regions20170509134320044"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="england_London_merge20170516175653390"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_natural20170511112710375"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_natural20170511112936383"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_amenity_step120170705114507817"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_natural20170511113503965"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_100m_Grid_copy20170705140418426"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="England_South_East_merge20170525085415081"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Regions_December_2016_Generalised_Clipped_Boundaries_in_England20170525105320438"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="Selected_Districts20170510223933406"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_leisure_220170511122633304"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse20170511114559046"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="memory_20170509134858759"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse20170511114650362"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse_220170511120720903"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_natural20170511090937591"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse20170511120602802"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_leisure20170508144858401"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="England_North_West_merge20170525085340237"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_natural20170511113044739"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="Valid20170510223933466"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="wales_landuse20170511114408529"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:27700" srcDatumTransform="-1" destDatumTransform="-1" layerid="Wales___Final_250m20170510162242213"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_100m_Grid_copy20170705111022534"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="England_South_West_merge20170525085404409"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_100m_Grid20170705110422704"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="EPSG:3857" srcDatumTransform="-1" destDatumTransform="-1" layerid="OSM_Standard20170525102302887"/>
-      <layer_coordinate_transform destAuthId="EPSG:27700" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="bounds20170525105215610"/>
+      <layer_coordinate_transform destAuthId="EPSG:29901" srcAuthId="EPSG:3857" srcDatumTransform="-1" destDatumTransform="-1" layerid="OSM_Standard20170525102302887"/>
+      <layer_coordinate_transform destAuthId="EPSG:29901" srcAuthId="EPSG:29901" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_100m_Grid20170717111200914"/>
+      <layer_coordinate_transform destAuthId="EPSG:29901" srcAuthId="EPSG:29901" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_100m_Grid_copy_copy20170717132202617"/>
+      <layer_coordinate_transform destAuthId="EPSG:29901" srcAuthId="EPSG:29901" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_100m_Grid_copy20170717113933954"/>
+      <layer_coordinate_transform destAuthId="EPSG:29901" srcAuthId="USER:100018" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_100m_Grid_copy20170705140418426"/>
+      <layer_coordinate_transform destAuthId="EPSG:29901" srcAuthId="EPSG:29901" srcDatumTransform="-1" destDatumTransform="-1" layerid="OSNI_Boundaries_2990120170717103512545"/>
+      <layer_coordinate_transform destAuthId="EPSG:29901" srcAuthId="EPSG:29901" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_100m_Grid_copy20170717131703757"/>
+      <layer_coordinate_transform destAuthId="EPSG:29901" srcAuthId="EPSG:29901" srcDatumTransform="-1" destDatumTransform="-1" layerid="Northern_Ireland_100m_Grid20170717132457721"/>
     </layer_coordinate_transform_info>
   </mapcanvas>
   <layer-tree-canvas>
     <custom-order enabled="0">
       <item>OSM_Standard20170525102302887</item>
-      <item>Northern_Ireland_100m_Grid20170705110422704</item>
-      <item>Northern_Ireland_100m_Road_Grid20170705111010993</item>
       <item>Northern_Ireland_100m_Grid_copy20170705111022534</item>
       <item>Northern_Ireland_100m_Grid_copy20170705140418426</item>
-      <item>Northern_Ireland_100m_Use_Classes_Grid20170705140456059</item>
       <item>Northern_Ireland_clip20170705141045274</item>
       <item>NI_Forest20170705141205476</item>
-      <item>Northern_Ireland_100m_Grid_201120170705151122925</item>
+      <item>OSNI_Boundaries_2990120170717103512545</item>
+      <item>Northern_Ireland_100m_Grid20170717111200914</item>
+      <item>Northern_Ireland_100m_Road_Grid20170717113918304</item>
+      <item>Northern_Ireland_100m_Grid_copy20170717113933954</item>
+      <item>Northern_Ireland_100m_Grid20170717132457721</item>
+      <item>Northern_Ireland_100m_NSPL_2001_Grid20170717134254316</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
+    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="OSNI_Boundaries-29901" showFeatureCount="0">
+      <filegroup open="true" hidden="false">
+        <legendlayerfile isInOverview="0" layerid="OSNI_Boundaries_2990120170717103512545" visible="1"/>
+      </filegroup>
+    </legendlayer>
     <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="Northern_Ireland-100m-Road-Grid" showFeatureCount="0">
       <filegroup open="true" hidden="false">
-        <legendlayerfile isInOverview="0" layerid="Northern_Ireland_100m_Road_Grid20170705111010993" visible="1"/>
+        <legendlayerfile isInOverview="0" layerid="Northern_Ireland_100m_Road_Grid20170717113918304" visible="1"/>
       </filegroup>
     </legendlayer>
     <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="Northern_Ireland-100m-Grid" showFeatureCount="0">
       <filegroup open="true" hidden="false">
-        <legendlayerfile isInOverview="0" layerid="Northern_Ireland_100m_Grid20170705110422704" visible="0"/>
+        <legendlayerfile isInOverview="0" layerid="Northern_Ireland_100m_Grid20170717111200914" visible="0"/>
       </filegroup>
     </legendlayer>
-    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="Northern_Ireland-100m-Use_Classes-Grid" showFeatureCount="0">
+    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="Northern_Ireland-100m-NSPL_2001-Grid" showFeatureCount="0">
       <filegroup open="true" hidden="false">
-        <legendlayerfile isInOverview="0" layerid="Northern_Ireland_100m_Use_Classes_Grid20170705140456059" visible="1"/>
+        <legendlayerfile isInOverview="0" layerid="Northern_Ireland_100m_NSPL_2001_Grid20170717134254316" visible="1"/>
       </filegroup>
     </legendlayer>
-    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="Northern_Ireland-100m-Grid-2011" showFeatureCount="0">
-      <filegroup open="true" hidden="false">
-        <legendlayerfile isInOverview="0" layerid="Northern_Ireland_100m_Grid_201120170705151122925" visible="1"/>
+    <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="Northern_Ireland-100m-Roads" showFeatureCount="0">
+      <filegroup open="false" hidden="false">
+        <legendlayerfile isInOverview="0" layerid="Northern_Ireland_100m_Grid_copy20170717113933954" visible="0"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="Northern_Ireland-100m-Grid" showFeatureCount="0">
+      <filegroup open="false" hidden="false">
+        <legendlayerfile isInOverview="0" layerid="Northern_Ireland_100m_Grid20170717132457721" visible="0"/>
       </filegroup>
     </legendlayer>
     <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="Northern_Ireland-100m-Grid copy" showFeatureCount="0">
@@ -189,9 +140,9 @@
         <legendlayerfile isInOverview="0" layerid="Northern_Ireland_100m_Grid_copy20170705111022534" visible="0"/>
       </filegroup>
     </legendlayer>
-    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="OSM Standard" showFeatureCount="0">
+    <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="OSM Standard" showFeatureCount="0">
       <filegroup open="true" hidden="false">
-        <legendlayerfile isInOverview="0" layerid="OSM_Standard20170525102302887" visible="1"/>
+        <legendlayerfile isInOverview="0" layerid="OSM_Standard20170525102302887" visible="0"/>
       </filegroup>
     </legendlayer>
   </legend>
@@ -423,7 +374,13 @@
       <previewExpression></previewExpression>
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
-      <id>Northern_Ireland_100m_Grid20170705110422704</id>
+      <extent>
+        <xmin>187000</xmin>
+        <ymin>308000</ymin>
+        <xmax>370000</xmax>
+        <ymax>455000</ymax>
+      </extent>
+      <id>Northern_Ireland_100m_Grid20170717111200914</id>
       <datasource>./no-sync/grid/Northern_Ireland-100m-Grid.shp</datasource>
       <keywordList>
         <value></value>
@@ -431,11 +388,11 @@
       <layername>Northern_Ireland-100m-Grid</layername>
       <srs>
         <spatialrefsys>
-          <proj4>+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs</proj4>
-          <srsid>100018</srsid>
-          <srid>0</srid>
-          <authid>USER:100018</authid>
-          <description> * Generated CRS (+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs)</description>
+          <proj4>+proj=tmerc +lat_0=53.5 +lon_0=-8 +k=1 +x_0=200000 +y_0=250000 +ellps=airy +towgs84=482.5,-130.6,564.6,-1.042,-0.214,-0.631,8.15 +units=m +no_defs</proj4>
+          <srsid>2563</srsid>
+          <srid>29901</srid>
+          <authid>EPSG:29901</authid>
+          <description>OSNI 1952 / Irish National Grid</description>
           <projectionacronym>tmerc</projectionacronym>
           <ellipsoidacronym>airy</ellipsoidacronym>
           <geographicflag>false</geographicflag>
@@ -458,13 +415,13 @@
           <symbol alpha="1" clip_to_extent="1" type="fill" name="0">
             <layer pass="0" class="SimpleFill" locked="0">
               <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="14,145,69,255"/>
+              <prop k="color" v="157,190,89,255"/>
               <prop k="joinstyle" v="bevel"/>
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
               <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="242,38,225,255"/>
-              <prop k="outline_style" v="solid"/>
+              <prop k="outline_color" v="254,5,5,255"/>
+              <prop k="outline_style" v="dot"/>
               <prop k="outline_width" v="0.1"/>
               <prop k="outline_width_unit" v="MM"/>
               <prop k="style" v="no"/>
@@ -620,7 +577,7 @@
       </customproperties>
       <blendMode>0</blendMode>
       <featureBlendMode>0</featureBlendMode>
-      <layerTransparency>75</layerTransparency>
+      <layerTransparency>0</layerTransparency>
       <displayfield>id</displayfield>
       <label>0</label>
       <labelattributes>
@@ -646,7 +603,6 @@
       <SingleCategoryDiagramRenderer diagramType="Histogram" sizeLegend="0" attributeLegend="1">
         <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" sizeScale="0,0,0,0,0,0" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" lineSizeScale="0,0,0,0,0,0" sizeType="MM" lineSizeType="MM" minScaleDenominator="inf">
           <fontProperties description=".SF NS Text,13,-1,5,50,0,0,0,0,0" style=""/>
-          <attribute field="" color="#000000" label=""/>
         </DiagramCategory>
         <symbol alpha="1" clip_to_extent="1" type="marker" name="sizeSymbol">
           <layer pass="0" class="SimpleMarker" locked="0">
@@ -672,7 +628,7 @@
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>.</annotationform>
+      <annotationform></annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
       </aliases>
@@ -685,10 +641,10 @@
           <column width="-1" hidden="1" type="actions"/>
         </columns>
       </attributetableconfig>
-      <editform>.</editform>
+      <editform></editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>.</editforminitfilepath>
+      <editforminitfilepath></editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -719,26 +675,34 @@ def my_form_open(dialog, layer, feature):
       <previewExpression></previewExpression>
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
-      <id>Northern_Ireland_100m_Grid_201120170705151122925</id>
-      <datasource>./no-sync/final/Northern_Ireland-100m-Grid-2011.shp</datasource>
+      <extent>
+        <xmin>187000</xmin>
+        <ymin>308000</ymin>
+        <xmax>370000</xmax>
+        <ymax>455000</ymax>
+      </extent>
+      <id>Northern_Ireland_100m_Grid20170717132457721</id>
+      <datasource>./no-sync/grid/Northern_Ireland-100m-Grid.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
-      <layername>Northern_Ireland-100m-Grid-2011</layername>
+      <layername>Northern_Ireland-100m-Grid</layername>
       <srs>
         <spatialrefsys>
-          <proj4>+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs</proj4>
-          <srsid>100018</srsid>
-          <srid>0</srid>
-          <authid>USER:100018</authid>
-          <description> * Generated CRS (+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs)</description>
+          <proj4>+proj=tmerc +lat_0=53.5 +lon_0=-8 +k=1 +x_0=200000 +y_0=250000 +ellps=airy +towgs84=482.5,-130.6,564.6,-1.042,-0.214,-0.631,8.15 +units=m +no_defs</proj4>
+          <srsid>2563</srsid>
+          <srid>29901</srid>
+          <authid>EPSG:29901</authid>
+          <description>OSNI 1952 / Irish National Grid</description>
           <projectionacronym>tmerc</projectionacronym>
           <ellipsoidacronym>airy</ellipsoidacronym>
           <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <provider encoding="System">ogr</provider>
-      <vectorjoins/>
+      <vectorjoins>
+        <join hasCustomPrefix="1" joinFieldName="id" customPrefix="j_" targetFieldName="id" memoryCache="1" joinLayerId="Northern_Ireland_100m_NSPL_2001_Grid20170717134254316"/>
+      </vectorjoins>
       <layerDependencies/>
       <expressionfields/>
       <map-layer-style-manager current="">
@@ -748,151 +712,29 @@ def my_form_open(dialog, layer, feature):
         <edittype widgetv2type="TextEdit" name="id">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="motorway">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        <edittype widgetv2type="TextEdit" name="j_hi_density">
+          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="main">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        <edittype widgetv2type="TextEdit" name="j_total">
+          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="local">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="amenity">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="allotments">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="brownfield">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="cemetery">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="churchyard">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="farmland">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="farmyard">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="forest">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="grass">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="greenfield">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="landfill">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="meadow">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="orchard">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="pitch">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="quarry">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="recreation">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="reservoir">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="scrub">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="villagegre">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="common">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="golfcourse">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="marina">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="miniatureg">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="naturerese">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="park">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="playground">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="track">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="waterpark">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="beach">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="coastline">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="grassland">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="heath">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="mud">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="water">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="wetland">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="wood">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="not null">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="hi_density">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="total">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="lo_density">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        <edittype widgetv2type="TextEdit" name="j_lo_density">
+          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
       </edittypes>
-      <renderer-v2 attr="local" forceraster="0" symbollevels="0" type="graduatedSymbol" graduatedMethod="GraduatedColor" enableorderby="0">
+      <renderer-v2 attr="j_total" forceraster="0" symbollevels="0" type="graduatedSymbol" graduatedMethod="GraduatedColor" enableorderby="0">
         <ranges>
-          <range render="true" symbol="0" lower="1.000000000000000" upper="8.714000000000000" label=" 1.0 - 8.7 "/>
-          <range render="true" symbol="1" lower="8.714000000000000" upper="17.428571428571427" label=" 8.7 - 17.4 "/>
-          <range render="true" symbol="2" lower="17.428571428571427" upper="26.142857142857139" label=" 17.4 - 26.1 "/>
-          <range render="true" symbol="3" lower="26.142857142857139" upper="34.857142857142854" label=" 26.1 - 34.9 "/>
-          <range render="true" symbol="4" lower="34.857142857142854" upper="43.571428571428569" label=" 34.9 - 43.6 "/>
-          <range render="true" symbol="5" lower="43.571428571428569" upper="52.285714285714285" label=" 43.6 - 52.3 "/>
-          <range render="true" symbol="6" lower="52.285714285714285" upper="61.000000000000000" label=" 52.3 - 61.0 "/>
+          <range render="true" symbol="0" lower="1.000000000000000" upper="1.800000000000000" label=" 0.0000 - 1.8000 "/>
+          <range render="true" symbol="1" lower="1.800000000000000" upper="3.600000000000000" label=" 1.8000 - 3.6000 "/>
+          <range render="true" symbol="2" lower="3.600000000000000" upper="5.400000000000000" label=" 3.6000 - 5.4000 "/>
+          <range render="true" symbol="3" lower="5.400000000000000" upper="7.200000000000000" label=" 5.4000 - 7.2000 "/>
+          <range render="true" symbol="4" lower="7.200000000000000" upper="9.000000000000000" label=" 7.2000 - 9.0000 "/>
         </ranges>
         <symbols>
           <symbol alpha="1" clip_to_extent="1" type="fill" name="0">
             <layer pass="0" class="SimpleFill" locked="0">
               <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="67,134,41,255"/>
+              <prop k="color" v="241,238,246,255"/>
               <prop k="joinstyle" v="bevel"/>
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
@@ -907,7 +749,7 @@ def my_form_open(dialog, layer, feature):
           <symbol alpha="1" clip_to_extent="1" type="fill" name="1">
             <layer pass="0" class="SimpleFill" locked="0">
               <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="77,136,84,255"/>
+              <prop k="color" v="215,181,216,255"/>
               <prop k="joinstyle" v="bevel"/>
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
@@ -922,7 +764,7 @@ def my_form_open(dialog, layer, feature):
           <symbol alpha="1" clip_to_extent="1" type="fill" name="2">
             <layer pass="0" class="SimpleFill" locked="0">
               <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="88,138,128,255"/>
+              <prop k="color" v="223,101,176,255"/>
               <prop k="joinstyle" v="bevel"/>
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
@@ -937,7 +779,7 @@ def my_form_open(dialog, layer, feature):
           <symbol alpha="1" clip_to_extent="1" type="fill" name="3">
             <layer pass="0" class="SimpleFill" locked="0">
               <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="98,140,172,255"/>
+              <prop k="color" v="221,28,119,255"/>
               <prop k="joinstyle" v="bevel"/>
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
@@ -952,37 +794,7 @@ def my_form_open(dialog, layer, feature):
           <symbol alpha="1" clip_to_extent="1" type="fill" name="4">
             <layer pass="0" class="SimpleFill" locked="0">
               <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="139,101,129,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="0,0,0,255"/>
-              <prop k="outline_style" v="no"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
-            </layer>
-          </symbol>
-          <symbol alpha="1" clip_to_extent="1" type="fill" name="5">
-            <layer pass="0" class="SimpleFill" locked="0">
-              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="180,61,85,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="0,0,0,255"/>
-              <prop k="outline_style" v="no"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
-            </layer>
-          </symbol>
-          <symbol alpha="1" clip_to_extent="1" type="fill" name="6">
-            <layer pass="0" class="SimpleFill" locked="0">
-              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="221,22,42,255"/>
+              <prop k="color" v="152,0,67,255"/>
               <prop k="joinstyle" v="bevel"/>
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
@@ -999,7 +811,7 @@ def my_form_open(dialog, layer, feature):
           <symbol alpha="1" clip_to_extent="1" type="fill" name="0">
             <layer pass="0" class="SimpleFill" locked="0">
               <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="72,136,218,255"/>
+              <prop k="color" v="166,102,229,255"/>
               <prop k="joinstyle" v="bevel"/>
               <prop k="offset" v="0,0"/>
               <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
@@ -1013,10 +825,10 @@ def my_form_open(dialog, layer, feature):
           </symbol>
         </source-symbol>
         <colorramp type="gradient" name="[source]">
-          <prop k="color1" v="67,134,41,255"/>
-          <prop k="color2" v="221,22,42,255"/>
+          <prop k="color1" v="241,238,246,255"/>
+          <prop k="color2" v="152,0,67,255"/>
           <prop k="discrete" v="0"/>
-          <prop k="stops" v="0.5;98,140,172,255"/>
+          <prop k="stops" v="0.25;215,181,216,255:0.5;223,101,176,255:0.75;221,28,119,255"/>
         </colorramp>
         <invertedcolorramp value="0"/>
         <mode name="equal"/>
@@ -1168,7 +980,7 @@ def my_form_open(dialog, layer, feature):
         <property key="variableNames"/>
         <property key="variableValues"/>
       </customproperties>
-      <blendMode>11</blendMode>
+      <blendMode>0</blendMode>
       <featureBlendMode>0</featureBlendMode>
       <layerTransparency>0</layerTransparency>
       <displayfield>id</displayfield>
@@ -1224,99 +1036,19 @@ def my_form_open(dialog, layer, feature):
       <annotationform></annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
-        <alias field="motorway" index="1" name=""/>
-        <alias field="main" index="2" name=""/>
-        <alias field="local" index="3" name=""/>
-        <alias field="amenity" index="4" name=""/>
-        <alias field="allotments" index="5" name=""/>
-        <alias field="brownfield" index="6" name=""/>
-        <alias field="cemetery" index="7" name=""/>
-        <alias field="churchyard" index="8" name=""/>
-        <alias field="farmland" index="9" name=""/>
-        <alias field="farmyard" index="10" name=""/>
-        <alias field="forest" index="11" name=""/>
-        <alias field="grass" index="12" name=""/>
-        <alias field="greenfield" index="13" name=""/>
-        <alias field="landfill" index="14" name=""/>
-        <alias field="meadow" index="15" name=""/>
-        <alias field="orchard" index="16" name=""/>
-        <alias field="pitch" index="17" name=""/>
-        <alias field="quarry" index="18" name=""/>
-        <alias field="recreation" index="19" name=""/>
-        <alias field="reservoir" index="20" name=""/>
-        <alias field="scrub" index="21" name=""/>
-        <alias field="villagegre" index="22" name=""/>
-        <alias field="common" index="23" name=""/>
-        <alias field="golfcourse" index="24" name=""/>
-        <alias field="marina" index="25" name=""/>
-        <alias field="miniatureg" index="26" name=""/>
-        <alias field="naturerese" index="27" name=""/>
-        <alias field="park" index="28" name=""/>
-        <alias field="playground" index="29" name=""/>
-        <alias field="track" index="30" name=""/>
-        <alias field="waterpark" index="31" name=""/>
-        <alias field="beach" index="32" name=""/>
-        <alias field="coastline" index="33" name=""/>
-        <alias field="grassland" index="34" name=""/>
-        <alias field="heath" index="35" name=""/>
-        <alias field="mud" index="36" name=""/>
-        <alias field="water" index="37" name=""/>
-        <alias field="wetland" index="38" name=""/>
-        <alias field="wood" index="39" name=""/>
-        <alias field="not null" index="40" name=""/>
-        <alias field="hi_density" index="41" name=""/>
-        <alias field="total" index="42" name=""/>
-        <alias field="lo_density" index="43" name=""/>
+        <alias field="j_hi_density" index="1" name=""/>
+        <alias field="j_total" index="2" name=""/>
+        <alias field="j_lo_density" index="3" name=""/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="1191313408">
         <columns>
           <column width="-1" hidden="0" type="field" name="id"/>
-          <column width="-1" hidden="0" type="field" name="motorway"/>
-          <column width="-1" hidden="0" type="field" name="main"/>
-          <column width="-1" hidden="0" type="field" name="local"/>
-          <column width="-1" hidden="0" type="field" name="amenity"/>
-          <column width="-1" hidden="0" type="field" name="allotments"/>
-          <column width="-1" hidden="0" type="field" name="brownfield"/>
-          <column width="-1" hidden="0" type="field" name="cemetery"/>
-          <column width="-1" hidden="0" type="field" name="churchyard"/>
-          <column width="-1" hidden="0" type="field" name="farmland"/>
-          <column width="-1" hidden="0" type="field" name="farmyard"/>
-          <column width="-1" hidden="0" type="field" name="forest"/>
-          <column width="-1" hidden="0" type="field" name="grass"/>
-          <column width="-1" hidden="0" type="field" name="greenfield"/>
-          <column width="-1" hidden="0" type="field" name="landfill"/>
-          <column width="-1" hidden="0" type="field" name="meadow"/>
-          <column width="-1" hidden="0" type="field" name="orchard"/>
-          <column width="-1" hidden="0" type="field" name="pitch"/>
-          <column width="-1" hidden="0" type="field" name="quarry"/>
-          <column width="-1" hidden="0" type="field" name="recreation"/>
-          <column width="-1" hidden="0" type="field" name="reservoir"/>
-          <column width="-1" hidden="0" type="field" name="scrub"/>
-          <column width="-1" hidden="0" type="field" name="villagegre"/>
-          <column width="-1" hidden="0" type="field" name="common"/>
-          <column width="-1" hidden="0" type="field" name="golfcourse"/>
-          <column width="-1" hidden="0" type="field" name="marina"/>
-          <column width="-1" hidden="0" type="field" name="miniatureg"/>
-          <column width="-1" hidden="0" type="field" name="naturerese"/>
-          <column width="-1" hidden="0" type="field" name="park"/>
-          <column width="-1" hidden="0" type="field" name="playground"/>
-          <column width="-1" hidden="0" type="field" name="track"/>
-          <column width="-1" hidden="0" type="field" name="waterpark"/>
-          <column width="-1" hidden="0" type="field" name="beach"/>
-          <column width="-1" hidden="0" type="field" name="coastline"/>
-          <column width="-1" hidden="0" type="field" name="grassland"/>
-          <column width="-1" hidden="0" type="field" name="heath"/>
-          <column width="-1" hidden="0" type="field" name="mud"/>
-          <column width="-1" hidden="0" type="field" name="water"/>
-          <column width="-1" hidden="0" type="field" name="wetland"/>
-          <column width="-1" hidden="0" type="field" name="wood"/>
-          <column width="-1" hidden="0" type="field" name="not null"/>
-          <column width="-1" hidden="0" type="field" name="hi_density"/>
-          <column width="-1" hidden="0" type="field" name="total"/>
-          <column width="-1" hidden="0" type="field" name="lo_density"/>
+          <column width="-1" hidden="0" type="field" name="j_hi_density"/>
+          <column width="-1" hidden="0" type="field" name="j_total"/>
+          <column width="-1" hidden="0" type="field" name="j_lo_density"/>
           <column width="-1" hidden="1" type="actions"/>
         </columns>
       </attributetableconfig>
@@ -1350,49 +1082,9 @@ def my_form_open(dialog, layer, feature):
       </conditionalstyles>
       <defaults>
         <default field="id" expression=""/>
-        <default field="motorway" expression=""/>
-        <default field="main" expression=""/>
-        <default field="local" expression=""/>
-        <default field="amenity" expression=""/>
-        <default field="allotments" expression=""/>
-        <default field="brownfield" expression=""/>
-        <default field="cemetery" expression=""/>
-        <default field="churchyard" expression=""/>
-        <default field="farmland" expression=""/>
-        <default field="farmyard" expression=""/>
-        <default field="forest" expression=""/>
-        <default field="grass" expression=""/>
-        <default field="greenfield" expression=""/>
-        <default field="landfill" expression=""/>
-        <default field="meadow" expression=""/>
-        <default field="orchard" expression=""/>
-        <default field="pitch" expression=""/>
-        <default field="quarry" expression=""/>
-        <default field="recreation" expression=""/>
-        <default field="reservoir" expression=""/>
-        <default field="scrub" expression=""/>
-        <default field="villagegre" expression=""/>
-        <default field="common" expression=""/>
-        <default field="golfcourse" expression=""/>
-        <default field="marina" expression=""/>
-        <default field="miniatureg" expression=""/>
-        <default field="naturerese" expression=""/>
-        <default field="park" expression=""/>
-        <default field="playground" expression=""/>
-        <default field="track" expression=""/>
-        <default field="waterpark" expression=""/>
-        <default field="beach" expression=""/>
-        <default field="coastline" expression=""/>
-        <default field="grassland" expression=""/>
-        <default field="heath" expression=""/>
-        <default field="mud" expression=""/>
-        <default field="water" expression=""/>
-        <default field="wetland" expression=""/>
-        <default field="wood" expression=""/>
-        <default field="not null" expression=""/>
-        <default field="hi_density" expression=""/>
-        <default field="total" expression=""/>
-        <default field="lo_density" expression=""/>
+        <default field="j_hi_density" expression=""/>
+        <default field="j_total" expression=""/>
+        <default field="j_lo_density" expression=""/>
       </defaults>
       <previewExpression></previewExpression>
     </maplayer>
@@ -1416,15 +1108,7 @@ def my_form_open(dialog, layer, feature):
         </spatialrefsys>
       </srs>
       <provider encoding="System">ogr</provider>
-      <vectorjoins>
-        <join hasCustomPrefix="1" joinFieldName="id" customPrefix="" targetFieldName="id" memoryCache="1" joinLayerId="Northern_Ireland_100m_Road_Grid20170705111010993">
-          <joinFieldsSubset>
-            <field name="motorway"/>
-            <field name="main"/>
-            <field name="local"/>
-          </joinFieldsSubset>
-        </join>
-      </vectorjoins>
+      <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
       <map-layer-style-manager current="">
@@ -1433,15 +1117,6 @@ def my_form_open(dialog, layer, feature):
       <edittypes>
         <edittype widgetv2type="TextEdit" name="id">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="motorway">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="main">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="local">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
       </edittypes>
       <renderer-v2 attr="main" forceraster="0" symbollevels="0" type="graduatedSymbol" graduatedMethod="GraduatedColor" enableorderby="0">
@@ -1759,9 +1434,6 @@ def my_form_open(dialog, layer, feature):
       <annotationform>.</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
-        <alias field="motorway" index="1" name=""/>
-        <alias field="main" index="2" name=""/>
-        <alias field="local" index="3" name=""/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
@@ -1798,16 +1470,32 @@ def my_form_open(dialog, layer, feature):
 ]]></editforminitcode>
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
-      <widgets/>
+      <widgets>
+        <widget name="local">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="main">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="motorway">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+      </widgets>
       <conditionalstyles>
         <rowstyles/>
         <fieldstyles/>
       </conditionalstyles>
       <defaults>
         <default field="id" expression=""/>
-        <default field="motorway" expression=""/>
-        <default field="main" expression=""/>
-        <default field="local" expression=""/>
       </defaults>
       <previewExpression></previewExpression>
     </maplayer>
@@ -1837,9 +1525,7 @@ def my_form_open(dialog, layer, feature):
         </spatialrefsys>
       </srs>
       <provider encoding="System">ogr</provider>
-      <vectorjoins>
-        <join hasCustomPrefix="1" joinFieldName="id" customPrefix="" targetFieldName="id" memoryCache="1" joinLayerId="Northern_Ireland_100m_Use_Classes_Grid20170705140456059"/>
-      </vectorjoins>
+      <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
       <map-layer-style-manager current="">
@@ -1848,117 +1534,6 @@ def my_form_open(dialog, layer, feature):
       <edittypes>
         <edittype widgetv2type="TextEdit" name="id">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="amenity">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="allotments">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="brownfield">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="cemetery">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="churchyard">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="farmland">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="farmyard">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="forest">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="grass">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="greenfield">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="landfill">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="meadow">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="orchard">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="pitch">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="quarry">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="recreation_ground">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="reservoir">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="scrub">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="village_green">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="common">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="golf_course">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="marina">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="miniature_golf">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="nature_reserve">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="park">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="playground">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="track">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="water_park">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="beach">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="coastline">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="grassland">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="heath">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="mud">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="water">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="wetland">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="wood">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="not null">
-          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
       </edittypes>
       <renderer-v2 attr="forest" forceraster="0" symbollevels="0" type="graduatedSymbol" graduatedMethod="GraduatedColor" enableorderby="0">
@@ -2340,43 +1915,6 @@ def my_form_open(dialog, layer, feature):
       <annotationform>.</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
-        <alias field="amenity" index="1" name=""/>
-        <alias field="allotments" index="2" name=""/>
-        <alias field="brownfield" index="3" name=""/>
-        <alias field="cemetery" index="4" name=""/>
-        <alias field="churchyard" index="5" name=""/>
-        <alias field="farmland" index="6" name=""/>
-        <alias field="farmyard" index="7" name=""/>
-        <alias field="forest" index="8" name=""/>
-        <alias field="grass" index="9" name=""/>
-        <alias field="greenfield" index="10" name=""/>
-        <alias field="landfill" index="11" name=""/>
-        <alias field="meadow" index="12" name=""/>
-        <alias field="orchard" index="13" name=""/>
-        <alias field="pitch" index="14" name=""/>
-        <alias field="quarry" index="15" name=""/>
-        <alias field="recreation_ground" index="16" name=""/>
-        <alias field="reservoir" index="17" name=""/>
-        <alias field="scrub" index="18" name=""/>
-        <alias field="village_green" index="19" name=""/>
-        <alias field="common" index="20" name=""/>
-        <alias field="golf_course" index="21" name=""/>
-        <alias field="marina" index="22" name=""/>
-        <alias field="miniature_golf" index="23" name=""/>
-        <alias field="nature_reserve" index="24" name=""/>
-        <alias field="park" index="25" name=""/>
-        <alias field="playground" index="26" name=""/>
-        <alias field="track" index="27" name=""/>
-        <alias field="water_park" index="28" name=""/>
-        <alias field="beach" index="29" name=""/>
-        <alias field="coastline" index="30" name=""/>
-        <alias field="grassland" index="31" name=""/>
-        <alias field="heath" index="32" name=""/>
-        <alias field="mud" index="33" name=""/>
-        <alias field="water" index="34" name=""/>
-        <alias field="wetland" index="35" name=""/>
-        <alias field="wood" index="36" name=""/>
-        <alias field="not null" index="37" name=""/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
@@ -2447,6 +1985,713 @@ def my_form_open(dialog, layer, feature):
 ]]></editforminitcode>
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
+      <widgets>
+        <widget name="allotments">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="amenity">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="beach">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="brownfield">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="cemetery">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="churchyard">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="coastline">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="common">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="farmland">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="farmyard">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="forest">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="golf_course">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="grass">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="grassland">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="greenfield">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="heath">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="landfill">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="marina">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="meadow">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="miniature_golf">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="mud">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="nature_reserve">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="not null">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="orchard">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="park">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="pitch">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="playground">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="quarry">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="recreation_ground">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="reservoir">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="scrub">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="track">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="village_green">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="water">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="water_park">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="wetland">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+        <widget name="wood">
+          <config>
+            <option key="IsMultiline" value="false"/>
+            <option key="UseHtml" value="false"/>
+          </config>
+        </widget>
+      </widgets>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <defaults>
+        <default field="id" expression=""/>
+      </defaults>
+      <previewExpression></previewExpression>
+    </maplayer>
+    <maplayer simplifyAlgorithm="0" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+      <extent>
+        <xmin>187000</xmin>
+        <ymin>308000</ymin>
+        <xmax>370000</xmax>
+        <ymax>455000</ymax>
+      </extent>
+      <id>Northern_Ireland_100m_Grid_copy20170717113933954</id>
+      <datasource>./no-sync/grid/Northern_Ireland-100m-Grid.shp</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Northern_Ireland-100m-Roads</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=tmerc +lat_0=53.5 +lon_0=-8 +k=1 +x_0=200000 +y_0=250000 +ellps=airy +towgs84=482.5,-130.6,564.6,-1.042,-0.214,-0.631,8.15 +units=m +no_defs</proj4>
+          <srsid>2563</srsid>
+          <srid>29901</srid>
+          <authid>EPSG:29901</authid>
+          <description>OSNI 1952 / Irish National Grid</description>
+          <projectionacronym>tmerc</projectionacronym>
+          <ellipsoidacronym>airy</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <provider encoding="System">ogr</provider>
+      <vectorjoins>
+        <join hasCustomPrefix="1" joinFieldName="id" customPrefix="" targetFieldName="id" memoryCache="1" joinLayerId="Northern_Ireland_100m_Road_Grid20170717113918304"/>
+      </vectorjoins>
+      <layerDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <edittypes>
+        <edittype widgetv2type="TextEdit" name="id">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="motorway">
+          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="main">
+          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="local">
+          <widgetv2config IsMultiline="0" fieldEditable="0" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+      </edittypes>
+      <renderer-v2 attr="local" forceraster="0" symbollevels="0" type="graduatedSymbol" graduatedMethod="GraduatedColor" enableorderby="0">
+        <ranges>
+          <range render="true" symbol="0" lower="1.000000000000000" upper="8.714000000000000" label=" 1.0 - 8.7 "/>
+          <range render="true" symbol="1" lower="8.714000000000000" upper="17.428571428571427" label=" 8.7 - 17.4 "/>
+          <range render="true" symbol="2" lower="17.428571428571427" upper="26.142857142857139" label=" 17.4 - 26.1 "/>
+          <range render="true" symbol="3" lower="26.142857142857139" upper="34.857142857142854" label=" 26.1 - 34.9 "/>
+          <range render="true" symbol="4" lower="34.857142857142854" upper="43.571428571428569" label=" 34.9 - 43.6 "/>
+          <range render="true" symbol="5" lower="43.571428571428569" upper="52.285714285714285" label=" 43.6 - 52.3 "/>
+          <range render="true" symbol="6" lower="52.285714285714285" upper="61.000000000000000" label=" 52.3 - 61.0 "/>
+        </ranges>
+        <symbols>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="0">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="67,134,41,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="no"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+          </symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="1">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="77,136,84,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="no"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+          </symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="2">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="88,138,128,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="no"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+          </symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="3">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="98,140,172,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="no"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+          </symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="4">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="139,101,129,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="no"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+          </symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="5">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="180,61,85,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="no"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+          </symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="6">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="221,22,42,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="no"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+          </symbol>
+        </symbols>
+        <source-symbol>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="0">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="72,136,218,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="no"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+            </layer>
+          </symbol>
+        </source-symbol>
+        <colorramp type="gradient" name="[source]">
+          <prop k="color1" v="67,134,41,255"/>
+          <prop k="color2" v="221,22,42,255"/>
+          <prop k="discrete" v="0"/>
+          <prop k="stops" v="0.5;98,140,172,255"/>
+        </colorramp>
+        <invertedcolorramp value="0"/>
+        <mode name="equal"/>
+        <rotation/>
+        <sizescale scalemethod="diameter"/>
+        <labelformat format=" %1 - %2 " trimtrailingzeroes="false" decimalplaces="1"/>
+      </renderer-v2>
+      <labeling type="simple"/>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="labeling" value="pal"/>
+        <property key="labeling/addDirectionSymbol" value="false"/>
+        <property key="labeling/angleOffset" value="0"/>
+        <property key="labeling/blendMode" value="0"/>
+        <property key="labeling/bufferBlendMode" value="0"/>
+        <property key="labeling/bufferColorA" value="255"/>
+        <property key="labeling/bufferColorB" value="255"/>
+        <property key="labeling/bufferColorG" value="255"/>
+        <property key="labeling/bufferColorR" value="255"/>
+        <property key="labeling/bufferDraw" value="false"/>
+        <property key="labeling/bufferJoinStyle" value="128"/>
+        <property key="labeling/bufferNoFill" value="false"/>
+        <property key="labeling/bufferSize" value="1"/>
+        <property key="labeling/bufferSizeInMapUnits" value="false"/>
+        <property key="labeling/bufferSizeMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/bufferTransp" value="0"/>
+        <property key="labeling/centroidInside" value="false"/>
+        <property key="labeling/centroidWhole" value="false"/>
+        <property key="labeling/decimals" value="3"/>
+        <property key="labeling/displayAll" value="false"/>
+        <property key="labeling/dist" value="0"/>
+        <property key="labeling/distInMapUnits" value="false"/>
+        <property key="labeling/distMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/drawLabels" value="false"/>
+        <property key="labeling/enabled" value="false"/>
+        <property key="labeling/fieldName" value=""/>
+        <property key="labeling/fitInPolygonOnly" value="false"/>
+        <property key="labeling/fontCapitals" value="0"/>
+        <property key="labeling/fontFamily" value=".SF NS Text"/>
+        <property key="labeling/fontItalic" value="false"/>
+        <property key="labeling/fontLetterSpacing" value="0"/>
+        <property key="labeling/fontLimitPixelSize" value="false"/>
+        <property key="labeling/fontMaxPixelSize" value="10000"/>
+        <property key="labeling/fontMinPixelSize" value="3"/>
+        <property key="labeling/fontSize" value="13"/>
+        <property key="labeling/fontSizeInMapUnits" value="false"/>
+        <property key="labeling/fontSizeMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/fontStrikeout" value="false"/>
+        <property key="labeling/fontUnderline" value="false"/>
+        <property key="labeling/fontWeight" value="50"/>
+        <property key="labeling/fontWordSpacing" value="0"/>
+        <property key="labeling/formatNumbers" value="false"/>
+        <property key="labeling/isExpression" value="true"/>
+        <property key="labeling/labelOffsetInMapUnits" value="true"/>
+        <property key="labeling/labelOffsetMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/labelPerPart" value="false"/>
+        <property key="labeling/leftDirectionSymbol" value="&lt;"/>
+        <property key="labeling/limitNumLabels" value="false"/>
+        <property key="labeling/maxCurvedCharAngleIn" value="25"/>
+        <property key="labeling/maxCurvedCharAngleOut" value="-25"/>
+        <property key="labeling/maxNumLabels" value="2000"/>
+        <property key="labeling/mergeLines" value="false"/>
+        <property key="labeling/minFeatureSize" value="0"/>
+        <property key="labeling/multilineAlign" value="4294967295"/>
+        <property key="labeling/multilineHeight" value="1"/>
+        <property key="labeling/namedStyle" value=""/>
+        <property key="labeling/obstacle" value="true"/>
+        <property key="labeling/obstacleFactor" value="1"/>
+        <property key="labeling/obstacleType" value="0"/>
+        <property key="labeling/offsetType" value="0"/>
+        <property key="labeling/placeDirectionSymbol" value="0"/>
+        <property key="labeling/placement" value="1"/>
+        <property key="labeling/placementFlags" value="10"/>
+        <property key="labeling/plussign" value="false"/>
+        <property key="labeling/predefinedPositionOrder" value="TR,TL,BR,BL,R,L,TSR,BSR"/>
+        <property key="labeling/preserveRotation" value="true"/>
+        <property key="labeling/previewBkgrdColor" value="#ffffff"/>
+        <property key="labeling/priority" value="5"/>
+        <property key="labeling/quadOffset" value="4"/>
+        <property key="labeling/repeatDistance" value="0"/>
+        <property key="labeling/repeatDistanceMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/repeatDistanceUnit" value="1"/>
+        <property key="labeling/reverseDirectionSymbol" value="false"/>
+        <property key="labeling/rightDirectionSymbol" value=">"/>
+        <property key="labeling/scaleMax" value="10000000"/>
+        <property key="labeling/scaleMin" value="1"/>
+        <property key="labeling/scaleVisibility" value="false"/>
+        <property key="labeling/shadowBlendMode" value="6"/>
+        <property key="labeling/shadowColorB" value="0"/>
+        <property key="labeling/shadowColorG" value="0"/>
+        <property key="labeling/shadowColorR" value="0"/>
+        <property key="labeling/shadowDraw" value="false"/>
+        <property key="labeling/shadowOffsetAngle" value="135"/>
+        <property key="labeling/shadowOffsetDist" value="1"/>
+        <property key="labeling/shadowOffsetGlobal" value="true"/>
+        <property key="labeling/shadowOffsetMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shadowOffsetUnits" value="1"/>
+        <property key="labeling/shadowRadius" value="1.5"/>
+        <property key="labeling/shadowRadiusAlphaOnly" value="false"/>
+        <property key="labeling/shadowRadiusMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shadowRadiusUnits" value="1"/>
+        <property key="labeling/shadowScale" value="100"/>
+        <property key="labeling/shadowTransparency" value="30"/>
+        <property key="labeling/shadowUnder" value="0"/>
+        <property key="labeling/shapeBlendMode" value="0"/>
+        <property key="labeling/shapeBorderColorA" value="255"/>
+        <property key="labeling/shapeBorderColorB" value="128"/>
+        <property key="labeling/shapeBorderColorG" value="128"/>
+        <property key="labeling/shapeBorderColorR" value="128"/>
+        <property key="labeling/shapeBorderWidth" value="0"/>
+        <property key="labeling/shapeBorderWidthMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shapeBorderWidthUnits" value="1"/>
+        <property key="labeling/shapeDraw" value="false"/>
+        <property key="labeling/shapeFillColorA" value="255"/>
+        <property key="labeling/shapeFillColorB" value="255"/>
+        <property key="labeling/shapeFillColorG" value="255"/>
+        <property key="labeling/shapeFillColorR" value="255"/>
+        <property key="labeling/shapeJoinStyle" value="64"/>
+        <property key="labeling/shapeOffsetMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shapeOffsetUnits" value="1"/>
+        <property key="labeling/shapeOffsetX" value="0"/>
+        <property key="labeling/shapeOffsetY" value="0"/>
+        <property key="labeling/shapeRadiiMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shapeRadiiUnits" value="1"/>
+        <property key="labeling/shapeRadiiX" value="0"/>
+        <property key="labeling/shapeRadiiY" value="0"/>
+        <property key="labeling/shapeRotation" value="0"/>
+        <property key="labeling/shapeRotationType" value="0"/>
+        <property key="labeling/shapeSVGFile" value=""/>
+        <property key="labeling/shapeSizeMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shapeSizeType" value="0"/>
+        <property key="labeling/shapeSizeUnits" value="1"/>
+        <property key="labeling/shapeSizeX" value="0"/>
+        <property key="labeling/shapeSizeY" value="0"/>
+        <property key="labeling/shapeTransparency" value="0"/>
+        <property key="labeling/shapeType" value="0"/>
+        <property key="labeling/substitutions" value="&lt;substitutions/>"/>
+        <property key="labeling/textColorA" value="255"/>
+        <property key="labeling/textColorB" value="0"/>
+        <property key="labeling/textColorG" value="0"/>
+        <property key="labeling/textColorR" value="0"/>
+        <property key="labeling/textTransp" value="0"/>
+        <property key="labeling/upsidedownLabels" value="0"/>
+        <property key="labeling/useSubstitutions" value="false"/>
+        <property key="labeling/wrapChar" value=""/>
+        <property key="labeling/xOffset" value="0"/>
+        <property key="labeling/yOffset" value="0"/>
+        <property key="labeling/zIndex" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>11</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerTransparency>0</layerTransparency>
+      <displayfield>id</displayfield>
+      <label>0</label>
+      <labelattributes>
+        <label fieldname="" text="Label"/>
+        <family fieldname="" name=".SF NS Text"/>
+        <size fieldname="" units="pt" value="12"/>
+        <bold fieldname="" on="0"/>
+        <italic fieldname="" on="0"/>
+        <underline fieldname="" on="0"/>
+        <strikeout fieldname="" on="0"/>
+        <color fieldname="" red="0" blue="0" green="0"/>
+        <x fieldname=""/>
+        <y fieldname=""/>
+        <offset x="0" y="0" units="pt" yfieldname="" xfieldname=""/>
+        <angle fieldname="" value="0" auto="0"/>
+        <alignment fieldname="" value="center"/>
+        <buffercolor fieldname="" red="255" blue="255" green="255"/>
+        <buffersize fieldname="" units="pt" value="1"/>
+        <bufferenabled fieldname="" on=""/>
+        <multilineenabled fieldname="" on=""/>
+        <selectedonly on=""/>
+      </labelattributes>
+      <SingleCategoryDiagramRenderer diagramType="Histogram" sizeLegend="0" attributeLegend="1">
+        <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" sizeScale="0,0,0,0,0,0" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" lineSizeScale="0,0,0,0,0,0" sizeType="MM" lineSizeType="MM" minScaleDenominator="inf">
+          <fontProperties description=".SF NS Text,13,-1,5,50,0,0,0,0,0" style=""/>
+          <attribute field="" color="#000000" label=""/>
+        </DiagramCategory>
+        <symbol alpha="1" clip_to_extent="1" type="marker" name="sizeSymbol">
+          <layer pass="0" class="SimpleMarker" locked="0">
+            <prop k="angle" v="0"/>
+            <prop k="color" v="255,0,0,255"/>
+            <prop k="horizontal_anchor_point" v="1"/>
+            <prop k="joinstyle" v="bevel"/>
+            <prop k="name" v="circle"/>
+            <prop k="offset" v="0,0"/>
+            <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+            <prop k="offset_unit" v="MM"/>
+            <prop k="outline_color" v="0,0,0,255"/>
+            <prop k="outline_style" v="solid"/>
+            <prop k="outline_width" v="0"/>
+            <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
+            <prop k="outline_width_unit" v="MM"/>
+            <prop k="scale_method" v="diameter"/>
+            <prop k="size" v="2"/>
+            <prop k="size_map_unit_scale" v="0,0,0,0,0,0"/>
+            <prop k="size_unit" v="MM"/>
+            <prop k="vertical_anchor_point" v="1"/>
+          </layer>
+        </symbol>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings yPosColumn="-1" showColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
+      <annotationform>.</annotationform>
+      <aliases>
+        <alias field="id" index="0" name=""/>
+        <alias field="motorway" index="1" name=""/>
+        <alias field="main" index="2" name=""/>
+        <alias field="local" index="3" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <attributeactions default="-1"/>
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+        <columns>
+          <column width="-1" hidden="0" type="field" name="id"/>
+          <column width="-1" hidden="0" type="field" name="motorway"/>
+          <column width="-1" hidden="0" type="field" name="main"/>
+          <column width="-1" hidden="0" type="field" name="local"/>
+          <column width="-1" hidden="0" type="field" name="amenity"/>
+          <column width="-1" hidden="0" type="field" name="allotments"/>
+          <column width="-1" hidden="0" type="field" name="brownfield"/>
+          <column width="-1" hidden="0" type="field" name="cemetery"/>
+          <column width="-1" hidden="0" type="field" name="churchyard"/>
+          <column width="-1" hidden="0" type="field" name="farmland"/>
+          <column width="-1" hidden="0" type="field" name="farmyard"/>
+          <column width="-1" hidden="0" type="field" name="forest"/>
+          <column width="-1" hidden="0" type="field" name="grass"/>
+          <column width="-1" hidden="0" type="field" name="greenfield"/>
+          <column width="-1" hidden="0" type="field" name="landfill"/>
+          <column width="-1" hidden="0" type="field" name="meadow"/>
+          <column width="-1" hidden="0" type="field" name="orchard"/>
+          <column width="-1" hidden="0" type="field" name="pitch"/>
+          <column width="-1" hidden="0" type="field" name="quarry"/>
+          <column width="-1" hidden="0" type="field" name="recreation"/>
+          <column width="-1" hidden="0" type="field" name="reservoir"/>
+          <column width="-1" hidden="0" type="field" name="scrub"/>
+          <column width="-1" hidden="0" type="field" name="villagegre"/>
+          <column width="-1" hidden="0" type="field" name="common"/>
+          <column width="-1" hidden="0" type="field" name="golfcourse"/>
+          <column width="-1" hidden="0" type="field" name="marina"/>
+          <column width="-1" hidden="0" type="field" name="miniatureg"/>
+          <column width="-1" hidden="0" type="field" name="naturerese"/>
+          <column width="-1" hidden="0" type="field" name="park"/>
+          <column width="-1" hidden="0" type="field" name="playground"/>
+          <column width="-1" hidden="0" type="field" name="track"/>
+          <column width="-1" hidden="0" type="field" name="waterpark"/>
+          <column width="-1" hidden="0" type="field" name="beach"/>
+          <column width="-1" hidden="0" type="field" name="coastline"/>
+          <column width="-1" hidden="0" type="field" name="grassland"/>
+          <column width="-1" hidden="0" type="field" name="heath"/>
+          <column width="-1" hidden="0" type="field" name="mud"/>
+          <column width="-1" hidden="0" type="field" name="water"/>
+          <column width="-1" hidden="0" type="field" name="wetland"/>
+          <column width="-1" hidden="0" type="field" name="wood"/>
+          <column width="-1" hidden="0" type="field" name="not null"/>
+          <column width="-1" hidden="0" type="field" name="hi_density"/>
+          <column width="-1" hidden="0" type="field" name="total"/>
+          <column width="-1" hidden="0" type="field" name="lo_density"/>
+          <column width="-1" hidden="1" type="actions"/>
+        </columns>
+      </attributetableconfig>
+      <editform>.</editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath>.</editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
       <widgets/>
       <conditionalstyles>
         <rowstyles/>
@@ -2454,48 +2699,88 @@ def my_form_open(dialog, layer, feature):
       </conditionalstyles>
       <defaults>
         <default field="id" expression=""/>
-        <default field="amenity" expression=""/>
-        <default field="allotments" expression=""/>
-        <default field="brownfield" expression=""/>
-        <default field="cemetery" expression=""/>
-        <default field="churchyard" expression=""/>
-        <default field="farmland" expression=""/>
-        <default field="farmyard" expression=""/>
-        <default field="forest" expression=""/>
-        <default field="grass" expression=""/>
-        <default field="greenfield" expression=""/>
-        <default field="landfill" expression=""/>
-        <default field="meadow" expression=""/>
-        <default field="orchard" expression=""/>
-        <default field="pitch" expression=""/>
-        <default field="quarry" expression=""/>
-        <default field="recreation_ground" expression=""/>
-        <default field="reservoir" expression=""/>
-        <default field="scrub" expression=""/>
-        <default field="village_green" expression=""/>
-        <default field="common" expression=""/>
-        <default field="golf_course" expression=""/>
-        <default field="marina" expression=""/>
-        <default field="miniature_golf" expression=""/>
-        <default field="nature_reserve" expression=""/>
-        <default field="park" expression=""/>
-        <default field="playground" expression=""/>
-        <default field="track" expression=""/>
-        <default field="water_park" expression=""/>
-        <default field="beach" expression=""/>
-        <default field="coastline" expression=""/>
-        <default field="grassland" expression=""/>
-        <default field="heath" expression=""/>
-        <default field="mud" expression=""/>
-        <default field="water" expression=""/>
-        <default field="wetland" expression=""/>
-        <default field="wood" expression=""/>
-        <default field="not null" expression=""/>
+        <default field="motorway" expression=""/>
+        <default field="main" expression=""/>
+        <default field="local" expression=""/>
       </defaults>
       <previewExpression></previewExpression>
     </maplayer>
     <maplayer minimumScale="0" maximumScale="1e+08" readOnly="0" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
-      <id>Northern_Ireland_100m_Road_Grid20170705111010993</id>
+      <id>Northern_Ireland_100m_NSPL_2001_Grid20170717134254316</id>
+      <datasource>file:./no-sync/integration/Northern_Ireland-100m-NSPL_2001-Grid.csv?type=csv&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Northern_Ireland-100m-NSPL_2001-Grid</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties/>
+      <provider encoding="System">delimitedtext</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <edittypes>
+        <edittype widgetv2type="TextEdit" name="id">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="hi_density">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="total">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="lo_density">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+      </edittypes>
+      <annotationform></annotationform>
+      <aliases>
+        <alias field="id" index="0" name=""/>
+        <alias field="hi_density" index="1" name=""/>
+        <alias field="total" index="2" name=""/>
+        <alias field="lo_density" index="3" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <attributeactions default="-1"/>
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+        <columns/>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <defaults>
+        <default field="id" expression=""/>
+        <default field="hi_density" expression=""/>
+        <default field="total" expression=""/>
+        <default field="lo_density" expression=""/>
+      </defaults>
+      <previewExpression></previewExpression>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" readOnly="0" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
+      <id>Northern_Ireland_100m_Road_Grid20170717113918304</id>
       <datasource>file:./no-sync/integration/Northern_Ireland-100m-Road-Grid.csv?type=csv&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no</datasource>
       <keywordList>
         <value></value>
@@ -2535,7 +2820,7 @@ def my_form_open(dialog, layer, feature):
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
       </edittypes>
-      <annotationform>.</annotationform>
+      <annotationform></annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="motorway" index="1" name=""/>
@@ -2545,13 +2830,13 @@ def my_form_open(dialog, layer, feature):
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="44318800">
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="-1520247391">
         <columns/>
       </attributetableconfig>
-      <editform>.</editform>
+      <editform></editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>.</editforminitfilepath>
+      <editforminitfilepath></editforminitfilepath>
       <editforminitcode><![CDATA[]]></editforminitcode>
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
@@ -2565,250 +2850,6 @@ def my_form_open(dialog, layer, feature):
         <default field="motorway" expression=""/>
         <default field="main" expression=""/>
         <default field="local" expression=""/>
-      </defaults>
-      <previewExpression></previewExpression>
-    </maplayer>
-    <maplayer minimumScale="0" maximumScale="1e+08" readOnly="0" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
-      <id>Northern_Ireland_100m_Use_Classes_Grid20170705140456059</id>
-      <datasource>file:./no-sync/integration/Northern_Ireland-100m-Use_Classes-Grid.csv?type=csv&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no</datasource>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>Northern_Ireland-100m-Use_Classes-Grid</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
-          <srsid>3452</srsid>
-          <srid>4326</srid>
-          <authid>EPSG:4326</authid>
-          <description>WGS 84</description>
-          <projectionacronym>longlat</projectionacronym>
-          <ellipsoidacronym>WGS84</ellipsoidacronym>
-          <geographicflag>true</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <customproperties/>
-      <provider encoding="System">delimitedtext</provider>
-      <vectorjoins/>
-      <layerDependencies/>
-      <expressionfields/>
-      <map-layer-style-manager current="">
-        <map-layer-style name=""/>
-      </map-layer-style-manager>
-      <edittypes>
-        <edittype widgetv2type="TextEdit" name="id">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="amenity">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="allotments">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="brownfield">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="cemetery">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="churchyard">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="farmland">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="farmyard">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="forest">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="grass">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="greenfield">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="landfill">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="meadow">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="orchard">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="pitch">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="quarry">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="recreation_ground">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="reservoir">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="scrub">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="village_green">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="common">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="golf_course">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="marina">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="miniature_golf">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="nature_reserve">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="park">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="playground">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="track">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="water_park">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="beach">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="coastline">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="grassland">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="heath">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="mud">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="water">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="wetland">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="wood">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="not null">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-      </edittypes>
-      <annotationform>.</annotationform>
-      <aliases>
-        <alias field="id" index="0" name=""/>
-        <alias field="amenity" index="1" name=""/>
-        <alias field="allotments" index="2" name=""/>
-        <alias field="brownfield" index="3" name=""/>
-        <alias field="cemetery" index="4" name=""/>
-        <alias field="churchyard" index="5" name=""/>
-        <alias field="farmland" index="6" name=""/>
-        <alias field="farmyard" index="7" name=""/>
-        <alias field="forest" index="8" name=""/>
-        <alias field="grass" index="9" name=""/>
-        <alias field="greenfield" index="10" name=""/>
-        <alias field="landfill" index="11" name=""/>
-        <alias field="meadow" index="12" name=""/>
-        <alias field="orchard" index="13" name=""/>
-        <alias field="pitch" index="14" name=""/>
-        <alias field="quarry" index="15" name=""/>
-        <alias field="recreation_ground" index="16" name=""/>
-        <alias field="reservoir" index="17" name=""/>
-        <alias field="scrub" index="18" name=""/>
-        <alias field="village_green" index="19" name=""/>
-        <alias field="common" index="20" name=""/>
-        <alias field="golf_course" index="21" name=""/>
-        <alias field="marina" index="22" name=""/>
-        <alias field="miniature_golf" index="23" name=""/>
-        <alias field="nature_reserve" index="24" name=""/>
-        <alias field="park" index="25" name=""/>
-        <alias field="playground" index="26" name=""/>
-        <alias field="track" index="27" name=""/>
-        <alias field="water_park" index="28" name=""/>
-        <alias field="beach" index="29" name=""/>
-        <alias field="coastline" index="30" name=""/>
-        <alias field="grassland" index="31" name=""/>
-        <alias field="heath" index="32" name=""/>
-        <alias field="mud" index="33" name=""/>
-        <alias field="water" index="34" name=""/>
-        <alias field="wetland" index="35" name=""/>
-        <alias field="wood" index="36" name=""/>
-        <alias field="not null" index="37" name=""/>
-      </aliases>
-      <excludeAttributesWMS/>
-      <excludeAttributesWFS/>
-      <attributeactions default="-1"/>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
-        <columns/>
-      </attributetableconfig>
-      <editform>.</editform>
-      <editforminit/>
-      <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>.</editforminitfilepath>
-      <editforminitcode><![CDATA[]]></editforminitcode>
-      <featformsuppress>0</featformsuppress>
-      <editorlayout>generatedlayout</editorlayout>
-      <widgets/>
-      <conditionalstyles>
-        <rowstyles/>
-        <fieldstyles/>
-      </conditionalstyles>
-      <defaults>
-        <default field="id" expression=""/>
-        <default field="amenity" expression=""/>
-        <default field="allotments" expression=""/>
-        <default field="brownfield" expression=""/>
-        <default field="cemetery" expression=""/>
-        <default field="churchyard" expression=""/>
-        <default field="farmland" expression=""/>
-        <default field="farmyard" expression=""/>
-        <default field="forest" expression=""/>
-        <default field="grass" expression=""/>
-        <default field="greenfield" expression=""/>
-        <default field="landfill" expression=""/>
-        <default field="meadow" expression=""/>
-        <default field="orchard" expression=""/>
-        <default field="pitch" expression=""/>
-        <default field="quarry" expression=""/>
-        <default field="recreation_ground" expression=""/>
-        <default field="reservoir" expression=""/>
-        <default field="scrub" expression=""/>
-        <default field="village_green" expression=""/>
-        <default field="common" expression=""/>
-        <default field="golf_course" expression=""/>
-        <default field="marina" expression=""/>
-        <default field="miniature_golf" expression=""/>
-        <default field="nature_reserve" expression=""/>
-        <default field="park" expression=""/>
-        <default field="playground" expression=""/>
-        <default field="track" expression=""/>
-        <default field="water_park" expression=""/>
-        <default field="beach" expression=""/>
-        <default field="coastline" expression=""/>
-        <default field="grassland" expression=""/>
-        <default field="heath" expression=""/>
-        <default field="mud" expression=""/>
-        <default field="water" expression=""/>
-        <default field="wetland" expression=""/>
-        <default field="wood" expression=""/>
-        <default field="not null" expression=""/>
       </defaults>
       <previewExpression></previewExpression>
     </maplayer>
@@ -3086,6 +3127,319 @@ def my_form_open(dialog, layer, feature):
         <property key="zmin" value="0"/>
       </customproperties>
     </maplayer>
+    <maplayer simplifyAlgorithm="0" minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+      <id>OSNI_Boundaries_2990120170717103512545</id>
+      <datasource>./no-sync/osni/OSNI_Boundaries-29901.shp</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>OSNI_Boundaries-29901</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=tmerc +lat_0=53.5 +lon_0=-8 +k=1 +x_0=200000 +y_0=250000 +ellps=airy +towgs84=482.5,-130.6,564.6,-1.042,-0.214,-0.631,8.15 +units=m +no_defs</proj4>
+          <srsid>2563</srsid>
+          <srid>29901</srid>
+          <authid>EPSG:29901</authid>
+          <description>OSNI 1952 / Irish National Grid</description>
+          <projectionacronym>tmerc</projectionacronym>
+          <ellipsoidacronym>airy</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <provider encoding="System">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <edittypes>
+        <edittype widgetv2type="TextEdit" name="ID">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="NAME">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="Area_SqKM">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="OBJECTID">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+      </edittypes>
+      <renderer-v2 forceraster="0" symbollevels="0" type="singleSymbol" enableorderby="0">
+        <symbols>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="0">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="154,113,152,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="245,10,10,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="no"/>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale scalemethod="diameter"/>
+      </renderer-v2>
+      <labeling type="simple"/>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="labeling" value="pal"/>
+        <property key="labeling/addDirectionSymbol" value="false"/>
+        <property key="labeling/angleOffset" value="0"/>
+        <property key="labeling/blendMode" value="0"/>
+        <property key="labeling/bufferBlendMode" value="0"/>
+        <property key="labeling/bufferColorA" value="255"/>
+        <property key="labeling/bufferColorB" value="255"/>
+        <property key="labeling/bufferColorG" value="255"/>
+        <property key="labeling/bufferColorR" value="255"/>
+        <property key="labeling/bufferDraw" value="false"/>
+        <property key="labeling/bufferJoinStyle" value="128"/>
+        <property key="labeling/bufferNoFill" value="false"/>
+        <property key="labeling/bufferSize" value="1"/>
+        <property key="labeling/bufferSizeInMapUnits" value="false"/>
+        <property key="labeling/bufferSizeMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/bufferTransp" value="0"/>
+        <property key="labeling/centroidInside" value="false"/>
+        <property key="labeling/centroidWhole" value="false"/>
+        <property key="labeling/decimals" value="3"/>
+        <property key="labeling/displayAll" value="false"/>
+        <property key="labeling/dist" value="0"/>
+        <property key="labeling/distInMapUnits" value="false"/>
+        <property key="labeling/distMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/drawLabels" value="false"/>
+        <property key="labeling/enabled" value="false"/>
+        <property key="labeling/fieldName" value=""/>
+        <property key="labeling/fitInPolygonOnly" value="false"/>
+        <property key="labeling/fontCapitals" value="0"/>
+        <property key="labeling/fontFamily" value=".SF NS Text"/>
+        <property key="labeling/fontItalic" value="false"/>
+        <property key="labeling/fontLetterSpacing" value="0"/>
+        <property key="labeling/fontLimitPixelSize" value="false"/>
+        <property key="labeling/fontMaxPixelSize" value="10000"/>
+        <property key="labeling/fontMinPixelSize" value="3"/>
+        <property key="labeling/fontSize" value="13"/>
+        <property key="labeling/fontSizeInMapUnits" value="false"/>
+        <property key="labeling/fontSizeMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/fontStrikeout" value="false"/>
+        <property key="labeling/fontUnderline" value="false"/>
+        <property key="labeling/fontWeight" value="50"/>
+        <property key="labeling/fontWordSpacing" value="0"/>
+        <property key="labeling/formatNumbers" value="false"/>
+        <property key="labeling/isExpression" value="true"/>
+        <property key="labeling/labelOffsetInMapUnits" value="true"/>
+        <property key="labeling/labelOffsetMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/labelPerPart" value="false"/>
+        <property key="labeling/leftDirectionSymbol" value="&lt;"/>
+        <property key="labeling/limitNumLabels" value="false"/>
+        <property key="labeling/maxCurvedCharAngleIn" value="25"/>
+        <property key="labeling/maxCurvedCharAngleOut" value="-25"/>
+        <property key="labeling/maxNumLabels" value="2000"/>
+        <property key="labeling/mergeLines" value="false"/>
+        <property key="labeling/minFeatureSize" value="0"/>
+        <property key="labeling/multilineAlign" value="4294967295"/>
+        <property key="labeling/multilineHeight" value="1"/>
+        <property key="labeling/namedStyle" value=""/>
+        <property key="labeling/obstacle" value="true"/>
+        <property key="labeling/obstacleFactor" value="1"/>
+        <property key="labeling/obstacleType" value="0"/>
+        <property key="labeling/offsetType" value="0"/>
+        <property key="labeling/placeDirectionSymbol" value="0"/>
+        <property key="labeling/placement" value="1"/>
+        <property key="labeling/placementFlags" value="10"/>
+        <property key="labeling/plussign" value="false"/>
+        <property key="labeling/predefinedPositionOrder" value="TR,TL,BR,BL,R,L,TSR,BSR"/>
+        <property key="labeling/preserveRotation" value="true"/>
+        <property key="labeling/previewBkgrdColor" value="#ffffff"/>
+        <property key="labeling/priority" value="5"/>
+        <property key="labeling/quadOffset" value="4"/>
+        <property key="labeling/repeatDistance" value="0"/>
+        <property key="labeling/repeatDistanceMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/repeatDistanceUnit" value="1"/>
+        <property key="labeling/reverseDirectionSymbol" value="false"/>
+        <property key="labeling/rightDirectionSymbol" value=">"/>
+        <property key="labeling/scaleMax" value="10000000"/>
+        <property key="labeling/scaleMin" value="1"/>
+        <property key="labeling/scaleVisibility" value="false"/>
+        <property key="labeling/shadowBlendMode" value="6"/>
+        <property key="labeling/shadowColorB" value="0"/>
+        <property key="labeling/shadowColorG" value="0"/>
+        <property key="labeling/shadowColorR" value="0"/>
+        <property key="labeling/shadowDraw" value="false"/>
+        <property key="labeling/shadowOffsetAngle" value="135"/>
+        <property key="labeling/shadowOffsetDist" value="1"/>
+        <property key="labeling/shadowOffsetGlobal" value="true"/>
+        <property key="labeling/shadowOffsetMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shadowOffsetUnits" value="1"/>
+        <property key="labeling/shadowRadius" value="1.5"/>
+        <property key="labeling/shadowRadiusAlphaOnly" value="false"/>
+        <property key="labeling/shadowRadiusMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shadowRadiusUnits" value="1"/>
+        <property key="labeling/shadowScale" value="100"/>
+        <property key="labeling/shadowTransparency" value="30"/>
+        <property key="labeling/shadowUnder" value="0"/>
+        <property key="labeling/shapeBlendMode" value="0"/>
+        <property key="labeling/shapeBorderColorA" value="255"/>
+        <property key="labeling/shapeBorderColorB" value="128"/>
+        <property key="labeling/shapeBorderColorG" value="128"/>
+        <property key="labeling/shapeBorderColorR" value="128"/>
+        <property key="labeling/shapeBorderWidth" value="0"/>
+        <property key="labeling/shapeBorderWidthMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shapeBorderWidthUnits" value="1"/>
+        <property key="labeling/shapeDraw" value="false"/>
+        <property key="labeling/shapeFillColorA" value="255"/>
+        <property key="labeling/shapeFillColorB" value="255"/>
+        <property key="labeling/shapeFillColorG" value="255"/>
+        <property key="labeling/shapeFillColorR" value="255"/>
+        <property key="labeling/shapeJoinStyle" value="64"/>
+        <property key="labeling/shapeOffsetMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shapeOffsetUnits" value="1"/>
+        <property key="labeling/shapeOffsetX" value="0"/>
+        <property key="labeling/shapeOffsetY" value="0"/>
+        <property key="labeling/shapeRadiiMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shapeRadiiUnits" value="1"/>
+        <property key="labeling/shapeRadiiX" value="0"/>
+        <property key="labeling/shapeRadiiY" value="0"/>
+        <property key="labeling/shapeRotation" value="0"/>
+        <property key="labeling/shapeRotationType" value="0"/>
+        <property key="labeling/shapeSVGFile" value=""/>
+        <property key="labeling/shapeSizeMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shapeSizeType" value="0"/>
+        <property key="labeling/shapeSizeUnits" value="1"/>
+        <property key="labeling/shapeSizeX" value="0"/>
+        <property key="labeling/shapeSizeY" value="0"/>
+        <property key="labeling/shapeTransparency" value="0"/>
+        <property key="labeling/shapeType" value="0"/>
+        <property key="labeling/substitutions" value="&lt;substitutions/>"/>
+        <property key="labeling/textColorA" value="255"/>
+        <property key="labeling/textColorB" value="0"/>
+        <property key="labeling/textColorG" value="0"/>
+        <property key="labeling/textColorR" value="0"/>
+        <property key="labeling/textTransp" value="0"/>
+        <property key="labeling/upsidedownLabels" value="0"/>
+        <property key="labeling/useSubstitutions" value="false"/>
+        <property key="labeling/wrapChar" value=""/>
+        <property key="labeling/xOffset" value="0"/>
+        <property key="labeling/yOffset" value="0"/>
+        <property key="labeling/zIndex" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerTransparency>0</layerTransparency>
+      <displayfield>NAME</displayfield>
+      <label>0</label>
+      <labelattributes>
+        <label fieldname="" text="Label"/>
+        <family fieldname="" name=".SF NS Text"/>
+        <size fieldname="" units="pt" value="12"/>
+        <bold fieldname="" on="0"/>
+        <italic fieldname="" on="0"/>
+        <underline fieldname="" on="0"/>
+        <strikeout fieldname="" on="0"/>
+        <color fieldname="" red="0" blue="0" green="0"/>
+        <x fieldname=""/>
+        <y fieldname=""/>
+        <offset x="0" y="0" units="pt" yfieldname="" xfieldname=""/>
+        <angle fieldname="" value="0" auto="0"/>
+        <alignment fieldname="" value="center"/>
+        <buffercolor fieldname="" red="255" blue="255" green="255"/>
+        <buffersize fieldname="" units="pt" value="1"/>
+        <bufferenabled fieldname="" on=""/>
+        <multilineenabled fieldname="" on=""/>
+        <selectedonly on=""/>
+      </labelattributes>
+      <SingleCategoryDiagramRenderer diagramType="Histogram" sizeLegend="0" attributeLegend="1">
+        <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" sizeScale="0,0,0,0,0,0" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" lineSizeScale="0,0,0,0,0,0" sizeType="MM" lineSizeType="MM" minScaleDenominator="inf">
+          <fontProperties description=".SF NS Text,13,-1,5,50,0,0,0,0,0" style=""/>
+        </DiagramCategory>
+        <symbol alpha="1" clip_to_extent="1" type="marker" name="sizeSymbol">
+          <layer pass="0" class="SimpleMarker" locked="0">
+            <prop k="angle" v="0"/>
+            <prop k="color" v="255,0,0,255"/>
+            <prop k="horizontal_anchor_point" v="1"/>
+            <prop k="joinstyle" v="bevel"/>
+            <prop k="name" v="circle"/>
+            <prop k="offset" v="0,0"/>
+            <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+            <prop k="offset_unit" v="MM"/>
+            <prop k="outline_color" v="0,0,0,255"/>
+            <prop k="outline_style" v="solid"/>
+            <prop k="outline_width" v="0"/>
+            <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
+            <prop k="outline_width_unit" v="MM"/>
+            <prop k="scale_method" v="diameter"/>
+            <prop k="size" v="2"/>
+            <prop k="size_map_unit_scale" v="0,0,0,0,0,0"/>
+            <prop k="size_unit" v="MM"/>
+            <prop k="vertical_anchor_point" v="1"/>
+          </layer>
+        </symbol>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings yPosColumn="-1" showColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
+      <annotationform></annotationform>
+      <aliases>
+        <alias field="ID" index="0" name=""/>
+        <alias field="NAME" index="1" name=""/>
+        <alias field="Area_SqKM" index="2" name=""/>
+        <alias field="OBJECTID" index="3" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <attributeactions default="-1"/>
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+        <columns>
+          <column width="-1" hidden="0" type="field" name="ID"/>
+          <column width="-1" hidden="0" type="field" name="NAME"/>
+          <column width="-1" hidden="0" type="field" name="Area_SqKM"/>
+          <column width="-1" hidden="0" type="field" name="OBJECTID"/>
+          <column width="-1" hidden="1" type="actions"/>
+        </columns>
+      </attributetableconfig>
+      <editform></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <defaults>
+        <default field="ID" expression=""/>
+        <default field="NAME" expression=""/>
+        <default field="Area_SqKM" expression=""/>
+        <default field="OBJECTID" expression=""/>
+      </defaults>
+      <previewExpression></previewExpression>
+    </maplayer>
   </projectlayers>
   <properties>
     <Variables>
@@ -3112,8 +3466,8 @@ def my_form_open(dialog, layer, feature):
       <DegreeFormat type="QString">MU</DegreeFormat>
     </PositionPrecision>
     <WCSUrl type="QString"></WCSUrl>
-    <WMSContactPhone type="QString"></WMSContactPhone>
     <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
+    <WMSContactPhone type="QString"></WMSContactPhone>
     <WMSServiceAbstract type="QString"></WMSServiceAbstract>
     <WMSContactPosition type="QString"></WMSContactPosition>
     <WMSAddWktGeometry type="bool">false</WMSAddWktGeometry>
@@ -3139,10 +3493,22 @@ def my_form_open(dialog, layer, feature):
     <Digitizing>
       <DefaultSnapToleranceUnit type="int">2</DefaultSnapToleranceUnit>
       <LayerSnappingList type="QStringList">
-        <value>Northern_Ireland_100m_Grid20170705110422704</value>
+        <value>NI_Forest20170705141205476</value>
         <value>Northern_Ireland_100m_Grid_copy20170705111022534</value>
+        <value>Northern_Ireland_100m_Grid_copy20170705140418426</value>
+        <value>Northern_Ireland_clip20170705141045274</value>
+        <value>OSNI_Boundaries_2990120170717103512545</value>
+        <value>Northern_Ireland_100m_Grid20170717111200914</value>
+        <value>Northern_Ireland_100m_Grid_copy20170717113933954</value>
+        <value>Northern_Ireland_100m_Grid20170717132457721</value>
       </LayerSnappingList>
       <LayerSnappingEnabledList type="QStringList">
+        <value>disabled</value>
+        <value>disabled</value>
+        <value>disabled</value>
+        <value>disabled</value>
+        <value>disabled</value>
+        <value>disabled</value>
         <value>disabled</value>
         <value>disabled</value>
       </LayerSnappingEnabledList>
@@ -3151,14 +3517,32 @@ def my_form_open(dialog, layer, feature):
       <LayerSnappingToleranceUnitList type="QStringList">
         <value>2</value>
         <value>2</value>
+        <value>2</value>
+        <value>2</value>
+        <value>2</value>
+        <value>2</value>
+        <value>2</value>
+        <value>2</value>
       </LayerSnappingToleranceUnitList>
       <LayerSnapToList type="QStringList">
+        <value>to_vertex_and_segment</value>
+        <value>to_vertex_and_segment</value>
+        <value>to_vertex_and_segment</value>
+        <value>to_vertex_and_segment</value>
+        <value>to_vertex_and_segment</value>
+        <value>to_vertex_and_segment</value>
         <value>to_vertex_and_segment</value>
         <value>to_vertex_and_segment</value>
       </LayerSnapToList>
       <DefaultSnapType type="QString">off</DefaultSnapType>
       <DefaultSnapTolerance type="double">0</DefaultSnapTolerance>
       <LayerSnappingToleranceList type="QStringList">
+        <value>0.000000</value>
+        <value>0.000000</value>
+        <value>0.000000</value>
+        <value>0.000000</value>
+        <value>0.000000</value>
+        <value>0.000000</value>
         <value>0.000000</value>
         <value>0.000000</value>
       </LayerSnappingToleranceList>
@@ -3175,9 +3559,9 @@ def my_form_open(dialog, layer, feature):
       <filterByMap type="bool">false</filterByMap>
     </Legend>
     <SpatialRefSys>
-      <ProjectCRSProj4String type="QString">+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=375,-111,431,0,0,0,0 +units=m +no_defs</ProjectCRSProj4String>
-      <ProjectCrs type="QString">EPSG:27700</ProjectCrs>
-      <ProjectCRSID type="int">2437</ProjectCRSID>
+      <ProjectCRSProj4String type="QString">+proj=tmerc +lat_0=53.5 +lon_0=-8 +k=1 +x_0=200000 +y_0=250000 +ellps=airy +towgs84=482.5,-130.6,564.6,-1.042,-0.214,-0.631,8.15 +units=m +no_defs</ProjectCRSProj4String>
+      <ProjectCrs type="QString">EPSG:29901</ProjectCrs>
+      <ProjectCRSID type="int">2563</ProjectCRSID>
     </SpatialRefSys>
     <DefaultStyles>
       <Fill type="QString"></Fill>

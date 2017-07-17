@@ -72,7 +72,19 @@ buffer.region <- function(p, simplify=r.simplify, buffer=r.buffer) {
   
   params = p
   
-  if (params$country.nm %in% c('Northern Ireland','Wales','Scotland')) { # No filtering for regions
+  if (params$country.nm=='Northern Ireland') {
+    cat("  No filter. Processing entire country.\n")
+    
+    shp <- st_read(get.path(paths$osni, get.file(t='OSNI_Boundaries-*.shp',crs.ni)), stringsAsFactors=TRUE, quiet=TRUE)
+    
+    # Set projection (issues with reading in even properly projected files)
+    shp <- shp %>% st_set_crs(NA) %>% st_set_crs(crs.ni)
+    #print(st_crs(shp)) # Check reprojection
+    
+    # Extract country from shapefile
+    r.shp <- shp
+    
+  } else if (params$country.nm %in% c('Wales','Scotland')) { # No filtering for regions
     cat("  No filter. Processing entire country.\n")
     
     shp <- st_read(r.shp.countries, stringsAsFactors=TRUE, quiet=TRUE)

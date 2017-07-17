@@ -8,6 +8,10 @@ source('funcs.R')
 source('config.R')
   
 params = set.params(r)
+target.crs = crs.gb
+if (r=='Northern Ireland') {
+  target.crs = crs.ni
+}
 
 cat("\n","======================\n","02:Grid (", params$display.nm,")\n")
 
@@ -15,12 +19,17 @@ cat("\n","======================\n","02:Grid (", params$display.nm,")\n")
 cat("  Simplifying and buffering region to control for edge effects.")
 rb.shp <- buffer.region(params)
 
+# Default
 cat("  Working out extent of region and rounding to",g.anchor,"m.\n")
-box <- make.box(rb.shp)
-
+if (r=='Northern Ireland') { ## We want to emulate the actual grid
+  box <- make.box(create.box(187000, 370000, 308000, 455000, proj=crs.ni), proj=crs.ni, a=1000)
+} else { # Rest of UK
+  box <- make.box(rb.shp)
+}
+  
 # Resolution is the length of the grid on one side (if only one number then you get a square grid)
 cat("  Creating raster grid with resolution of",g.resolution,"m.\n")
-ra.r <- st_make_grid(box, cellsize=g.resolution, what="polygons", crs=CRS(paste('+init=epsg',crs.gb,sep=":")))
+ra.r <- st_make_grid(box, cellsize=g.resolution, what="polygons", crs=CRS(paste('+init=epsg',target.crs,sep=":")))
 
 # Save the output of st_within and then 
 # convert that to a logical vector using

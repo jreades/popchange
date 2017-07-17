@@ -40,8 +40,8 @@ osni.map$local.target         = 'Local'
 if (r == 'Northern Ireland') {
   full.path = get.path(paths$osni.src,'OSNI_Open_Data__50k_Transport_Line.shp')
   rds <- st_read(full.path, quiet=TRUE)
-  rds <- rds%>% st_set_crs(NA) %>% st_set_crs(crs.ni)
-  rds <- st_transform(rds, crs.gb)
+  rds <- rds%>% st_set_crs(NA) %>% st_set_crs(crs.osm)
+  rds <- st_transform(rds, crs.ni)
   
   # Drop TEMA classes that we don't need -- 
   # this includes overpasses because they 
@@ -136,10 +136,16 @@ if (r == 'Northern Ireland') {
 # a much stronger temporal aspect: because what's 
 # highway now wasn't always highway...
 #########################
+
+target.crs = crs.gb
+if (r='Northern Ireland') {
+  target.crs = crs.ni
+}
+
 cat("Loading grid with resolution",g.resolution,"m.\n")
 grid.fn = get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp"))
 grd <- st_read(grid.fn, quiet=TRUE)
-grd <- grd %>% st_set_crs(NA) %>% st_set_crs(crs.gb)
+grd <- grd %>% st_set_crs(NA) %>% st_set_crs(target.crs)
 
 cat("   Calculating intersections with grid.","\n")
 for (rd in road.classes) {

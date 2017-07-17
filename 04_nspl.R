@@ -130,26 +130,15 @@ dt <- dt[ !dt$usertype=='Large', ]
 # Should be on the order of 1.88 million rows and 22 columns
 cat(paste("NSPL final dimensions:",dim(dt)[1],"rows,",dim(dt)[2],"cols"),"\n")
 
-# Need to reproject NI (it's in EPSG:29901)
-# into EPSG:27700
+# Need to separate NI (it's in EPSG:29901)
 dt.ni    <- subset(dt, country=='Northern Ireland')
-dt.ni.sf <- st_as_sf(dt.ni, coords=c("oseast1m","osnrth1m"), crs=crs.ni.nspl, agr="constant")
-t <- st_coordinates(st_transform(dt.ni.sf, crs.gb))
-dt.ni$oseast1m = t[,1]
-dt.ni$osnrth1m = t[,2]
+dt.ni.sf <- st_as_sf(dt.ni, coords=c("oseast1m","osnrth1m"), crs=crs.ni, agr="constant")
 
-# And update the data.table
-data.table::setkey(dt, pcds)
-data.table::setkey(dt.ni, pcds)
-dt[dt.ni, oseast1m := i.oseast1m ]
-dt[dt.ni, osnrth1m := i.osnrth1m ]
-rm(t,dt.ni,dt.ni.sf)
+dt       <- subset(dt, country!='Northern Ireland')
+dt.sf    <- st_as_sf(dt, coords=c("oseast1m","osnrth1m"), crs=crs.gb, agr="constant")
 
-# Use the region-buffered shape to select postcodes falling 
-# within the buffered boundary at each time-step for our
-# analysis, and begin by create a sf data frame from the 
-# Easting & Northing coordinates
-dt.sf = st_as_sf(dt, coords=c("oseast1m","osnrth1m"), crs=crs.gb, agr="constant")
+# Tidy up
+rm(dt.ni, dt)
 
 ######################################################
 ######################################################
@@ -166,9 +155,16 @@ rb.shp <- buffer.region(params)
 # convert that to a logical vector using
 # lengths()
 cat("  Selecting postcodes falling within regional buffer.\n")
-is.within <- st_within(dt.sf, rb.shp) %>% lengths()
-dt.region <- subset(dt, is.within==1)
-rm(is.within)
+if (r=='Northern Ireland') {
+  dt.region <- as.data.table(dt.ni.sf)
+  dt.region$oseast1m = st_coordinates(dt.region$geometry)[ , 'X']
+  dt.region$osnrth1m = st_coordinates(dt.region$geometry)[ , 'Y']
+  dt.region$geometry <- NULL
+} else {
+  is.within <- st_within(dt.sf, rb.shp) %>% lengths()
+  dt.region <- subset(dt, is.within==1)
+  rm(is.within)
+}
 
 # Note: No viable data from 1971
 #       No viable NI data from 1981
@@ -189,11 +185,6 @@ for (y in census.years) {
       # Useful diagnostics about active postcodes at
       # same northing and easting
       
-      # Can't use signif since we have numbers ranging
-      # from 100s to 100,000s. 
-      dt.region.y$oseast10m = round(dt.region.y$oseast1m/10)*10
-      dt.region.y$osnrth10m = round(dt.region.y$osnrth1m/10)*10
-      
       # There are 2011 Rural/Urban indicators
       if (sum(is.na(dt.region.y$ru11ind))/nrow(dt.region.y) < 1.0) {
         dt.region.y <- dt.region.y %>% 
@@ -204,13 +195,13 @@ for (y in census.years) {
           mutate( urban = ifelse( grepl('^[23457][A-Z]', oac11, perl=TRUE), 1, 0))
       }
       
-      write.csv(subset(dt.region.y, select=c('pcds','oseast1m','osnrth1m','oseast10m','osnrth10m','osgrdind','oa11','ru11ind','oac11','urban','introduced','terminated','country','region')), file=region.y.fn, row.names=FALSE)
+      write.csv(subset(dt.region.y, select=c('pcds','oseast1m','osnrth1m','osgrdind','oa11','ru11ind','oac11','urban','introduced','terminated','country','region')), file=region.y.fn, row.names=FALSE)
     }
     rm(y.as_date)
   }
 }
 rm(y,region.y.fn,dt.region.y,dt.region)
-rm(dt,dt.sf)
+rm(dt.sf,dt.ni.sf)
 
 ######################################################
 ######################################################
@@ -226,10 +217,14 @@ for (y in census.years) {
     
     dt = data.table::fread(get.path(paths$nspl, get.file(t="{file.nm}-NSPL-*.csv",y)))
     
+    # Round off any sub-1m resolution info as seems to be a 
+    # problem for the sf library or GDAL.
     # Note cast to data frame -- seems to be triggered
     # by this bug: https://github.com/hadley/dtplyr/issues/51
     dt = as.data.frame(dt) %>% 
-      dplyr::mutate_at(c("oseast1m", "osnrth1m"), funs(round(.,0)))
+      dplyr::mutate_at(c("oseast1m", "osnrth1m"), funs(round(.,0))) %>%
+      dplyr::mutate(oseast10m=round(oseast1m,-1)) %>% 
+      dplyr::mutate(osnrth10m=round(osnrth1m,-1))
     
     dupes1m = dt %>% 
       dplyr::filter(osgrdind <= 4) %>%
@@ -262,11 +257,16 @@ for (y in census.years) {
     
     write.csv(dt.categorised, file=get.path(paths$int, get.file(t="{file.nm}-{g.resolution}m-*-Points.csv",'NSPL',y)), row.names=FALSE)
     
+    target.crs = crs.gb
+    if (r=='Northern Ireland') {
+      target.crs = crs.ni
+    }
+    
     cat("  Loading grid with resolution",g.resolution,"m.","\n")
     grd <- st_read(get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp")), quiet=TRUE)
-    grd <- grd %>% st_set_crs(NA) %>% st_set_crs(crs.gb)
+    grd <- grd %>% st_set_crs(NA) %>% st_set_crs(target.crs)
     
-    dt.categorised.sf <- st_as_sf(dt.categorised, coords=c("oseast1m","osnrth1m"), crs=crs.gb, agr='identity')
+    dt.categorised.sf <- st_as_sf(dt.categorised, coords=c("oseast1m","osnrth1m"), crs=target.crs, agr='identity')
     
     # We can drop non-matching rows as we're going to 
     # output a CSV file to join back on to the grid
@@ -281,74 +281,85 @@ for (y in census.years) {
   }
 }
 
+######################################################
+######################################################
+# Step 4: Things that we could now do to help estimate
+#         population locations. NOT IMPLEMENTED YET.
+######################################################
+######################################################
 # Kriging and KDE
-  
-cat("\n","======================\n","Kriging:", params$display.nm,"\n")
-
-# This bit is a kludge to get around a problem that I 
-# encountered with converting directly from sf objects
-# to SpatialPolygons -- owin() refused to work with the
-# converted data (complained about missing 'W' weights 
-# vector). Writing this data out and then reading it back
-# in via OGR appears to work without a hitch. As best I 
-# can tell from investigation the issue has something to 
-# do with holes; however, the examples I found in which 
-# someone had resolved this via a function didn't work 
-# for me (and the performance was crap anyway) so the 
-# issue became pointlessly complex to resolve. Some other
-# time perhaps.
-fn = 'region.tmp.shp'            # Makes it easy to tidy up
-delete.shp(fn)                   # Check doesn't exist already
-st_write(rb.shp, fn, quiet=TRUE) # Write it out
-r.sp   <- readOGR(fn)            # Read it back i
-w      <- as.owin(r.sp)          # Window for ppp below
-delete.shp(fn)                   # And tidy up
-
-for (y in c(1981, 1991, 2001, 2011)) {
-  cat("    ","Reading shape data for year:", y,"\n")
-  region.y.fn   <- get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL.shp",y))
-  region.k.path <- get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL_Kriged.shp",y))
-  dt.region     <- st_read(region.y.fn, quiet=TRUE)
-  
-  # Extract postcode points from the sf object
-  pts <- st_coordinates(dt.region)
-  
-  # Jitter to avoid two postcodes sitting on top of each other
-  p <- ppp(jitter(pts[,1], amount=1), jitter(pts[,2], amount=1), window=w)
-  
-  # Possibly: https://github.com/samuelbosch/blogbits/blob/master/kernel_density/splancs_kernel_density.R
-  K1 <- density(p, sigma=1500, bw="SJ", kernel="epanechnikov")
-  plot(K1, main=NULL)
-  #contour(K1, add=TRUE)
-}
-
-# Now create the Voronoi
-  
-cat("\n","======================\n","Creating Voronoi Polygons for:", params$display.nm,"\n")
-
-for (y in c(1981, 1991, 2001, 2011)) {
-  cat("    ","Reading shape data for year:", y,"\n")
-  region.y.fn <- get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL.shp",y))
-  region.v.fn <- get.path(paths$voronoi, get.file(t="{file.nm}_*_NSPL_Voronoi.shp",y))
-  dt.region     <- st_read(region.y.fn, quiet=TRUE)
-  dt.region     <- dt.region %>% st_set_crs(NA) %>% st_set_crs(crs.gb)
-  
-  if (st_crs(rb.shp)$epsg != st_crs(dt.region)$epsg) {
-    cat(paste(rep("=",25),collapse="="), "\n")
-    cat(paste(rep("=",25),collapse="="), "\n")
-    print("The EPSG values don't match for the two files!")
-    cat(paste(rep("=",25),collapse="="), "\n")
-    cat(paste(rep("=",25),collapse="="), "\n")
-  }
-  
-  dt.multi      <- st_multipoint(st_coordinates( st_geometry(dt.region) ))
-  rb.poly       <- st_geometry(rb.shp)
-  dt.v          <- st_sfc(st_voronoi(dt.multi, st_sfc(rb.poly), dTolerance=0.0)) # Cropping doesn't seem to work...
-  dt.v          <- dt.v %>% st_set_crs(crs.gb) %>% st_cast()
-  # Now need to join postcodes back on to
-  # the Voronoi polygons
-  st_write(dt.v, region.v.fn, delete_layer=TRUE, quiet=TRUE)
-  rm(dt.v, dt.region, region.v.fn, region.y.fn, rb.poly, dt.multi)
-}
+# cat("\n","======================\n","Kriging:", params$display.nm,"\n")
+# 
+# # This bit is a kludge to get around a problem that I 
+# # encountered with converting directly from sf objects
+# # to SpatialPolygons -- owin() refused to work with the
+# # converted data (complained about missing 'W' weights 
+# # vector). Writing this data out and then reading it back
+# # in via OGR appears to work without a hitch. As best I 
+# # can tell from investigation the issue has something to 
+# # do with holes; however, the examples I found in which 
+# # someone had resolved this via a function didn't work 
+# # for me (and the performance was crap anyway) so the 
+# # issue became pointlessly complex to resolve. Some other
+# # time perhaps.
+# fn = 'region.tmp.shp'            # Makes it easy to tidy up
+# delete.shp(fn)                   # Check doesn't exist already
+# st_write(rb.shp, fn, quiet=TRUE) # Write it out
+# r.sp   <- readOGR(fn)            # Read it back i
+# w      <- as.owin(r.sp)          # Window for ppp below
+# delete.shp(fn)                   # And tidy up
+# 
+# for (y in c(1981, 1991, 2001, 2011)) {
+#   cat("    ","Reading shape data for year:", y,"\n")
+#   region.y.fn   <- get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL.shp",y))
+#   region.k.path <- get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL_Kriged.shp",y))
+#   dt.region     <- st_read(region.y.fn, quiet=TRUE)
+#   
+#   # Extract postcode points from the sf object
+#   pts <- st_coordinates(dt.region)
+#   
+#   # Jitter to avoid two postcodes sitting on top of each other
+#   p <- ppp(jitter(pts[,1], amount=1), jitter(pts[,2], amount=1), window=w)
+#   
+#   # Possibly: https://github.com/samuelbosch/blogbits/blob/master/kernel_density/splancs_kernel_density.R
+#   K1 <- density(p, sigma=1500, bw="SJ", kernel="epanechnikov")
+#   plot(K1, main=NULL)
+#   #contour(K1, add=TRUE)
+# }
+# 
+# # Now create the Voronoi
+#   
+# cat("\n","======================\n","Creating Voronoi Polygons for:", params$display.nm,"\n")
+# 
+# for (y in c(1981, 1991, 2001, 2011)) {
+#   cat("    ","Reading shape data for year:", y,"\n")
+#   
+#   target.crs = crs.gb
+#   if (r =='Northern Ireland') {
+#     target.crs = crs.ni
+#   }
+#   
+#   region.y.fn <- get.path(paths$nspl, get.file(t="{file.nm}_*_NSPL.shp",y))
+#   region.v.fn <- get.path(paths$voronoi, get.file(t="{file.nm}_*_NSPL_Voronoi.shp",y))
+#   dt.region     <- st_read(region.y.fn, quiet=TRUE)
+#   dt.region     <- dt.region %>% st_set_crs(NA) %>% st_set_crs(target.crs)
+#   
+#   if (st_crs(rb.shp)$epsg != st_crs(dt.region)$epsg) {
+#     cat(paste(rep("=",25),collapse="="), "\n")
+#     cat(paste(rep("=",25),collapse="="), "\n")
+#     print("The EPSG values don't match for the two files!")
+#     cat(paste(rep("=",25),collapse="="), "\n")
+#     cat(paste(rep("=",25),collapse="="), "\n")
+#   }
+#   
+#   dt.multi      <- st_multipoint(st_coordinates( st_geometry(dt.region) ))
+#   rb.poly       <- st_geometry(rb.shp)
+#   dt.v          <- st_sfc(st_voronoi(dt.multi, st_sfc(rb.poly), dTolerance=0.0)) # Cropping doesn't seem to work...
+#   dt.v          <- dt.v %>% st_set_crs(target.crs) %>% st_cast()
+#   # Now need to join postcodes back on to
+#   # the Voronoi polygons
+#   st_write(dt.v, region.v.fn, delete_layer=TRUE, quiet=TRUE)
+#   rm(dt.v, dt.region, region.v.fn, region.y.fn, rb.poly, dt.multi)
+# }
 
 cat("  Done processing NSPL data...\n")

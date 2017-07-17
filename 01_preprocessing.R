@@ -5,13 +5,14 @@ rm(list = ls())
 source('funcs.R')
 source('config.R')
 
-params = set.params("Northern Ireland")
+r = 'Northern Ireland'
+params = set.params(r)
 
 # Create raster grid of arbitrary size:
 # https://gis.stackexchange.com/questions/154537/generating-grid-shapefile-in-r
 
 raw.source   = get.path(paths$osni.src, "OSNI_Open_Data_Largescale_Boundaries__NI_Outline.shp")
-merge.source = get.path(paths$osni, "OSNI_Boundaries-reprojected.shp")
+merge.source = get.path(paths$osni, "OSNI_Boundaries-*.shp")
 os.source    = get.path(paths$os.src, "Countries_December_2016_Generalised_Clipped_Boundaries_in_Great_Britain.shp")
 merge.target = get.path(paths$os, "Countries_UK.shp")
 sql.update   = "UPDATE Countries_UK SET ctry16nm='Northern Ireland', objectid=4, ctry16cd='N92000005' WHERE ctry16nm IS NULL"
@@ -28,7 +29,10 @@ if (! file.exists(dfile)) {
     get.path(paths$osm.src, "ireland-and-northern-ireland-latest.osm.pbf"),
     dfile
   ) 
+} else {
+  cat("OSM file already renamed and in place.","\n")
 }
+rm(dfile)
 
 ########### OS Data
 # Copy the regions file to the right place
@@ -45,12 +49,12 @@ for (ext in c('shp','dbf','shx','sbn','sbx','prj')) {
 }
 
 # Reproject the NI data (though it was EPSG:29901 but apparently not)
-cmd1 = c('-f "ESRI Shapefile"', paste('-t_srs EPSG',crs.gb,sep=":"), paste('-s_srs EPSG',crs.ni,sep=":"), merge.source, raw.source, '-overwrite', '--config ogr_interleaved_reading yes',';')
+cmd1 = c('-f "ESRI Shapefile"', paste('-t_srs EPSG',crs.gb,sep=":"), paste('-s_srs EPSG',crs.osm,sep=":"), get.file(t=merge.source,crs.gb), raw.source, '-overwrite', '--config ogr_interleaved_reading yes',';')
 cat(ogr.lib, cmd1,"\n")
 system2(ogr.lib, cmd1, wait=TRUE)
 
 # Merge the NI and GB data to give UK
-cmd2 = c(merge.target, merge.source, '-append', '-update',';')
+cmd2 = c(merge.target, get.file(t=merge.source,crs.gb), '-append', '-update',';')
 cat(ogr.lib, cmd2,"\n")
 system2(ogr.lib, cmd2, wait=TRUE)
 
@@ -60,5 +64,10 @@ system2(ogr.lib, cmd2, wait=TRUE)
 cmd3 = c(merge.target, '-dialect SQLite', paste('-sql "', sql.update, '"', sep=" "))
 cat(ogr.info, cmd3,"\n")
 system2(ogr.info, cmd3, wait=TRUE)
+
+# And make a copy of the NI data in the *correct* projection
+cmd4 = c('-f "ESRI Shapefile"', paste('-t_srs EPSG',crs.ni,sep=":"), paste('-s_srs EPSG',crs.osm,sep=":"), get.file(t=merge.source,crs.ni), raw.source, '-overwrite', '--config ogr_interleaved_reading yes',';')
+cat(ogr.lib, cmd4, "\n")
+system2(ogr.lib, cmd4, wait=TRUE)
 
 cat("Done, you're now ready to run the rest of the scripts.\n\n")

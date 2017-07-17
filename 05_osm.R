@@ -58,7 +58,7 @@ cat("  Retrieving regional boundaries.\n")
 if (params$country.nm %in% c('England','Northern Ireland')) {
   rb.shp <- buffer.region(params)
 } else {
-  rb.shp <- get.region(params)
+  rb.shp <- get.region(params) # No need to buffer 
 }
 
 # Useful for auditing, not necessary in production
@@ -67,18 +67,26 @@ if (params$country.nm %in% c('England','Northern Ireland')) {
 #########
 # Step 1a: Subset the OSM file for a region (usually only done with England)
 
+target.crs = crs.gb
+if (r=='Northern Ireland') {
+  target.crs = crs.ni
+}
+
 # Derive a bounding box for the boundaries 
-# of the region? Note that these will be in
-# EPSG:27700 format (including NI since the 
-# ni-preprocessing step transforms that too).
-e = make.box(rb.shp)
+# of the region. For NI we need the box to 
+# line up with the NI grid.
+if (r=='Northern Ireland') { ## We want to emulate the actual grid
+  e <- make.box(create.box(187000, 370000, 308000, 455000, proj=crs.ni), proj=crs.ni, a=1000)
+} else { # Rest of UK
+  e <- make.box(rb.shp)
+}
 
 # Transform to EPSG:4326 so that we can work out 
 # the coordinates to use for clipping the OSM data
 e.st = st_transform(e, '+init=epsg:4326')
 
 # Work out the I/O path names
-file.osm   = get.path(paths$osm.src, get.file(t="{osm}-lastest.osm.pbf"))
+file.osm   = get.path(paths$osm.src, get.file(t="{osm}-latest.osm.pbf"))
 file.clip  = get.path(paths$osm, get.file(t="{file.nm}-clip.shp"))
 
 # And begin to build the clipping query to execute
@@ -147,7 +155,7 @@ for (k in ls(osm.classes)) {
   
   # And begin to compose both the extract and  
   # union queries.
-  osm.extract = c('-f "ESRI Shapefile"', paste('-t_srs EPSG',crs.gb,sep=":"), paste('-s_srs EPSG',crs.osm,sep=":"))
+  osm.extract = c('-f "ESRI Shapefile"', paste('-t_srs EPSG',target.crs,sep=":"), paste('-s_srs EPSG',crs.osm,sep=":"))
   osm.union = c('-dialect sqlite')
   
   # We look at the class to figure out which 
@@ -290,18 +298,18 @@ cat("Chunking OSM data into multiples of base grid of",cells.per.iter,"\n")
 merged.fn   = get.file(t="{file.nm}-merge.shp")
 merged.path = get.path(paths$osm, merged.fn)
 mrg <- st_read(merged.path, quiet=TRUE, stringsAsFactors=FALSE)
-mrg <- mrg %>% st_set_crs(NA) %>% st_set_crs(crs.gb)
+mrg <- mrg %>% st_set_crs(NA) %>% st_set_crs(target.crs)
 rm(merged.fn, merged.path)
 
 #cat("  Loading grid with resolution",g.resolution,"m.","\n")
 grd <- st_read(get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp")), quiet=TRUE)
-grd <- grd %>% st_set_crs(NA) %>% st_set_crs(crs.gb)
+grd <- grd %>% st_set_crs(NA) %>% st_set_crs(target.crs)
 
 # Create a box from the merged file that we can 
 # subdivide into large-ish areas over which we 
 # can iterate much more quickly that trying to 
 # do the entire thing in one go...
-bb = st_bbox(make.box(grd))
+bb = st_bbox(make.box(grd, proj=target.crs))
 
 # Create a sequence of coordinates to use for 
 # defining bounding boxes
@@ -312,7 +320,7 @@ yseq = seq(bb['ymin'],bb['ymax'],g.resolution*cells.per.iter)
 clip.grid <- list()
 for (x in seq(1,length(xseq)-1)) {
   for (y in seq(1,length(yseq)-1)) {
-    clip.grid[[length(clip.grid)+1]] = create.box(xseq[x], xseq[x+1], yseq[y], yseq[y+1])
+    clip.grid[[length(clip.grid)+1]] = create.box(xseq[x], xseq[x+1], yseq[y], yseq[y+1], proj=target.crs)
   }
 }
 

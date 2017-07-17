@@ -9,10 +9,12 @@
 ogr.lib  = '/Library/Frameworks/GDAL.framework/Programs/ogr2ogr'
 ogr.info = '/Library/Frameworks/GDAL.framework/Programs/ogrinfo'
 
+#ogr.lib = '/usr/local/opt/gdal2/bin/ogr2ogr'
+#ogr.info = '/usr/local/opt/gdal2/bin/ogrinfo'
+
 crs.gb      = 27700
 crs.osm     = 4326
-crs.ni      = 4326
-crs.ni.nspl = 29901
+crs.ni      = 29901
 
 ########## Useful NSPL/Census info
 # What years are available for the NSPL
