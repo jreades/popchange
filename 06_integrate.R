@@ -14,9 +14,14 @@ source('config.R')
 params = set.params(r)
 cat("\n","======================\n","06:Integration (", params$display.nm,")\n")
 
+target.crs = crs.gb
+if (r=='Northern Ireland') {
+  target.crs = crs.ni
+}
+
 # Load Grid
 grd <- st_read(get.path(paths$grid, get.file(t="{file.nm}-{g.resolution}m-Grid.shp")), quiet=TRUE)
-grd <- grd %>% st_set_crs(NA) %>% st_set_crs(crs.gb)
+grd <- grd %>% st_set_crs(NA) %>% st_set_crs(target.crs)
 cat("Loaded grid containing",nrow(grd),"cells","\n")
 
 # Load Roads
@@ -40,7 +45,7 @@ for (y in census.years) {
     cat("Loaded NSPL grid for",y,"containing",nrow(nspl),"cells","\n")
     dt.sf3 = dt.sf2 %>% dplyr::left_join(nspl, by="id")
     dt.sf3[is.na(dt.sf3)] = 0 # Avoid mixed NA/0 challenges
-    cat("Writing shapefile to 'final' directory...")
+    cat("Writing shapefile to 'final' directory...","\n")
     st_write(dt.sf3, get.path(paths$final,get.file(t="{file.nm}-{g.resolution}m-Grid-*.shp",y)), delete_dsn=TRUE, quiet=TRUE)
   } else {
     cat("Skipping year",y,"since no NSPL data found for that year.","\n")  
